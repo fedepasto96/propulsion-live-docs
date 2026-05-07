@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cost Estimation Guideline – E3/E4 High-Capacity Battery and Charger</title>
+  <style>
+    body { font-family: 'Segoe UI', system-ui, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.6; color: #333; }
+    h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: 0.3em; }
+    h1.part-heading { font-size: 1.5em; margin-top: 2.5em; border-bottom: 2px solid #555; color: #222; }
+    h2 { font-size: 1.3em; margin-top: 1.5em; }
+    h3 { font-size: 1.1em; margin-top: 1em; }
+    table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+    th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+    th { background: #f5f5f5; font-weight: 600; }
+    ul { margin: 0.5em 0; }
+    li { margin: 0.3em 0; }
+    hr { border: none; border-top: 1px solid #ddd; margin: 1.5em 0; }
+    strong { font-weight: 600; }
+    @media print { body { margin: 20px; } }
+  </style>
+</head>
+<body>
+
+<h1>Cost Estimation Guideline – E3/E4 High-Capacity Battery and Charger</h1>
+
+<h2>Purpose</h2>
+<p>This document provides suppliers and partners with instructions for performing cost estimates for the Elios 3 / E4 high-capacity <strong>battery pack</strong> and <strong>charger</strong>. Use it together with the technical material in this folder.</p>
+
+<hr>
+
+<h2>General Rules</h2>
+<p>The following rules apply to both the battery pack and charger cost estimations.</p>
+
+<h3>Volume / MOQ</h3>
+<ul>
+  <li><strong>Pricing volume:</strong> Quote at <strong>1,000–1,500 units</strong> (MOQ) up to <strong>6,000–7,000 units per year</strong>.</li>
+  <li><strong>Batch splitting:</strong> Option to split production into batches of minimum 500 pcs for logistical purposes; to be decided later in the project.</li>
+</ul>
+
+<h3>Cost Scope – Include All of the Following</h3>
+<ul>
+  <li>Tooling</li>
+  <li>NRE (Non-Recurring Engineering)</li>
+  <li>Certification costs</li>
+  <li>Logistics / shipping</li>
+  <li>Packaging</li>
+</ul>
+
+<h3>Quote Format</h3>
+<ul>
+  <li><strong>Currency:</strong> CHF (Swiss Francs)</li>
+</ul>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- PART A – BATTERY PACK                                        -->
+<!-- ============================================================ -->
+
+<h1 class="part-heading">Part A – Battery Pack</h1>
+
+<h2>Material Overview</h2>
+<table>
+  <tr><th>Document</th><th>Location</th><th>Use For</th></tr>
+  <tr><td>Elios 3 Battery Drawing</td><td><code>BOM/Elios 3 Battery Drawing.pdf</code></td><td>High-level BOM extraction, mechanical constraints, cell count, pack configuration</td></tr>
+  <tr><td>System Level Technical Requirements</td><td><code>E3 High Capacity Battery Requirements/E4 Battery - System Level Technical Requirements.pdf</code></td><td>Performance targets (capacity, voltage, discharge rates, temperature range), safety requirements</td></tr>
+  <tr><td>Battery Certification</td><td><code>E3 High Capacity Battery Requirements/E4 Battery - Battery Certification.pdf</code></td><td>Compliance scope and certification requirements</td></tr>
+</table>
+
+<h2>Reference Cell Packs</h2>
+<p>The following cell packs are currently considered viable for the project. Suppliers should consider cells of roughly <strong>10 Ah</strong> for pack sizing. Use these as reference for capacity, energy, and dimensions:</p>
+<table>
+  <tr><th>Cell pack</th><th>Capacity</th><th>Energy</th><th>Dimensions</th></tr>
+  <tr><td><strong>EVE</strong></td><td>10.5 Ah</td><td>216 Wh</td><td>135 × 63 × 41 mm</td></tr>
+  <tr><td><strong>Amprius</strong></td><td>10.8 Ah (6S1P)</td><td>220 Wh</td><td>140 × 50 × 65 mm</td></tr>
+</table>
+
+<h2>Key Cost Estimation Rules – Battery</h2>
+
+<h3>BMS (Battery Management System) and PCBA</h3>
+<ul>
+  <li><strong>Exclude from cost:</strong> BMS and PCBA (Printed Circuit Board Assembly) — design and actual PCBA are provided by us (PCBA assembled by our supplier).</li>
+  <li><strong>Include in cost:</strong> Integration cost for the PCBA/BMS into the battery pack must be estimated.</li>
+  <li><strong>PCB structure:</strong> One front PCB for the connector; one top PCB for the main components (actual BMS); one interface PCB in front to connect the cells to each other.</li>
+</ul>
+
+<h3>Battery Pack Design</h3>
+<ul>
+  <li><strong>Design to use:</strong> Our design (drawings and specifications provided in this folder). A 3D CAD file may be shared if needed; the PCBA will remain basic in the CAD as a placeholder for assembly description.</li>
+  <li><strong>DFM (Design for Manufacturing):</strong> Suppliers shall modify our design only as needed for manufacturing (DFM).</li>
+</ul>
+
+<h2>Cost Breakdown – Battery</h2>
+<p>Provide a breakdown including at least:</p>
+<ul>
+  <li>Cells</li>
+  <li>Mechanical parts</li>
+  <li>Assembly</li>
+  <li>PCBA/BMS integration</li>
+  <li>Testing</li>
+  <li>Certification</li>
+  <li>Packaging</li>
+</ul>
+
+<h2>Deliverables – Battery</h2>
+<ul>
+  <li>Cost estimate in CHF</li>
+  <li>Breakdown as above</li>
+  <li>DFM (Design for Manufacturing) — modifications to our design as needed for manufacturing</li>
+  <li>Contact for clarifications: [to be completed]</li>
+</ul>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- PART B – CHARGER                                             -->
+<!-- ============================================================ -->
+
+<h1 class="part-heading">Part B – Charger</h1>
+
+<h2>Reference Specifications</h2>
+<p>The charger must be compatible with the 6S Li-ion battery pack described in Part A.</p>
+<table>
+  <tr><th>Parameter</th><th>Value</th></tr>
+  <tr><td>Nominal charge voltage</td><td><strong>26.1 V</strong></td></tr>
+  <tr><td>Charge current</td><td><strong>10 A</strong></td></tr>
+  <tr><td>Charging protocol</td><td>[TBD]</td></tr>
+  <tr><td>Input voltage range</td><td><strong>100–240 V AC, 50/60 Hz</strong> (universal mains)</td></tr>
+  <tr><td>Connector type</td><td>TBD — reference legacy <strong>12-pin connector</strong> as baseline</td></tr>
+</table>
+
+<h2>Design Ownership</h2>
+<p>Design ownership for the charger is <strong>to be determined</strong>. Depending on the final decision, suppliers may be asked to:</p>
+<ul>
+  <li>Manufacture to a design provided by the customer, or</li>
+  <li>Propose their own design based on the requirements above.</li>
+</ul>
+<p>Suppliers should indicate their capability for both scenarios in their quotation.</p>
+
+<h2>Key Cost Estimation Rules – Charger</h2>
+<p>The following cost items must be considered and included where applicable:</p>
+
+<h3>Electronics / PCBA</h3>
+<ul>
+  <li>Power supply design and components (AC/DC conversion, power factor correction)</li>
+  <li>Charging circuit and charge management IC</li>
+  <li>Protection circuitry (over-voltage, over-current, over-temperature, short-circuit)</li>
+</ul>
+
+<h3>Enclosure / Mechanical Housing</h3>
+<ul>
+  <li>Charger enclosure (material, tooling, finishing)</li>
+  <li>Thermal management (heat sinks, ventilation, thermal pads)</li>
+</ul>
+
+<h3>Cables and Connectors</h3>
+<ul>
+  <li>AC input cable (with regional plug variants if applicable)</li>
+  <li>DC output cable and connector to battery pack</li>
+  <li>Reference connector: legacy 12-pin (final type TBD)</li>
+</ul>
+
+<h3>Firmware / Software</h3>
+<ul>
+  <li>Charging algorithm implementation (if applicable)</li>
+  <li>Communication with BMS (if applicable)</li>
+  <li>Any firmware development or licensing costs</li>
+</ul>
+
+<h3>Certification</h3>
+<ul>
+  <li>Safety certification (e.g. IEC 62368-1, UL, CE)</li>
+  <li>EMC compliance</li>
+  <li>Country-specific regulatory approvals as required</li>
+</ul>
+
+<h3>Testing and QC</h3>
+<ul>
+  <li>End-of-line testing</li>
+  <li>Reliability / burn-in testing</li>
+  <li>Quality control procedures</li>
+</ul>
+
+<h3>Packaging and Logistics</h3>
+<ul>
+  <li>Charger packaging (retail or bulk)</li>
+  <li>Shipping and logistics</li>
+</ul>
+
+<h2>Cost Breakdown – Charger</h2>
+<p>Provide a breakdown including at least:</p>
+<ul>
+  <li>Electronics / PCBA</li>
+  <li>Enclosure / mechanical parts</li>
+  <li>Cables and connectors</li>
+  <li>Firmware / software (if applicable)</li>
+  <li>Assembly</li>
+  <li>Testing / QC</li>
+  <li>Certification</li>
+  <li>Packaging</li>
+  <li>Tooling (amortized or one-time)</li>
+  <li>NRE (Non-Recurring Engineering)</li>
+</ul>
+
+<h2>Deliverables – Charger</h2>
+<ul>
+  <li>Cost estimate in CHF</li>
+  <li>Breakdown as above</li>
+  <li>DFM notes (if manufacturing to our design) or design proposal (if supplier-designed)</li>
+  <li>Lead time estimate</li>
+  <li>Contact for clarifications: [to be completed]</li>
+</ul>
+
+</body>
+</html>

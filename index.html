@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E4 Battery Project — Planning Documents</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --border: #334155;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --section-bg: #1e293b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    .container { max-width: 960px; margin: 0 auto; }
+    header {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .section {
+      background: var(--section-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .section h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section h2 .icon {
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--bg);
+      font-weight: 700;
+    }
+    .file-list { list-style: none; }
+    .file-list li {
+      border-bottom: 1px solid var(--border);
+    }
+    .file-list li:last-child { border-bottom: none; }
+    .file-list a {
+      display: block;
+      padding: 0.65rem 0.75rem;
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+      font-size: 0.9rem;
+    }
+    .file-list a:hover {
+      background: rgba(56, 189, 248, 0.08);
+      color: var(--accent-hover);
+    }
+    .file-list a::before {
+      content: "📄 ";
+      font-size: 0.85rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+    @media (max-width: 600px) {
+      body { padding: 1rem; }
+      header h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>E4 Battery Project</h1>
+      <p>Planning Documents &mdash; Internal Reference</p>
+    </header>
+
+    <div class="section">
+      <h2><span class="icon">C</span> Charger Suppliers</h2>
+      <ul class="file-list">
+        <li><a href="Charger%20Suppliers/Charger%20Supplier%20Selection%20Report.html">Charger Supplier Selection Report</a></li>
+        <li><a href="Charger%20Suppliers/Charger%20Supplier%20Scouting%20-%20Cost-Effective%20Asia%20%26%20Global.html">Charger Supplier Scouting — Cost-Effective Asia &amp; Global</a></li>
+        <li><a href="Charger%20Suppliers/Charger%20Supplier%20Scouting%20-%20Unified%20Ranking.html">Charger Supplier Scouting — Unified Ranking</a></li>
+        <li><a href="Charger%20Suppliers/E4_Charger_Supplier_Cost_Comparison.html">E4 Charger Supplier Cost Comparison</a></li>
+        <li><a href="Charger%20Suppliers/Charger%20Supplier%20Outreach%20Emails%20-%20Template.html">Charger Supplier Outreach Emails — Template</a></li>
+        <li><a href="Charger%20Suppliers/Charger%20Outreach%20Emails%20-%20Drafts.html">Charger Outreach Emails — Drafts</a></li>
+        <li><a href="Charger%20Suppliers/Charger%20Questions.html">Charger Questions</a></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2><span class="icon">P</span> Pack Assemblers</h2>
+      <ul class="file-list">
+        <li><a href="Pack%20Assemblers/Battery%20Pack%20Assembler%20Scouting.html">Battery Pack Assembler Scouting</a></li>
+        <li><a href="Pack%20Assemblers/Battery%20Pack%20Assembler%20Scouting%20-%20Contract%20Manufacturers%20(Phase%202).html">Battery Pack Assembler Scouting — Contract Manufacturers (Phase 2)</a></li>
+        <li><a href="Pack%20Assemblers/E4_Battery_Supplier_Cost_Comparison.html">E4 Battery Supplier Cost Comparison</a></li>
+        <li><a href="Pack%20Assemblers/Assembler%20Outreach%20Emails%20-%20Template%20(Phase%202).html">Assembler Outreach Emails — Template (Phase 2)</a></li>
+        <li><a href="Pack%20Assemblers/Assembler%20Outreach%20Emails%20-%20Drafts.html">Assembler Outreach Emails — Drafts</a></li>
+        <li><a href="Pack%20Assemblers/Assembler%20Questions.html">Assembler Questions</a></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2><span class="icon">R</span> Reports</h2>
+      <ul class="file-list">
+        <li><a href="Reports/e4_2026_prototype_budget_v3.html">E4 2026 Prototype Budget (v3)</a></li>
+        <li><a href="Reports/e4_2026_prototype_budget_v2.html">E4 2026 Prototype Budget (v2)</a></li>
+        <li><a href="Reports/e4_2026_prototype_budget.html">E4 2026 Prototype Budget</a></li>
+        <li><a href="Reports/scenario_cost_comparison.html">Scenario Cost Comparison</a></li>
+        <li><a href="Reports/battery-risk-update.html">Battery Risk Update</a></li>
+        <li><a href="Reports/battery_project_gantt.html">Battery Project Gantt</a></li>
+        <li><a href="Reports/supply_chain_strategy_diagram_v2.html">Supply Chain Strategy Diagram (v2)</a></li>
+        <li><a href="Reports/supply_chain_strategy_diagram_v1.html">Supply Chain Strategy Diagram (v1)</a></li>
+        <li><a href="Reports/supply_chain_strategy_diagram.html">Supply Chain Strategy Diagram</a></li>
+        <li><a href="Reports/index.html">Reports Index</a></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2><span class="icon">U</span> Project Updates</h2>
+      <ul class="file-list">
+        <li><a href="project%20updates/slide1-risk-overview.html">Slide 1 — Risk Overview</a></li>
+        <li><a href="project%20updates/slide2-mitigation-actions-v2.html">Slide 2 — Mitigation Actions (v2)</a></li>
+        <li><a href="project%20updates/slide2-mitigation-actions.html">Slide 2 — Mitigation Actions</a></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2><span class="icon">S</span> Supplier Engagement</h2>
+      <ul class="file-list">
+        <li><a href="Supplier%20Engagement/Characterization%20Lab%20Questions.html">Characterization Lab Questions</a></li>
+        <li><a href="Supplier%20Engagement/Supplier%20Visit%20Questions%20-%20China%20Trip.html">Supplier Visit Questions — China Trip</a></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2><span class="icon">$</span> Cost Evaluation Material</h2>
+      <ul class="file-list">
+        <li><a href="Cost%20Evaluation%20Material/COST_ESTIMATION_GUIDELINE.html">Cost Estimation Guideline</a></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2><span class="icon">L</span> Regulatory</h2>
+      <ul class="file-list">
+        <li><a href="Regulatory/Export%20Rules%20and%20Regulations.html">Export Rules and Regulations</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      E4 Battery Project &mdash; Internal Planning Documentation<br>
+      Auto-synced from project repository
+    </footer>
+  </div>
+</body>
+</html>

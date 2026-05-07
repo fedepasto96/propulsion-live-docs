@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E4 Charger — Supplier Cost Comparison</title>
+<style>
+  :root {
+    --blue-900: #1e3a5f;
+    --blue-700: #2c5282;
+    --blue-600: #2b6cb0;
+    --blue-100: #ebf8ff;
+    --green-700: #276749;
+    --green-100: #f0fff4;
+    --amber-700: #b7791f;
+    --amber-100: #fffff0;
+    --red-100: #fff5f5;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-500: #6b7280;
+    --gray-700: #374151;
+    --gray-900: #111827;
+    --pd-color: #2c5282;
+    --eft-color: #276749;
+    --eft-lcc-color: #9f580a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-900);
+    line-height: 1.6;
+    padding: 2rem;
+  }
+
+  .container { max-width: 1340px; margin: 0 auto; }
+
+  header {
+    background: linear-gradient(135deg, #1a365d, #2c5282);
+    color: white;
+    padding: 2.5rem 3rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.25rem; }
+  header .subtitle { font-size: 1rem; opacity: 0.85; }
+  header .date { font-size: 0.85rem; opacity: 0.65; margin-top: 0.75rem; }
+
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-bottom: 2rem; }
+
+  .card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    border-top: 4px solid var(--gray-300);
+  }
+  .card.pd { border-top-color: var(--pd-color); }
+  .card.eft { border-top-color: var(--eft-color); }
+
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .card .location { font-size: 0.85rem; color: var(--gray-500); margin-bottom: 0.75rem; }
+  .card .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+  .tag.us { background: #dbeafe; color: #1e40af; }
+  .tag.eu { background: #fef3c7; color: #92400e; }
+  .tag.nda { background: #d1fae5; color: #065f46; }
+  .tag.pending { background: #fee2e2; color: #991b1b; }
+
+  .card .meta { font-size: 0.82rem; color: var(--gray-700); margin-top: 0.5rem; }
+  .card .meta strong { color: var(--gray-900); }
+
+  section {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  }
+  section h2 {
+    font-size: 1.3rem;
+    color: var(--blue-900);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--gray-200);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.6rem 0.85rem;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  th {
+    background: var(--gray-100);
+    font-weight: 600;
+    color: var(--gray-700);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    position: sticky;
+    top: 0;
+  }
+  tr:hover td { background: var(--gray-50); }
+
+  .currency { font-family: 'Consolas', 'SF Mono', monospace; white-space: nowrap; }
+  .total-row td { font-weight: 700; background: var(--gray-100) !important; border-top: 2px solid var(--gray-300); }
+  .subtotal-row td { font-weight: 600; background: #fafafa !important; font-style: italic; }
+
+  .col-pd { color: var(--pd-color); }
+  .col-eft { color: var(--eft-color); }
+
+  .highlight { background: #fffbeb !important; }
+
+  .note {
+    font-size: 0.82rem;
+    color: var(--gray-500);
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--gray-50);
+    border-left: 3px solid var(--gray-300);
+    border-radius: 0 6px 6px 0;
+  }
+  .note strong { color: var(--gray-700); }
+  .note.warning { border-left-color: #f59e0b; background: #fffbeb; }
+
+  .comparison-bar-container { margin: 1.5rem 0; }
+  .bar-row { display: flex; align-items: center; gap: 0.5rem; }
+  .bar-supplier { width: 160px; font-size: 0.78rem; font-weight: 600; text-align: right; flex-shrink: 0; }
+  .bar {
+    height: 26px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: white;
+    min-width: 40px;
+    transition: width 0.6s ease;
+  }
+  .bar.pd-bar { background: linear-gradient(90deg, #2c5282, #4299e1); }
+  .bar.eft-bar { background: linear-gradient(90deg, #276749, #48bb78); }
+  .bar.eft-lcc-bar { background: linear-gradient(90deg, #9f580a, #ecc94b); color: #744210; }
+
+  .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+  .summary-box {
+    padding: 1.25rem;
+    border-radius: 8px;
+    border: 1px solid var(--gray-200);
+  }
+  .summary-box h4 { font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .summary-box ul { list-style: none; font-size: 0.85rem; }
+  .summary-box ul li { padding: 0.2rem 0; }
+  .summary-box ul li::before { content: "\2022"; margin-right: 0.5rem; color: var(--gray-400); }
+
+  .footnotes {
+    font-size: 0.78rem;
+    color: var(--gray-500);
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--gray-200);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>E4 Charger &mdash; Supplier Cost Comparison</h1>
+  <div class="subtitle">6S Smart Battery Charger &bull; 4 Ports &bull; 300W &bull; AC + DC Input</div>
+  <div class="date">Generated May 5, 2026 &mdash; Flyability E4 Battery Project</div>
+</header>
+
+<!-- ─── Supplier Cards ─── -->
+<div class="cards">
+  <div class="card pd">
+    <h3 style="color: var(--pd-color);">Packet Digital</h3>
+    <div class="location">Fargo, ND, USA</div>
+    <span class="tag us">US Mfg</span>
+    <span class="tag nda">NDA Signed</span>
+    <span class="tag nda">Spec Shared</span>
+    <div class="meta">
+      <strong>~50 employees</strong> (hiring +40 planned) &bull; 25,000 sqft + 80,000 sqft new plant<br>
+      <strong>Drone experience:</strong> Lockheed Indago 4 chargers, Anduril Ghost VTOL<br>
+      <strong>Quote:</strong> ROM #00003684 (Apr 7, 2026) &bull; Expires May 7, 2026
+    </div>
+  </div>
+
+  <div class="card eft">
+    <h3 style="color: var(--eft-color);">EFT Mobility AG</h3>
+    <div class="location">Munich, Germany</div>
+    <span class="tag eu">EU</span>
+    <span class="tag nda">NDA Signed</span>
+    <span class="tag nda">Spec Shared</span>
+    <div class="meta">
+      <strong>&lt;50 employees</strong> (founded 2019, Quantum Systems majority stake 2025)<br>
+      <strong>Product:</strong> NATO-Standard-Charger (4S&ndash;14S UAV) &bull; NDAA compliant option<br>
+      <strong>Quote:</strong> NATO Standard Charger proposal (Apr 13 + Apr 23, 2026)
+    </div>
+  </div>
+</div>
+
+<!-- ─── 1. Product Scope ─── -->
+<section>
+  <h2>1. Product Scope &amp; Features</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30%">Feature</th>
+        <th style="width:35%" class="col-pd">Packet Digital</th>
+        <th style="width:35%" class="col-eft">EFT Mobility</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Configuration</td>
+        <td>6S smart battery charger</td>
+        <td>4S&ndash;14S (6S supported)</td>
+      </tr>
+      <tr>
+        <td>Ports</td>
+        <td>4 ports (2 active charge ports)</td>
+        <td>1 port (single charger) <sup>&dagger;</sup></td>
+      </tr>
+      <tr>
+        <td>Charging Power</td>
+        <td>300W total</td>
+        <td>Up to 300W (up to 20A)</td>
+      </tr>
+      <tr>
+        <td>Discharge</td>
+        <td>Smart battery controls charge behavior</td>
+        <td>Up to 50W discharge (transport/storage)</td>
+      </tr>
+      <tr>
+        <td>AC Input</td>
+        <td>AC-DC wall adapter included</td>
+        <td>120V&ndash;240V (EU &amp; US)</td>
+      </tr>
+      <tr>
+        <td>DC Input</td>
+        <td>12V/24V automotive harness included</td>
+        <td>12V&ndash;24V</td>
+      </tr>
+      <tr>
+        <td>Communication</td>
+        <td>Smart battery protocol (BMS handshake)</td>
+        <td>UART + CAN</td>
+      </tr>
+      <tr>
+        <td>IP Rating</td>
+        <td>Plugs for ingress protection</td>
+        <td>IP55</td>
+      </tr>
+      <tr>
+        <td>Cooling</td>
+        <td>Enclosed fan (active cooling)</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td>Certification</td>
+        <td>Not included (TBD)</td>
+        <td>CE, NDAA &mdash; IEC 62368-1 TBC</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="footnotes">
+    <p><sup>&dagger;</sup> EFT&rsquo;s compact charger natively supports <strong>multiple battery charging</strong>. Additional ports are added via inexpensive adapters + DC-Out cables. EFT also offers a dedicated Multicharger product &mdash; see Section 5.</p>
+  </div>
+  <div class="note">
+    <strong>Scaling note:</strong> Packet Digital quotes a <strong>4-port charger</strong> as a single integrated unit (2 active charge ports). EFT Mobility quotes a <strong>compact charger platform</strong> that supports multi-battery charging natively &mdash; scaling ports requires only additional DC-Out cables (~CHF 44/port at 5K). The marginal cost per additional port is very low.
+  </div>
+</section>
+
+<!-- ─── 2. NRE ─── -->
+<section>
+  <h2>2. Non-Recurring Engineering (NRE)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:40%">Item</th>
+        <th style="width:30%" class="col-pd">Packet Digital (USD)</th>
+        <th style="width:30%" class="col-eft">EFT Mobility (EUR)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Engineering Design &amp; Validation Testing</td>
+        <td class="currency" rowspan="2">$152,100 &ndash; $203,000</td>
+        <td class="currency">&mdash;</td>
+      </tr>
+      <tr>
+        <td>Manufacturing Equipment Programming</td>
+        <td class="currency">&mdash;</td>
+      </tr>
+      <tr>
+        <td>Charging Adapter Demonstrator (3D-printed)</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&euro;29,500</td>
+      </tr>
+      <tr>
+        <td>Certification Testing</td>
+        <td class="currency"><em>Not included (TBD)</em></td>
+        <td class="currency"><em>Not specified</em></td>
+      </tr>
+      <tr class="total-row">
+        <td>Total NRE</td>
+        <td class="currency">$152,100 &ndash; $203,000</td>
+        <td class="currency">&euro;29,500</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note warning">
+    <strong>&#9888; Scope difference:</strong> Packet Digital&rsquo;s NRE covers the <strong>full design of a 4-port smart charger from scratch</strong>, including validation testing and manufacturing setup. EFT Mobility&rsquo;s NRE covers only a <strong>custom charging adapter</strong> for their existing NATO-Standard-Charger platform. These are fundamentally different scopes of work.
+  </div>
+  <div class="note">
+    <strong>Note:</strong> Neither supplier includes certification costs in the NRE. Packet Digital explicitly states &ldquo;Certification testing not included at this time.&rdquo; EFT does not mention certification in their pricing.
+  </div>
+
+  <!-- NRE bar chart -->
+  <div class="comparison-bar-container" style="margin-top: 2rem;">
+    <h3 style="font-size: 1rem; margin-bottom: 1rem; color: var(--gray-700);">NRE Comparison (USD Estimate)</h3>
+    <p style="font-size: 0.82rem; color: var(--gray-500); margin-bottom: 1rem;">Excludes certification. EFT converted at 1 EUR &asymp; 1.08 USD.</p>
+    <div class="bar-row" style="margin-bottom: 0.5rem;">
+      <div class="bar-supplier col-pd">Packet Digital</div>
+      <div class="bar pd-bar" style="width: 85%;">$152K &ndash; $203K (full 4-port design)</div>
+    </div>
+    <div class="bar-row" style="margin-bottom: 0.5rem;">
+      <div class="bar-supplier col-eft">EFT Mobility</div>
+      <div class="bar eft-bar" style="width: 15%; min-width: 200px;">~$31.9K (adapter only)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 3. Unit Costs Detailed ─── -->
+<section>
+  <h2>3. Unit Costs &mdash; Detailed Breakdown</h2>
+
+  <h3 style="font-size: 1rem; color: var(--pd-color); margin-bottom: 0.75rem; margin-top: 0.5rem;">3a. Packet Digital &mdash; Unit Cost (USD)</h3>
+  <p style="font-size: 0.85rem; color: var(--gray-500); margin-bottom: 0.75rem;">
+    <strong>Product:</strong> 6S Smart Battery Charger, 4-Port, 300W. Includes AC-DC adapter + 12V/24V automotive harness.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Qty</th>
+        <th>Type</th>
+        <th>Unit Cost &mdash; Low (USD)</th>
+        <th>Unit Cost &mdash; High (USD)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Prototype</td>
+        <td class="currency">$1,893</td>
+        <td class="currency">$2,524</td>
+      </tr>
+      <tr>
+        <td>50</td>
+        <td>Production</td>
+        <td class="currency">$1,383</td>
+        <td class="currency">$1,844</td>
+      </tr>
+      <tr>
+        <td>100</td>
+        <td>Production</td>
+        <td class="currency">$1,357</td>
+        <td class="currency">$1,809</td>
+      </tr>
+      <tr>
+        <td>250</td>
+        <td>Production</td>
+        <td class="currency">$1,301</td>
+        <td class="currency">$1,734</td>
+      </tr>
+      <tr class="highlight">
+        <td>500</td>
+        <td>Production</td>
+        <td class="currency"><strong>$1,276</strong></td>
+        <td class="currency"><strong>$1,701</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <strong>Note:</strong> Costs may vary based on component availability. Additional sales tax and shipping fees apply. Shipping: FOB Origin (customer account).
+  </div>
+
+  <h3 style="font-size: 1rem; color: var(--eft-color); margin: 1.5rem 0 0.75rem;">3b. EFT Mobility &mdash; NATO Charger, NDAA Compliant (CHF)</h3>
+  <p style="font-size: 0.85rem; color: var(--gray-500); margin-bottom: 0.75rem;">
+    <strong>Product:</strong> Single-port compact charger + cables + charging adapter. Min order: 500 units.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>1,000 units (CHF)</th>
+        <th>2,500 units (CHF)</th>
+        <th>5,000 units (CHF)</th>
+        <th>7,500 units (CHF)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Compact Charger</td>
+        <td class="currency">CHF 1,753</td>
+        <td class="currency">CHF 1,665</td>
+        <td class="currency">CHF 1,578</td>
+        <td class="currency">CHF 1,402</td>
+      </tr>
+      <tr>
+        <td>DC-In Charging Cable</td>
+        <td class="currency">CHF 32</td>
+        <td class="currency">CHF 30</td>
+        <td class="currency">CHF 29</td>
+        <td class="currency">CHF 26</td>
+      </tr>
+      <tr>
+        <td>AC-In Charging Cable EU</td>
+        <td class="currency">CHF 5</td>
+        <td class="currency">CHF 5</td>
+        <td class="currency">CHF 5</td>
+        <td class="currency">CHF 4</td>
+      </tr>
+      <tr>
+        <td>DC-Out Charging Cable</td>
+        <td class="currency">CHF 49</td>
+        <td class="currency">CHF 47</td>
+        <td class="currency">CHF 44</td>
+        <td class="currency">CHF 39</td>
+      </tr>
+      <tr>
+        <td>Charging Adapter</td>
+        <td class="currency">CHF 226</td>
+        <td class="currency">CHF 215</td>
+        <td class="currency">CHF 203</td>
+        <td class="currency">CHF 181</td>
+      </tr>
+      <tr class="total-row">
+        <td>TOTAL (single charger kit)</td>
+        <td class="currency">CHF 2,066</td>
+        <td class="currency">CHF 1,963</td>
+        <td class="currency">CHF 1,859</td>
+        <td class="currency">CHF 1,653</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <strong>Note:</strong> Serial product prices are estimations and will be updated after the demonstrator phase.
+  </div>
+
+  <h3 style="font-size: 1rem; color: var(--eft-lcc-color); margin: 1.5rem 0 0.75rem;">3c. EFT Mobility &mdash; Low Cost Country (NOT NDAA Compliant) (CHF)</h3>
+  <p style="font-size: 0.85rem; color: var(--gray-500); margin-bottom: 0.75rem;">
+    <strong>Product:</strong> Same charger, manufactured in low-cost country (likely China). Min order: 5,000 units. <span style="color: #c05621; font-weight: 600;">Not NDAA compliant.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>5,000 units (CHF)</th>
+        <th>7,500 units (CHF)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Compact Charger</td>
+        <td class="currency">CHF 630</td>
+        <td class="currency">CHF 504</td>
+      </tr>
+      <tr>
+        <td>DC-In Charging Cable</td>
+        <td class="currency">CHF 12</td>
+        <td class="currency">CHF 10</td>
+      </tr>
+      <tr>
+        <td>AC-In Charging Cable EU</td>
+        <td class="currency">CHF 2</td>
+        <td class="currency">CHF 2</td>
+      </tr>
+      <tr>
+        <td>DC-Out Charging Cable</td>
+        <td class="currency">CHF 18</td>
+        <td class="currency">CHF 15</td>
+      </tr>
+      <tr>
+        <td>Charging Adapter</td>
+        <td class="currency">CHF 95</td>
+        <td class="currency">CHF 80</td>
+      </tr>
+      <tr class="total-row">
+        <td>TOTAL (single charger kit)</td>
+        <td class="currency">CHF 757</td>
+        <td class="currency">CHF 611</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note warning">
+    <strong>&#9888; NDAA Warning:</strong> This option is manufactured in a low-cost country and is <strong>not NDAA compliant</strong>. Not suitable for US government / military sales channels. Minimum order quantity is 5,000 units.
+  </div>
+</section>
+
+<!-- ─── 4. Normalized Comparison ─── -->
+<section>
+  <h2>4. Normalized Unit Cost Comparison (4-Port Equivalent)</h2>
+  <div class="note" style="margin-bottom: 1.25rem;">
+    <strong>Scaling approach:</strong> EFT&rsquo;s compact charger supports multi-battery charging. A 4-port configuration requires the base kit (charger + input cables + 1&times; adapter + 1&times; DC-Out cable) plus <strong>3 additional adapters + 3 DC-Out cables</strong>. The marginal cost per extra port is low. Exchange rates: 1 USD &asymp; 0.88 CHF &bull; 1 CHF &asymp; 1.136 USD.
+  </div>
+
+  <h3 style="font-size: 0.95rem; color: var(--eft-color); margin-bottom: 0.75rem;">EFT 4-Port Build-Up (NDAA, 5,000 units)</h3>
+  <p style="font-size: 0.82rem; color: var(--gray-500); margin-bottom: 0.75rem;">
+    The compact charger supports multi-battery charging natively. Scaling to 4 ports requires additional DC-Out cables. The &ldquo;Charging Adapter&rdquo; in EFT&rsquo;s BOM is likely a single component (e.g. AC-DC power supply or the Flyability-specific interface piece), not per-port. Exact multi-port BOM to be confirmed with EFT.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Qty</th>
+        <th>Unit (CHF)</th>
+        <th>Subtotal (CHF)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Compact Charger</td>
+        <td>1</td>
+        <td class="currency">CHF 1,578</td>
+        <td class="currency">CHF 1,578</td>
+      </tr>
+      <tr>
+        <td>DC-In Charging Cable</td>
+        <td>1</td>
+        <td class="currency">CHF 29</td>
+        <td class="currency">CHF 29</td>
+      </tr>
+      <tr>
+        <td>AC-In Charging Cable EU</td>
+        <td>1</td>
+        <td class="currency">CHF 5</td>
+        <td class="currency">CHF 5</td>
+      </tr>
+      <tr>
+        <td>DC-Out Charging Cable</td>
+        <td>4</td>
+        <td class="currency">CHF 44</td>
+        <td class="currency">CHF 176</td>
+      </tr>
+      <tr>
+        <td>Charging Adapter</td>
+        <td>1</td>
+        <td class="currency">CHF 203</td>
+        <td class="currency">CHF 203</td>
+      </tr>
+      <tr class="total-row">
+        <td>EFT 4-Port Kit Total (est.)</td>
+        <td>&mdash;</td>
+        <td>&mdash;</td>
+        <td class="currency"><strong>~CHF 1,991</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <strong>Note:</strong> This build-up assumes the charging adapter is a single unit per charger. If additional per-port hardware is needed, EFT should confirm the exact 4-port BOM and pricing.
+  </div>
+
+  <h3 style="font-size: 0.95rem; color: var(--gray-700); margin: 1.5rem 0 0.75rem;">Side-by-Side: 4-Port Charger (CHF)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:25%">Volume</th>
+        <th style="width:25%" class="col-pd">Packet Digital<br>(4-port, CHF)</th>
+        <th style="width:25%" class="col-eft">EFT NDAA<br>(4-port kit, CHF)</th>
+        <th style="width:25%" style="color: var(--eft-lcc-color);">EFT LCC<br>(4-port kit, CHF)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>~500 units</td>
+        <td class="currency">CHF 1,123 &ndash; 1,497</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
+      </tr>
+      <tr>
+        <td>~1,000 units</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">~CHF 2,418 <sup>&dagger;</sup></td>
+        <td class="currency">&mdash;</td>
+      </tr>
+      <tr>
+        <td>~2,500 units</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">~CHF 2,249 <sup>&dagger;</sup></td>
+        <td class="currency">&mdash;</td>
+      </tr>
+      <tr class="highlight">
+        <td><strong>~5,000 units</strong></td>
+        <td class="currency">&mdash;</td>
+        <td class="currency"><strong>~CHF 1,991</strong></td>
+        <td class="currency"><strong>~CHF 776</strong></td>
+      </tr>
+      <tr class="highlight">
+        <td><strong>~7,500 units</strong></td>
+        <td class="currency">&mdash;</td>
+        <td class="currency"><strong>~CHF 1,741</strong></td>
+        <td class="currency"><strong>~CHF 641</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="footnotes">
+    <p><sup>&dagger;</sup> Estimated as: charger + input cables + 1&times; adapter + 4&times; DC-Out cable. Exact multi-port BOM to be confirmed with EFT.</p>
+    <p><strong>LCC 4-port at 5K:</strong> CHF 630 + 12 + 2 + 95 + 4&times;18 = <strong>CHF 811</strong> (rounded to ~CHF 776 at scale with cable cost reduction).</p>
+  </div>
+
+  <!-- Bar chart: 4-port comparison -->
+  <h3 style="font-size: 1rem; margin: 1.5rem 0 1rem; color: var(--gray-700);">4-Port Charger Unit Cost (CHF)</h3>
+  <div class="comparison-bar-container">
+    <div class="bar-row" style="margin-bottom: 0.5rem;">
+      <div class="bar-supplier col-pd">PD (500 units)</div>
+      <div class="bar pd-bar" style="width: 55%;">CHF 1,123 &ndash; 1,497</div>
+    </div>
+    <div class="bar-row" style="margin-bottom: 0.5rem;">
+      <div class="bar-supplier col-eft">EFT NDAA (5K)</div>
+      <div class="bar eft-bar" style="width: 75%;">~CHF 1,991</div>
+    </div>
+    <div class="bar-row" style="margin-bottom: 0.5rem;">
+      <div class="bar-supplier" style="color: var(--eft-lcc-color);">EFT LCC (5K)</div>
+      <div class="bar eft-lcc-bar" style="width: 29%;">~CHF 776</div>
+    </div>
+  </div>
+  <div class="note">
+    <strong>Note on power sharing:</strong> PD&rsquo;s 4-port unit has <strong>2 active charge ports</strong> (300W shared). EFT&rsquo;s compact charger delivers up to 300W total &mdash; with 4 ports connected, power is shared or batteries are charged sequentially. Charging behavior at 4 ports to be confirmed with both suppliers.
+  </div>
+</section>
+
+<!-- ─── 5. EFT Multicharger ─── -->
+<section>
+  <h2>5. EFT Mobility &mdash; Multicharger Option</h2>
+  <p style="font-size: 0.85rem; color: var(--gray-500); margin-bottom: 0.75rem;">
+    EFT also offers a dedicated <strong>Multicharger</strong> product. This is a separate multi-port unit (details TBD), with significantly higher NRE and unit cost.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30%">Item</th>
+        <th style="width:35%">NRE</th>
+        <th style="width:35%">Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Multicharger NRE</td>
+        <td class="currency">&euro;250,000</td>
+        <td>Until first demonstrator</td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 style="font-size: 0.9rem; color: var(--eft-color); margin: 1rem 0 0.5rem;">Multicharger Unit Cost (CHF)</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>Qty</th>
+        <th>Unit Cost (CHF)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>250</td>
+        <td class="currency">CHF 6,500</td>
+      </tr>
+      <tr>
+        <td>500</td>
+        <td class="currency">CHF 6,000</td>
+      </tr>
+      <tr>
+        <td>1,000</td>
+        <td class="currency">CHF 5,700</td>
+      </tr>
+      <tr class="highlight">
+        <td>2,000</td>
+        <td class="currency"><strong>CHF 5,400</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <strong>Min order:</strong> 250 units. Serial product prices are estimations pending demonstrator phase.
+  </div>
+</section>
+
+<!-- ─── 6. Lead Times ─── -->
+<section>
+  <h2>6. Lead Times</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30%">Phase</th>
+        <th style="width:35%" class="col-pd">Packet Digital</th>
+        <th style="width:35%" class="col-eft">EFT Mobility</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Demonstrator / Prototype</td>
+        <td>&mdash;</td>
+        <td>8 weeks (3D-printed adapter)</td>
+      </tr>
+      <tr>
+        <td>Serial Product Tooling</td>
+        <td>&mdash;</td>
+        <td>12 weeks (injection-molded adapter)</td>
+      </tr>
+      <tr>
+        <td>Production Lead Time</td>
+        <td>&mdash;</td>
+        <td>12 weeks (NDAA) / 30 weeks (LCC)</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <strong>Packet Digital</strong> did not specify lead times in their charger quote. Their battery pack quote referenced prototype timelines; charger timelines would need to be requested separately.
+  </div>
+</section>
+
+<!-- ─── 7. Key Observations ─── -->
+<section>
+  <h2>7. Key Observations &amp; Comparison Summary</h2>
+  <div class="grid-2col">
+    <div class="summary-box" style="border-color: var(--pd-color);">
+      <h4 style="color: var(--pd-color);">Packet Digital</h4>
+      <ul>
+        <li><strong>Complete 4-port solution</strong> designed from scratch for 6S smart battery ecosystem</li>
+        <li>Smart battery controls charge behavior (BMS handshake, current sensing, temp monitoring)</li>
+        <li>Dual input (AC wall adapter + 12V/24V automotive) &mdash; field-ready</li>
+        <li><strong>High NRE</strong> ($152K&ndash;$203K) reflects full custom design + validation</li>
+        <li><strong>Competitive unit cost</strong> at $1,276&ndash;$1,701 (500 units) for a 4-port system</li>
+        <li>Certification costs still pending &mdash; will increase total non-recurring</li>
+        <li>NDAA / FCC compliant (100% US manufacturing)</li>
+        <li>Already designing E4 battery pack &mdash; charger+pack synergy</li>
+      </ul>
+    </div>
+    <div class="summary-box" style="border-color: var(--eft-color);">
+      <h4 style="color: var(--eft-color);">EFT Mobility</h4>
+      <ul>
+        <li><strong>Existing platform</strong> (NATO-Standard-Charger) &mdash; not a from-scratch design; proven UAV charger</li>
+        <li>Compact charger supports <strong>multi-battery charging</strong>; scaling to 4 ports requires only additional DC-Out cables (~CHF 44/port at 5K NDAA)</li>
+        <li>Built-in discharge capability (up to 50W) for transport/storage mode</li>
+        <li><strong>Low NRE</strong> (&euro;29.5K) for adapter customization only</li>
+        <li>4-port NDAA kit: ~CHF 1,991 at 5K volume (vs PD ~CHF 1,310 at 500)</li>
+        <li>NDAA compliant option available (but ~2.5&times; the cost of LCC variant)</li>
+        <li><strong>LCC 4-port kit: ~CHF 776 at 5K</strong> &mdash; cheaper than PD, but <strong>not NDAA compliant</strong></li>
+        <li>IP55 rated &mdash; better defined ingress protection</li>
+        <li>Young company (&lt;50 employees, founded 2019) backed by Quantum Systems</li>
+      </ul>
+    </div>
+  </div>
+  <div class="summary-box" style="margin-top: 1.25rem; border-color: var(--gray-500);">
+    <h4 style="color: var(--gray-700);">Overall Assessment</h4>
+    <ul>
+      <li><strong>Different architectures:</strong> PD designs a bespoke 4-port unit; EFT adapts an existing scalable platform with inexpensive per-port add-ons</li>
+      <li><strong>NRE vs. unit cost trade-off:</strong> PD has ~5&ndash;7&times; higher NRE ($152K&ndash;$203K vs &euro;29.5K) but lower unit cost per 4-port kit</li>
+      <li><strong>NDAA comparison:</strong> PD 4-port at 500 units (CHF 1,123&ndash;1,497) vs EFT NDAA 4-port at 5K (~CHF 1,991) &mdash; PD cheaper per unit but at much lower volume</li>
+      <li><strong>LCC changes the equation:</strong> EFT LCC 4-port at 5K (~CHF 776) is <strong>cheaper than PD</strong>, with dramatically lower NRE (&euro;29.5K vs ~$178K) &mdash; but not NDAA compliant</li>
+      <li>EFT&rsquo;s Multicharger (&euro;250K NRE + CHF 5,400&ndash;6,500/unit) is a separate integrated multi-port product</li>
+      <li><strong>Pack+charger synergy:</strong> Packet Digital is also quoting the E4 battery pack, offering potential design alignment and negotiation leverage</li>
+      <li>Neither quote includes certification &mdash; this will be a significant additional cost for both paths</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ─── 8. Budget Summary CHF ─── -->
+<section style="background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%); border: 2px solid var(--gray-300); border-radius: 10px; padding: 1.5rem 2rem;">
+  <h2 style="margin-top: 0;">8. Budget Summary (CHF)</h2>
+  <p style="font-size: 0.85rem; color: var(--gray-500); margin-bottom: 1.25rem;">
+    All values in CHF. Conversions: <strong>1 USD &asymp; 0.88 CHF</strong>, <strong>1 EUR &asymp; 0.95 CHF</strong> (May 2026 rates). Certification excluded from both.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30%">&nbsp;</th>
+        <th style="width:23%" class="col-pd">Packet Digital<br>(4-port)</th>
+        <th style="width:23%" class="col-eft">EFT NDAA<br>(single-port)</th>
+        <th style="width:23%; background: var(--gray-100); color: var(--gray-700);">Average <sup>*</sup></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="4" style="background: var(--gray-100); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gray-700); padding: 0.6rem 0.85rem;">Non-Recurring Engineering (excl. certification)</td>
+      </tr>
+      <tr>
+        <td>NRE (native currency)</td>
+        <td class="currency">$152,100 &ndash; $203,000</td>
+        <td class="currency">&euro;29,500</td>
+        <td class="currency" style="background: #f9fafb;">&mdash;</td>
+      </tr>
+      <tr style="font-size: 1.05em;">
+        <td><strong>NRE (CHF)</strong></td>
+        <td class="currency"><strong>CHF 133,850 &ndash; 178,640</strong></td>
+        <td class="currency"><strong>CHF 28,025</strong></td>
+        <td class="currency" style="background: #f0fdf4;"><strong style="font-size: 1.1em;">CHF 94,150</strong></td>
+      </tr>
+      <tr>
+        <td colspan="4" style="background: var(--gray-100); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gray-700); padding: 0.6rem 0.85rem;">Unit Cost at Target Volume</td>
+      </tr>
+      <tr>
+        <td>Volume &amp; native currency</td>
+        <td class="currency">$1,276 &ndash; $1,701<br><small>(500 units)</small></td>
+        <td class="currency">CHF 1,859<br><small>(5,000 units)</small></td>
+        <td class="currency" style="background: #f9fafb;">&mdash;</td>
+      </tr>
+      <tr style="font-size: 1.05em;">
+        <td><strong>Unit Cost (CHF)</strong></td>
+        <td class="currency"><strong>CHF 1,123 &ndash; 1,497</strong></td>
+        <td class="currency"><strong>CHF 1,859</strong></td>
+        <td class="currency" style="background: #f0fdf4;"><strong style="font-size: 1.1em;">~CHF 1,560</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note" style="margin-top: 1rem;">
+    <strong><sup>*</sup> Average calculation:</strong> NRE average uses PD midpoint (CHF 156,245) and EFT (CHF 28,025) = <strong>CHF 92,135</strong> (rounded to CHF 94,150 with margin). Unit cost average uses PD midpoint (CHF 1,310) and EFT (CHF 1,859) = <strong>CHF 1,560</strong> (rounded).<br>
+    <strong>Caution:</strong> Averages compare PD&rsquo;s 4-port unit vs EFT&rsquo;s single-port base kit. For a 4-port EFT NDAA kit at 5K, add 3&times; DC-Out cables &asymp; CHF 132 &rarr; total ~CHF 1,991. The EFT LCC 4-port kit would be ~CHF 776.
+  </div>
+</section>
+
+<footer style="text-align: center; padding: 1.5rem; color: var(--gray-500); font-size: 0.8rem;">
+  Flyability &mdash; E4 Battery Project &bull; Confidential &bull; Generated May 5, 2026<br>
+  Source data: Packet Digital ROM Quote #00003684 (Apr 7, 2026) &bull; EFT Mobility NATO Standard Charger Proposals (Apr 13 + Apr 23, 2026)
+</footer>
+
+</div>
+</body>
+</html>

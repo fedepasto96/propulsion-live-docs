@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E4 Battery Project — Gantt Timeline</title>
+<script src="https://cdn.jsdelivr.net/npm/frappe-gantt@0.6.1/dist/frappe-gantt.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/frappe-gantt@0.6.1/dist/frappe-gantt.min.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #f5f6fa;
+    color: #2d3436;
+    padding: 16px 24px;
+  }
+  h1 { font-size: 1.5rem; text-align: center; margin-bottom: 4px; color: #1a1a2e; }
+  .subtitle { text-align: center; font-size: 0.82rem; color: #636e72; margin-bottom: 14px; }
+  .controls {
+    display: flex; justify-content: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap;
+  }
+  .controls button {
+    padding: 5px 14px; font-size: 0.78rem; border: 1px solid #b2bec3;
+    border-radius: 4px; background: #fff; cursor: pointer; font-weight: 600;
+  }
+  .controls button:hover { background: #dfe6e9; }
+  .controls button.active { background: #2B7A78; color: #fff; border-color: #2B7A78; }
+  #gantt-container {
+    background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    overflow-x: auto; padding: 8px;
+  }
+  .legend {
+    display: flex; justify-content: center; gap: 14px; margin: 14px 0 8px;
+    flex-wrap: wrap; font-size: 0.74rem;
+  }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-dot { width: 13px; height: 13px; border-radius: 3px; }
+
+  .gantt .bar-label { font-size: 10.5px !important; font-weight: 600 !important; }
+  .gantt .grid-header { fill: #f8f9fa !important; }
+  .gantt .tick { stroke: #e9ecef !important; }
+  .gantt .today-highlight { fill: rgba(43,122,120,0.08) !important; }
+
+  .corrections {
+    max-width: 700px; margin: 20px auto 0; font-size: 0.82rem;
+    background: #fff8e1; border: 1px solid #ffe082; border-radius: 6px; padding: 12px 16px;
+  }
+  .corrections h3 { font-size: 0.95rem; margin-bottom: 6px; color: #e65100; }
+  .corrections ul { margin: 0 0 0 18px; line-height: 1.6; }
+  .corrections li b { color: #bf360c; }
+</style>
+</head>
+<body>
+
+<h1>Harmony Battery — E4 Project Gantt</h1>
+<p class="subtitle">Based on Teamwork plan (19 Feb 2026) with corrections applied. Drag bars to adjust. Switch zoom below.</p>
+
+<div class="controls">
+  <button onclick="setView('Week')" id="btn-Week">Week</button>
+  <button onclick="setView('Month')" id="btn-Month" class="active">Month</button>
+  <button onclick="setView('Quarter Day')" id="btn-qday">Day</button>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#1a1a2e"></div> Phase</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#457B9D"></div> Cell Procurement</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#2B7A78"></div> BMS / SOC</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#78909C"></div> Concept / PM</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#F4A261"></div> Pack Design</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#e17055"></div> Charger</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#6c5ce7"></div> Assembler</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#E76F51"></div> Certification</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#264653"></div> Milestone / Gate</div>
+</div>
+
+<div id="gantt-container">
+  <svg id="gantt"></svg>
+</div>
+
+<div class="corrections">
+  <h3>Corrections applied vs. original plan</h3>
+  <ul>
+    <li><b>#6 SOC track:</b> Added cell sample order, TI ChemID execution, BMS FW v1 integration</li>
+    <li><b>#7 Certification:</b> Added UN 38.3 prep + testing track (Nov 2026 - Feb 2027)</li>
+    <li><b>#8 Cell samples:</b> Added sample procurement bridging Phase 0 cell selection to TI ChemID</li>
+    <li><b>#9 WL delivery buffer:</b> Added BMS + Pack integration & testing block (Oct 8 - Nov 10)</li>
+    <li><b>#11 Pack mech. design:</b> Assigned dates (Apr - Aug 2026), parallel to BMS board dev</li>
+    <li><b>#12 Charger dev:</b> Assigned dates: supplier dev May-Sep, protos Sep-Nov (ready for WL delivery)</li>
+  </ul>
+</div>
+
+<script>
+const tasks = [
+
+  // ══════════════════════════════════════
+  //  PHASE 0 — Research & Pre-study
+  // ══════════════════════════════════════
+  { id: 'p0', name: 'PHASE 0 — Research & Pre-study', start: '2026-01-01', end: '2026-04-01', progress: 15, custom_class: 'bar-phase' },
+
+  // Cell selection
+  { id: 'p0_cell',       name: 'Cell selection',                    start: '2026-01-01', end: '2026-03-22', progress: 30, custom_class: 'bar-cells' },
+  { id: 'p0_cell_perf',  name: '  Prototype Perf. Assessment',      start: '2026-01-01', end: '2026-02-27', progress: 50, custom_class: 'bar-cells' },
+  { id: 'p0_cell_china', name: '  Suppliers assessment in China',    start: '2026-03-06', end: '2026-03-22', progress: 0,  custom_class: 'bar-cells' },
+
+  // BMS Architecture Pre-study
+  { id: 'p0_bms',        name: 'BMS Architecture - Pre study',      start: '2026-01-28', end: '2026-03-30', progress: 20, custom_class: 'bar-bms' },
+  { id: 'p0_ic_sel',     name: '  IC selection',                    start: '2026-01-28', end: '2026-03-09', progress: 30, custom_class: 'bar-bms' },
+  { id: 'p0_ic_comp',    name: '  ICs performance comp.',           start: '2026-01-28', end: '2026-02-20', progress: 40, custom_class: 'bar-bms' },
+  { id: 'p0_soc_val',    name: '  Validation of SOC capabilities',  start: '2026-02-20', end: '2026-03-09', progress: 10, custom_class: 'bar-bms', dependencies: 'p0_ic_comp' },
+
+  // Conceptualization & Feasibility
+  { id: 'p0_concept',    name: 'Conceptualization & Feasibility',   start: '2026-02-02', end: '2026-03-30', progress: 15, custom_class: 'bar-concept' },
+  { id: 'p0_reqs',       name: '  Gathering requirements',          start: '2026-02-02', end: '2026-02-20', progress: 25, custom_class: 'bar-concept' },
+  { id: 'p0_arch',       name: '  First architecture ideas',        start: '2026-02-13', end: '2026-02-24', progress: 15, custom_class: 'bar-concept' },
+  { id: 'p0_hlr',        name: '  HL Requirements Freeze',          start: '2026-03-02', end: '2026-03-10', progress: 0,  custom_class: 'bar-concept' },
+  { id: 'p0_poc',        name: '  POC',                             start: '2026-03-13', end: '2026-03-24', progress: 0,  custom_class: 'bar-concept' },
+  { id: 'p0_solsel',     name: '  Solution selection & reqs freeze', start: '2026-03-25', end: '2026-03-30', progress: 0, custom_class: 'bar-concept' },
+
+  // Charger Supplier Selection
+  { id: 'p0_charger',    name: 'Charger Supplier Selection',        start: '2026-02-16', end: '2026-03-27', progress: 10, custom_class: 'bar-charger' },
+  { id: 'p0_chg_sota',   name: '  State of the art analysis',      start: '2026-02-23', end: '2026-02-27', progress: 10, custom_class: 'bar-charger' },
+  { id: 'p0_chg_scout',  name: '  Charger Suppliers Scouting',     start: '2026-02-26', end: '2026-03-09', progress: 5,  custom_class: 'bar-charger' },
+  { id: 'p0_chg_disc',   name: '  Interviews and discussions',     start: '2026-03-09', end: '2026-03-20', progress: 0,  custom_class: 'bar-charger', dependencies: 'p0_chg_scout' },
+  { id: 'p0_chg_final',  name: '  Final selection',                start: '2026-03-23', end: '2026-03-27', progress: 0,  custom_class: 'bar-charger', dependencies: 'p0_chg_disc' },
+
+  // Pack Assembler Selection
+  { id: 'p0_asm',        name: 'Pack Assembler Selection',          start: '2026-02-16', end: '2026-03-13', progress: 25, custom_class: 'bar-asm' },
+  { id: 'p0_asm_scout',  name: '  Pack Assemblers Scouting',       start: '2026-02-16', end: '2026-02-20', progress: 40, custom_class: 'bar-asm' },
+  { id: 'p0_asm_disc',   name: '  Discussions',                    start: '2026-02-23', end: '2026-03-06', progress: 20, custom_class: 'bar-asm' },
+  { id: 'p0_asm_sel',    name: '  Selection',                      start: '2026-03-09', end: '2026-03-13', progress: 0,  custom_class: 'bar-asm', dependencies: 'p0_asm_disc' },
+
+  // Gate 0
+  { id: 'gate0', name: 'GATE 0', start: '2026-03-31', end: '2026-04-01', progress: 0, custom_class: 'bar-gate' },
+
+  // ══════════════════════════════════════
+  //  PHASE 1 — Study
+  // ══════════════════════════════════════
+  { id: 'p1', name: 'PHASE 1 — Study', start: '2026-04-06', end: '2027-04-01', progress: 0, custom_class: 'bar-phase' },
+
+  // Detailed Technical Reqs
+  { id: 'p1_reqs',       name: 'Detailed Technical Reqs. definition', start: '2026-04-07', end: '2026-05-15', progress: 0, custom_class: 'bar-concept' },
+  { id: 'p1_xpec',       name: '  Migration to Xpec + tech bricks',   start: '2026-04-08', end: '2026-05-01', progress: 0, custom_class: 'bar-concept' },
+
+  // [CORRECTION #8] Cell Samples procurement
+  { id: 'p1_samp_order', name: 'Order cell samples (20-30)',        start: '2026-03-15', end: '2026-04-01', progress: 0, custom_class: 'bar-cells', dependencies: 'p0_cell' },
+  { id: 'p1_samp_recv',  name: 'Receive cell samples',              start: '2026-04-01', end: '2026-04-20', progress: 0, custom_class: 'bar-cells', dependencies: 'p1_samp_order' },
+
+  // [CORRECTION #6] TI ChemID track
+  { id: 'p1_ti_ship',    name: 'Ship samples to TI',                start: '2026-04-20', end: '2026-04-27', progress: 0, custom_class: 'bar-bms', dependencies: 'p1_samp_recv' },
+  { id: 'p1_ti_chemid',  name: 'TI ChemID execution (6-7 wks)',     start: '2026-04-27', end: '2026-06-15', progress: 0, custom_class: 'bar-bms', dependencies: 'p1_ti_ship' },
+
+  // WL Proto Dev (BMS board)
+  { id: 'p1_wlproto',    name: 'WL Proto Dev. (BMS board)',         start: '2026-04-06', end: '2026-08-17', progress: 0, custom_class: 'bar-bms' },
+  { id: 'p1_wl_arch',    name: '  Architecture definition',         start: '2026-04-06', end: '2026-04-13', progress: 0, custom_class: 'bar-bms' },
+  { id: 'p1_wl_schem',   name: '  Schematics captures',             start: '2026-04-13', end: '2026-05-22', progress: 0, custom_class: 'bar-bms', dependencies: 'p1_wl_arch' },
+  { id: 'p1_wl_layout',  name: '  Layout capture',                  start: '2026-05-25', end: '2026-06-09', progress: 0, custom_class: 'bar-bms', dependencies: 'p1_wl_schem' },
+  { id: 'p1_wl_review',  name: '  Review and modification',         start: '2026-06-10', end: '2026-06-30', progress: 0, custom_class: 'bar-bms', dependencies: 'p1_wl_layout' },
+  { id: 'p1_wl_order',   name: '  Order PCBAs',                     start: '2026-07-01', end: '2026-07-08', progress: 0, custom_class: 'bar-bms', dependencies: 'p1_wl_review' },
+  { id: 'p1_wl_recv',    name: '  Reception + PCBA validation',     start: '2026-07-09', end: '2026-07-28', progress: 0, custom_class: 'bar-bms', dependencies: 'p1_wl_order' },
+  { id: 'p1_wl_test',    name: '  Integration testing & debug',     start: '2026-07-29', end: '2026-08-17', progress: 0, custom_class: 'bar-bms', dependencies: 'p1_wl_recv' },
+
+  // [CORRECTION #6] BMS firmware with TI SOC
+  { id: 'p1_bms_fw',     name: 'BMS firmware v1 (TI SOC)',          start: '2026-06-15', end: '2026-09-30', progress: 0, custom_class: 'bar-bms', dependencies: 'p1_ti_chemid' },
+
+  // [CORRECTION #11] Pack Mechanical Design
+  { id: 'p1_mech',       name: 'Pack Mechanical Design',            start: '2026-04-15', end: '2026-08-01', progress: 0, custom_class: 'bar-pack' },
+  { id: 'p1_mech_wl',    name: '  WL Design',                      start: '2026-04-15', end: '2026-08-01', progress: 0, custom_class: 'bar-pack' },
+
+  // [CORRECTION #12] WL Charger Dev
+  { id: 'p1_charger',    name: 'WL Charger Dev.',                   start: '2026-05-01', end: '2026-11-01', progress: 0, custom_class: 'bar-charger' },
+  { id: 'p1_chg_dev',    name: '  Charger Dev. at supplier',        start: '2026-05-01', end: '2026-09-15', progress: 0, custom_class: 'bar-charger' },
+  { id: 'p1_chg_proto',  name: '  Charger Protos production',       start: '2026-09-15', end: '2026-11-01', progress: 0, custom_class: 'bar-charger', dependencies: 'p1_chg_dev' },
+
+  // WL cell pack order 1 — 20 pcs
+  { id: 'p1_cells1',     name: 'WL cell pack order 1 — 20 pcs',    start: '2026-07-31', end: '2026-10-08', progress: 0, custom_class: 'bar-cells' },
+  { id: 'p1_c1_prod',    name: '  Cells production',                start: '2026-07-31', end: '2026-09-15', progress: 0, custom_class: 'bar-cells' },
+  { id: 'p1_c1_ship',    name: '  Cells shipment',                  start: '2026-09-16', end: '2026-09-25', progress: 0, custom_class: 'bar-cells', dependencies: 'p1_c1_prod' },
+  { id: 'p1_c1_asm',     name: '  Battery Pack assembly',           start: '2026-09-29', end: '2026-10-08', progress: 0, custom_class: 'bar-pack', dependencies: 'p1_c1_ship' },
+
+  // [CORRECTION #9] BMS + Pack integration & testing
+  { id: 'p1_integ',      name: 'BMS + Pack integration & testing',  start: '2026-10-08', end: '2026-11-10', progress: 0, custom_class: 'bar-pack', dependencies: 'p1_c1_asm,p1_bms_fw' },
+
+  // 20 WL prototypes ready
+  { id: 'ms_20wl',       name: '20 WL prototypes ready to use',     start: '2026-11-13', end: '2026-11-17', progress: 0, custom_class: 'bar-gate' },
+
+  // [CORRECTION #7] UN 38.3 Certification
+  { id: 'p1_un383_prep', name: 'UN 38.3 test prep + submit',        start: '2026-11-17', end: '2026-12-07', progress: 0, custom_class: 'bar-cert', dependencies: 'ms_20wl' },
+  { id: 'p1_un383_test', name: 'UN 38.3 testing (6-8 wks)',         start: '2026-12-07', end: '2027-02-01', progress: 0, custom_class: 'bar-cert', dependencies: 'p1_un383_prep' },
+
+  // WL pack order 2
+  { id: 'p1_order2',     name: 'WL cell pack order 2',              start: '2026-12-01', end: '2026-12-07', progress: 0, custom_class: 'bar-cells' },
+
+  // 50 WL prototypes ready
+  { id: 'ms_50wl',       name: '50 WL prototypes ready to use',     start: '2027-01-29', end: '2027-02-03', progress: 0, custom_class: 'bar-gate' },
+
+  // UN 38.3 certified
+  { id: 'ms_un383',      name: 'UN 38.3 CERTIFIED',                 start: '2027-01-29', end: '2027-02-03', progress: 0, custom_class: 'bar-cert' },
+
+  // Gate 1
+  { id: 'gate1', name: 'GATE 1', start: '2027-03-31', end: '2027-04-01', progress: 0, custom_class: 'bar-gate' },
+
+  // ══════════════════════════════════════
+  //  PHASE 2 — Development
+  // ══════════════════════════════════════
+  { id: 'p2', name: 'PHASE 2 — Development', start: '2027-04-15', end: '2028-01-01', progress: 0, custom_class: 'bar-phase' },
+  { id: 'p2_ll',         name: 'Development LL (250 packs)',         start: '2027-04-15', end: '2027-12-15', progress: 0, custom_class: 'bar-pack' },
+  { id: 'p2_iec',        name: 'IEC 62133 certification',            start: '2027-06-01', end: '2027-10-01', progress: 0, custom_class: 'bar-cert' },
+  { id: 'gate2', name: 'GATE 2', start: '2027-12-30', end: '2028-01-02', progress: 0, custom_class: 'bar-gate' },
+
+  // ══════════════════════════════════════
+  //  PHASE 2 — Handover to Ops
+  // ══════════════════════════════════════
+  { id: 'p2h', name: 'PHASE 2 — Handover to Ops', start: '2028-01-14', end: '2028-03-28', progress: 0, custom_class: 'bar-phase' },
+  { id: 'p2h_launch',    name: 'Product launch',                     start: '2028-01-12', end: '2028-01-16', progress: 0, custom_class: 'bar-gate' },
+  { id: 'gate3', name: 'GATE 3', start: '2028-03-26', end: '2028-03-30', progress: 0, custom_class: 'bar-gate' },
+
+  // ══════════════════════════════════════
+  //  PHASE 3 — Serial Life
+  // ══════════════════════════════════════
+  { id: 'p3', name: 'PHASE 3 — Serial Life', start: '2028-05-01', end: '2028-05-05', progress: 0, custom_class: 'bar-phase' },
+  { id: 'p3_start',      name: 'Serial life PM starts',              start: '2028-04-30', end: '2028-05-04', progress: 0, custom_class: 'bar-gate' },
+];
+
+const gantt = new Gantt('#gantt', tasks, {
+  view_mode: 'Month',
+  date_format: 'YYYY-MM-DD',
+  bar_height: 20,
+  bar_corner_radius: 3,
+  padding: 14,
+  popup_trigger: 'click',
+  language: 'en',
+});
+
+function setView(mode) {
+  gantt.change_view_mode(mode === 'Quarter Day' ? mode : mode);
+  document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+  const ev = event && event.target;
+  if (ev) ev.classList.add('active');
+}
+
+const style = document.createElement('style');
+style.textContent = `
+  .bar-phase .bar-progress, .bar-phase .bar       { fill: #1a1a2e !important; opacity: 0.85; }
+  .bar-cells .bar-progress, .bar-cells .bar        { fill: #457B9D !important; }
+  .bar-bms .bar-progress, .bar-bms .bar            { fill: #2B7A78 !important; }
+  .bar-concept .bar-progress, .bar-concept .bar    { fill: #78909C !important; }
+  .bar-pack .bar-progress, .bar-pack .bar          { fill: #F4A261 !important; }
+  .bar-charger .bar-progress, .bar-charger .bar    { fill: #e17055 !important; }
+  .bar-asm .bar-progress, .bar-asm .bar            { fill: #6c5ce7 !important; }
+  .bar-cert .bar-progress, .bar-cert .bar          { fill: #E76F51 !important; }
+  .bar-gate .bar-progress, .bar-gate .bar          { fill: #264653 !important; }
+`;
+document.head.appendChild(style);
+</script>
+
+</body>
+</html>

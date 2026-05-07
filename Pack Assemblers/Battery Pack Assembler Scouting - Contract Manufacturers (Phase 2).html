@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Battery Pack Assembler Scouting — Contract Manufacturers / EMS (Phase 2)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 20px;
+            color: #1a1a1a;
+            background: #fafafa;
+        }
+        h1 { font-size: 20px; color: #1a1a2e; }
+        h2 { font-size: 16px; color: #1e40af; margin-top: 30px; }
+        h3 { font-size: 14px; color: #1e40af; margin-top: 18px; }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 12px;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 6px 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #1e3a5f;
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) { background: #f9fafb; }
+        tr:hover { background: #eef2ff; }
+        .high { color: #15803d; font-weight: 600; }
+        .medium { color: #b45309; font-weight: 600; }
+        .low { color: #dc2626; font-weight: 600; }
+        .tag {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .us { background: #dbeafe; color: #1e40af; }
+        .eu { background: #e5e7eb; color: #374151; }
+        .naf { background: #fde68a; color: #92400e; }
+        .can { background: #fecaca; color: #991b1b; }
+        .note { font-size: 12px; color: #374151; margin-top: 14px; line-height: 1.55; }
+        .intro {
+            background: #fff;
+            border-left: 4px solid #2563eb;
+            padding: 14px 18px;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 16px 0 24px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .intro strong { color: #1e3a5f; }
+        ul.tier-list { font-size: 12.5px; line-height: 1.6; }
+        /* ── Ranking / scoring styles ─────────────────────── */
+        .score-cell { text-align:center; font-weight:700; font-size:11.5px; border-radius:3px; padding:2px 5px; }
+        .s-high { background:#d1fae5; color:#065f46; }
+        .s-mid  { background:#fef3c7; color:#92400e; }
+        .s-low  { background:#fee2e2; color:#7f1d1d; }
+        .score-big { font-size:13px; font-weight:700; }
+        .rank-num { display:inline-flex; align-items:center; justify-content:center; background:#1e3a5f; color:white; border-radius:50%; width:22px; height:22px; font-size:11px; font-weight:700; flex-shrink:0; }
+        .ranking-table { border-collapse:collapse; width:100%; font-size:11.5px; background:white; margin-bottom:24px; }
+        .ranking-table th { background:#374151; color:white; padding:5px 7px; text-align:left; font-size:11px; }
+        .ranking-table th[title] { cursor:help; border-bottom:2px dashed #9ca3af; }
+        .ranking-table td { border:1px solid #e5e7eb; padding:4px 7px; vertical-align:middle; }
+        .ranking-table tr:nth-child(even) { background:#f9fafb; }
+        .ranking-table tr:hover { background:#eef2ff; }
+        .method-box { background:#f0f9ff; border:1px solid #bae6fd; border-radius:6px; padding:14px 18px; font-size:12.5px; margin:16px 0; line-height:1.6; }
+        .method-box strong { color:#0c4a6e; }
+        .method-weight { display:inline-block; background:#0ea5e9; color:white; border-radius:3px; padding:1px 5px; font-size:11px; font-weight:700; margin-left:3px; }
+        a.company-link {
+            color: #1d4ed8;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        a.company-link:hover { color: #1e3a8a; }
+        .sources {
+            margin-top: 28px;
+            background: #fff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 18px 24px;
+        }
+        .sources h2 { margin-top: 0; }
+        .sources details {
+            border-top: 1px solid #e5e7eb;
+            padding: 10px 0;
+        }
+        .sources details:first-of-type { border-top: none; }
+        .sources summary {
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e3a5f;
+            padding: 4px 0;
+        }
+        .sources .src-body {
+            font-size: 12.5px;
+            line-height: 1.6;
+            color: #374151;
+            padding: 6px 0 4px 14px;
+            border-left: 2px solid #dbeafe;
+            margin: 6px 0 6px 4px;
+        }
+        .sources .src-body a {
+            color: #1d4ed8;
+            word-break: break-all;
+        }
+        .sources .src-body ul { margin: 4px 0 6px 18px; padding: 0; }
+        .sources .src-body li { margin: 2px 0; }
+    </style>
+</head>
+<body>
+
+<h1>E4 Battery Pack Assembler Scouting — Contract Manufacturers / EMS (Phase 2)</h1>
+<p style="font-size:13px;"><strong>Updated:</strong> April 2026 | <strong>Project:</strong> E4 Battery | <strong>Owner:</strong> Federico Pastore</p>
+
+<div class="intro">
+    <p><strong>Purpose.</strong> This is a complementary list to the existing <em>Battery Pack Assembler Scouting</em> (drone-native pack houses such as Tulip, Packet Digital, Re:Build, Leclanché, etc.). The candidates below are <strong>large contract manufacturers (CM) / Electronic Manufacturing Services (EMS) providers</strong> that take a <strong>"build-to-print" approach</strong> — i.e. companies similar to <strong>VDL</strong>, which Tulip itself uses as its physical assembler. The strategic intent is to <strong>bypass intermediaries</strong> (Tulip, BMZ, etc.) and contract directly with the underlying factory, capturing their scale, automation, low‑cost regional footprints (Eastern Europe / North Africa / Mexico) and clean‑room/laser‑welding infrastructure, while still owning our own design and BMS.</p>
+    <p><strong>Profile we are targeting:</strong> Tier‑1/2 EMS or industrial CM with (1) <em>laser tab welding or ultrasonic bonding</em> (mandatory for pouch cells), (2) <em>humidity / dry‑room or Class 7‑8 cleanroom</em> for cell handling, (3) <em>traceability software</em>, (4) ideally ISO 13485 (medical) and/or IATF 16949 (automotive) which already imply lithium‑safe processes, and (5) capability for low‑to‑medium volumes (Flyability target: 6–7 k packs/yr, 1 kg, 6–7 pouch cells).</p>
+    <p><strong>Add-on logic.</strong> Companies already present in the existing scouting list (BMZ Group, VARTA, Tulip, Leclanché, Enix, etc.) are intentionally <em>not</em> repeated here.</p>
+</div>
+
+<h2 style="margin-top:28px;">Supplier Ranking — Composite Score</h2>
+<div class="method-box">
+    <strong>Scoring methodology.</strong> Each company is scored 1–10 on five criteria, weighted to reflect Flyability's priorities for a 1 kg / 6–7 pouch cell / 6–7k units/yr build-to-print drone battery program:
+    <ul style="margin:6px 0 4px 18px; padding:0;">
+        <li><strong>Battery Pack Flexibility (BPF)</strong> <span class="method-weight">35%</span> — how closely the company's existing setup matches our product: pouch cell tab welding, small-format (1 kg), 6–7k units/yr, and willingness to engage on small programs.</li>
+        <li><strong>Assembly Process Proficiency (APP)</strong> <span class="method-weight">35%</span> — laser/ultrasonic tab welding capability, dry-room/humidity control, traceability, and certifications (ISO 13485 / IATF 16949 / AS9100).</li>
+        <li><strong>Production Volume (VOL)</strong> <span class="method-weight">10%</span> — annual battery packs or equivalent units assembled, as proxy for operational maturity.</li>
+        <li><strong>Employees (EMP)</strong> <span class="method-weight">10%</span> — headcount as indicator of industrial stability and capacity buffer.</li>
+        <li><strong>Annual Revenue (REV)</strong> <span class="method-weight">10%</span> — financial scale and long-term viability as a partner.</li>
+    </ul>
+    <strong>Formula: Score = BPF×0.35 + APP×0.35 + VOL×0.10 + EMP×0.10 + REV×0.10</strong> (max 10.0). Hover column headers for full metric descriptions. <span class="score-cell s-high" style="font-size:11px;">Green ≥ 8.0</span> &nbsp; <span class="score-cell s-mid" style="font-size:11px;">Amber 5.0–7.9</span> &nbsp; <span class="score-cell s-low" style="font-size:11px;">Red &lt; 5.0</span>
+</div>
+
+<table class="ranking-table">
+<thead><tr>
+    <th style="width:30px;">#</th>
+    <th>Company</th>
+    <th>Region</th>
+    <th title="Battery Pack Flexibility /10 (weight 35%) — fit for pouch-cell / small-format / 6-7k packs/yr program">BPF /10</th>
+    <th title="Assembly Process Proficiency /10 (weight 35%) — laser/ultrasonic tab welding, dry-room, traceability, certs">APP /10</th>
+    <th title="Production Volume /10 (weight 10%) — annual battery packs or equivalent units as maturity proxy">VOL /10</th>
+    <th title="Employees /10 (weight 10%) — headcount as stability / capacity indicator">EMP /10</th>
+    <th title="Annual Revenue /10 (weight 10%) — financial scale and long-term viability">REV /10</th>
+    <th title="Composite Score = BPF×0.35 + APP×0.35 + VOL×0.10 + EMP×0.10 + REV×0.10  (max 10.0)">Score /10</th>
+</tr></thead>
+<tbody>
+<tr><td><span class="rank-num">1</span></td><td><strong>Videoton Elektro-PLAST</strong></td><td><span class="tag eu">EU/HU</span></td>
+    <td class="score-cell s-high">9</td><td class="score-cell s-high">9</td><td class="score-cell s-high">9</td><td class="score-cell s-high">8</td><td class="score-cell s-mid">6</td>
+    <td class="score-cell s-high score-big">8.6</td></tr>
+<tr><td><span class="rank-num">2</span></td><td><strong>Zollner Elektronik AG</strong></td><td><span class="tag eu">EU/DE</span></td>
+    <td class="score-cell s-mid">7</td><td class="score-cell s-high">10</td><td class="score-cell s-mid">5</td><td class="score-cell s-high">8</td><td class="score-cell s-high">8</td>
+    <td class="score-cell s-high score-big">8.1</td></tr>
+<tr><td><span class="rank-num">3</span></td><td><strong>Celestica Inc.</strong></td><td><span class="tag can">CAN/MX/US</span></td>
+    <td class="score-cell s-mid">7</td><td class="score-cell s-high">9</td><td class="score-cell s-mid">6</td><td class="score-cell s-high">9</td><td class="score-cell s-high">9</td>
+    <td class="score-cell s-high score-big">8.0</td></tr>
+<tr><td><span class="rank-num">4</span></td><td><strong>Webasto Battery Solutions OEM</strong></td><td><span class="tag eu">EU/DE</span></td>
+    <td class="score-cell s-high">8</td><td class="score-cell s-high">9</td><td class="score-cell s-mid">6</td><td class="score-cell s-mid">7</td><td class="score-cell s-mid">7</td>
+    <td class="score-cell s-high score-big">8.0</td></tr>
+<tr><td><span class="rank-num">5</span></td><td><strong>Flex Ltd. — Energy Division</strong></td><td><span class="tag us">US + Global</span></td>
+    <td class="score-cell s-mid">5</td><td class="score-cell s-high">9</td><td class="score-cell s-high">9</td><td class="score-cell s-high">10</td><td class="score-cell s-high">10</td>
+    <td class="score-cell s-high score-big">7.8</td></tr>
+<tr><td><span class="rank-num">6</span></td><td><strong>VDL Groep (ETG + Nedcar / MIC)</strong></td><td><span class="tag eu">EU/NL</span></td>
+    <td class="score-cell s-mid">7</td><td class="score-cell s-high">8</td><td class="score-cell s-mid">6</td><td class="score-cell s-high">8</td><td class="score-cell s-mid">7</td>
+    <td class="score-cell s-mid score-big">7.4</td></tr>
+<tr><td><span class="rank-num">7</span></td><td><strong>Sanmina Corporation</strong></td><td><span class="tag us">US</span></td>
+    <td class="score-cell s-mid">5</td><td class="score-cell s-high">9</td><td class="score-cell s-mid">5</td><td class="score-cell s-high">9</td><td class="score-cell s-high">9</td>
+    <td class="score-cell s-mid score-big">7.2</td></tr>
+<tr><td><span class="rank-num">8</span></td><td><strong>Jabil Inc. — Energy / BESS</strong></td><td><span class="tag us">US + Global</span></td>
+    <td class="score-cell s-low">3</td><td class="score-cell s-high">9</td><td class="score-cell s-high">9</td><td class="score-cell s-high">9</td><td class="score-cell s-high">10</td>
+    <td class="score-cell s-mid score-big">7.0</td></tr>
+<tr><td><span class="rank-num">9</span></td><td><strong>USI / AsteelFlash Tunisia</strong></td><td><span class="tag naf">N.AFRICA/TN</span></td>
+    <td class="score-cell s-mid">7</td><td class="score-cell s-mid">7</td><td class="score-cell s-mid">7</td><td class="score-cell s-mid">6</td><td class="score-cell s-low">4</td>
+    <td class="score-cell s-mid score-big">6.6</td></tr>
+<tr><td><span class="rank-num">10</span></td><td><strong>Benchmark Electronics</strong></td><td><span class="tag us">US/MX</span></td>
+    <td class="score-cell s-mid">5</td><td class="score-cell s-high">8</td><td class="score-cell s-mid">5</td><td class="score-cell s-mid">7</td><td class="score-cell s-mid">6</td>
+    <td class="score-cell s-mid score-big">6.4</td></tr>
+<tr><td><span class="rank-num">11</span></td><td><strong>Triathlon Batterien GmbH</strong></td><td><span class="tag eu">EU/DE</span></td>
+    <td class="score-cell s-mid">6</td><td class="score-cell s-mid">7</td><td class="score-cell s-mid">7</td><td class="score-cell s-mid">5</td><td class="score-cell s-low">4</td>
+    <td class="score-cell s-mid score-big">6.2</td></tr>
+<tr><td><span class="rank-num">12</span></td><td><strong>Kitron ASA</strong></td><td><span class="tag eu">EU/NO+CEE</span></td>
+    <td class="score-cell s-mid">5</td><td class="score-cell s-high">8</td><td class="score-cell s-mid">5</td><td class="score-cell s-mid">5</td><td class="score-cell s-mid">6</td>
+    <td class="score-cell s-mid score-big">6.2</td></tr>
+<tr><td><span class="rank-num">13</span></td><td><strong>Eldor Corporation S.p.A.</strong></td><td><span class="tag eu">EU/IT</span></td>
+    <td class="score-cell s-mid">5</td><td class="score-cell s-mid">7</td><td class="score-cell s-low">4</td><td class="score-cell s-mid">6</td><td class="score-cell s-mid">5</td>
+    <td class="score-cell s-mid score-big">5.7</td></tr>
+<tr><td><span class="rank-num">14</span></td><td><strong>ACTIA Africa (ACTIA Group)</strong></td><td><span class="tag naf">N.AFRICA/TN</span></td>
+    <td class="score-cell s-mid">5</td><td class="score-cell s-mid">7</td><td class="score-cell s-mid">6</td><td class="score-cell s-mid">5</td><td class="score-cell s-low">4</td>
+    <td class="score-cell s-mid score-big">5.7</td></tr>
+<tr><td><span class="rank-num">15</span></td><td><strong>Ficosa International</strong></td><td><span class="tag eu">EU/ES</span></td>
+    <td class="score-cell s-low">3</td><td class="score-cell s-mid">7</td><td class="score-cell s-low">4</td><td class="score-cell s-high">8</td><td class="score-cell s-mid">7</td>
+    <td class="score-cell s-mid score-big">5.4</td></tr>
+<tr><td><span class="rank-num">16</span></td><td><strong>Impact Clean Power Technology</strong></td><td><span class="tag eu">EU/PL</span></td>
+    <td class="score-cell s-low">3</td><td class="score-cell s-mid">7</td><td class="score-cell s-high">8</td><td class="score-cell s-mid">5</td><td class="score-cell s-low">4</td>
+    <td class="score-cell s-mid score-big">5.2</td></tr>
+<tr><td><span class="rank-num">17</span></td><td><strong>Scanfil Oyj</strong></td><td><span class="tag eu">EU/FI+CEE</span></td>
+    <td class="score-cell s-low">4</td><td class="score-cell s-mid">6</td><td class="score-cell s-low">4</td><td class="score-cell s-mid">6</td><td class="score-cell s-mid">5</td>
+    <td class="score-cell s-mid score-big">5.0</td></tr>
+<tr><td><span class="rank-num">18</span></td><td><strong>Comtron d.o.o.</strong></td><td><span class="tag eu">EU/SI</span></td>
+    <td class="score-cell s-high">8</td><td class="score-cell s-mid">5</td><td class="score-cell s-low">1</td><td class="score-cell s-low">1</td><td class="score-cell s-low">1</td>
+    <td class="score-cell s-mid score-big">4.9</td></tr>
+<tr><td><span class="rank-num">19</span></td><td><strong>Leoni Morocco</strong></td><td><span class="tag naf">N.AFRICA/MA</span></td>
+    <td class="score-cell s-low">2</td><td class="score-cell s-low">4</td><td class="score-cell s-low">3</td><td class="score-cell s-high">9</td><td class="score-cell s-high">9</td>
+    <td class="score-cell s-low score-big">4.2</td></tr>
+<tr><td><span class="rank-num">20</span></td><td><strong>EXO Industry (Cebon Group)</strong></td><td><span class="tag eu">EU/FR</span></td>
+    <td class="score-cell s-mid">6</td><td class="score-cell s-low">4</td><td class="score-cell s-low">2</td><td class="score-cell s-low">2</td><td class="score-cell s-low">2</td>
+    <td class="score-cell s-low score-big">4.1</td></tr>
+<tr><td><span class="rank-num">21</span></td><td><strong>NOTE AB</strong></td><td><span class="tag eu">EU/SE</span></td>
+    <td class="score-cell s-low">3</td><td class="score-cell s-mid">5</td><td class="score-cell s-low">3</td><td class="score-cell s-low">4</td><td class="score-cell s-low">3</td>
+    <td class="score-cell s-low score-big">3.8</td></tr>
+</tbody>
+</table>
+
+<h2>Detailed scouting table (sorted by composite score)</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th style="width:32px; text-align:center;">#</th>
+        <th>Company</th>
+        <th>Contacted?</th>
+        <th>Suitability for Flyability?</th>
+        <th>Status update</th>
+        <th>Next actions</th>
+        <th>NDA signed</th>
+        <th>Region</th>
+        <th>Location</th>
+        <th>Scale</th>
+        <th>Drone / UAS experience</th>
+        <th>Cell formats</th>
+        <th>Business model</th>
+        <th>Certifications</th>
+        <th>Employees</th>
+        <th>Key strengths</th>
+        <th>Key risks / limitations</th>
+        <th>Willingness</th>
+        <th>Comment</th>
+        <th>Promising</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Rows sorted by composite score (highest first) -->
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">1</span></td>
+        <td><a class="company-link" href="https://www.vtep.videoton.hu/services/battery-pack-assembly/?lang=en" target="_blank"><strong>Videoton Elektro-PLAST (VT Battery)</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Send initial outreach — high priority</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/HU</span></td>
+        <td>Marcali + Kaposvár, Hungary (battery sites); Székesfehérvár (HQ)</td>
+        <td>Very Large (millions of packs/yr; one of largest EMS providers in EU; ~10,000+ employees in Group)</td>
+        <td>Yes — listed e‑mobility as key application, plus automotive and industrial</td>
+        <td>Cylindrical, prismatic, button cells; up to 144 cells/pack — pouch capability via laser / ultrasonic welding to confirm</td>
+        <td>Pure-play EMS contract manufacturing (assembling battery packs since 1997)</td>
+        <td>IATF 16949, ISO 9001, ISO 14001, ISO 13485 (Group)</td>
+        <td>~10,000+ (Videoton Group)</td>
+        <td>Very mature battery line: spot, laser and ultrasonic welding, ESD-protected lines with automated humidity control + central HVAC for Li-ion areas, full traceability + Industry 4.0, in-house plastic injection (housings) + PCBA + final assembly. Hungary = significant cost advantage vs DE/CH.</td>
+        <td>Drone-grade pouch cell expertise to be confirmed (much of their work is cylindrical/prismatic for industrial/automotive).</td>
+        <td></td>
+        <td>Probably the single best VDL-equivalent in Eastern Europe for our profile: explicit battery line, EMS scale, low-cost region. Top priority outreach.</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">2</span></td>
+        <td><a class="company-link" href="https://www.zollner-electronics.com/en/" target="_blank"><strong>Zollner Elektronik AG</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Initial outreach (sales / new business)</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/DE</span></td>
+        <td>Zandt (HQ), Germany — 26 sites worldwide (DE, HU, RO, TN, CN, US)</td>
+        <td>Very Large (Top‑20 global EMS, &gt;10,000 employees)</td>
+        <td>No specific drone reference, but extensive aerospace and medical pack-build experience</td>
+        <td>Module-level assembly; cylindrical and prismatic mainstream, pouch-compatible processes (laser/ultrasonic)</td>
+        <td>Pure-play EMS / contract manufacturing (PCBA + box build + module assembly)</td>
+        <td>ISO 9100 (aerospace), IATF 16949 (automotive), ISO 13485 (medical), ISO 14001</td>
+        <td>~10,000+ (Europe), &gt;5,000 globally outside EU</td>
+        <td>Full process toolkit: SMT/THT, laser welding, ultrasonic and thick/thin wire bonding, conformal coating, cleanroom, X-ray, AOI/SPI, functional test, full traceability. Aerospace + medical certs imply cell-handling discipline already in place.</td>
+        <td>Generalist EMS, not drone-focused. Premium German pricing — Eastern European or Tunisian sites needed for cost competitiveness.</td>
+        <td></td>
+        <td>One of the most direct VDL analogues in Europe. Ask explicitly for Hungary/Romania/Tunisia sites for pouch pack assembly to capture cost arbitrage.</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">3</span></td>
+        <td><a class="company-link" href="https://www.celestica.com/our-expertise/markets/aerospace-and-defense" target="_blank"><strong>Celestica Inc.</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Send initial outreach (focus on Monterrey MX + Toronto ON for A&D / Energy)</td>
+        <td>FALSE</td>
+        <td><span class="tag can">CAN/MX/US</span></td>
+        <td>Toronto, ON (HQ); 14 countries — Monterrey MX manufactures Powin Centipede BESS</td>
+        <td>Very Large (~26,000 employees; ~$8B+ revenue)</td>
+        <td>UAV experience: avionics, optoelectronics, vision, LiDAR, complex mechanical assembly</td>
+        <td>Multi-format; battery module assembly demonstrated (Powin Centipede)</td>
+        <td>Pure-play EMS with Aerospace &amp; Defense + Energy + Industrial divisions</td>
+        <td>AS9100, ITAR-compliant, NADCAP, CGP, ISO 13485, IATF 16949, ISO 9001</td>
+        <td>~26,000</td>
+        <td>One of the strongest aerospace + defense EMS pedigrees. Demonstrated battery system assembly (Powin Centipede). Monterrey MX = strong cost + USMCA US-region positioning. Canadian HQ may also align with NDAA "trusted ally" sourcing.</td>
+        <td>Battery pack assembly currently sized for utility-scale ESS, not 1 kg drone packs. Account engagement threshold to verify.</td>
+        <td></td>
+        <td>One of the most credible Tier-1 EMS choices for both EU and US regions. Especially compelling because of Mexico cost + AS9100/ITAR profile.</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">4</span></td>
+        <td><a class="company-link" href="https://webasto-group.com/en-us/battery.html" target="_blank"><strong>Webasto (Battery Solutions OEM)</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Initial outreach to Webasto Battery Systems</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/DE</span></td>
+        <td>Schierling (Regensburg) + Hengersberg (Deggendorf), Germany; Jiaxing, China</td>
+        <td>Large (multi-product lines, mass production capable)</td>
+        <td>No drone reference (commercial vehicles, buses, off-highway focus)</td>
+        <td>Pouch cells (Samsung SDI partnership since 2018) + prismatic</td>
+        <td>Explicit "build-to-print" or design-to-spec battery contract manufacturing for OEMs; flexible (small batch → mass production)</td>
+        <td>IATF 16949, ISO 9001, automotive grade</td>
+        <td>~14,000+ (group)</td>
+        <td>Explicit build-to-print offering. Pouch-cell native at scale. German automotive quality. Thermal-management heritage useful for cold-weather drone ops. Two-year contract-to-SOP claimed.</td>
+        <td>Volume floor likely high (commercial vehicles / buses). Small drone-format packs may not fit their MOQ.</td>
+        <td></td>
+        <td>Strong fit on capability profile; commercial fit (volume) is the real question. Worth a discovery call.</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">5</span></td>
+        <td><a class="company-link" href="https://www.flex.com/expertise/energy" target="_blank"><strong>Flex Ltd. (formerly Flextronics) — Energy Division</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag us">US + Global</span></td>
+        <td>Austin, TX (HQ); 100+ sites globally incl. Mexico, US, Europe, Asia</td>
+        <td>Very Large (~150,000 employees; Top-3 EMS globally)</td>
+        <td>No drone-pack reference, but Energy division has built BESS for Green Charge Networks at Milpitas innovation centre</td>
+        <td>Multi-format</td>
+        <td>Pure-play EMS / contract manufacturing — Energy division dedicated to ESS and battery solutions</td>
+        <td>ISO 9001, IATF 16949, ISO 13485, AS9100, ITAR (selected sites)</td>
+        <td>~150,000</td>
+        <td>One of the largest CMs on the planet. Existing Energy division dedicated to battery / ESS contract manufacturing. Mexico sites useful for US compliance + cost.</td>
+        <td>At our scale (6–7k packs/yr, 1 kg) we are below their typical engagement threshold. Account team may not prioritize a small program.</td>
+        <td></td>
+        <td>Useful as a "long-shot" option to test how aggressively they price small drone-format work; lower priority than Sanmina/Benchmark for US-region production.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">6</span></td>
+        <td><a class="company-link" href="https://www.vdlgroep.com/en" target="_blank"><strong>VDL Groep (ETG + Nedcar / MIC)</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Send initial outreach (target: VDL ETG Projects + VDL Nedcar Mobility Innovation Centre)</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/NL</span></td>
+        <td>Eindhoven (HQ), Born (battery MIC), multiple ETG sites NL/CZ/SG/US</td>
+        <td>Very Large (VDL Groep ~15k employees; MIC battery line ~40k packs/yr; ETG multi-site low-volume / high-mix CM)</td>
+        <td>No drone-specific reference, but VDL ETG runs build-to-print for ASML, Thermo Fisher, Philips and other complex OEMs</td>
+        <td>Multiple — currently configured for automotive modules (BMW after-sales 125k modules contract)</td>
+        <td>Pure contract manufacturing / build-to-print; VDL Nedcar = vehicle CM, VDL ETG = mechatronic/industrial CM, MIC = dedicated battery line</td>
+        <td>IATF 16949, ISO 9001, ISO 14001, automotive grade</td>
+        <td>~15,000 (Groep) / ~3,000 (Nedcar)</td>
+        <td>Reference for the "VDL model": pure CM, no design overhead, automotive-grade quality, significant battery automation already in place. Same plant Tulip uses → potential to short-circuit the middleman.</td>
+        <td>Battery line currently sized for automotive (large modules); fit for 1 kg / 6–7 cell pouch packs to be confirmed. Unlikely to engage below a minimum annual revenue threshold.</td>
+        <td></td>
+        <td>Top "VDL-like" target by definition. ETG (industrial CM) probably more relevant than the Nedcar MIC for drone-format packs. First call should explore minimum order quantity and small-format pouch capability.</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">7</span></td>
+        <td><a class="company-link" href="https://www.sanmina.com/industries/defense-aerospace/" target="_blank"><strong>Sanmina Corporation</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Send initial outreach</td>
+        <td>FALSE</td>
+        <td><span class="tag us">US</span></td>
+        <td>San Jose, CA (HQ); ITAR-registered facilities incl. Salt Lake City UT, Costa Mesa CA</td>
+        <td>Very Large (~32,000 employees worldwide; Top-10 EMS globally)</td>
+        <td>Defense/aerospace platforms — UAV electronics, radars, comms; battery-pack-specific UAV reference TBC</td>
+        <td>Module-level assembly; pouch capability TBC</td>
+        <td>Pure-play EMS with strong defense / industrial / medical mix</td>
+        <td>AS9100C, NADCAP, ISO 13485, FDA, ITAR-registered</td>
+        <td>~32,000</td>
+        <td>Multiple ITAR-compliant US facilities — covers FCC / NDAA-favoured supply for US drone fleet. Aerospace + medical certifications imply mature lithium handling. Strong systems-build capability.</td>
+        <td>Battery pack assembly is not their headline service — needs explicit confirmation of laser welding line + dry-room.</td>
+        <td></td>
+        <td>Strongest US "pure-play CM" candidate alongside Benchmark for an ITAR-compliant US-built battery option.</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">8</span></td>
+        <td><a class="company-link" href="https://www.jabil.com/industries/energy.html" target="_blank"><strong>Jabil Inc. — Energy / BESS</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Track only — likely scale mismatch</td>
+        <td>FALSE</td>
+        <td><span class="tag us">US + Global</span></td>
+        <td>St. Petersburg, FL (HQ); &gt;100 sites worldwide (US, MX, EU, APAC)</td>
+        <td>Very Large (~140,000 employees; major BESS contract with Powin: 2 GWh → 4 GWh/yr)</td>
+        <td>No drone-pack reference; large-format BESS only</td>
+        <td>Module-level + large-format ESS</td>
+        <td>Pure-play EMS / contract manufacturing</td>
+        <td>ISO 9001, IATF 16949, ISO 13485, AS9100</td>
+        <td>~140,000</td>
+        <td>Massive battery contract experience (Powin Stack750 2–4 GWh). Global low-cost network.</td>
+        <td>Energy practice is sized for utility-scale BESS, not small drone packs. Misaligned with Flyability volume profile.</td>
+        <td></td>
+        <td>Not a realistic primary option but useful as a benchmark on EMS pricing / capability.</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">9</span></td>
+        <td><a class="company-link" href="https://www.asteelflash.com/facility/asteelflash-la-soukra/" target="_blank"><strong>USI / AsteelFlash Tunisia</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Send initial outreach — high priority cost option</td>
+        <td>FALSE</td>
+        <td><span class="tag naf">N. AFRICA / TN</span></td>
+        <td>La Soukra, Tunis — 27,000 m² (close to airport)</td>
+        <td>Large (1,000–4,999 employees; 7 SMT lines, expandable to 14)</td>
+        <td>No specific drone reference; energy = 25% of business mix</td>
+        <td>Multi-format via box build / cable + PCBA + module assembly</td>
+        <td>Pure-play EMS (parent USI = Universal Scientific Industrial, Shanghai-listed)</td>
+        <td>ISO 13485 (medical), IATF 16949 (automotive), ISO 9001, ISO 14001</td>
+        <td>1,000–4,999</td>
+        <td>Industrial 45% / energy 25% / automotive 15% / medical 10% — almost ideal mix for drone packs. Both ISO 13485 + IATF 16949 = cell-handling discipline already in place. Tunisia = strong EU-cost arbitrage. Internal soldering qualification lab + AOI/SPI/X-ray.</td>
+        <td>Battery pack assembly not advertised as flagship product — confirm laser/ultrasonic welding + dry-room availability.</td>
+        <td></td>
+        <td><strong>Top low-cost EMS candidate.</strong> Combination of certifications, scale and Tunisian cost base is uniquely well-suited to our profile.</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">10</span></td>
+        <td><a class="company-link" href="https://www.bench.com/" target="_blank"><strong>Benchmark Electronics</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Send initial outreach (Tempe AZ HQ + Lafayette CO RF/aerospace)</td>
+        <td>FALSE</td>
+        <td><span class="tag us">US</span></td>
+        <td>Tempe, AZ (HQ); Lafayette, CO (RF/Aerospace), Phoenix AZ, Guadalajara MX, Penang MY</td>
+        <td>Very Large (~10,000+ employees; ~$2.6B revenue)</td>
+        <td>Defense/aerospace pedigree; Dynetics weapon system electronics contract</td>
+        <td>Multi-format; pouch capability TBC</td>
+        <td>Pure-play EMS with aerospace/defense + medical specialization</td>
+        <td>AS9100, ISO 9001, ISO 13485, ITAR-registered, NADCAP</td>
+        <td>~10,000+</td>
+        <td>Long aerospace/defense pedigree, ITAR-compliant, Mexico site for cost arbitrage on US-region production. Strong RF + ruggedized assembly heritage relevant to drone platforms.</td>
+        <td>Battery pack assembly capability needs to be explicitly verified.</td>
+        <td></td>
+        <td>Worth a discovery call alongside Sanmina to compare US-region build-to-print proposals for the spare/replacement market.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">11</span></td>
+        <td><a class="company-link" href="https://www.triathlon-batteries.com/" target="_blank"><strong>Triathlon Batterien GmbH (Triathlon Holding)</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Evaluate further; check fit for low-volume drone format</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/DE</span></td>
+        <td>Glauchau (DE), additional sites in Europe + acquired Voltabox VoltaMobil HV business (2025)</td>
+        <td>Large (one of Europe's largest dedicated lithium pack assembly plants)</td>
+        <td>No drone reference (intralogistics, AGVs, forklifts, industrial)</td>
+        <td>Multiple — has previously assembled Voltabox cylindrical and prismatic modules</td>
+        <td>Custom pack design + serial assembly; previously contract-assembled for third parties (Voltabox)</td>
+        <td>ISO 9001, IATF 16949 (industrial)</td>
+        <td>&gt;1,000</td>
+        <td>One of Europe's largest dedicated Li-ion pack assembly plants. Highly automated. Has previous "third-party brand" assembly history.</td>
+        <td>Industrial/forklift native — pouch cell + drone-grade weight constraints to validate. May prefer their own cell selection.</td>
+        <td></td>
+        <td>Worth a discovery call as a German-based volume assembler. Lower priority than VDL/Webasto/Zollner.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">12</span></td>
+        <td><a class="company-link" href="https://www.kitron.com/" target="_blank"><strong>Kitron ASA</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Initial outreach (Lithuania / Poland / Czech sites)</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/NO + LT/PL/CZ</span></td>
+        <td>Norway (HQ); production in Norway, Sweden, Denmark, Lithuania, Poland, Czechia, US, India, China</td>
+        <td>Large (~3,300 employees; €738M revenue 2025; targeting €1.5B long-term)</td>
+        <td>Some defense/UAV electronics experience (recent €42M defense/aerospace contract Apr 2026)</td>
+        <td>Multiple (cylindrical, prismatic, pouch)</td>
+        <td>Pure-play EMS contract manufacturing</td>
+        <td>EN 9100:2018, AQAP 2110, ISO 9001, ISO 13485, IATF 16949</td>
+        <td>~3,300</td>
+        <td>Defense/aerospace-grade EMS with Eastern European low-cost sites (Lithuania, Poland, Czechia). AQAP 2110 is rare and very valuable for drone defense customers. Mid-volume sweet spot matches Flyability.</td>
+        <td>Battery pack assembly is not their flagship — needs to be confirmed in discovery call.</td>
+        <td></td>
+        <td>Strong fit for defense-grade drone supplier with low-cost EU footprint; very interesting alternative to expensive Western European players.</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">13</span></td>
+        <td><a class="company-link" href="https://www.eldorgroup.com/" target="_blank"><strong>Eldor Corporation S.p.A.</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/IT</span></td>
+        <td>Orsenigo (Como), Italy + plants in CN, TR, BR, US</td>
+        <td>Large (group-wide; battery division since 1999)</td>
+        <td>No drone reference (Tier-1 automotive)</td>
+        <td>Pouch + prismatic (auto-format)</td>
+        <td>Tier‑1 automotive supplier; highly flexible mass-production lines for high-tech automotive components (incl. on-board chargers, DC/DC, integrated HV boxes)</td>
+        <td>IATF 16949, ISO 9001, ISO 14001</td>
+        <td>~3,000+</td>
+        <td>Italian automotive supplier with strong industrialisation know-how. Highly automated lines. Battery division of 25+ years. EHS unit recently sold to BorgWarner — group remains active in battery assembly and ignition/electronics.</td>
+        <td>Heavy automotive-only focus; willingness to accept low-volume drone-format programs uncertain. Post-BorgWarner deal, residual battery capability needs clarification.</td>
+        <td></td>
+        <td>Italian backup option in case other Mediterranean / EU CMs don't engage.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">14</span></td>
+        <td><a class="company-link" href="https://ems.actia.com/international-electronic-manufacturing-sites/" target="_blank"><strong>ACTIA Africa (ACTIA Group)</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Initial outreach (ACTIA EMS division)</td>
+        <td>FALSE</td>
+        <td><span class="tag naf">N. AFRICA / TN</span></td>
+        <td>Chotrana (Ariana) + CIPI ACTIA Tunis (~18,300 m²) + Sfax R&amp;D unit (400 staff)</td>
+        <td>Large (~1,650 employees in TN; ACTIA Group is global automotive electronics)</td>
+        <td>No drone reference; automotive electronics + lithium battery JV (ASSAD partnership 2021)</td>
+        <td>Multi-format; lithium battery via ASSAD JV</td>
+        <td>EMS / contract manufacturing (683M SMT components/yr; 3.2M finished products/yr)</td>
+        <td>IATF 16949, ISO 9001, ISO 14001</td>
+        <td>~1,650 (TN) / Group: many more</td>
+        <td>French-Tunisian automotive electronics specialist. Existing lithium battery joint venture (ASSAD) shows commitment to the segment. Tunisia cost base; strong ties to French aerospace/automotive ecosystem (ACTIA Aerospace exists).</td>
+        <td>Their EMS arm builds for the automotive industry — pouch cell drone format fit unproven.</td>
+        <td></td>
+        <td>Strong second pick after USI/AsteelFlash for North-African low-cost EMS. Particularly attractive if combined with French support from ACTIA HQ.</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">15</span></td>
+        <td><a class="company-link" href="https://www.ficosa.com/products/emobility/" target="_blank"><strong>Ficosa International</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/ES</span></td>
+        <td>Mollet del Vallès / Viladecavalls (Barcelona); production at Taicang (CN)</td>
+        <td>Very Large (Tier-1 global automotive supplier)</td>
+        <td>No drone reference</td>
+        <td>Multiple — automotive-format BMS + battery boxes</td>
+        <td>Tier‑1 systems integrator (ECU, BMC, CMC, BDU, OBC) + assembly</td>
+        <td>IATF 16949, ISO 9001</td>
+        <td>~10,000+</td>
+        <td>Tier-1 reputation. Strong systems integration capability (BMS, junction box, OBC). Spanish R&amp;D, Chinese production — could be useful if China remains a sourcing option.</td>
+        <td>Heavy automotive scale (€200M+ contracts). Likely not interested in single‑kg drone packs.</td>
+        <td></td>
+        <td>Low priority — scale mismatch. Track only as a strategic option.</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">16</span></td>
+        <td><a class="company-link" href="http://www.icpt.pl/" target="_blank"><strong>Impact Clean Power Technology (ICPT)</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/PL</span></td>
+        <td>Pruszków (near Warsaw), Poland — GigafactoryX</td>
+        <td>Very Large (4 GWh planned; 1.2 GWh achieved; ~16–17k systems/yr)</td>
+        <td>No — heavy-duty (e-buses, 6,000+ in field), trams, trains, stationary ESS</td>
+        <td>LTO, LFP, NMC — primarily prismatic, large-format</td>
+        <td>Designs + manufactures + offers contract assembly within their ecosystem</td>
+        <td>IATF 16949 alignment, ISO 9001, ISO 14001</td>
+        <td>~500+</td>
+        <td>Largest pure-play battery assembler in Poland. Highly automated (Teamtechnik line, 11-min cycle). Strong vertical capabilities.</td>
+        <td>Heavy-duty / large-format DNA. Likely not interested in 1 kg pouch drone packs unless framed as long-term volume agreement.</td>
+        <td></td>
+        <td>Large but mismatched format (buses/trams). Lower priority — only if other Polish/Hungarian options fall through.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">17</span></td>
+        <td><a class="company-link" href="https://www.scanfil.com/" target="_blank"><strong>Scanfil Oyj</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/FI + PL/EE</span></td>
+        <td>Finland (HQ); production in PL, EE, DE, UK, US, CN, etc. — 16 sites</td>
+        <td>Large (~4,700 employees; low to medium volume sweet spot)</td>
+        <td>No specific drone reference</td>
+        <td>Multiple via box build / module assembly</td>
+        <td>Pure-play EMS</td>
+        <td>ISO 9001, ISO 14001, IATF 16949, ISO 13485, AS9100 (selected sites)</td>
+        <td>~4,700</td>
+        <td>Explicit positioning on low-to-medium volume + energy &amp; cleantech segment, which matches Flyability volumes (6–7k/yr). Polish + Estonian sites for cost.</td>
+        <td>No flagship battery pack experience advertised — would need to confirm laser welding + dry-room infrastructure.</td>
+        <td></td>
+        <td>Solid Nordic EMS option. Worth a discovery call to confirm battery pack capability.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">18</span></td>
+        <td><a class="company-link" href="https://comtron.si/en/battery/" target="_blank"><strong>Comtron d.o.o.</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/SI</span></td>
+        <td>Slovenia</td>
+        <td>Small-Medium</td>
+        <td>Yes — explicit drone / aerial Li-ion pack capability</td>
+        <td>Cylindrical + Li-Po pouch</td>
+        <td>Custom Li-ion pack manufacturing — consultation → series production → certification</td>
+        <td>UN 38.3, CE</td>
+        <td>~30–50</td>
+        <td>Slovenian builder with explicit drone/aerial focus. Low-cost EU region. Reasonable match for our volumes.</td>
+        <td>Small scale; not VDL-class. Capabilities need to be verified onsite.</td>
+        <td></td>
+        <td>Bonus regional candidate for Slovenian / CEE redundancy — likely "drone-native" (closer to Tier-1 list) but still worth a screening call.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">19</span></td>
+        <td><a class="company-link" href="https://www.leoni-morocco.com/" target="_blank"><strong>Leoni Morocco</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Track only — re-evaluate in 12–18 months</td>
+        <td>FALSE</td>
+        <td><span class="tag naf">N. AFRICA / MA</span></td>
+        <td>Casablanca-Settat region (9 plants) + new Agadir plant (2024)</td>
+        <td>Very Large (7,000+ new jobs by 2027; group: ~95,000 globally)</td>
+        <td>No</td>
+        <td>Wiring harnesses primarily, expanding into battery modules</td>
+        <td>Tier-1 automotive supplier; €91M Moroccan investment program 2023</td>
+        <td>IATF 16949, ISO 9001</td>
+        <td>~95,000 (group)</td>
+        <td>German-owned major Moroccan industrial footprint. Lithium "bunker" infrastructure being built. Could become a relevant battery assembler in a few years.</td>
+        <td>Currently primarily a wiring harness supplier — battery pack assembly capability is nascent. Not yet ready for production.</td>
+        <td></td>
+        <td>Monitor only. Not actionable at SOP timing for E4.</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">20</span></td>
+        <td><a class="company-link" href="https://www.cebon.com/" target="_blank"><strong>EXO Industry (Cebon Group)</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/FR</span></td>
+        <td>France (development centre + assembly), part of Cebon Group (Gothenburg, SE)</td>
+        <td>Small-Medium</td>
+        <td>Industrial / professional applications; drone TBC</td>
+        <td>Multiple (cylindrical + pouch)</td>
+        <td>Battery system development + customised pack assembly arm of Cebon Group; sister of GP Batteries distribution business</td>
+        <td>ISO 9001</td>
+        <td>~50–100</td>
+        <td>French battery pack design + assembly arm of a larger European distributor (Cebon). Reasonable size for our volumes. Backed by GP Batteries cell access if needed.</td>
+        <td>Smaller than the other CMs in this list. Less industrial muscle than VDL or Zollner.</td>
+        <td></td>
+        <td>Worth a discovery call as a French-based mid-size option.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td style="text-align:center;"><span class="rank-num">21</span></td>
+        <td><a class="company-link" href="https://www.note-ems.com/en/" target="_blank"><strong>NOTE AB</strong></a></td>
+        <td>FALSE</td><td></td><td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/SE</span></td>
+        <td>Sweden (HQ); production sites in SE, FI, EE, UK, CN</td>
+        <td>Medium-Large</td>
+        <td>Some experience in Security &amp; Defence segment</td>
+        <td>Multiple</td>
+        <td>Pure-play EMS (PCBA + box build)</td>
+        <td>ISO 9001, ISO 14001, ISO 13485</td>
+        <td>~1,500</td>
+        <td>Northern European EMS partner with explicit defence segment. Estonia site for low-cost.</td>
+        <td>No clear battery flagship; smaller scale than Scanfil/Kitron.</td>
+        <td></td>
+        <td>Lower priority; only worth a call if Kitron/Scanfil don't match.</td>
+        <td>Maybe</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Tiering & next steps</h2>
+
+<h3>Tier 1 — high-priority outreach (Q2 2026)</h3>
+<ul class="tier-list">
+    <li><strong>Videoton Elektro-PLAST (HU)</strong> — most direct VDL analogue with explicit battery pack assembly heritage in a low-cost region. Probably the single best fit.</li>
+    <li><strong>VDL Groep — VDL ETG + VDL Nedcar MIC (NL)</strong> — the reference; engage ETG (build-to-print mechatronic CM) ahead of Nedcar MIC (large-format batteries).</li>
+    <li><strong>Zollner Elektronik AG (DE / HU / RO / TN)</strong> — Top-20 global EMS with the right cert stack; ask specifically for Hungarian/Romanian/Tunisian sites.</li>
+    <li><strong>Webasto Battery Solutions (DE)</strong> — only player on this list that explicitly publishes a "build-to-print pouch cell" offering.</li>
+    <li><strong>Kitron (LT / PL / CZ)</strong> — defense-grade (AQAP 2110), low-cost CEE footprint, mid-volume sweet spot.</li>
+    <li><strong>USI / AsteelFlash Tunisia</strong> — best-priced ISO 13485 + IATF 16949 EMS within EU logistics range.</li>
+    <li><strong>Celestica (Monterrey, MX + Toronto)</strong> — strongest dual EU+US Tier-1 EMS option with proven BESS and AS9100 / ITAR.</li>
+    <li><strong>Sanmina (US / ITAR)</strong> — top US-region pure CM candidate for spare/replacement battery production for the US fleet.</li>
+</ul>
+
+<h3>Tier 2 — discovery calls if Tier 1 doesn't engage</h3>
+<ul class="tier-list">
+    <li><strong>ACTIA Africa (TN)</strong> — French-Tunisian automotive EMS with existing lithium JV (ASSAD).</li>
+    <li><strong>Triathlon Batterien (DE)</strong> — large dedicated battery assembly plant with prior third-party brand assembly history.</li>
+    <li><strong>Benchmark Electronics (US/MX)</strong> — aerospace/defense EMS, Lafayette CO + Guadalajara MX.</li>
+    <li><strong>Eldor Corporation (IT)</strong> — automotive Tier-1 with battery division since 1999.</li>
+    <li><strong>Scanfil (FI / PL / EE)</strong> — Energy & Cleantech EMS at the right volume range.</li>
+    <li><strong>EXO Industry / Cebon Group (FR)</strong> — French mid-size battery pack assembler.</li>
+    <li><strong>Comtron (SI)</strong> — small Slovenian custom Li-ion pack maker with explicit drone focus.</li>
+    <li><strong>NOTE AB (SE / EE)</strong> — Nordic EMS with a defence segment.</li>
+    <li><strong>Flex Ltd. — Energy (US/MX/Global)</strong> — long-shot to test pricing on a small program.</li>
+</ul>
+
+<h3>Tier 3 — track / monitor only</h3>
+<ul class="tier-list">
+    <li><strong>Impact Clean Power Technology (PL)</strong> — large-format ESS and bus DNA; mismatch on drone format.</li>
+    <li><strong>Ficosa (ES)</strong> — Tier-1 automotive scale; mismatch on volume.</li>
+    <li><strong>Jabil — Energy (US/MX/Global)</strong> — utility-scale BESS focus; mismatch on volume.</li>
+    <li><strong>Leoni Morocco</strong> — wiring harness primary; battery module capability is nascent.</li>
+</ul>
+
+<p class="note">
+    <strong>Total:</strong> 21 companies (8 Western EU, 4 N. Europe / CEE, 3 N. Africa, 4 US, 1 Canada/Mexico, 1 dual-region).<br>
+    <strong>Selection rationale:</strong> Companies excluded from the existing scouting list (BMZ, VARTA, Tulip, Leclanché, Enix, Custom Power, Packet Digital, Re:Build, Emerging Power, Titan, Wake Energy, Aved/Lithion, CRG Defense, Smart Battery Solutions, EFT Mobility, GRITEC, Exista, Swaytronic, Alexander Battery Technologies, AKKU SYS, ABH-Nord, Neo Battery Materials, Perkons Energy, Mitsunami) — all already covered in <em>Battery Pack Assembler Scouting.html</em> or <em>append_pack_assemblers_to_gsheet.py</em>.<br>
+    <strong>Next operational step:</strong> when ready, replicate <code>append_pack_assemblers_to_gsheet.py</code> for these new entries and append them to the "Pack assembler list" tab of the master Google Sheet.
+</p>
+
+<div class="sources">
+<h2>Sources &amp; references</h2>
+<p style="font-size:12.5px; color:#374151; margin-top:0;">Click each company below to expand the supporting research links and a short context note (why they are on this list, what to verify in a discovery call). All sources gathered between Apr 2026 web research and the public web pages of the companies.</p>
+
+<details open>
+<summary>1. VDL Groep — VDL ETG + VDL Nedcar Mobility Innovation Centre <span class="tag eu">EU/NL</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> VDL is the explicit reference for the "no-design, assembly-only / build-to-print" model the user asked us to find. <strong>VDL ETG Projects</strong> is a multi-site mechatronic / industrial CM that builds for ASML, Thermo Fisher and other complex OEMs (low-volume, high-mix — exactly Flyability's profile). <strong>VDL Nedcar</strong> + the <strong>Mobility Innovation Centre (MIC)</strong> in Born run a 2,000 m² battery demo line at ~40k packs/yr (currently using ~10% of available capacity), with a planned 30,000 m² expansion described as the largest battery production facility in the Netherlands. VDL just secured a long-term contract to assemble ~125k battery modules for BMW Group's after-sales business through 2035. ETG is the natural entry door for a 1 kg / 6–7 cell pouch program.</p>
+<p><strong>What to verify on a discovery call:</strong> minimum order quantity / minimum revenue threshold, willingness to do small-format pouch packs, dry-room and laser-welding availability for non-automotive sizes.</p>
+<ul>
+<li><a href="https://www.vdlgroep.com/en" target="_blank">https://www.vdlgroep.com/en</a> — VDL Groep corporate site.</li>
+<li><a href="https://www.vdletg.com/nl" target="_blank">https://www.vdletg.com/nl</a> — VDL ETG (mechatronic CM, build-to-print).</li>
+<li><a href="https://www.vdletgprojects.com/" target="_blank">https://www.vdletgprojects.com/</a> — VDL ETG Projects (machine, module &amp; mechatronic systems CM).</li>
+<li><a href="https://www.vdlnedcar.nl/en" target="_blank">https://www.vdlnedcar.nl/en</a> — VDL Nedcar (vehicle CM + battery MIC).</li>
+<li><a href="https://www.vdlgroep.com/nl/5-werelden/mobility/vdl-mobility-innovation-centre" target="_blank">https://www.vdlgroep.com/nl/5-werelden/mobility/vdl-mobility-innovation-centre</a> — Mobility Innovation Centre overview.</li>
+<li><a href="https://etn.news/buzz/vdl-ev-battery-systems-assembly-born-germany-bmw-group" target="_blank">etn.news</a> — VDL bags order to assemble 125,000 battery modules for BMW Group.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>2. Webasto — Battery Solutions OEM <span class="tag eu">EU/DE</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> Of all the candidates Webasto is the only one that explicitly publishes a "build-to-print" battery offering. Production lines in Schierling (Regensburg) — €11M investment for a multi-product line that already builds packs for a European bus maker — and Hengersberg (Deggendorf) — €18M prototype + validation centre for aluminium battery housings. Cells are sourced from <strong>Samsung SDI</strong> as a strategic partner since 2018 (so they natively work with pouch / prismatic cells). Webasto claims a contract-to-SOP timeline of about two years and supports both small-batch and mass-production lines.</p>
+<p><strong>What to verify on a discovery call:</strong> MOQ for 1 kg / 6–7 cell pouch programs (their advertised lines are bus-class), willingness to deviate from Samsung SDI cell sourcing if Flyability's cell choice differs.</p>
+<ul>
+<li><a href="https://webasto-group.com/en-us/battery.html" target="_blank">https://webasto-group.com/en-us/battery.html</a> — Webasto Battery Systems landing page.</li>
+<li><a href="https://webasto-group.com/en-us/battery/battery-solutions-oem.html" target="_blank">https://webasto-group.com/en-us/battery/battery-solutions-oem.html</a> — Battery Solutions for OEMs (build-to-print page).</li>
+<li><a href="https://insideevs.com/news/373791/webasto-launched-ev-battery-pack-production-in-germany/" target="_blank">insideevs.com</a> — Webasto launches EV battery pack production in Germany (Schierling + Hengersberg).</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>3. Zollner Elektronik AG <span class="tag eu">EU/DE + HU/RO/TN</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> Zollner is one of the cleanest VDL analogues in continental Europe: Top-20 global EMS, 26 sites worldwide, more than 10,000 employees in Europe, and the full process toolkit relevant to pouch cells — SMT/THT, <strong>laser welding, ultrasonic and thick/thin wire bonding</strong>, conformal coating, cleanroom production, X-ray, AOI/SPI, functional test, full traceability. Their certification stack (<strong>ISO 9100 aerospace, IATF 16949 automotive, ISO 13485 medical</strong>) is exactly the "infrastructure anchor" we asked for in the brief. Hungarian, Romanian and Tunisian sites give significant cost arbitrage versus the German HQ.</p>
+<p><strong>What to verify on a discovery call:</strong> which specific Zollner sites have an established lithium pack line / dry-room (Hungary or Romania most likely), and whether they take small-format drone programs.</p>
+<ul>
+<li><a href="http://zollner-electronics.com/en/" target="_blank">http://zollner-electronics.com/en/</a> — Zollner corporate.</li>
+<li><a href="https://www.zollner-electronics.com/en/technologies-processes" target="_blank">technologies &amp; processes page</a> (laser welding, wire bonding, cleanrooms).</li>
+<li><a href="https://www.zollner-electronics.com/en/services" target="_blank">services page</a> — full EMS scope.</li>
+<li><a href="https://www.ems-europe.info/ems-providers-in-europe/4:zollner-elektronik-ag" target="_blank">ems-europe.info — Zollner profile</a> (cert list).</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>4. Triathlon Batterien GmbH (Triathlon Holding) <span class="tag eu">EU/DE</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> Triathlon's plant in <strong>Glauchau, Germany</strong> was, at its launch, described as "Europe's most up-to-date battery assembly plant". Voltabox previously operated a dedicated production hall section there and built up to several thousand modules per year on Voltabox's behalf — which is exactly the third-party-brand build-to-print pattern we are looking for. In 2025 Triathlon Holding completed the acquisition of Voltabox's <strong>VoltaMobil</strong> high-voltage battery activities, consolidating that capability in-house.</p>
+<p><strong>What to verify on a discovery call:</strong> whether they accept third-party programs again post-VoltaMobil consolidation, and whether their lines are sized for sub-1 kg pouch packs.</p>
+<ul>
+<li><a href="https://www.triathlon-batteries.com/" target="_blank">https://www.triathlon-batteries.com/</a> — Triathlon Batterien corporate site.</li>
+<li><a href="https://paragon.ag/en/company/media/news/translate-to-english-artikel/paragon-subsidiary-voltabox-deutschland-gmbh-forms-strategic-partnership-with-triathlon-batterien-gm" target="_blank">paragon.ag press release</a> — Voltabox / Triathlon strategic partnership (Glauchau plant detail).</li>
+<li><a href="https://www.eqs-news.com/news/corporate/voltabox-completes-transformation-acquisition-of-ekm-finalized-portfolio-streamlined-revenue-surge-and-break-even-expected-in-2025/330e8e96-fa7e-4c70-9993-70d9b122e8ca" target="_blank">EQS News — VoltaMobil sold to Triathlon Holding (2025)</a>.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>5. Videoton Elektro-PLAST (VT Battery) <span class="tag eu">EU/HU</span></summary>
+<div class="src-body">
+<p><strong>Why on the list — top pick of the list.</strong> Videoton is one of the largest EMS providers in the EU and has been assembling battery packs since <strong>1997</strong>, in dedicated facilities in <strong>Marcali</strong> and <strong>Kaposvár</strong> (Hungary). Their published capability set is, point-by-point, the "infrastructure anchor" stack we asked for: <strong>spot, laser AND ultrasonic welding</strong>, ESD-protected lines, <strong>automated humidity control + central HVAC</strong> for Li-ion areas, traceability + Industry 4.0 — plus single-cell to 144-cell packs across Li-ion, LFP and Ni-MH. Vertically integrated with in-house plastic injection (housings) and PCBA. Hungary cost base. Multi-million packs/year output across automotive, e-mobility, healthcare, telecom, consumer electronics. Group is ~10,000+ employees and operates as a pure CM (same model as VDL).</p>
+<p><strong>What to verify on a discovery call:</strong> direct experience with pouch cell tab welding (their site emphasises cylindrical / prismatic / button), MOQ for 6–7k packs/yr, whether they have a dedicated lithium dry-room in Marcali or Kaposvár.</p>
+<ul>
+<li><a href="https://www.vtep.videoton.hu/services/battery-pack-assembly/?lang=en" target="_blank">VTEP — battery pack assembly capabilities</a> (full line description).</li>
+<li><a href="https://battery.videoton.hu/" target="_blank">https://battery.videoton.hu/</a> — Videoton Battery business unit.</li>
+<li><a href="https://battery.videoton.hu/activities/engineering-services/?lang=en" target="_blank">engineering services page</a>.</li>
+<li><a href="https://www.videoton.hu/about-us/?lang=en" target="_blank">Videoton Group — about us</a>.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>6. Kitron ASA <span class="tag eu">EU/NO + LT/PL/CZ</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> Kitron is a defense-grade Nordic EMS with manufacturing in <strong>Lithuania, Poland and Czechia</strong> for cost arbitrage. ~3,300 employees, €738M revenue in 2025, and a stated long-term target of €1.5B with defense/aerospace as a growth pillar. They hold <strong>EN 9100, AQAP 2110</strong> (the NATO defense standard — rare and very valuable for any drone program selling into EU defense / homeland-security customers), plus the usual ISO 9001 / 13485 stack. In Apr 2026 they signed a €42M defense/aerospace production order.</p>
+<p><strong>What to verify on a discovery call:</strong> battery pack assembly is not their flagship — confirm laser-welding line and lithium handling at the Lithuania or Poland sites.</p>
+<ul>
+<li><a href="https://www.kitron.com/" target="_blank">https://www.kitron.com/</a> — Kitron corporate.</li>
+<li><a href="https://www.kitron.com/services" target="_blank">services overview</a> (sites + certifications).</li>
+<li><a href="https://www.adriadefense.com/kitron-secures-eur-42-million-defense-aerospace-production-order/" target="_blank">€42M defense/aerospace production order, Apr 2026</a>.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>7. Impact Clean Power Technology (ICPT) <span class="tag eu">EU/PL</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> ICPT operates <strong>GigafactoryX</strong> in Pruszków near Warsaw (Poland): currently 1.2 GWh/yr (achieved 2024), targeting 4 GWh/yr at full capacity. ~16,000 battery systems delivered in 2024, 17,000 expected in 2025. The Teamtechnik-built automation line cycles a battery every <strong>11 minutes</strong>. They run LTO, LFP and NMC chemistries and have already deployed 6,000+ e-buses in the field. The "VDL of Eastern Europe" — but mostly bus / tram / stationary ESS sized.</p>
+<p><strong>What to verify:</strong> whether they would even quote a 1 kg / 6–7 cell pouch drone pack — likely not their preferred profile, but useful as a benchmark and worth a screening call.</p>
+<ul>
+<li><a href="http://www.icpt.pl/" target="_blank">http://www.icpt.pl/</a> — ICPT corporate site.</li>
+<li><a href="https://www.electrive.com/2022/06/29/impact-clean-power-technology-builds-plant-in-poland/" target="_blank">electrive.com — ICPT builds GigafactoryX (2022)</a>.</li>
+<li><a href="https://www.sustainable-bus.com/components/impact-gigafactory-x-new-production-line-batteries/" target="_blank">sustainable-bus.com — automated line, 1.2 GWh/yr</a>.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>8. Scanfil Oyj <span class="tag eu">EU/FI + PL/EE</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> Scanfil is a Finnish EMS with ~4,700 employees, 16 production facilities globally, explicitly positioned on <strong>low-to-medium volume + Energy &amp; Cleantech segment</strong> — exactly Flyability's volume range (6–7k/yr). Polish and Estonian sites for cost arbitrage. Full PCBA + box build + system integration scope.</p>
+<p><strong>What to verify:</strong> battery pack assembly is not flagship; confirm laser welding + dry-room availability and any pouch-cell history.</p>
+<ul>
+<li><a href="https://www.scanfil.com/" target="_blank">https://www.scanfil.com/</a> — Scanfil corporate site.</li>
+<li><a href="https://www.scanfil.com/services" target="_blank">services overview</a>.</li>
+<li><a href="https://www.scanfil.com/company" target="_blank">company / sites</a>.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>9. NOTE AB <span class="tag eu">EU/SE + EE</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> NOTE is one of Northern Europe's main EMS partners with an explicit <strong>Security &amp; Defence segment</strong> alongside Medtech, Industrial, Communication and Greentech. ~1,500 employees with sites in Sweden, Finland, Estonia, UK and China. Smaller than Scanfil/Kitron and less battery-flagged, so it sits as a back-up Nordic option.</p>
+<ul>
+<li><a href="https://www.note-ems.com/en/" target="_blank">https://www.note-ems.com/en/</a> — NOTE EMS corporate site.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>10. Eldor Corporation S.p.A. <span class="tag eu">EU/IT</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> Italian Tier-1 automotive supplier (Orsenigo, Como) founded 1972 with a battery division since 1999 and additional plants in CN, TR, BR, US. Highly automated mass production, on-board chargers, DC/DC converters, integrated HV boxes — i.e. they already industrialise battery-adjacent power electronics at scale. The Electric Hybrid Systems (EHS) unit was sold to BorgWarner in mid-2023 for €75M, with €250M projected revenue under BorgWarner by 2027 — the residual Eldor group still owns ignition systems, ECUs, fuel cell systems and a battery line.</p>
+<p><strong>What to verify:</strong> what battery activity is left at Eldor itself (post-BorgWarner divestment), and whether they'll engage on a small-format drone program.</p>
+<ul>
+<li><a href="https://www.eldorgroup.com/" target="_blank">https://www.eldorgroup.com/</a> — Eldor corporate.</li>
+<li><a href="https://www.borgwarner.com/newsroom/press-releases/2023/06/19/borgwarner-to-acquire-eldor-corporation-s-electric-hybrid-systems-business-segment" target="_blank">BorgWarner press release</a> — acquisition of Eldor EHS (2023).</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>11. Ficosa International <span class="tag eu">EU/ES</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> Spanish multinational Tier-1 automotive supplier with a dedicated R&amp;D Center in Mollet del Vallès (Barcelona) for battery pack systems and €200M+ in BMS contracts won for two Tier-1 OEMs in China. eMobility portfolio: BMS (BMC, CMC, UI Sensor), Battery Boxes (eBox, BDU, Junction Box), Charging Devices (OBC, OCDC, CCU). Production runs at the Taicang Technical Centre in China.</p>
+<p><strong>What to verify:</strong> Ficosa's automotive scale is their strength but also a likely deal-breaker — small drone-format programs are unlikely to clear their threshold. Track only.</p>
+<ul>
+<li><a href="https://www.ficosa.com/" target="_blank">https://www.ficosa.com/</a> — Ficosa corporate.</li>
+<li><a href="https://www.ficosa.com/products/emobility/" target="_blank">eMobility product portfolio</a>.</li>
+<li><a href="https://www.ficosa.com/news/ficosa-wins-five-important-contracts-battery-management-systems-chinese-market/" target="_blank">€200M+ BMS contracts in Chinese market</a>.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>12. EXO Industry (Cebon Group) <span class="tag eu">EU/FR</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> Cebon Group is a Gothenburg-based security &amp; energy distribution group; <strong>EXO Industry</strong> is its France-based engineering &amp; battery assembly arm specialising in customised packs (ISO 9001 certified). Sister of GP Batteries distribution and GPBM Industry — so they have access to GP cells if needed, but they are happy to integrate third-party cells. Smaller than VDL/Zollner, but a good mid-size French CM option for EU production.</p>
+<ul>
+<li><a href="https://www.cebon.com/" target="_blank">https://www.cebon.com/</a> — Cebon Group corporate.</li>
+<li><a href="https://www.cebon.com/cebon-group-acquires-dutch-brands-group/" target="_blank">Cebon acquires Dutch Brands Group (energy + security positioning)</a>.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>13. Comtron d.o.o. <span class="tag eu">EU/SI</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> Slovenian small-to-medium custom Li-ion pack manufacturer with explicit aerial / drone focus. Cylindrical + Li-Po pouch capability, UN 38.3 + CE, full lifecycle from consultation to series production and certification. Smaller than VDL/Zollner — sits between the "drone-native" Tier-1 list and this Phase-2 list — but kept here as a low-cost EU-region redundancy option.</p>
+<ul>
+<li><a href="https://comtron.si/en/battery/" target="_blank">https://comtron.si/en/battery/</a> — Comtron battery / Li-ion pack capability page.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>14. USI / AsteelFlash Tunisia <span class="tag naf">N. AFRICA / TN</span></summary>
+<div class="src-body">
+<p><strong>Why on the list — best low-cost EMS in this list.</strong> Tunisian facility of <strong>Universal Scientific Industrial (USI, Shanghai-listed)</strong>, in La Soukra, Tunis. 27,000 m² floor space, 7 SMT lines (expandable to 14), 1,000–4,999 employees. Industry mix is almost ideal for Flyability: <strong>Industrial 45% / Energy 25% / Automotive 15% / Medical 10% / Mechatronics 5%</strong>. Critically they hold <strong>both ISO 13485 (medical) AND IATF 16949 (automotive)</strong> — the dual stack our brief flagged as the gold standard for lithium-grade discipline. Internal soldering qualification lab + AOI/SPI/X-ray + box-build + cable harness + NPI. Tunisia cost base + EU logistics proximity = strong value proposition.</p>
+<p><strong>What to verify:</strong> battery pack assembly is not advertised as their flagship — confirm laser/ultrasonic welding line and dry-room availability.</p>
+<ul>
+<li><a href="https://www.asteelflash.com/facility/asteelflash-la-soukra/" target="_blank">https://www.asteelflash.com/facility/asteelflash-la-soukra/</a> — facility page (Tunisia).</li>
+<li><a href="https://www.emsnow.com/emsnow-profile/usi-asteelflash-tunisia/" target="_blank">EMSNow profile — USI / AsteelFlash Tunisia</a> (industry mix + capacity).</li>
+<li><a href="https://www.asteelflash.com/our-facilities/" target="_blank">All AsteelFlash facilities</a>.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>15. ACTIA Africa (ACTIA Group) <span class="tag naf">N. AFRICA / TN</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> French-Tunisian ACTIA Group (also has ACTIA Aerospace) operates two Tunis sites (CIPI ACTIA + ACTIA Tunisia, ~18,300 m², 542 employees as of Mar 2025) plus a 400-staff R&amp;D unit in Sfax. Group-wide ~1,650 employees in Tunisia incl. 800 engineers. They produce 683M SMT components/yr and 3.2M finished products/yr. In May 2021 ACTIA Africa signed a strategic partnership with <strong>L'Accumulateur Tunisien Assad</strong> to develop lithium-ion battery manufacturing — leveraging ACTIA's embedded electronics for diagnostic + remote monitoring of battery systems. Industry 4.0 and standardised production methods across France / Sweden / Tunisia / US.</p>
+<p><strong>What to verify:</strong> whether the Assad lithium JV can take third-party build-to-print programs, or if it's currently dedicated to Assad's own product line.</p>
+<ul>
+<li><a href="https://ems.actia.com/international-electronic-manufacturing-sites/" target="_blank">ACTIA EMS — international sites</a>.</li>
+<li><a href="https://en.africanmanager.com/tunisia-assad-partners-with-actia-group-to-position-in-lithium-battery-segment/" target="_blank">ASSAD / ACTIA partnership for lithium batteries</a>.</li>
+<li><a href="https://en.africanmanager.com/actia-tunisia-develops-manufacture-of-automotive-components/" target="_blank">ACTIA Tunisia automotive components manufacturing</a>.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>16. Leoni Morocco <span class="tag naf">N. AFRICA / MA</span></summary>
+<div class="src-body">
+<p><strong>Why on the list (track only).</strong> German-owned Leoni operates 9 plants in the Casablanca-Settat region and is opening a new plant in <strong>Agadir</strong>; €91M investment package signed in 2023, ~7,000 new jobs by 2027. Currently the Moroccan footprint is dominated by <strong>wiring harnesses</strong>, but the company is publicly expanding into battery module assembly as Morocco builds its EV ecosystem (Gotion High-Tech gigafactory). Will likely become a relevant battery assembler in 2–3 years; not yet actionable for E4 SOP timing.</p>
+<ul>
+<li><a href="https://www.leoni-morocco.com/" target="_blank">https://www.leoni-morocco.com/</a> — Leoni Morocco corporate.</li>
+<li><a href="https://www.leoni.com/press/press-releases/morocco-investment-1" target="_blank">Leoni press release — Agadir plant + €91M Morocco investment</a>.</li>
+<li><a href="https://www.moroccoworldnews.com/2023/05/355717/automotive-morocco-germanys-leoni-sign-agreements-to-implement-91-33-million-projects" target="_blank">Morocco-Leoni agreement details</a>.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>17. Sanmina Corporation <span class="tag us">US (ITAR)</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> Sanmina is one of the largest US EMS companies (~32,000 employees worldwide). Multiple <strong>ITAR-registered, AS9100C-certified</strong> facilities — confirmed publicly for <strong>Salt Lake City (UT)</strong> and <strong>Costa Mesa (CA)</strong> — covering avionics, comms, encryption, mission control, guidance, radar, night vision. Aerospace + medical + defense triple-cert stack implies mature lithium handling discipline. Strongest US "pure-play CM" candidate for FCC / NDAA-favoured supply for the US drone fleet.</p>
+<p><strong>What to verify:</strong> Sanmina does not advertise battery pack assembly as a headline service — explicitly confirm laser-welding line, dry-room and pouch cell experience.</p>
+<ul>
+<li><a href="https://www.sanmina.com/" target="_blank">https://www.sanmina.com/</a> — Sanmina corporate.</li>
+<li><a href="https://www.sanmina.com/industries/defense-aerospace/" target="_blank">Defense &amp; Aerospace industry page</a>.</li>
+<li><a href="https://www.sanmina.com/sanminas-salt-lake-city-facility-awarded-as9100c-certification-defense-aerospace-manufacturing/" target="_blank">Salt Lake City facility AS9100C / ITAR</a>.</li>
+<li><a href="https://www.sanmina.com/sanminas-costa-mesa-facility-awarded-as9100c-certification-for-defense-and-aerospace-pcb-manufacturing/" target="_blank">Costa Mesa facility AS9100C / ITAR</a>.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>18. Benchmark Electronics <span class="tag us">US/MX</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> Tempe-AZ-headquartered EMS (~10,000+ employees, ~$2.6B revenue) with a strong aerospace + defense pedigree. Lafayette, CO is their RF / aerospace centre; Guadalajara, MX provides cost arbitrage for US-region production. They publish capabilities including PCBA, system build, mixed/hybrid assembly, and mechanical/precision machining, plus ITAR + AS9100 + NADCAP + ISO 13485 certifications. Recent contract to manufacture electronics for Dynetics' weapon system.</p>
+<p><strong>What to verify:</strong> like Sanmina, battery pack assembly capability needs explicit confirmation in a discovery call.</p>
+<ul>
+<li><a href="https://www.bench.com/" target="_blank">https://www.bench.com/</a> — Benchmark corporate.</li>
+<li><a href="https://www.bench.com/setting-the-benchmark/benchmark-to-manufacture-the-electronics-for-dynetics-weapon-system" target="_blank">Dynetics weapon system electronics contract</a>.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>19. Flex Ltd. (formerly Flextronics) — Energy Division <span class="tag us">US + Global</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> Flex is one of the top-3 EMS companies globally (~150,000 employees, 100+ sites). Their dedicated <strong>Energy</strong> division has on-the-record battery / ESS contract manufacturing experience — most notably the <strong>Green Charge Networks</strong> "GreenStation" intelligent energy storage program built at Milpitas, California. Mexico sites are useful for US-region cost + USMCA compliance. The risk is that they typically engage at a much larger volume threshold than Flyability's 6–7k packs/yr.</p>
+<ul>
+<li><a href="https://www.flex.com/expertise/energy" target="_blank">https://www.flex.com/expertise/energy</a> — Energy / battery design + manufacturing services.</li>
+<li><a href="https://www.prnewswire.com/news-releases/green-charge-networks-partners-with-flextronics-to-deploy-intelligent-energy-storage-nationwide-300029902.html" target="_blank">Green Charge Networks / Flextronics ESS partnership</a>.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>20. Jabil Inc. — Energy / BESS <span class="tag us">US + Global</span></summary>
+<div class="src-body">
+<p><strong>Why on the list (track only / benchmark).</strong> Jabil's Energy practice manufactures large-format BESS for <strong>Powin's Stack750</strong> (initial 2 GWh/yr in Q4 2023, scaling to 4 GWh/yr). They publish module automation, thermal management, BMS integration, enclosure + power electronics assembly and large-format module assembly — at utility-scale. The volume profile is far above Flyability's needs, but Jabil is useful as a benchmark for what Tier-1 EMS pricing on battery programs looks like.</p>
+<ul>
+<li><a href="https://www.jabil.com/industries/energy.html" target="_blank">https://www.jabil.com/industries/energy.html</a> — Jabil Energy industry page.</li>
+<li><a href="https://staging.jabil.com/industries/energy/battery-energy-storage-systems.html" target="_blank">Jabil BESS capabilities</a>.</li>
+<li><a href="https://powin.com/powin-signs-agreement-with-jabil-to-boost-u-s-manufacturing-capabilities-and-accelerate-development-of-next-gen-energy-storage-platforms-2/" target="_blank">Powin / Jabil 2 GWh manufacturing agreement</a>.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>21. Celestica Inc. <span class="tag can">CAN/MX/US</span></summary>
+<div class="src-body">
+<p><strong>Why on the list.</strong> Toronto-headquartered Tier-1 EMS / ODM, ~26,000 employees, present in 14 countries. Demonstrated battery system assembly: <strong>Powin selected Celestica to manufacture the Centipede BESS platform</strong> at the Monterrey, Mexico facility (production from Q2 2022). Aerospace &amp; Defense and Space &amp; UAV segments published — UAV-relevant capabilities include avionics, optoelectronics, vision systems, sensors, LiDAR, complex mechanical assembly. <strong>ITAR-compliant, AS9100, NADCAP, CGP</strong> certifications across the network. Canadian HQ + Mexican production = strong dual-region (EU + US) candidate with NDAA "trusted ally" sourcing optics.</p>
+<p><strong>What to verify:</strong> account engagement threshold for our 6–7k packs/yr volume; whether Monterrey would do a small-format pouch program.</p>
+<ul>
+<li><a href="https://www.celestica.com/" target="_blank">https://www.celestica.com/</a> — Celestica corporate.</li>
+<li><a href="https://www.celestica.com/our-expertise/markets/aerospace-and-defense" target="_blank">Aerospace &amp; Defense expertise</a>.</li>
+<li><a href="https://www.celestica.com/our-expertise/services/manufacturing-services" target="_blank">Manufacturing services overview</a>.</li>
+<li><a href="https://batteriesnews.com/powin-celestica-next-generation-battery-energy-storage-system-north-america/" target="_blank">Powin / Celestica BESS partnership (Monterrey, MX)</a>.</li>
+</ul>
+</div>
+</details>
+
+</div>
+
+</body>
+</html>

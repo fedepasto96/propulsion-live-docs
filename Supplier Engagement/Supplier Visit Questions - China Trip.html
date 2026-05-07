@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Supplier Visit Questions — China Trip</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #222;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: 24px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 32px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            font-size: 16px;
+            margin-top: 24px;
+        }
+
+        h4 {
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+
+        th,
+        td {
+            border: 1px solid #bbb;
+            padding: 8px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            margin: 12px 0;
+            border-left: 4px solid;
+            border-radius: 4px;
+        }
+
+        .alert-important {
+            border-left-color: #7c3aed;
+            background-color: #f3f0ff;
+        }
+
+        .alert-warning {
+            border-left-color: #d97706;
+            background-color: #fffbeb;
+        }
+
+        .alert-label {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        ul,
+        ol {
+            margin: 8px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin: 4px 0;
+        }
+
+        .meta {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .meta strong {
+            color: #333;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 28px 0;
+        }
+
+        .question {
+            margin: 6px 0;
+            padding: 4px 0;
+        }
+
+        .question-num {
+            font-weight: bold;
+            color: #2563eb;
+            margin-right: 4px;
+        }
+
+        .notes-box {
+            border: 1px dashed #bbb;
+            background: #fafafa;
+            padding: 12px;
+            min-height: 80px;
+            margin: 8px 0 16px;
+            font-style: italic;
+            color: #999;
+        }
+
+        .supplier-header {
+            background: #f0f0f0;
+            padding: 8px 12px;
+            border-left: 4px solid #2563eb;
+            margin-top: 28px;
+        }
+
+        .supplier-header h3 {
+            margin: 0;
+        }
+
+        .supplier-header .location {
+            color: #555;
+            font-size: 13px;
+        }
+
+        @media print {
+            .notes-box {
+                min-height: 120px;
+            }
+            h2, .supplier-header {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Supplier Visit Questions — China Trip</h1>
+
+    <p class="meta">
+        <strong>Project:</strong> E4 Battery Project — Harmony Project<br>
+        <strong>Visitor:</strong> Maarten (Cell-Pack Specialist)<br>
+        <strong>Date:</strong> 2026 (TBD)<br>
+        <strong>Purpose:</strong> Evaluate cell suppliers against E4 requirements, export regulation risks,
+        and decoupled cell + assembly strategy<br>
+        <strong>Reference:</strong> Export Rules and Regulations document — Sections 1.4 and 1.5
+    </p>
+
+    <hr>
+
+    <h2>Visit Schedule Overview</h2>
+
+    <table>
+        <tr>
+            <th>Week</th>
+            <th>Region</th>
+            <th>Suppliers</th>
+        </tr>
+        <tr>
+            <td><strong>Week 1</strong></td>
+            <td>Shenzhen / Guangdong cluster</td>
+            <td>Grepow, Shenguan, Enrichpower, Spard, EVE Energy</td>
+        </tr>
+        <tr>
+            <td><strong>Week 2</strong></td>
+            <td>Northern China + East Coast</td>
+            <td>ENPOWER (Beijing), CBAK Energy (Yuncheng), Ganfeng LiEnergy (Taizhou)</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <h2>Part A — Universal Questions (Ask Every Supplier)</h2>
+
+    <p>These questions should be asked at <strong>every</strong> supplier visit. They cover the critical topics
+        identified in the export regulations analysis.</p>
+
+    <h3>A1. Export Controls &amp; Decision 58 Awareness</h3>
+
+    <div class="alert alert-warning">
+        <div class="alert-label">CONTEXT FOR MAARTEN</div>
+        MOFCOM Decision 58 (Oct 2025) imposed export controls on Li-ion cells/packs with energy density ≥300 Wh/kg
+        at cell level. Currently <strong>suspended</strong> until Nov 10, 2026 (Decision 70). E4 target is ~350 Wh/kg
+        — above the threshold. All Chinese suppliers would be affected if controls are reinstated.
+    </div>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Why It Matters</th>
+            <th>Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>A1.1</td>
+            <td>Are you aware of MOFCOM Decision 58 and its implications for exporting cells ≥300 Wh/kg?</td>
+            <td>Gauges regulatory awareness and sophistication.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A1.2</td>
+            <td>What is your contingency plan if the export controls are reinstated after Nov 10, 2026?</td>
+            <td>Shows whether they've thought about this risk proactively.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A1.3</td>
+            <td>Have you ever applied for a MOFCOM export license? For what products? What was the process and timeline?</td>
+            <td>Indicates practical experience with the licensing pathway.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A1.4</td>
+            <td>Do you have any manufacturing operations or partnerships <strong>outside of China</strong>
+                (e.g., SE Asia, Europe, US)?</td>
+            <td>Non-China manufacturing would bypass Decision 58 entirely.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A1.5</td>
+            <td>Can you confirm the gravimetric energy density at <strong>cell level</strong> (Wh/kg) for cells
+                you would supply for the E4 project? Is it above or below 300 Wh/kg?</td>
+            <td>Determines whether Decision 58 applies to the specific cells being offered.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <h3>A2. Decoupled Cell + Assembly Model</h3>
+
+    <div class="alert alert-important">
+        <div class="alert-label">CONTEXT FOR MAARTEN</div>
+        We are evaluating a strategy where we source <strong>cells only</strong> from suppliers and have packs assembled
+        by an independent assembler in the US or EU (e.g., Leclanché in Switzerland, Packet Digital or Re:Build in the US).
+        This gives us flexibility to swap cell suppliers if export controls are reinstated.
+    </div>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Why It Matters</th>
+            <th>Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>A2.1</td>
+            <td>Can you supply <strong>cells only</strong> (without pack assembly)? Is this something you do regularly?</td>
+            <td>Core requirement for the decoupled strategy.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A2.2</td>
+            <td>What is the <strong>price difference</strong> between supplying cells only vs. complete battery packs?</td>
+            <td>Quantifies the cost of decoupled assembly.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A2.3</td>
+            <td>What is the <strong>MOQ for cell-only</strong> orders? How does it compare to complete pack MOQ?</td>
+            <td>Determines if small-volume cell orders are feasible.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A2.4</td>
+            <td>Can cells be shipped directly to a <strong>third-party assembler in the US or EU</strong>?
+                Any restrictions or requirements?</td>
+            <td>Logistics feasibility for decoupled model.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A2.5</td>
+            <td>Would you be willing to provide cell samples and datasheets to a third-party assembler
+                for <strong>pack design qualification</strong>?</td>
+            <td>Needed to qualify cells with the assembler.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A2.6</td>
+            <td>Do you offer any <strong>technical support</strong> (BMS integration guidance, thermal specs,
+                welding parameters) to third-party assemblers using your cells?</td>
+            <td>Reduces integration risk at the assembler.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <h3>A3. Cell Specifications &amp; Certification</h3>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Why It Matters</th>
+            <th>Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>A3.1</td>
+            <td>What is the <strong>maximum energy density at cell level</strong> (Wh/kg) you can produce today?
+                What is your roadmap for the next 12–24 months?</td>
+            <td>Confirms if they can meet the ~350 Wh/kg E4 target.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A3.2</td>
+            <td>What <strong>cell form factors</strong> are available (pouch, cylindrical, prismatic)?
+                What do you recommend for a drone application?</td>
+            <td>Form factor affects pack assembly approach.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A3.3</td>
+            <td>Do your cells have <strong>UN 38.3 certification</strong> updated for the 2025 test criteria
+                (+85°C thermal test)? When does it expire?</td>
+            <td>Mandatory for all shipments. Expired certs block shipments in 2026.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A3.4</td>
+            <td>Can you provide a full <strong>cell datasheet</strong>, UN 38.3 test summary, and MSDS/SDS?</td>
+            <td>Required documentation for shipping and assembler qualification.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A3.5</td>
+            <td>What is the <strong>cycle life</strong> at the target energy density? What capacity retention
+                do you guarantee at 500 / 1000 cycles?</td>
+            <td>Critical for drone battery lifetime and cost-of-ownership.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A3.6</td>
+            <td>What <strong>C-rate</strong> (continuous and peak discharge) can the cells support?</td>
+            <td>Drone applications require high power during flight.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A3.7</td>
+            <td>What is the <strong>cell weight and dimensions</strong> for the E4-candidate cell?</td>
+            <td>Needed for pack design and weight budget.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <h3>A4. Shipping &amp; Logistics</h3>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Why It Matters</th>
+            <th>Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>A4.1</td>
+            <td>What is your preferred <strong>shipping mode</strong> (air vs. sea)? Can you handle both?</td>
+            <td>Air has stricter SoC and labeling requirements.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A4.2</td>
+            <td>Can you ship cells at <strong>≤30% State of Charge</strong>? Is this standard in your process?</td>
+            <td>Mandatory for air shipment from Jan 1, 2026 (IATA DGR 67th).</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A4.3</td>
+            <td>What is the <strong>lead time</strong> from order confirmation to delivery (for cells only and for complete packs)?</td>
+            <td>Impacts project planning and stockpiling decisions.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A4.4</td>
+            <td>Do you have experience shipping to the <strong>United States</strong> and/or <strong>Europe</strong>?
+                Any past issues with customs?</td>
+            <td>Export experience reduces risk of shipment delays.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <h3>A5. Commercial Terms</h3>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Why It Matters</th>
+            <th>Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>A5.1</td>
+            <td>What is the <strong>unit price</strong> for cells at the E4 target spec (~350 Wh/kg)?
+                How does it scale with volume (100 / 1,000 / 10,000 units)?</td>
+            <td>Core cost input for project budget.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A5.2</td>
+            <td>Is there an <strong>NRE (non-recurring engineering) cost</strong> for custom cell development?</td>
+            <td>Affects upfront investment.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A5.3</td>
+            <td>What are your <strong>MOQs</strong> for initial orders and for ongoing production?</td>
+            <td>Must be compatible with E4 project volumes.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A5.4</td>
+            <td>What is your annual <strong>production capacity</strong>? How much of it is available for new customers?</td>
+            <td>Ensures they can actually serve the E4 project.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A5.5</td>
+            <td>What are your standard <strong>payment terms</strong>?</td>
+            <td>Cash flow planning.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A5.6</td>
+            <td>Can you provide <strong>samples for qualification</strong> (both for Flyability testing and
+                for a third-party assembler)? Cost and timeline?</td>
+            <td>Needed to start the decoupled assembly qualification process.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <h2>Part B — Supplier-Specific Questions</h2>
+
+    <p>These questions are tailored to each supplier based on what we know from testing, communication, and the
+        visit schedule.</p>
+
+    <!-- WEEK 1 -->
+
+    <div class="supplier-header">
+        <h3>Grepow</h3>
+        <span class="location">📍 Shenzhen area — Week 1</span>
+    </div>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Context</th>
+            <th>Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>B1.1</td>
+            <td>Initial tests showed 282 Wh/kg at pack level. What is the <strong>cell-level energy density</strong>
+                and can you offer a higher density cell for E4 (~350 Wh/kg)?</td>
+            <td>Test sample was below target. Need to understand cell-level spec and upgrade path.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B1.2</td>
+            <td>Test 1 results showed 91.27% vs datasheet — what accounts for the gap?
+                What improvements are planned?</td>
+            <td>Experimental vs datasheet performance discrepancy.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B1.3</td>
+            <td>What is your <strong>drone/UAV battery experience</strong>? Reference customers?</td>
+            <td>Assess domain expertise.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B1.4</td>
+            <td>What is your timeline and pricing for a <strong>custom cell</strong> at ~350 Wh/kg
+                if your current product doesn't meet the spec?</td>
+            <td>Evaluate custom development path.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="notes-box">Notes from visit:</div>
+
+    <div class="supplier-header">
+        <h3>Shenguan</h3>
+        <span class="location">📍 Shenzhen area — Week 1</span>
+    </div>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Context</th>
+            <th>Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>B2.1</td>
+            <td>Company overview: what is your <strong>core product line</strong> and primary market?</td>
+            <td>New supplier — basic capability assessment.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B2.2</td>
+            <td>What is your <strong>highest energy density cell</strong> currently in production?
+                What chemistry (NMC, LFP, silicon-anode)?</td>
+            <td>Determines if they can meet E4 spec.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B2.3</td>
+            <td>Do you have experience with <strong>drone/UAV or aerospace</strong> battery applications?</td>
+            <td>Domain relevance.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B2.4</td>
+            <td>What <strong>certifications</strong> do you hold (UN 38.3, IEC 62133, ISO 9001)?</td>
+            <td>Baseline quality and compliance check.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B2.5</td>
+            <td>What is your <strong>production facility size</strong> and annual capacity?</td>
+            <td>Scale assessment.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="notes-box">Notes from visit:</div>
+
+    <div class="supplier-header">
+        <h3>Enrichpower</h3>
+        <span class="location">📍 Shenzhen area — Week 1</span>
+    </div>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Context</th>
+            <th>Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>B3.1</td>
+            <td>Company overview: what is your <strong>core product line</strong> and primary market?</td>
+            <td>New supplier — basic capability assessment.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B3.2</td>
+            <td>What is your <strong>highest energy density cell</strong> currently in production?
+                What chemistry?</td>
+            <td>Determines if they can meet E4 spec.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B3.3</td>
+            <td>Do you have experience with <strong>drone/UAV or aerospace</strong> applications?</td>
+            <td>Domain relevance.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B3.4</td>
+            <td>What <strong>certifications</strong> do you hold?</td>
+            <td>Baseline quality check.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B3.5</td>
+            <td>What is your <strong>production facility size</strong> and annual capacity?</td>
+            <td>Scale assessment.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="notes-box">Notes from visit:</div>
+
+    <div class="supplier-header">
+        <h3>Spard</h3>
+        <span class="location">📍 Guangdong — Week 1</span>
+    </div>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Context</th>
+            <th>Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>B4.1</td>
+            <td>Initial tests showed 99.80% vs datasheet (best result). What <strong>cell-level energy density</strong>
+                do you offer and can you reach ~350 Wh/kg?</td>
+            <td>Strong test results. Confirm cell-level spec.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B4.2</td>
+            <td>You've been noted for good communication and innovation. What is your <strong>technology roadmap</strong>
+                for higher energy density cells in the next 12–24 months?</td>
+            <td>Assess future capability alignment with E4 target.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B4.3</td>
+            <td>Are you open to a <strong>cell-only supply model</strong> where packs are assembled by a
+                third party? Have you done this before?</td>
+            <td>Key for decoupled assembly strategy. Spard's good communication makes them a good candidate.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B4.4</td>
+            <td>What is your current <strong>production volume</strong>? Can you scale to meet our projected needs?</td>
+            <td>Noted as "small volume but growing".</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="notes-box">Notes from visit:</div>
+
+    <div class="supplier-header">
+        <h3>EVE Energy</h3>
+        <span class="location">📍 Guangdong / Fujian — Week 1</span>
+    </div>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Context</th>
+            <th>Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>B5.1</td>
+            <td>EVE is a major manufacturer. Are you willing to serve <strong>smaller drone-volume customers</strong>?
+                What are your MOQs?</td>
+            <td>Large manufacturer — risk of being too big to care about E4 volumes.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B5.2</td>
+            <td>Samples were paid but not received. What is the <strong>status and expected delivery date</strong>?</td>
+            <td>Follow up on outstanding samples.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B5.3</td>
+            <td>Do you offer <strong>custom cell formats</strong> optimized for drone applications,
+                or only standard automotive/ESS cells?</td>
+            <td>Determines if they can tailor cells for E4 form factor.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B5.4</td>
+            <td>What is your <strong>highest energy density cell</strong> available for non-automotive
+                applications? Can you reach ~350 Wh/kg?</td>
+            <td>Confirm E4 spec feasibility.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="notes-box">Notes from visit:</div>
+
+    <!-- WEEK 2 -->
+
+    <div class="supplier-header">
+        <h3>ENPOWER</h3>
+        <span class="location">📍 Beijing — Week 2</span>
+    </div>
+
+    <div class="alert alert-important">
+        <div class="alert-label">SPECIAL NOTE</div>
+        ENPOWER has both <strong>US and China operations</strong>. They are confirmed capable of ~350 Wh/kg.
+        The US entity is not subject to Decision 58. The key question is understanding the relationship between
+        the US and China operations and whether cells for E4 can be sourced from the US manufacturing line.
+    </div>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Context</th>
+            <th>Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>B6.1</td>
+            <td>What is the <strong>relationship between your US and China operations</strong>?
+                Are cells manufactured in both locations? Same specs?</td>
+            <td>Critical for export control strategy. US-made cells bypass Decision 58.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B6.2</td>
+            <td>Can the E4 cells (~350 Wh/kg) be manufactured at your <strong>US facility</strong>
+                and shipped directly to the US or to a US/EU assembler?</td>
+            <td>Ideal scenario — no Chinese export controls, no Section 301 tariff.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B6.3</td>
+            <td>What is the <strong>production capacity</strong> of your US facility vs. your China facility?</td>
+            <td>Determines if US production can serve E4 volumes.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B6.4</td>
+            <td>What is the <strong>price difference</strong> between US-manufactured and China-manufactured cells?</td>
+            <td>Cost trade-off for regulatory simplicity.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B6.5</td>
+            <td>Initial tests showed strong results. What is your <strong>technology roadmap</strong>
+                beyond 350 Wh/kg?</td>
+            <td>Long-term alignment with E4 evolution.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="notes-box">Notes from visit:</div>
+
+    <div class="supplier-header">
+        <h3>CBAK Energy</h3>
+        <span class="location">📍 Yuncheng area — Week 2</span>
+    </div>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Context</th>
+            <th>Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>B7.1</td>
+            <td>Samples were paid but not received. What is the <strong>status and root cause of the delay</strong>?</td>
+            <td>Communication has been slow. Need to understand reliability.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B7.2</td>
+            <td>What is your <strong>commitment to timelines</strong> for production orders?
+                What SLAs can you offer?</td>
+            <td>Address the slow communication concern directly.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B7.3</td>
+            <td>What is your <strong>highest energy density cell</strong> for non-automotive applications?
+                Can you meet ~350 Wh/kg?</td>
+            <td>Confirm E4 spec feasibility.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B7.4</td>
+            <td>You were noted for good innovation and production volumes. What <strong>annual production capacity</strong>
+                do you have? How much is allocated to small-volume / specialty customers?</td>
+            <td>Volume vs. flexibility trade-off.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B7.5</td>
+            <td>Are you open to a <strong>cell-only supply model</strong>?</td>
+            <td>Decoupled assembly feasibility.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="notes-box">Notes from visit:</div>
+
+    <div class="supplier-header">
+        <h3>Ganfeng LiEnergy</h3>
+        <span class="location">📍 Taizhou, Zhejiang — Week 2</span>
+    </div>
+
+    <div class="alert alert-important">
+        <div class="alert-label">SPECIAL NOTE</div>
+        Ganfeng Lithium is one of the world's largest lithium producers. Ganfeng LiEnergy is their battery
+        cell manufacturing subsidiary. Their <strong>vertical integration</strong> (lithium mining → refining →
+        cell production) could provide cost and supply chain advantages.
+    </div>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Context</th>
+            <th>Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>B8.1</td>
+            <td>What <strong>cell chemistries and form factors</strong> does Ganfeng LiEnergy produce?
+                Do you have products suitable for drone/UAV applications?</td>
+            <td>Assess product fit for E4.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B8.2</td>
+            <td>What is your <strong>highest energy density cell</strong>? Can you reach ~350 Wh/kg?</td>
+            <td>E4 spec feasibility.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B8.3</td>
+            <td>Does your <strong>vertical integration</strong> (lithium supply → cell production) translate
+                to a cost or supply stability advantage for customers?</td>
+            <td>Key differentiator vs. other suppliers.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B8.4</td>
+            <td>Are you open to serving <strong>smaller-volume specialty customers</strong> (drone market)?
+                What are your MOQs?</td>
+            <td>Large company — same concern as EVE about minimum volumes.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B8.5</td>
+            <td>Do you have any <strong>manufacturing facilities outside China</strong>? Any plans
+                for international expansion?</td>
+            <td>Non-China manufacturing bypasses Decision 58.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B8.6</td>
+            <td>Are you open to a <strong>cell-only supply model</strong> for third-party pack assembly?</td>
+            <td>Decoupled assembly feasibility.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="notes-box">Notes from visit:</div>
+
+    <hr>
+
+    <h2>Part C — General Visit Notes</h2>
+
+    <p>Use this section for overall impressions, facility observations, and cross-supplier comparisons.</p>
+
+    <h3>Factory / Facility Observations</h3>
+    <div class="notes-box">
+        For each visit, note: cleanliness, automation level, testing equipment, quality control processes,
+        worker training, safety measures, production line maturity...
+    </div>
+
+    <h3>Overall Impressions &amp; Supplier Ranking</h3>
+    <div class="notes-box">
+        After all visits, rank suppliers on: technical capability, communication quality, reliability,
+        cost competitiveness, willingness to support cell-only model, export control preparedness...
+    </div>
+
+    <h3>Recommended Next Steps</h3>
+    <div class="notes-box">
+        Which suppliers should we proceed with? What samples should be requested? Any red flags?
+        Recommendations for the decoupled assembly strategy...
+    </div>
+
+    <hr>
+
+    <p><em>Prepared for the E4 Battery Project. Reference: Export Rules and Regulations document (Sections 1.4, 1.5).
+        Questions should be adapted based on real-time conversation during visits.</em></p>
+
+</body>
+
+</html>

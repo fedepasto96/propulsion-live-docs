@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E4 Battery — Phased Supply Chain Strategy</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f8f9fa; color: #1a1a2e; padding: 32px; }
+    h1 { font-size: 24px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+    .subtitle { font-size: 13px; color: #6b7280; margin-bottom: 32px; }
+
+    .scenario-card { background: #fff; border-radius: 14px; border: 1px solid #e5e7eb; padding: 28px; margin-bottom: 28px; }
+    .scenario-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .scenario-badge { font-size: 14px; font-weight: 700; color: #fff; padding: 4px 12px; border-radius: 7px; letter-spacing: 0.5px; }
+    .badge-a { background: #059669; } /* Green for baseline */
+    .badge-b { background: #2563eb; } /* Blue for exploratory */
+    .scenario-title { font-size: 18px; font-weight: 600; }
+    .scenario-desc { font-size: 13px; color: #6b7280; margin-bottom: 20px; line-height: 1.6; max-width: 900px; }
+
+    .map-svg { display: block; margin: 0 auto; }
+
+    .comparison { background: #fff; border-radius: 14px; border: 1px solid #e5e7eb; padding: 24px; margin-bottom: 28px; }
+    .comparison h3 { font-size: 15px; font-weight: 600; margin-bottom: 14px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    th { background: #1e293b; color: #fff; padding: 10px 14px; text-align: left; font-weight: 600; }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+    td { padding: 9px 14px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+    tr:nth-child(even) { background: #f9fafb; }
+    tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+    tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+
+    .phased-plan { background: #fff; border-radius: 14px; border: 1px solid #e5e7eb; padding: 24px; margin-bottom: 28px; }
+    .phased-plan h3 { font-size: 15px; font-weight: 600; margin-bottom: 14px; }
+    .timeline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .phase-card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 16px; position: relative; }
+    .phase-card h4 { font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 8px; display: flex; justify-content: space-between;}
+    .phase-card .date { font-size: 12px; color: #64748b; font-weight: 500; }
+    .phase-card p { font-size: 12.5px; color: #475569; line-height: 1.5; margin-bottom: 8px; }
+    .phase-card ul { margin-left: 20px; font-size: 12px; color: #475569; line-height: 1.6; }
+
+    .decision-gate { background: #fffbeb; border: 1.5px solid #f59e0b; border-radius: 14px; padding: 22px; margin-top: 20px; }
+    .decision-gate h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; color: #92400e; }
+    .decision-gate p { font-size: 13px; color: #78350f; line-height: 1.6; }
+
+    @media print {
+        body { padding: 12px; background: #fff; }
+        .scenario-card, .comparison, .phased-plan { break-inside: avoid; page-break-inside: avoid; }
+    }
+</style>
+</head>
+<body>
+
+<h1>E4 Battery — Phased Supply Chain Strategy</h1>
+<p class="subtitle">Commercial-first approach: NDAA deprioritized. EVE / Enpower (China) as baseline, Amprius (US-headquartered, China-sourced cells) as exploratory. &bull; Feb 2026</p>
+
+<!-- ==================== SCENARIO A (BASELINE) ==================== -->
+<div class="scenario-card">
+    <div class="scenario-header">
+        <span class="scenario-badge badge-a">BASELINE PATH</span>
+        <span class="scenario-title">EVE / Enpower Cells (China) — Selected for "Works Like" (WL)</span>
+    </div>
+    <p class="scenario-desc">High responsiveness, proven facilities, and cost-effective. MOFCOM Decision 58 risk is deemed manageable.
+        <strong>Crucially:</strong> Cells must be shipped to a US Assembler to ensure the final battery pack contributes enough US-manufactured
+        content to help the E4 drone pass the FCC "Buy American" 65% threshold.</p>
+
+    <svg class="map-svg" viewBox="0 0 1100 520" width="1100" height="520">
+        <defs>
+            <marker id="ah-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/></marker>
+            <marker id="ah-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#059669"/></marker>
+        </defs>
+
+        <!-- ── Geographic regions ── -->
+        <rect x="10" y="10" width="330" height="500" rx="16" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+        <text x="175" y="42" text-anchor="middle" font-size="14" font-weight="700" fill="#1e40af" font-family="Segoe UI, sans-serif">UNITED STATES</text>
+
+        <rect x="360" y="10" width="330" height="500" rx="16" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+        <text x="525" y="42" text-anchor="middle" font-size="14" font-weight="700" fill="#065f46" font-family="Segoe UI, sans-serif">EUROPE / SWITZERLAND</text>
+
+        <rect x="710" y="10" width="380" height="500" rx="16" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+        <text x="900" y="42" text-anchor="middle" font-size="14" font-weight="700" fill="#b91c1c" font-family="Segoe UI, sans-serif">CHINA</text>
+
+        <!-- ── China: Cell Manufacturer ── -->
+        <rect x="760" y="80" width="280" height="70" rx="10" fill="#fff" stroke="#dc2626" stroke-width="2"/>
+        <text x="900" y="108" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b" font-family="Segoe UI, sans-serif">🇨🇳 EVE Energy / Enpower</text>
+        <text x="900" y="128" text-anchor="middle" font-size="11" fill="#6b7280" font-family="Segoe UI, sans-serif">Chinese Cell Manufacturer</text>
+
+        <!-- Cost/Performance badge -->
+        <rect x="780" y="162" width="240" height="32" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+        <text x="900" y="183" text-anchor="middle" font-size="11" font-weight="600" fill="#065f46" font-family="Segoe UI, sans-serif">~35 CHF/cell &amp; highly responsive</text>
+
+        <!-- ── US: Pack Assembler ── -->
+        <rect x="30" y="220" width="290" height="70" rx="10" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+        <text x="175" y="248" text-anchor="middle" font-size="14" font-weight="700" fill="#1e40af" font-family="Segoe UI, sans-serif">🇺🇸 Packet Digital / Re:Build</text>
+        <text x="175" y="268" text-anchor="middle" font-size="11" fill="#6b7280" font-family="Segoe UI, sans-serif">US Pack Assembler</text>
+
+        <!-- ── EU/CH: Pack Assembler ── -->
+        <rect x="380" y="220" width="290" height="70" rx="10" fill="#fff" stroke="#059669" stroke-width="2"/>
+        <text x="525" y="248" text-anchor="middle" font-size="14" font-weight="700" fill="#065f46" font-family="Segoe UI, sans-serif">🇪🇺 Tulip / SBS / BMZ</text>
+        <text x="525" y="268" text-anchor="middle" font-size="11" fill="#6b7280" font-family="Segoe UI, sans-serif">EU Pack Assembler</text>
+
+        <!-- ── US Market ── -->
+        <rect x="30" y="380" width="290" height="70" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+        <text x="175" y="410" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a" font-family="Segoe UI, sans-serif">🇺🇸 US MARKET</text>
+        <text x="175" y="432" text-anchor="middle" font-size="11" fill="#3b82f6" font-family="Segoe UI, sans-serif">Commercial Sales Only (No DoD)</text>
+
+        <!-- ── Global Market ── -->
+        <rect x="380" y="380" width="290" height="70" rx="12" fill="#d1fae5" stroke="#059669" stroke-width="2.5"/>
+        <text x="525" y="410" text-anchor="middle" font-size="15" font-weight="700" fill="#064e3b" font-family="Segoe UI, sans-serif">🌍 GLOBAL MARKET</text>
+        <text x="525" y="432" text-anchor="middle" font-size="11" fill="#059669" font-family="Segoe UI, sans-serif">EU, APAC, MEA, LATAM</text>
+
+        <!-- ── ARROWS ── -->
+        <!-- China → US Assembler -->
+        <path d="M760,115 Q450,90 320,218" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="8,4" marker-end="url(#ah-blue)"/>
+        <text x="500" y="118" font-size="10" fill="#2563eb" font-family="Segoe UI, sans-serif">cells ship to US</text>
+
+        <!-- China → EU Assembler -->
+        <path d="M760,130 Q690,200 670,240" fill="none" stroke="#059669" stroke-width="2.5" stroke-dasharray="8,4" marker-end="url(#ah-green)"/>
+        <text x="720" y="210" font-size="10" fill="#059669" font-family="Segoe UI, sans-serif" transform="rotate(-55, 720, 210)">cells ship to EU</text>
+
+        <!-- US Assembler → US Market -->
+        <path d="M175,290 L175,378" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ah-blue)"/>
+        <text x="188" y="340" font-size="10" fill="#2563eb" font-family="Segoe UI, sans-serif">packs</text>
+
+        <!-- EU Assembler → Global Market -->
+        <path d="M525,290 L525,378" fill="none" stroke="#059669" stroke-width="2.5" marker-end="url(#ah-green)"/>
+        <text x="538" y="340" font-size="10" fill="#059669" font-family="Segoe UI, sans-serif">packs</text>
+
+        <!-- ── COMPLIANCE TAGS (US path) ── -->
+        <rect x="30" y="460" width="290" height="40" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+        <text x="175" y="484" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af" font-family="Segoe UI, sans-serif">✅ FCC (via US Assembly) · ⚠️ 25% Tariff · ❌ NDAA</text>
+
+        <!-- ── COMPLIANCE TAGS (EU path) ── -->
+        <rect x="380" y="460" width="290" height="40" rx="8" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+        <text x="525" y="484" text-anchor="middle" font-size="11" font-weight="600" fill="#065f46" font-family="Segoe UI, sans-serif">✅ No EAR re-export risk · ⚠️ MOFCOM risk</text>
+    </svg>
+</div>
+
+<!-- ==================== SCENARIO B (EXPLORATORY) ==================== -->
+<div class="scenario-card">
+    <div class="scenario-header">
+        <span class="scenario-badge badge-b">EXPLORATORY PATH</span>
+        <span class="scenario-title">Amprius Cells (US) — Evaluated for "Looks Like" (LL)</span>
+    </div>
+    <p class="scenario-desc">Highest performance cells. NDAA compliance was initially assumed based on Amprius being a US-headquartered company.
+        However, Amprius sources most of their cells (including the ones relevant to E4) from China, invalidating the NDAA advantage.
+        Additionally, cells are very expensive (~45 CHF/cell), supplier responsiveness is slow, and energy density &gt;350 Wh/kg triggers
+        strict US EAR re-export controls for global sales from Switzerland.</p>
+
+    <svg class="map-svg" viewBox="0 0 1100 280" width="1100" height="280">
+        <defs>
+            <marker id="ah-blue2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/></marker>
+            <marker id="ah-green2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#059669"/></marker>
+        </defs>
+
+        <!-- ── Geographic regions ── -->
+        <rect x="10" y="10" width="380" height="260" rx="16" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+        <text x="200" y="42" text-anchor="middle" font-size="14" font-weight="700" fill="#1e40af" font-family="Segoe UI, sans-serif">UNITED STATES</text>
+
+        <rect x="410" y="10" width="300" height="260" rx="16" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+        <text x="560" y="42" text-anchor="middle" font-size="14" font-weight="700" fill="#065f46" font-family="Segoe UI, sans-serif">EUROPE / SWITZERLAND</text>
+
+        <!-- ── US: Cell Manufacturer ── -->
+        <rect x="40" y="80" width="260" height="60" rx="10" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+        <text x="170" y="105" text-anchor="middle" font-size="14" font-weight="700" fill="#1e40af" font-family="Segoe UI, sans-serif">🇺🇸 Amprius</text>
+        <text x="170" y="125" text-anchor="middle" font-size="11" fill="#6b7280" font-family="Segoe UI, sans-serif">US Cell Manufacturer</text>
+
+        <!-- ── US: Pack Assembler ── -->
+        <rect x="40" y="190" width="260" height="60" rx="10" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+        <text x="170" y="215" text-anchor="middle" font-size="14" font-weight="700" fill="#1e40af" font-family="Segoe UI, sans-serif">🇺🇸 US Assembler</text>
+        <text x="170" y="235" text-anchor="middle" font-size="11" fill="#2563eb" font-family="Segoe UI, sans-serif">✅ FCC  ·  ⚠️ NDAA (cells from China)</text>
+
+        <!-- ── EU/CH: Pack Assembler ── -->
+        <rect x="430" y="190" width="260" height="60" rx="10" fill="#fff" stroke="#059669" stroke-width="2"/>
+        <text x="560" y="215" text-anchor="middle" font-size="14" font-weight="700" fill="#065f46" font-family="Segoe UI, sans-serif">🇨🇭 EU Assembler</text>
+        <text x="560" y="235" text-anchor="middle" font-size="11" fill="#b91c1c" font-family="Segoe UI, sans-serif">⚠️ EAR Re-export risk (&gt;350 Wh/kg)</text>
+
+        <!-- ── ARROWS ── -->
+        <path d="M170,140 L170,188" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ah-blue2)"/>
+        <path d="M300,110 Q380,150 500,188" fill="none" stroke="#059669" stroke-width="2.5" stroke-dasharray="8,4" marker-end="url(#ah-green2)"/>
+    </svg>
+</div>
+
+<!-- ==================== COMPARISON TABLE ==================== -->
+<div class="comparison">
+    <h3>Supplier Comparison</h3>
+    <table>
+        <tr>
+            <th style="width:22%;">Criterion</th>
+            <th style="width:39%;">🇨🇳 EVE Energy / Enpower (Baseline)</th>
+            <th style="width:39%;">🇺🇸 Amprius (Exploratory)</th>
+        </tr>
+        <tr>
+            <td><strong>Performance</strong></td>
+            <td>Very good (comparable energy/power density)</td>
+            <td><strong>Best in class</strong> (highest energy density)</td>
+        </tr>
+        <tr>
+            <td><strong>Cost per cell</strong></td>
+            <td>~35 CHF per cell</td>
+            <td>~31 CHF per cell</td>
+        </tr>
+        <tr>
+            <td><strong>Supplier Responsiveness</strong></td>
+            <td><strong>High</strong> (fast replies, convincing facilities)</td>
+            <td>Slow / Poor visibility into facilities</td>
+        </tr>
+        <tr>
+            <td><strong>US Market — FCC</strong></td>
+            <td>Requires US pack assembly to hit 65% Buy American</td>
+            <td>Requires US pack assembly to hit 65% Buy American</td>
+        </tr>
+        <tr>
+            <td><strong>US Market — NDAA</strong></td>
+            <td>🔴 Fails (Chinese cells banned for DoD/federal)</td>
+            <td>⚠️ Initially assumed compliant (US company), but cells of interest are sourced from China — NDAA advantage invalidated</td>
+        </tr>
+        <tr>
+            <td><strong>Global — EAR re-export</strong></td>
+            <td><strong>✅ None</strong> (Chinese origin, no US jurisdiction)</td>
+            <td>🔴 High risk (cells &gt;350 Wh/kg trigger BIS licensing globally)</td>
+        </tr>
+        <tr>
+            <td><strong>China Decision 58</strong></td>
+            <td>⚠️ Risk (Currently suspended, workarounds exist)</td>
+            <td><strong>✅ None</strong></td>
+        </tr>
+        <tr>
+            <td><strong>US Import Tariffs</strong></td>
+            <td>⚠️ 25% Section 301 tariff when importing to US</td>
+            <td><strong>✅ None</strong></td>
+        </tr>
+    </table>
+</div>
+
+<!-- ==================== PHASED EXECUTION PLAN ==================== -->
+<div class="phased-plan">
+    <h3>Phased Execution Plan</h3>
+    <div class="timeline-grid">
+        <div class="phase-card">
+            <h4>Phase 1: Works Like (WL) <span class="date">2026</span></h4>
+            <p>Execute the initial prototype phase using the validated, cost-effective baseline.</p>
+            <ul>
+                <li>Procure EVE / Enpower cells for the 10-15 WL batteries.</li>
+                <li>Establish US assembly partnership (Packet Digital/Re:Build) to ensure FCC pathway is viable.</li>
+                <li>Validate BMS and system performance with EVE / Enpower chemistry.</li>
+            </ul>
+        </div>
+        <div class="phase-card">
+            <h4>Phase 2: Looks Like (LL) &amp; Beyond <span class="date">2027+</span></h4>
+            <p>Evaluate if Amprius justifies its premium and regulatory overhead.</p>
+            <ul>
+                <li>Procure Amprius samples in parallel for testing.</li>
+                <li>Assess EAR re-export burden for global sales.</li>
+                <li><strong>Decision Gate:</strong> If Amprius proves superior and viable, switch for LL (250 units) and ML (2000 units). If not, proceed with EVE / Enpower.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="decision-gate">
+        <h3>&#9889; The "No-NDAA" Trade-off</h3>
+        <p>
+            By accepting that the E4 drone will not be sold to the US Department of Defense or federal agencies (ignoring NDAA),
+            Flyability unlocks the ability to use highly responsive, cost-effective Chinese cells (EVE / Enpower). The remaining regulatory
+            hurdle for the US commercial market (FCC) is solved purely through <strong>US-based pack assembly</strong>, which adds
+            enough domestic value to satisfy the 65% Buy American requirement.
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E4 Battery — 2026 Prototype Procurement Budget</title>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f5f6fa;
+    color: #2d3436;
+    padding: 20px 30px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+    color: #1a1a2e;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #636e72;
+    margin-bottom: 18px;
+  }
+
+  .toggle-btn {
+    display: block;
+    margin: 0 auto 14px;
+    padding: 8px 22px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #b2bec3;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .toggle-btn:hover { background: #dfe6e9; }
+
+  .editor {
+    display: none;
+    max-width: 1100px;
+    margin: 0 auto 20px;
+    background: #fff;
+    border: 1px solid #dfe6e9;
+    border-radius: 8px;
+    padding: 18px 22px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  }
+  .editor.open { display: block; }
+  .editor h3 {
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+    color: #636e72;
+  }
+
+  .ed-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .ed-card {
+    border: 1px solid #dfe6e9;
+    border-radius: 6px;
+    padding: 11px 13px;
+  }
+  .ed-card h4 {
+    font-size: 0.82rem;
+    margin-bottom: 9px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid;
+  }
+  .ed-card h4.cells    { border-color: #457B9D; color: #457B9D; }
+  .ed-card h4.bms      { border-color: #2B7A78; color: #2B7A78; }
+  .ed-card h4.charger  { border-color: #e17055; color: #c0513a; }
+  .ed-card h4.logistics { border-color: #78909C; color: #546e7a; }
+  .ed-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 0.76rem;
+  }
+  .ed-row label {
+    flex: 1;
+    color: #636e72;
+  }
+  .ed-row input {
+    width: 68px;
+    padding: 3px 5px;
+    border: 1px solid #dfe6e9;
+    border-radius: 4px;
+    font-size: 0.76rem;
+    text-align: right;
+    margin-left: 4px;
+  }
+  .ed-row .unit {
+    font-size: 0.68rem;
+    color: #b2bec3;
+    margin-left: 3px;
+    min-width: 30px;
+  }
+
+  .update-btn {
+    display: block;
+    margin: 16px auto 0;
+    padding: 9px 32px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+    background: #2B7A78;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .update-btn:hover { background: #1f5c5a; }
+
+  .section {
+    max-width: 1100px;
+    margin: 0 auto 18px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    padding: 18px 22px;
+    overflow-x: auto;
+  }
+  .section h2 {
+    font-size: 1.05rem;
+    color: #1a1a2e;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #e9ecef;
+  }
+
+  table.breakdown {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+  table.breakdown th {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.78rem;
+  }
+  table.breakdown th.num { text-align: right; }
+  table.breakdown td {
+    padding: 7px 10px;
+    border-bottom: 1px solid #e9ecef;
+  }
+  table.breakdown td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  table.breakdown tr:hover { background: #f8f9fa; }
+  table.breakdown tr.group-header td {
+    background: #f1f3f5;
+    font-weight: 700;
+    color: #1a1a2e;
+    border-bottom: 2px solid #dee2e6;
+  }
+  table.breakdown tr.total td {
+    background: #1a1a2e;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.88rem;
+    border-bottom: none;
+  }
+  table.breakdown tr.subtotal td {
+    background: #e9ecef;
+    font-weight: 600;
+    color: #1a1a2e;
+  }
+  .tag {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 3px;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .tag-cells     { background: #d6eaf8; color: #2471a3; }
+  .tag-bms       { background: #d5f5e3; color: #1e8449; }
+  .tag-assembly  { background: #fef3e2; color: #b45309; }
+  .tag-charger   { background: #fde8e4; color: #c0513a; }
+  .tag-logistics { background: #e8eaed; color: #546e7a; }
+
+  .charts-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 14px;
+    max-width: 1100px;
+    margin: 0 auto 18px;
+  }
+  .chart-box {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    overflow: hidden;
+  }
+
+  .assumptions {
+    max-width: 1100px;
+    margin: 0 auto 18px;
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 6px;
+    padding: 14px 18px;
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+  .assumptions h3 {
+    font-size: 0.92rem;
+    margin-bottom: 8px;
+    color: #e65100;
+  }
+  .assumptions ul { margin: 0 0 0 18px; }
+  .assumptions li { margin-bottom: 3px; }
+  .assumptions b { color: #bf360c; }
+
+  .timeline-note {
+    max-width: 1100px;
+    margin: 0 auto 18px;
+    background: #e8f4f8;
+    border: 1px solid #b3dce8;
+    border-radius: 6px;
+    padding: 14px 18px;
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+  .timeline-note h3 {
+    font-size: 0.92rem;
+    margin-bottom: 8px;
+    color: #1a5276;
+  }
+  .timeline-note ul { margin: 0 0 0 18px; }
+  .timeline-note li { margin-bottom: 3px; }
+  .timeline-note b { color: #1a5276; }
+</style>
+</head>
+<body>
+
+<h1>E4 Battery &mdash; 2026 Prototype Procurement Budget</h1>
+<p class="subtitle">Cost breakdown for cell pack orders, BMS &amp; assembly components, and charger prototype samples. Click &ldquo;Edit Assumptions&rdquo; to adjust inputs. All costs in CHF (1 USD &asymp; 0.88 CHF, May 2026).</p>
+
+<button class="toggle-btn" onclick="toggleEditor()">Edit Assumptions</button>
+
+<!-- ════════════ EDITOR PANEL ════════════ -->
+<div class="editor" id="editor">
+  <h3>Adjust procurement assumptions</h3>
+  <div class="ed-grid">
+
+    <!-- COL 1: Cells -->
+    <div class="ed-card">
+      <h4 class="cells">Cell Pack Orders</h4>
+      <div class="ed-row"><label>Cell unit cost (low)</label><input type="number" id="in_cell_lo" value="44" step="1" min="1"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>Cell unit cost (high)</label><input type="number" id="in_cell_hi" value="132" step="1" min="1"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>Cells per pack</label><input type="number" id="in_cells_per_pack" value="6" step="1" min="1"><span class="unit">cells</span></div>
+      <div class="ed-row"><label>Order 1 &mdash; packs qty</label><input type="number" id="in_o1_packs" value="50" step="1" min="1"><span class="unit">packs</span></div>
+      <div class="ed-row"><label>Order 2 &mdash; packs (low)</label><input type="number" id="in_o2_packs_lo" value="70" step="1" min="1"><span class="unit">packs</span></div>
+      <div class="ed-row"><label>Order 2 &mdash; packs (high)</label><input type="number" id="in_o2_packs_hi" value="80" step="1" min="1"><span class="unit">packs</span></div>
+      <div class="ed-row"><label>Overage / spares buffer</label><input type="number" id="in_overage" value="5" step="1" min="0" max="50"><span class="unit">%</span></div>
+    </div>
+
+    <!-- COL 2: BMS & Assembly -->
+    <div class="ed-card">
+      <h4 class="bms">BMS &amp; Pack Assembly*</h4>
+      <div class="ed-row"><label>BMS PCBA cost (low)</label><input type="number" id="in_bms_lo" value="132" step="5" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>BMS PCBA cost (high)</label><input type="number" id="in_bms_hi" value="220" step="5" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>BMS dev. proto batch</label><input type="number" id="in_bms_dev_qty" value="15" step="1" min="0"><span class="unit">boards</span></div>
+      <div class="ed-row"><label>Assembly mat. / pack (low)</label><input type="number" id="in_asm_mat_lo" value="31" step="5" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>Assembly mat. / pack (high)</label><input type="number" id="in_asm_mat_hi" value="70" step="5" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>Assembly labor O1 / pack (low)</label><input type="number" id="in_asm_lab_o1_lo" value="0" step="5" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>Assembly labor O1 / pack (high)</label><input type="number" id="in_asm_lab_o1_hi" value="0" step="5" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>Assembly labor O2 / pack (low)</label><input type="number" id="in_asm_lab_o2_lo" value="13" step="5" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>Assembly labor O2 / pack (high)</label><input type="number" id="in_asm_lab_o2_hi" value="35" step="5" min="0"><span class="unit">CHF</span></div>
+    </div>
+
+    <!-- COL 3: Charger -->
+    <div class="ed-card">
+      <h4 class="charger">Charger Samples (~340 W)</h4>
+      <div class="ed-row"><label>NRE / dev. contrib. (low)</label><input type="number" id="in_nre_lo" value="10560" step="500" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>NRE / dev. contrib. (high)</label><input type="number" id="in_nre_hi" value="22000" step="500" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>Sample unit cost (low)</label><input type="number" id="in_chg_unit_lo" value="264" step="10" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>Sample unit cost (high)</label><input type="number" id="in_chg_unit_hi" value="440" step="10" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>Sample quantity (low)</label><input type="number" id="in_chg_qty_lo" value="15" step="1" min="1"><span class="unit">units</span></div>
+      <div class="ed-row"><label>Sample quantity (high)</label><input type="number" id="in_chg_qty_hi" value="25" step="1" min="1"><span class="unit">units</span></div>
+    </div>
+
+    <!-- COL 4: Shipping -->
+    <div class="ed-card">
+      <h4 class="logistics">Shipping &amp; Logistics</h4>
+      <div class="ed-row"><label>Cell ship. / order (low)</label><input type="number" id="in_ship_cell_lo" value="704" step="100" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>Cell ship. / order (high)</label><input type="number" id="in_ship_cell_hi" value="1760" step="100" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>Charger shipping (low)</label><input type="number" id="in_ship_chg_lo" value="264" step="50" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>Charger shipping (high)</label><input type="number" id="in_ship_chg_hi" value="528" step="50" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>BMS PCBA ship. (low)</label><input type="number" id="in_ship_bms_lo" value="176" step="50" min="0"><span class="unit">CHF</span></div>
+      <div class="ed-row"><label>BMS PCBA ship. (high)</label><input type="number" id="in_ship_bms_hi" value="440" step="50" min="0"><span class="unit">CHF</span></div>
+    </div>
+
+  </div>
+  <button class="update-btn" onclick="recalculate()">Update Budget</button>
+</div>
+
+<!-- ════════════ BREAKDOWN TABLE ════════════ -->
+<div class="section">
+  <h2>Cost Breakdown (CHF)</h2>
+  <table class="breakdown" id="breakdownTable">
+    <thead>
+      <tr>
+        <th style="width:34%">Line Item</th>
+        <th style="width:14%">Details</th>
+        <th class="num" style="width:12%">Low (CHF)</th>
+        <th class="num" style="width:12%">Mid (CHF)</th>
+        <th class="num" style="width:12%">High (CHF)</th>
+        <th style="width:10%">Timing</th>
+      </tr>
+    </thead>
+    <tbody id="tbodyBreakdown"></tbody>
+  </table>
+</div>
+
+<!-- ════════════ CHARTS ════════════ -->
+<div class="charts-row">
+  <div class="chart-box"><div id="chart_bar"></div></div>
+  <div class="chart-box"><div id="chart_pie"></div></div>
+</div>
+
+<!-- ════════════ ASSUMPTIONS ════════════ -->
+<div class="assumptions">
+  <h3>Key Assumptions</h3>
+  <ul>
+    <li><b>Cell cost:</b> CHF 44&ndash;132 per cell unit &mdash; based on current supplier quotations for the selected cell chemistry and expected prototype pricing volatility (converted at 1 USD &asymp; 0.88 CHF).</li>
+    <li><b>6S configuration:</b> 6 cells in series per pack. Battery capacity ~13 Ah; charging voltage = 26.1 V.</li>
+    <li><b>Overage buffer:</b> 5% additional cells per order to cover QC rejects, incoming inspection failures, and destructive test samples.</li>
+    <li><b>BMS PCBA cost*:</b> CHF 132&ndash;220/board at prototype quantities. Includes PCB fabrication, SMT assembly, and components (TI BQ41Z90 gauge IC, MOSFETs, sense resistors, balancing circuits, connectors, passives). A small development batch (~15 boards) is ordered in Q3 for validation ahead of pack assembly.</li>
+    <li><b>Assembly materials:</b> CHF 31&ndash;70/pack covers connectors (12-pin battery connector), wiring harness, nickel strips/tabs, prototype enclosure (CNC or 3D-printed housing), thermal interface materials, conformal coating, labels, and insulation.</li>
+    <li><b>Assembly labor:</b> Order 1 defaults to CHF 0/pack (self-assembly). Order 2 assumes CHF 13&ndash;35/pack at external assembler for prototype quantities (spot welding, soldering, mechanical assembly, QC).</li>
+    <li><b>Charger:</b> ~340 W smart charger (26.1 V &times; 13 A at 1C for 13 Ah pack). NRE CHF 10,560&ndash;22,000 reflects significantly more complex power electronics vs. a sub-150 W unit. Prototype sample cost CHF 264&ndash;440/unit above production pricing due to low volume and proto tooling.</li>
+    <li><b>Charger quantity:</b> 15&ndash;25 units across 2026. First batch (~5&ndash;10) for validation; second batch (~10&ndash;15) paired with WL prototype packs.</li>
+    <li><b>Shipping:</b> DG (dangerous goods) surcharges apply for Li-ion cell shipments ex-China. BMS PCBA and charger shipments are standard freight.</li>
+  </ul>
+  <p style="margin-top:8px;"><b>*</b> PCB/BMS cost estimates checked with the Electrical team.</p>
+</div>
+
+<!-- ════════════ TIMELINE NOTE ════════════ -->
+<div class="timeline-note">
+  <h3>Timeline Alignment (Gantt Reference)</h3>
+  <ul>
+    <li><b>Q2-Q3 2026:</b> BMS PCBA dev. proto batch ordered Jul, received &amp; validated Jul&ndash;Aug. Integration testing Aug.</li>
+    <li><b>Q3 2026:</b> Order 1 &mdash; ~50 packs. Cells production Jul&ndash;Sep, shipment Sep, pack assembly late Sep&ndash;Oct. Feeds into BMS + Pack integration (Oct&ndash;Nov).</li>
+    <li><b>Q4 2026 (Dec):</b> Order 2 &mdash; ~70&ndash;80 packs. Placed Dec 2026, delivery expected Jan&ndash;Feb 2027 targeting 50 WL prototypes milestone.</li>
+    <li><b>Q2-Q3 2026:</b> Charger development at supplier (May&ndash;Sep). First validation samples expected mid-Q3.</li>
+    <li><b>Q3-Q4 2026:</b> Charger prototype production (Sep&ndash;Nov). Full batch ready to pair with 20 WL prototypes in November.</li>
+  </ul>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const fmt = n => n.toLocaleString('de-CH', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+
+function toggleEditor() {
+  $('editor').classList.toggle('open');
+}
+
+function getInputs() {
+  return {
+    cellLo:       +$('in_cell_lo').value,
+    cellHi:       +$('in_cell_hi').value,
+    cellsPerPack: +$('in_cells_per_pack').value,
+    o1Packs:      +$('in_o1_packs').value,
+    o2PacksLo:    +$('in_o2_packs_lo').value,
+    o2PacksHi:    +$('in_o2_packs_hi').value,
+    overage:      +$('in_overage').value / 100,
+
+    bmsLo:        +$('in_bms_lo').value,
+    bmsHi:        +$('in_bms_hi').value,
+    bmsDevQty:    +$('in_bms_dev_qty').value,
+    asmMatLo:     +$('in_asm_mat_lo').value,
+    asmMatHi:     +$('in_asm_mat_hi').value,
+    asmLabO1Lo:   +$('in_asm_lab_o1_lo').value,
+    asmLabO1Hi:   +$('in_asm_lab_o1_hi').value,
+    asmLabO2Lo:   +$('in_asm_lab_o2_lo').value,
+    asmLabO2Hi:   +$('in_asm_lab_o2_hi').value,
+
+    nreLo:        +$('in_nre_lo').value,
+    nreHi:        +$('in_nre_hi').value,
+    chgUnitLo:    +$('in_chg_unit_lo').value,
+    chgUnitHi:    +$('in_chg_unit_hi').value,
+    chgQtyLo:     +$('in_chg_qty_lo').value,
+    chgQtyHi:     +$('in_chg_qty_hi').value,
+
+    shipCellLo:   +$('in_ship_cell_lo').value,
+    shipCellHi:   +$('in_ship_cell_hi').value,
+    shipChgLo:    +$('in_ship_chg_lo').value,
+    shipChgHi:    +$('in_ship_chg_hi').value,
+    shipBmsLo:    +$('in_ship_bms_lo').value,
+    shipBmsHi:    +$('in_ship_bms_hi').value,
+  };
+}
+
+function compute(p) {
+  const o1Cells   = Math.ceil(p.o1Packs * p.cellsPerPack * (1 + p.overage));
+  const o2CellsLo = Math.ceil(p.o2PacksLo * p.cellsPerPack * (1 + p.overage));
+  const o2CellsHi = Math.ceil(p.o2PacksHi * p.cellsPerPack * (1 + p.overage));
+
+  const o1BmsQty = Math.ceil(p.o1Packs * (1 + p.overage));
+  const o2BmsLo  = Math.ceil(p.o2PacksLo * (1 + p.overage));
+  const o2BmsHi  = Math.ceil(p.o2PacksHi * (1 + p.overage));
+
+  const rows = [
+    // ── Order 1 ──
+    {
+      group: 'Cell Pack &mdash; Order 1 (~' + p.o1Packs + ' packs)',
+      tag: 'cells',
+      summaryUnit: 'pack',
+      qtyLo: p.o1Packs,
+      qtyHi: p.o1Packs,
+      quarter: 'Q3 2026',
+    },
+    {
+      name: 'Cells (raw material)',
+      detail: `${p.o1Packs} pk &times; ${p.cellsPerPack} cells + ${(p.overage*100).toFixed(0)}% = ${o1Cells} cells`,
+      lo: o1Cells * p.cellLo,
+      hi: o1Cells * p.cellHi,
+      timing: 'Q3 2026',
+      tag: 'cells',
+    },
+    {
+      name: 'BMS PCBAs (pack order 1)',
+      detail: `${o1BmsQty} boards @ CHF ${p.bmsLo}&ndash;${p.bmsHi}`,
+      lo: o1BmsQty * p.bmsLo,
+      hi: o1BmsQty * p.bmsHi,
+      timing: 'Q3 2026',
+      tag: 'bms',
+    },
+    {
+      name: 'Assembly materials',
+      detail: `${p.o1Packs} pk @ CHF ${p.asmMatLo}&ndash;${p.asmMatHi}`,
+      lo: p.o1Packs * p.asmMatLo,
+      hi: p.o1Packs * p.asmMatHi,
+      timing: 'Q3 2026',
+      tag: 'assembly',
+    },
+    {
+      name: 'Assembly labor (ext. assembler)',
+      detail: `${p.o1Packs} pk @ CHF ${p.asmLabO1Lo}&ndash;${p.asmLabO1Hi}`,
+      lo: p.o1Packs * p.asmLabO1Lo,
+      hi: p.o1Packs * p.asmLabO1Hi,
+      timing: 'Q3-Q4 2026',
+      tag: 'assembly',
+    },
+    {
+      name: 'Shipping (cells DG freight)',
+      detail: 'Li-ion DG surcharges',
+      lo: p.shipCellLo,
+      hi: p.shipCellHi,
+      timing: 'Q3 2026',
+      tag: 'logistics',
+    },
+
+    // ── Order 2 ──
+    {
+      group: 'Cell Pack &mdash; Order 2 (~' + p.o2PacksLo + '&ndash;' + p.o2PacksHi + ' packs)',
+      tag: 'cells',
+      summaryUnit: 'pack',
+      qtyLo: p.o2PacksLo,
+      qtyHi: p.o2PacksHi,
+      quarter: 'Q4 2026',
+    },
+    {
+      name: 'Cells (raw material)',
+      detail: `${p.o2PacksLo}&ndash;${p.o2PacksHi} pk &times; ${p.cellsPerPack} + ${(p.overage*100).toFixed(0)}% = ${o2CellsLo}&ndash;${o2CellsHi} cells`,
+      lo: o2CellsLo * p.cellLo,
+      hi: o2CellsHi * p.cellHi,
+      timing: 'Q4 2026',
+      tag: 'cells',
+    },
+    {
+      name: 'BMS PCBAs (pack order 2)',
+      detail: `${o2BmsLo}&ndash;${o2BmsHi} boards @ CHF ${p.bmsLo}&ndash;${p.bmsHi}`,
+      lo: o2BmsLo * p.bmsLo,
+      hi: o2BmsHi * p.bmsHi,
+      timing: 'Q4 2026',
+      tag: 'bms',
+    },
+    {
+      name: 'Assembly materials',
+      detail: `${p.o2PacksLo}&ndash;${p.o2PacksHi} pk @ CHF ${p.asmMatLo}&ndash;${p.asmMatHi}`,
+      lo: p.o2PacksLo * p.asmMatLo,
+      hi: p.o2PacksHi * p.asmMatHi,
+      timing: 'Q4 2026',
+      tag: 'assembly',
+    },
+    {
+      name: 'Assembly labor (ext. assembler)',
+      detail: `${p.o2PacksLo}&ndash;${p.o2PacksHi} pk @ CHF ${p.asmLabO2Lo}&ndash;${p.asmLabO2Hi}`,
+      lo: p.o2PacksLo * p.asmLabO2Lo,
+      hi: p.o2PacksHi * p.asmLabO2Hi,
+      timing: 'Q4 2026',
+      tag: 'assembly',
+    },
+    {
+      name: 'Shipping (cells DG freight)',
+      detail: 'Li-ion DG surcharges',
+      lo: p.shipCellLo,
+      hi: p.shipCellHi,
+      timing: 'Q4 2026',
+      tag: 'logistics',
+    },
+
+    // ── BMS Dev Protos ──
+    {
+      group: 'BMS Development Protos',
+      tag: 'bms',
+      summaryUnit: 'board',
+      qtyLo: p.bmsDevQty,
+      qtyHi: p.bmsDevQty,
+      quarter: 'Q3 2026',
+    },
+    {
+      name: 'BMS dev. proto batch (validation)',
+      detail: `${p.bmsDevQty} boards @ CHF ${p.bmsLo}&ndash;${p.bmsHi}`,
+      lo: p.bmsDevQty * p.bmsLo,
+      hi: p.bmsDevQty * p.bmsHi,
+      timing: 'Q3 2026',
+      tag: 'bms',
+    },
+    {
+      name: 'Shipping (PCBAs)',
+      detail: 'Standard freight',
+      lo: p.shipBmsLo,
+      hi: p.shipBmsHi,
+      timing: 'Q3 2026',
+      tag: 'logistics',
+    },
+
+    // ── Charger ──
+    {
+      group: 'Charger Prototypes (~340 W)',
+      tag: 'charger',
+      summaryUnit: 'sample',
+      qtyLo: p.chgQtyLo,
+      qtyHi: p.chgQtyHi,
+      quarter: 'Q3-Q4 2026',
+    },
+    {
+      name: 'NRE / development contribution',
+      detail: 'Supplier eng. for ~340 W smart charger',
+      lo: p.nreLo,
+      hi: p.nreHi,
+      timing: 'Q2-Q3 2026',
+      tag: 'charger',
+    },
+    {
+      name: 'Prototype samples',
+      detail: `${p.chgQtyLo}&ndash;${p.chgQtyHi} units @ CHF ${p.chgUnitLo}&ndash;${p.chgUnitHi}/ea`,
+      lo: p.chgQtyLo * p.chgUnitLo,
+      hi: p.chgQtyHi * p.chgUnitHi,
+      timing: 'Q3-Q4 2026',
+      tag: 'charger',
+    },
+    {
+      name: 'Shipping &amp; customs',
+      detail: 'Standard freight',
+      lo: p.shipChgLo,
+      hi: p.shipChgHi,
+      timing: 'Q3-Q4 2026',
+      tag: 'logistics',
+    },
+  ];
+
+  let totalLo = 0, totalHi = 0;
+  const subtotals = {};
+  let currentGroup = null;
+  for (const r of rows) {
+    if (r.group) {
+      currentGroup = r.group;
+      subtotals[currentGroup] = {
+        lo: 0,
+        hi: 0,
+        summaryUnit: r.summaryUnit || 'unit',
+        qtyLo: r.qtyLo || 1,
+        qtyHi: r.qtyHi || r.qtyLo || 1,
+        quarter: r.quarter || '',
+      };
+      continue;
+    }
+    if (!currentGroup) continue;
+    subtotals[currentGroup].lo += r.lo;
+    subtotals[currentGroup].hi += r.hi;
+    totalLo += r.lo;
+    totalHi += r.hi;
+  }
+
+  return { rows, subtotals, totalLo, totalHi };
+}
+
+const TAG_MAP = {
+  cells:     { cls: 'tag-cells',     label: 'CELLS' },
+  bms:       { cls: 'tag-bms',       label: 'BMS' },
+  assembly:  { cls: 'tag-assembly',  label: 'ASSEMBLY' },
+  charger:   { cls: 'tag-charger',   label: 'CHARGER' },
+  logistics: { cls: 'tag-logistics', label: 'LOGISTICS' },
+};
+
+function renderTable(result) {
+  const { rows, subtotals, totalLo, totalHi } = result;
+  const tbody = $('tbodyBreakdown');
+  tbody.innerHTML = '';
+  let activeGroup = null;
+
+  function appendSegmentSummary(groupName) {
+    if (!groupName || !subtotals[groupName]) return;
+    const st = subtotals[groupName];
+    const mid = (st.lo + st.hi) / 2;
+    const avgQty = (st.qtyLo + st.qtyHi) / 2;
+    const perUnitLo = st.lo / Math.max(st.qtyHi, 1);
+    const perUnitMid = mid / Math.max(avgQty, 1);
+    const perUnitHi = st.hi / Math.max(st.qtyLo, 1);
+
+    const tr = document.createElement('tr');
+    tr.className = 'subtotal';
+    tr.innerHTML =
+      `<td colspan="2" style="text-align:right">Segment total (${st.quarter}) &mdash; effective CHF/${st.summaryUnit}</td>` +
+      `<td class="num">${fmt(st.lo)} <span style="font-size:0.72rem;color:#636e72">(CHF ${fmt(Math.round(perUnitLo))}/${st.summaryUnit})</span></td>` +
+      `<td class="num" style="font-weight:700">${fmt(Math.round(mid))} <span style="font-size:0.72rem;color:#636e72">(CHF ${fmt(Math.round(perUnitMid))}/${st.summaryUnit})</span></td>` +
+      `<td class="num">${fmt(st.hi)} <span style="font-size:0.72rem;color:#636e72">(CHF ${fmt(Math.round(perUnitHi))}/${st.summaryUnit})</span></td>` +
+      `<td></td>`;
+    tbody.appendChild(tr);
+  }
+
+  for (const r of rows) {
+    if (r.group) {
+      if (activeGroup) appendSegmentSummary(activeGroup);
+      activeGroup = r.group;
+      const tr = document.createElement('tr');
+      tr.className = 'group-header';
+      tr.innerHTML = `<td colspan="6">${r.group}</td>`;
+      tbody.appendChild(tr);
+      continue;
+    }
+
+    const mid = (r.lo + r.hi) / 2;
+    const t = TAG_MAP[r.tag] || TAG_MAP.logistics;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      `<td>${r.name} <span class="tag ${t.cls}">${t.label}</span></td>` +
+      `<td style="font-size:0.73rem;color:#636e72">${r.detail}</td>` +
+      `<td class="num">${fmt(r.lo)}</td>` +
+      `<td class="num" style="font-weight:600">${fmt(Math.round(mid))}</td>` +
+      `<td class="num">${fmt(r.hi)}</td>` +
+      `<td style="font-size:0.76rem;color:#457B9D;font-weight:600">${r.timing}</td>`;
+    tbody.appendChild(tr);
+  }
+  appendSegmentSummary(activeGroup);
+
+  const totalMid = (totalLo + totalHi) / 2;
+  const trTotal = document.createElement('tr');
+  trTotal.className = 'total';
+  trTotal.innerHTML =
+    `<td colspan="2" style="text-align:right">TOTAL &mdash; 2026 Prototype Procurement</td>` +
+    `<td class="num">CHF ${fmt(totalLo)}</td>` +
+    `<td class="num">CHF ${fmt(Math.round(totalMid))}</td>` +
+    `<td class="num">CHF ${fmt(totalHi)}</td>` +
+    `<td></td>`;
+  tbody.appendChild(trTotal);
+}
+
+function renderCharts(result) {
+  const { subtotals, totalLo, totalHi } = result;
+  const groups = Object.keys(subtotals);
+  const CHART_COLORS = ['#457B9D', '#457B9D', '#2B7A78', '#e17055'];
+
+  const midVals = groups.map(g => Math.round((subtotals[g].lo + subtotals[g].hi) / 2));
+  const loVals  = groups.map(g => subtotals[g].lo);
+  const hiVals  = groups.map(g => subtotals[g].hi);
+  const errLo   = midVals.map((m, i) => m - loVals[i]);
+  const errHi   = midVals.map((m, i) => hiVals[i] - m);
+
+  const shortLabels = groups.map(g => {
+    if (g.includes('Order 1')) return 'Order 1<br>(Cells+Asm)';
+    if (g.includes('Order 2')) return 'Order 2<br>(Cells+Asm)';
+    if (g.includes('BMS Dev'))  return 'BMS Dev<br>Protos';
+    return 'Charger<br>Protos';
+  });
+
+  const barTrace = {
+    x: shortLabels,
+    y: midVals,
+    type: 'bar',
+    marker: { color: CHART_COLORS },
+    error_y: {
+      type: 'data',
+      symmetric: false,
+      array: errHi,
+      arrayminus: errLo,
+      color: '#333',
+      thickness: 1.5,
+      width: 5,
+    },
+    text: midVals.map(v => `CHF ${fmt(v)}`),
+    textposition: 'outside',
+    textfont: { size: 11, color: '#333' },
+    hovertemplate: '%{x}<br>Mid: CHF %{y:,.0f}<br>Low: CHF %{customdata[0]:,.0f}<br>High: CHF %{customdata[1]:,.0f}<extra></extra>',
+    customdata: groups.map((g, i) => [loVals[i], hiVals[i]]),
+  };
+
+  const totalMid = Math.round((totalLo + totalHi) / 2);
+  const yMax = Math.max(...hiVals) * 1.35;
+
+  const barLayout = {
+    title: { text: 'Cost by Category (mid-point with range)', font: { size: 14, color: '#1a1a2e' } },
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)',
+    font: { family: 'Segoe UI, system-ui, sans-serif', size: 12 },
+    margin: { t: 50, b: 60, l: 62, r: 20 },
+    yaxis: {
+      gridcolor: '#e0e0e0',
+      zeroline: true,
+      zerolinecolor: '#ccc',
+      title: { text: 'CHF', standoff: 6 },
+      range: [0, yMax],
+      tickformat: ',.0f',
+    },
+    bargap: 0.3,
+    height: 400,
+    annotations: [{
+      x: 0.5, y: 1.08, xref: 'paper', yref: 'paper',
+      text: `<b>Total: CHF ${fmt(totalLo)} &ndash; CHF ${fmt(totalHi)}  (mid: CHF ${fmt(totalMid)})</b>`,
+      showarrow: false,
+      font: { size: 12, color: '#1a1a2e' },
+    }],
+  };
+
+  Plotly.react('chart_bar', [barTrace], barLayout, { responsive: true, displayModeBar: false });
+
+  const pieTrace = {
+    labels: shortLabels.map(l => l.replace(/<br>/g, ' ')),
+    values: midVals,
+    type: 'pie',
+    marker: { colors: CHART_COLORS },
+    textinfo: 'label+percent',
+    textfont: { size: 11 },
+    hovertemplate: '%{label}<br>CHF %{value:,.0f}<br>%{percent}<extra></extra>',
+    hole: 0.38,
+  };
+
+  const pieLayout = {
+    title: { text: 'Budget Split (mid-point)', font: { size: 14, color: '#1a1a2e' } },
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    font: { family: 'Segoe UI, system-ui, sans-serif', size: 12 },
+    margin: { t: 50, b: 30, l: 20, r: 20 },
+    height: 400,
+    showlegend: false,
+    annotations: [{
+      text: `CHF ${fmt(totalMid)}`,
+      font: { size: 16, color: '#1a1a2e', family: 'Segoe UI' },
+      showarrow: false,
+      x: 0.5, y: 0.5,
+    }],
+  };
+
+  Plotly.react('chart_pie', [pieTrace], pieLayout, { responsive: true, displayModeBar: false });
+}
+
+function recalculate() {
+  const p = getInputs();
+  const result = compute(p);
+  renderTable(result);
+  renderCharts(result);
+}
+
+recalculate();
+</script>
+
+</body>
+</html>

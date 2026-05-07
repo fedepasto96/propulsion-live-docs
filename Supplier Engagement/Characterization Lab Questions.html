@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Characterization Lab Questions — E4 Battery Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #222;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: 24px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 32px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            font-size: 16px;
+            margin-top: 24px;
+        }
+
+        h4 {
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+
+        th,
+        td {
+            border: 1px solid #bbb;
+            padding: 8px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            margin: 12px 0;
+            border-left: 4px solid;
+            border-radius: 4px;
+        }
+
+        .alert-important {
+            border-left-color: #7c3aed;
+            background-color: #f3f0ff;
+        }
+
+        .alert-warning {
+            border-left-color: #d97706;
+            background-color: #fffbeb;
+        }
+
+        .alert-info {
+            border-left-color: #2563eb;
+            background-color: #eff6ff;
+        }
+
+        .alert-label {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        ul,
+        ol {
+            margin: 8px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin: 4px 0;
+        }
+
+        .meta {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .meta strong {
+            color: #333;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 28px 0;
+        }
+
+        .question {
+            margin: 6px 0;
+            padding: 4px 0;
+        }
+
+        .question-num {
+            font-weight: bold;
+            color: #2563eb;
+            margin-right: 4px;
+        }
+
+        .notes-box {
+            border: 1px dashed #bbb;
+            background: #fafafa;
+            padding: 12px;
+            min-height: 80px;
+            margin: 8px 0 16px;
+            font-style: italic;
+            color: #999;
+        }
+
+        .lab-header {
+            background: #f0f0f0;
+            padding: 8px 12px;
+            border-left: 4px solid #2563eb;
+            margin-top: 28px;
+        }
+
+        .lab-header h3 {
+            margin: 0;
+        }
+
+        .lab-header .location {
+            color: #555;
+            font-size: 13px;
+        }
+
+        .test-spec {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+
+        .test-spec h4 {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+        }
+
+        .test-spec table {
+            margin: 8px 0 0 0;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+
+        .tag-critical {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .tag-important {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .tag-nice {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        @media print {
+            .notes-box {
+                min-height: 120px;
+            }
+
+            h2,
+            .lab-header {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Characterization Lab Questions — E4 Battery Project</h1>
+
+    <p class="meta">
+        <strong>Project:</strong> E4 Battery Project — Harmony Project<br>
+        <strong>Prepared by:</strong> Federico Pastore (Lead Battery Engineer)<br>
+        <strong>Date:</strong> February 2026<br>
+        <strong>Purpose:</strong> Evaluate external labs for outsourced cell characterization (SOC algorithm
+        parameterization) — Option B2 in the BMS/SOC strategy document<br>
+        <strong>Reference:</strong> SOC Algorithm Strategy Google Doc; Characterization Labs sheet in techno scouting
+        spreadsheet
+    </p>
+
+    <hr>
+
+    <h2>Context: What We Need</h2>
+
+    <div class="alert alert-info">
+        <div class="alert-label">CAMPAIGN SUMMARY</div>
+        We are developing a custom SOC estimation algorithm (EKF/UKF-based) for the E4 battery pack, which uses
+        <strong>silicon-anode pouch cells</strong>. Silicon anodes introduce significant voltage hysteresis that
+        standard fuel gauges (e.g., TI Impedance Track) cannot handle without extensive characterization.
+        We need a lab to run a full characterization campaign on our cells to extract the model parameters.
+    </div>
+
+    <div class="test-spec">
+        <h4>Tests Required</h4>
+        <table>
+            <tr>
+                <th>Test</th>
+                <th>Protocol</th>
+                <th>Temperatures</th>
+                <th>Est. Duration (per temp)</th>
+            </tr>
+            <tr>
+                <td><strong>1. OCV vs. SOC (GITT)</strong></td>
+                <td>C/20 pulses, rest until dV/dt &lt; 0.5 mV/min, both charge and discharge directions</td>
+                <td>0C, 25C, 45C (minimum)</td>
+                <td>5-10 days</td>
+            </tr>
+            <tr>
+                <td><strong>2. HPPC pulse tests</strong></td>
+                <td>10s discharge pulse (1-3C) + 40s rest + 10s charge pulse (0.75C), at 10% SOC increments</td>
+                <td>0C, 25C, 45C</td>
+                <td>2-3 days</td>
+            </tr>
+            <tr>
+                <td><strong>3. Full capacity vs. C-rate</strong></td>
+                <td>CC discharge at 0.2C, 0.5C, 1C, 2C to cutoff voltage</td>
+                <td>0C, 25C, 45C</td>
+                <td>1-2 days</td>
+            </tr>
+            <tr>
+                <td><strong>4. Hysteresis minor loop</strong></td>
+                <td>Partial charge/discharge reversals at C/20 with OCV rest points, progressively smaller loops</td>
+                <td>25C (minimum)</td>
+                <td>5-7 days</td>
+            </tr>
+        </table>
+        <p style="margin: 8px 0 0; font-size: 12px; color: #666;">
+            <strong>Cell format:</strong> Silicon-anode pouch cell (exact spec TBD, likely NMC cathode, ~5 Ah)<br>
+            <strong>Voltage range:</strong> 2.7V - 4.3V<br>
+            <strong>Repeat per cell:</strong> 3 cells minimum (statistical repeatability)<br>
+            <strong>Estimated total duration:</strong> 6-8 weeks<br>
+            <strong>Target budget:</strong> 8,000 - 20,000 EUR
+        </p>
+    </div>
+
+    <hr>
+
+    <h2>Part A — Universal Questions (Ask Every Lab)</h2>
+
+    <p>These questions should be asked at <strong>every</strong> lab meeting. They cover technical capability, pricing,
+        data delivery, and project management.</p>
+
+    <h3>A1. Technical Capability</h3>
+
+    <table>
+        <tr>
+            <th style="width:50px">#</th>
+            <th>Question</th>
+            <th>Why It Matters</th>
+            <th style="width:200px">Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>A1.1</td>
+            <td>What <strong>cycler models</strong> do you use? What is the current/voltage range and
+                <strong>sampling rate</strong>?</td>
+            <td>HPPC requires fast sampling (&gt;100 Hz ideally) for clean R0 extraction. Our in-house cycler is
+                limited to 10 Hz, which is one reason we're exploring outsourcing.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A1.2</td>
+            <td>What <strong>temperature range</strong> can your chambers achieve? What is the temperature
+                <strong>stability and uniformity</strong> (e.g., +/- 0.5C)?</td>
+            <td>We need at least 0C, 25C, 45C. Stability matters for accurate OCV readings during long rests.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A1.3</td>
+            <td>How many <strong>test channels</strong> can you allocate to our campaign simultaneously?</td>
+            <td>Running 3 cells in parallel per test cuts total campaign time by ~3x. If they can only run 1 channel,
+                the campaign will take 4-6 months instead of 6-8 weeks.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A1.4</td>
+            <td>Have you characterized <strong>silicon-anode cells</strong> before? If so, for which customer /
+                application?</td>
+            <td><span class="tag tag-critical">CRITICAL</span> Silicon cells have unique behavior: long OCV
+                equilibration times, large hysteresis, path-dependent voltage. A lab without Si-anode experience
+                may underestimate rest times and deliver bad OCV data.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A1.5</td>
+            <td>Have you run <strong>GITT protocols with very long rest periods</strong> (2-6 hours per step)?
+                How do you determine when OCV has stabilized?</td>
+            <td>Silicon cells take much longer to reach equilibrium than graphite. The lab needs to use a dV/dt
+                threshold, not a fixed rest time. If they say "we rest for 1 hour," that's a red flag.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A1.6</td>
+            <td>Have you run <strong>hysteresis minor loop characterization</strong> before? Can you describe the
+                procedure you would use?</td>
+            <td><span class="tag tag-important">KEY DIFFERENTIATOR</span> This is the most specialized test. Many
+                labs can do GITT and HPPC but have never done minor loop characterization. If they haven't, they
+                can still do it from a written protocol, but it increases risk of errors.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A1.7</td>
+            <td>Can you run <strong>custom test scripts/protocols</strong> that we define, or do you only offer
+                predefined test packages?</td>
+            <td>We need precise control over pulse durations, rest conditions (dV/dt threshold), C-rates, and
+                direction reversals. A lab that only runs fixed packages won't work.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A1.8</td>
+            <td>Do you have <strong>EIS (Electrochemical Impedance Spectroscopy)</strong> capability?
+                If so, what frequency range?</td>
+            <td><span class="tag tag-nice">NICE TO HAVE</span> EIS provides a more complete impedance characterization
+                than HPPC alone. Not strictly required but would improve model accuracy. Useful for future aging
+                studies.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <h3>A2. Data Delivery and IP</h3>
+
+    <table>
+        <tr>
+            <th style="width:50px">#</th>
+            <th>Question</th>
+            <th>Why It Matters</th>
+            <th style="width:200px">Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>A2.1</td>
+            <td>What <strong>data formats</strong> do you deliver? Can we get raw time-series data
+                (timestamp, voltage, current, temperature) in CSV or similar?</td>
+            <td>We need raw data for our own parameter extraction pipeline. A PDF report with summary charts
+                is not sufficient.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A2.2</td>
+            <td>Do you provide <strong>processed / extracted parameters</strong> (R0, R1, C1, OCV-SOC curves)
+                or only raw data?</td>
+            <td>If they extract parameters, we should verify their methodology is compatible with our ECM
+                (1-RC or 2-RC equivalent circuit with hysteresis).</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A2.3</td>
+            <td>What is your <strong>IP and confidentiality policy</strong>? Do you require an NDA?
+                Can you sign ours?</td>
+            <td>Cell supplier data and our algorithm design are proprietary. We need confidence that test data
+                and cell specs won't be shared.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A2.4</td>
+            <td>Can we access <strong>real-time test progress</strong> remotely (e.g., a web dashboard)?
+                Or do we only see results at the end?</td>
+            <td>A multi-week campaign is risky if we can't monitor it. If a cell fails or a test program has a
+                bug, we want to know immediately rather than after 6 weeks.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A2.5</td>
+            <td>If we need to <strong>modify the test protocol mid-campaign</strong> (e.g., extend rest times
+                after seeing initial results), is that possible? At what cost?</td>
+            <td>Silicon cells are unpredictable. We may need to adjust GITT rest durations or add temperature
+                points after seeing first results. Rigid labs that can't adapt are a risk.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <h3>A3. Pricing and Timeline</h3>
+
+    <table>
+        <tr>
+            <th style="width:50px">#</th>
+            <th>Question</th>
+            <th>Why It Matters</th>
+            <th style="width:200px">Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>A3.1</td>
+            <td>Can you provide a <strong>detailed cost breakdown</strong> for the full campaign?
+                Specifically: equipment time, labor (setup/monitoring/analysis), consumables, reporting.</td>
+            <td>Allows us to compare like-for-like across labs and identify where costs can be reduced.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A3.2</td>
+            <td>How is pricing structured: <strong>fixed price per campaign</strong>, time-and-materials,
+                or per-channel-per-month?</td>
+            <td>Fixed price transfers risk to the lab (if tests take longer). T&M gives us flexibility but
+                no cost ceiling. We prefer fixed or capped T&M.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A3.3</td>
+            <td>What is the <strong>expected total duration</strong> from receiving cells to delivering
+                final data? Please break down: queue time, test execution, data processing/reporting.</td>
+            <td>Queue time can add 2-6 weeks on top of actual test time. We need the full picture.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A3.4</td>
+            <td>What is your <strong>current queue / lead time</strong>? When is the earliest we could start?</td>
+            <td>Directly impacts project timeline.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A3.5</td>
+            <td>Is there a <strong>minimum engagement fee</strong> or setup cost?</td>
+            <td>Some labs (especially large ones like Element) have minimum fees that make small campaigns
+                uneconomical.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A3.6</td>
+            <td>What are your <strong>payment terms</strong>? Do you require payment upfront, milestones,
+                or net-30/60?</td>
+            <td>Cash flow planning.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A3.7</td>
+            <td>If we need to run a <strong>second characterization campaign</strong> later (different cell,
+                or re-test after aging), would pricing be the same? Any repeat-customer discount?</td>
+            <td>We may need multiple campaigns as cell suppliers change or as we iterate on the algorithm.
+                Long-term relationship value.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <h3>A4. Project Management and Communication</h3>
+
+    <table>
+        <tr>
+            <th style="width:50px">#</th>
+            <th>Question</th>
+            <th>Why It Matters</th>
+            <th style="width:200px">Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>A4.1</td>
+            <td>Will we have a <strong>dedicated test engineer</strong> as a single point of contact?</td>
+            <td>Multi-week campaigns need continuity. We don't want to re-explain the project every time we call.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A4.2</td>
+            <td>How do you handle <strong>cell failures</strong> during testing? Do you have spare channels
+                / protocols to restart quickly?</td>
+            <td>If one of our 3 cells dies mid-GITT, we need to know immediately and restart with a spare cell.
+                A lab that waits until the end to tell us has wasted weeks.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A4.3</td>
+            <td>What <strong>safety measures</strong> do you have for testing lithium pouch cells?
+                (fire suppression, gas detection, pressure relief, abuse-rated chambers)</td>
+            <td>Silicon-anode cells can be less thermally stable than graphite. The lab should have proper safety
+                infrastructure, especially for the 2C / 45C capacity tests.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A4.4</td>
+            <td>How do you handle <strong>cell shipping</strong>? Can we send cells via standard DG courier,
+                or do you have a preferred logistics partner?</td>
+            <td>Lithium cells are dangerous goods (Class 9). Shipping requires proper packaging, labeling, and
+                documentation. The lab should be familiar with receiving DG shipments.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A4.5</td>
+            <td>Can you provide <strong>references</strong> from previous clients who ran similar characterization
+                campaigns?</td>
+            <td>Best way to verify quality and reliability claims.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <h3>A5. Bonus / Future Scope</h3>
+
+    <table>
+        <tr>
+            <th style="width:50px">#</th>
+            <th>Question</th>
+            <th>Why It Matters</th>
+            <th style="width:200px">Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>A5.1</td>
+            <td>Do you offer <strong>cycle aging / degradation testing</strong>?
+                Could we extend this campaign into a long-term aging study?</td>
+            <td><span class="tag tag-nice">NICE TO HAVE</span> Future need: understanding how model parameters
+                drift with aging for SOH estimation.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A5.2</td>
+            <td>Can you run <strong>application-specific profiles</strong> (e.g., a drone flight power
+                profile) for model validation?</td>
+            <td>After extracting parameters, we'll want to validate the model against a realistic load.
+                Running this at the lab saves us from doing it in-house.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>A5.3</td>
+            <td>Do you offer any <strong>consulting / data analysis</strong> services alongside testing?
+                (e.g., ECM parameter extraction, model fitting)</td>
+            <td>If the lab can also extract our equivalent circuit model parameters, it saves us significant
+                engineering time. But we need to verify their approach matches ours.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <h2>Part B — Lab-Specific Questions</h2>
+
+    <p>These questions are tailored to each lab based on their profile, capabilities, and potential concerns.</p>
+
+    <!-- COGNITION ENERGY -->
+
+    <div class="lab-header">
+        <h3>Cognition Energy</h3>
+        <span class="location">Abingdon, UK — Commercial test lab — 600+ channels</span>
+    </div>
+
+    <div class="alert alert-important">
+        <div class="alert-label">WHY THIS LAB</div>
+        Specialist commercial test lab built for bespoke cell characterization. Basytec, Maccor, and Neware cyclers.
+        Dedicated test engineer per project. Custom fixture design in-house. Strong IP protection.
+        <strong>Recommended first choice</strong> based on capability-to-cost ratio.
+    </div>
+
+    <table>
+        <tr>
+            <th style="width:50px">#</th>
+            <th>Question</th>
+            <th>Context</th>
+            <th style="width:200px">Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>B1.1</td>
+            <td>Which of your cycler platforms (Basytec, Maccor, Neware) would you recommend for our campaign?
+                What <strong>sampling rate</strong> does each offer during pulses?</td>
+            <td>Different cyclers have different strengths. Basytec is known for high accuracy, Maccor for reliability.
+                We need to verify pulse sampling rate specifically.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B1.2</td>
+            <td>Your website mentions <strong>CellPod One thermal holders</strong> for individual cell temperature
+                control. Would these be used for our campaign? How does the temperature accuracy compare to a
+                full climate chamber?</td>
+            <td>CellPod could offer better thermal contact with the cell surface than ambient air in a chamber,
+                potentially improving temperature accuracy during HPPC.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B1.3</td>
+            <td>Can you design a <strong>custom pouch cell fixture</strong> with thermocouple placement on the
+                cell surface? What is the lead time for fixture design?</td>
+            <td>They advertise in-house fixture design. Want to understand if this adds time / cost or is included.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B1.4</td>
+            <td>What is a <strong>realistic all-in price</strong> for our 4-test, 3-temperature, 3-cell campaign?
+                Can you provide a fixed-price quote?</td>
+            <td>Our estimate is 8,000-15,000 EUR. Need to validate this with an actual quote.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="notes-box">Notes from meeting:</div>
+
+    <!-- FRAUNHOFER ISC -->
+
+    <div class="lab-header">
+        <h3>Fraunhofer ISC</h3>
+        <span class="location">Wurzburg, Germany — Research institute — 350+ channels</span>
+    </div>
+
+    <div class="alert alert-important">
+        <div class="alert-label">WHY THIS LAB</div>
+        Part of the Fraunhofer FZEB (Research Center for Energy Storage and Systems). 24-channel EIS capability.
+        CT scanning and tear-down analysis available. Research-grade reporting. Strong reputation.
+        <strong>Best option if we need deep analysis</strong> beyond basic parameterization.
+    </div>
+
+    <table>
+        <tr>
+            <th style="width:50px">#</th>
+            <th>Question</th>
+            <th>Context</th>
+            <th style="width:200px">Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>B2.1</td>
+            <td>Your temperature range is listed as <strong>-25C to +80C</strong>. We need 0C as a test point.
+                Can you confirm this is achievable with stable control at 0C (+/- 1C)?</td>
+            <td>Their lower limit (-25C) should cover 0C easily, but want to confirm stability at this specific
+                point.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B2.2</td>
+            <td>As a research institute, how do you handle <strong>industry contracts</strong> vs. funded
+                research? Is there a minimum project size? How does your overhead / pricing structure work?</td>
+            <td>Fraunhofer institutional overhead is typically ~100% on labor. Need to understand if a small
+                characterization campaign is economically feasible for them or if we'd be forced into a larger
+                research project scope.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B2.3</td>
+            <td>Would <strong>EIS measurements</strong> be included in a standard characterization package,
+                or is that an additional cost? What frequency range does your EIS cover?</td>
+            <td>EIS could provide more detailed impedance data than HPPC alone. If it's available at marginal
+                cost, worth including.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B2.4</td>
+            <td>What is a <strong>realistic timeline</strong> from first contact to receiving final data?
+                Including internal approval, contracting, queue time, testing, and reporting.</td>
+            <td>Research institutes often have longer administrative lead times. Need honest assessment of
+                total calendar time.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B2.5</td>
+            <td>Have you worked with <strong>silicon-anode cells from Chinese suppliers</strong> before?
+                (e.g., Amprius, EnPower, or similar)</td>
+            <td>Our cells will likely come from Chinese silicon-anode suppliers. Direct experience with similar
+                cells would significantly reduce risk.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="notes-box">Notes from meeting:</div>
+
+    <!-- FRAUNHOFER IVI -->
+
+    <div class="lab-header">
+        <h3>Fraunhofer IVI</h3>
+        <span class="location">Dresden, Germany — Research institute</span>
+    </div>
+
+    <table>
+        <tr>
+            <th style="width:50px">#</th>
+            <th>Question</th>
+            <th>Context</th>
+            <th style="width:200px">Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>B3.1</td>
+            <td>Your public information is limited. Can you describe your <strong>cell characterization
+                    test stand capabilities</strong> in detail? Number of channels, cycler models, chamber specs?</td>
+            <td>Need to verify they can actually run our full test matrix before engaging further.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B3.2</td>
+            <td>What is your <strong>primary focus</strong>: automotive cells, stationary storage, or
+                small-format cells (pouch/cylindrical for portable applications)?</td>
+            <td>If they're geared toward large automotive cells, our small pouch cells may not be a good fit
+                for their equipment.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B3.3</td>
+            <td>How does your <strong>pricing compare to Fraunhofer ISC</strong>? Are you under the same
+                overhead structure?</td>
+            <td>As a smaller Fraunhofer institute, they may have more competitive rates. Worth asking directly.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="notes-box">Notes from meeting:</div>
+
+    <!-- WMG -->
+
+    <div class="lab-header">
+        <h3>WMG (University of Warwick)</h3>
+        <span class="location">Coventry, UK — Academic / industry services</span>
+    </div>
+
+    <div class="alert alert-info">
+        <div class="alert-label">NOTE</div>
+        WMG has a strong Battery Safety Centre with abuse-rated chambers and calorimetry (EV ARC+).
+        They're a good choice if we want to <strong>combine characterization with safety testing</strong>
+        in a single engagement.
+    </div>
+
+    <table>
+        <tr>
+            <th style="width:50px">#</th>
+            <th>Question</th>
+            <th>Context</th>
+            <th style="width:200px">Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>B4.1</td>
+            <td>Your public-facing materials focus on <strong>safety and abuse testing</strong>. Do you also
+                run standard performance characterization (GITT, HPPC, capacity) as a service?</td>
+            <td>Need to confirm they do our type of work, not just abuse testing.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B4.2</td>
+            <td>Could we bundle <strong>characterization + thermal runaway calorimetry</strong> in a single
+                campaign? What would the combined pricing look like?</td>
+            <td>We'll eventually need thermal runaway data for pack safety design. Bundling could save time
+                and money.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B4.3</td>
+            <td>As a university, how do you handle <strong>IP ownership</strong>? Is there any risk that our
+                test data or cell information could end up in published research?</td>
+            <td>Academic labs sometimes publish results. We need explicit IP protection for our proprietary
+                cell data.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B4.4</td>
+            <td>What is the <strong>typical turnaround time</strong> for an industry-funded characterization
+                project? Do academic calendars (term breaks, student availability) affect timelines?</td>
+            <td>University labs can have irregular availability compared to commercial labs.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="notes-box">Notes from meeting:</div>
+
+    <!-- ELEMENT -->
+
+    <div class="lab-header">
+        <h3>Element Materials Technology</h3>
+        <span class="location">Global (US, EU, Asia) — Large corporate test house — 3,000+ channels</span>
+    </div>
+
+    <table>
+        <tr>
+            <th style="width:50px">#</th>
+            <th>Question</th>
+            <th>Context</th>
+            <th style="width:200px">Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>B5.1</td>
+            <td>Which <strong>specific facility</strong> would handle our campaign? What equipment does
+                that specific site have?</td>
+            <td>Element is huge and global. "3,000+ channels" is spread across many sites. We need to know
+                which one and what it's equipped with.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B5.2</td>
+            <td>Is there a <strong>minimum engagement fee or minimum project size</strong>?</td>
+            <td>Our campaign is relatively small. Large corporate labs sometimes have minimums that make small
+                projects uneconomical.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B5.3</td>
+            <td>Can you run <strong>bespoke characterization protocols</strong> (GITT with custom dV/dt
+                thresholds, hysteresis minor loops), or do you primarily run standardized test packages
+                (UN 38.3, IEC 62133)?</td>
+            <td>Element's strength is certification testing. Our campaign is the opposite: custom, research-grade
+                characterization. Need to confirm they can do this, not just certify.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B5.4</td>
+            <td>Do you have a <strong>European facility</strong> that could handle this, or would it go to
+                the US?</td>
+            <td>Shipping cells to the US adds DG complexity and cost. European facility preferred.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="notes-box">Notes from meeting:</div>
+
+    <!-- GWP -->
+
+    <div class="lab-header">
+        <h3>GWP</h3>
+        <span class="location">Germany — Commercial lab</span>
+    </div>
+
+    <table>
+        <tr>
+            <th style="width:50px">#</th>
+            <th>Question</th>
+            <th>Context</th>
+            <th style="width:200px">Answer / Notes</th>
+        </tr>
+        <tr>
+            <td>B6.1</td>
+            <td>Very limited public information. Can you provide a <strong>full capability overview</strong>:
+                number of channels, cycler models, temperature range, cell formats supported?</td>
+            <td>Need basic qualification before engaging further.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B6.2</td>
+            <td>What is your <strong>primary customer base</strong>? Automotive, industrial, or consumer
+                electronics?</td>
+            <td>Determines if our small pouch cell campaign is a good fit for their setup.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>B6.3</td>
+            <td>Can you provide a <strong>ballpark quote</strong> for our 4-test, 3-temperature campaign?</td>
+            <td>Need to quickly assess if they're in our budget range before deep-diving.</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div class="notes-box">Notes from meeting:</div>
+
+    <hr>
+
+    <h2>Part C — Evaluation Criteria and Scoring</h2>
+
+    <p>Use this scoring matrix after all lab meetings to compare options objectively.</p>
+
+    <table>
+        <tr>
+            <th>Criterion</th>
+            <th>Weight</th>
+            <th>Cognition Energy</th>
+            <th>Fraunhofer ISC</th>
+            <th>Fraunhofer IVI</th>
+            <th>WMG</th>
+            <th>Element</th>
+            <th>GWP</th>
+        </tr>
+        <tr>
+            <td><strong>Si-anode experience</strong></td>
+            <td>25%</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+        </tr>
+        <tr>
+            <td><strong>Price (within budget)</strong></td>
+            <td>20%</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+        </tr>
+        <tr>
+            <td><strong>Timeline (shortest total)</strong></td>
+            <td>15%</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+        </tr>
+        <tr>
+            <td><strong>Equipment quality (sampling rate, temp accuracy)</strong></td>
+            <td>15%</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+        </tr>
+        <tr>
+            <td><strong>Flexibility (custom protocols, mid-campaign changes)</strong></td>
+            <td>10%</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+        </tr>
+        <tr>
+            <td><strong>Data delivery (raw data, real-time access)</strong></td>
+            <td>10%</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+        </tr>
+        <tr>
+            <td><strong>Communication / project management</strong></td>
+            <td>5%</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+            <td>/5</td>
+        </tr>
+        <tr style="background-color: #f0f0f0; font-weight: bold;">
+            <td><strong>WEIGHTED TOTAL</strong></td>
+            <td>100%</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <h2>Part D — General Notes</h2>
+
+    <h3>Overall Impressions and Lab Ranking</h3>
+    <div class="notes-box">
+        After all meetings, rank labs on: technical fit, cost, timeline, communication quality, flexibility,
+        Si-anode experience...
+    </div>
+
+    <h3>Recommended Next Steps</h3>
+    <div class="notes-box">
+        Which lab(s) to proceed with? Request formal quotes from top 2? Send cells for a pilot test first?
+        Any red flags identified?
+    </div>
+
+    <h3>Open Questions / Follow-ups</h3>
+    <div class="notes-box">
+        Questions that came up during meetings that need further investigation...
+    </div>
+
+    <hr>
+
+    <p><em>Prepared for the E4 Battery Project. Reference: SOC Algorithm Strategy Document, Characterization Labs
+        comparison sheet. Questions should be adapted based on real-time conversation during meetings.</em></p>
+
+</body>
+
+</html>

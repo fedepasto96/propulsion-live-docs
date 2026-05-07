@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slide 2 v2 -- Mitigation Actions</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    background: #e8e8e8;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; padding: 32px;
+  }
+  .slide {
+    background: #ffffff;
+    width: 1280px;
+    height: 720px;
+    padding: 36px 48px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .slide-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 12px; border-bottom: 3px solid #eee; padding-bottom: 12px;
+  }
+  .slide-title { font-size: 34px; font-weight: 700; color: #111; }
+  .slide-date  { font-size: 18px; color: #999; font-weight: 500; }
+  .col-headers { display: flex; margin-bottom: 6px; padding: 0 4px; }
+  .col-h {
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.2px; text-align: center;
+  }
+  .col-h.risk    { width: 280px; color: #b91c1c; }
+  .col-h.action  { width: 310px; margin-left: 68px; color: #1d4ed8; }
+  .col-h.outcome { width: 300px; margin-left: 68px; color: #15803d; }
+  .lanes { flex: 1; display: flex; flex-direction: column; }
+  .lane { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .lane-divider { border: none; border-top: 2px solid #f0f0f0; flex-shrink: 0; }
+  .lane-label { display: flex; align-items: center; gap: 10px; margin-bottom: 2px; }
+  .lane-icon {
+    width: 28px; height: 28px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .lane-icon.cost    { background: #fee2e2; }
+  .lane-icon.soc     { background: #fef3c7; }
+  .lane-icon.thermal { background: #fee2e2; }
+  .lane-title { font-size: 17px; font-weight: 700; color: #111; }
+  .diagram-wrap { width: 100%; display: flex; justify-content: center; }
+  svg.diagram { display: block; overflow: visible; }
+</style>
+</head>
+<body>
+
+<div class="slide">
+  <div class="slide-header">
+    <div class="slide-title">Mitigation Actions</div>
+    <div class="slide-date">May 2026</div>
+  </div>
+
+  <div class="col-headers">
+    <div class="col-h risk">Risk</div>
+    <div class="col-h action">Actions</div>
+    <div class="col-h outcome">Outcome</div>
+  </div>
+
+  <div class="lanes">
+
+    <!-- ========== LANE 1 ========== -->
+    <div class="lane">
+      <div class="lane-label">
+        <div class="lane-icon cost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="#b91c1c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="lane-title">1. Pack / Charger Cost</div>
+      </div>
+      <div class="diagram-wrap">
+        <svg class="diagram" viewBox="0 0 1080 150" width="1080" height="150" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9Z" fill="#aaa"/></marker></defs>
+          <path d="M282,75 C320,75 320,37 358,37"  fill="none" stroke="#ccc" stroke-width="2" marker-end="url(#a1)"/>
+          <path d="M282,75 C320,75 320,113 358,113" fill="none" stroke="#ccc" stroke-width="2" marker-end="url(#a1)"/>
+          <path d="M668,37 C706,37 706,75 730,75"   fill="none" stroke="#ccc" stroke-width="2" marker-end="url(#a1)"/>
+          <path d="M668,113 C706,113 706,75 730,75"  fill="none" stroke="#ccc" stroke-width="2" marker-end="url(#a1)"/>
+          <!-- Risk -->
+          <rect x="2" y="38" width="280" height="74" rx="12" fill="#fef2f2" stroke="#fecaca" stroke-width="1.5"/>
+          <rect x="2" y="38" width="8"   height="74" rx="4"  fill="#dc2626"/>
+          <foreignObject x="14" y="38" width="268" height="74">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="height:74px;display:flex;align-items:center;justify-content:center;font:700 20px/1.2 Segoe UI,Arial,sans-serif;text-align:center;color:#991b1b">
+              EU / US pack cost
+            </div>
+          </foreignObject>
+          <!-- Action A -->
+          <rect x="358" y="0" width="310" height="74" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+          <rect x="358" y="0" width="8"   height="74" rx="4"  fill="#2563eb"/>
+          <foreignObject x="370" y="0" width="298" height="74">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="height:74px;display:flex;align-items:center;justify-content:center;font:500 20px/1.2 Segoe UI,Arial,sans-serif;text-align:center;color:#1e40af">
+              More supplier quotes
+            </div>
+          </foreignObject>
+          <!-- Action B -->
+          <rect x="358" y="76" width="310" height="74" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+          <rect x="358" y="76" width="8"   height="74" rx="4"  fill="#2563eb"/>
+          <foreignObject x="370" y="76" width="298" height="74">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="height:74px;display:flex;align-items:center;justify-content:center;font:500 20px/1.2 Segoe UI,Arial,sans-serif;text-align:center;color:#1e40af">
+              Challenge regulations
+            </div>
+          </foreignObject>
+          <!-- Outcome -->
+          <rect x="730" y="38" width="300" height="74" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+          <rect x="730" y="38" width="8"   height="74" rx="4"  fill="#16a34a"/>
+          <foreignObject x="742" y="38" width="288" height="74">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="height:74px;display:flex;align-items:center;justify-content:center;font:700 20px/1.2 Segoe UI,Arial,sans-serif;text-align:center;color:#166534">
+              Supplier trade-off matrix
+            </div>
+          </foreignObject>
+        </svg>
+      </div>
+    </div>
+
+    <hr class="lane-divider">
+
+    <!-- ========== LANE 2 ========== -->
+    <div class="lane">
+      <div class="lane-label">
+        <div class="lane-icon soc">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="#92400e" stroke-width="2.5"/><circle cx="12" cy="12" r="3" stroke="#92400e" stroke-width="2"/></svg>
+        </div>
+        <div class="lane-title">2. SoC Estimation</div>
+      </div>
+      <div class="diagram-wrap">
+        <svg class="diagram" viewBox="0 0 1080 150" width="1080" height="150" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9Z" fill="#aaa"/></marker></defs>
+          <path d="M282,75 C320,75 320,37 358,37"  fill="none" stroke="#ccc" stroke-width="2" marker-end="url(#a2)"/>
+          <path d="M282,75 C320,75 320,113 358,113" fill="none" stroke="#ccc" stroke-width="2" marker-end="url(#a2)"/>
+          <path d="M668,37 C706,37 706,75 730,75"   fill="none" stroke="#ccc" stroke-width="2" marker-end="url(#a2)"/>
+          <path d="M668,113 C706,113 706,75 730,75"  fill="none" stroke="#ccc" stroke-width="2" marker-end="url(#a2)"/>
+          <!-- Risk -->
+          <rect x="2" y="38" width="280" height="74" rx="12" fill="#fef2f2" stroke="#fecaca" stroke-width="1.5"/>
+          <rect x="2" y="38" width="8"   height="74" rx="4"  fill="#dc2626"/>
+          <foreignObject x="14" y="38" width="268" height="74">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="height:74px;display:flex;align-items:center;justify-content:center;font:700 20px/1.2 Segoe UI,Arial,sans-serif;text-align:center;color:#991b1b">
+              SoC estimation accuracy
+            </div>
+          </foreignObject>
+          <!-- Action A -->
+          <rect x="358" y="0" width="310" height="74" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+          <rect x="358" y="0" width="8"   height="74" rx="4"  fill="#2563eb"/>
+          <foreignObject x="370" y="0" width="298" height="74">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="height:74px;display:flex;align-items:center;justify-content:center;font:500 20px/1.2 Segoe UI,Arial,sans-serif;text-align:center;color:#1e40af">
+              BQ41z90 stress test
+            </div>
+          </foreignObject>
+          <!-- Action B -->
+          <rect x="358" y="76" width="310" height="74" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+          <rect x="358" y="76" width="8"   height="74" rx="4"  fill="#2563eb"/>
+          <foreignObject x="370" y="76" width="298" height="74">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="height:74px;display:flex;align-items:center;justify-content:center;font:500 20px/1.2 Segoe UI,Arial,sans-serif;text-align:center;color:#1e40af">
+              Si-anode vs. graphite drift
+            </div>
+          </foreignObject>
+          <!-- Outcome -->
+          <rect x="730" y="38" width="300" height="74" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+          <rect x="730" y="38" width="8"   height="74" rx="4"  fill="#16a34a"/>
+          <foreignObject x="742" y="38" width="288" height="74">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="height:74px;display:flex;align-items:center;justify-content:center;font:700 20px/1.2 Segoe UI,Arial,sans-serif;text-align:center;color:#166534">
+              Validated SoC model
+            </div>
+          </foreignObject>
+        </svg>
+      </div>
+    </div>
+
+    <hr class="lane-divider">
+
+    <!-- ========== LANE 3 ========== -->
+    <div class="lane">
+      <div class="lane-label">
+        <div class="lane-icon thermal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 14.76V3.5a2 2 0 1 0-4 0v11.26a4.5 4.5 0 1 0 4 0z" stroke="#b91c1c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="lane-title">3. Thermal &amp; Cycle Life</div>
+      </div>
+      <div class="diagram-wrap">
+        <svg class="diagram" viewBox="0 0 1080 150" width="1080" height="150" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9Z" fill="#aaa"/></marker></defs>
+          <path d="M282,75 C320,75 320,37 358,37"  fill="none" stroke="#ccc" stroke-width="2" marker-end="url(#a3)"/>
+          <path d="M282,75 C320,75 320,113 358,113" fill="none" stroke="#ccc" stroke-width="2" marker-end="url(#a3)"/>
+          <path d="M668,37 C706,37 706,75 730,75"   fill="none" stroke="#ccc" stroke-width="2" marker-end="url(#a3)"/>
+          <path d="M668,113 C706,113 706,75 730,75"  fill="none" stroke="#ccc" stroke-width="2" marker-end="url(#a3)"/>
+          <!-- Risk -->
+          <rect x="2" y="38" width="280" height="74" rx="12" fill="#fef2f2" stroke="#fecaca" stroke-width="1.5"/>
+          <rect x="2" y="38" width="8"   height="74" rx="4"  fill="#dc2626"/>
+          <foreignObject x="14" y="38" width="268" height="74">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="height:74px;display:flex;align-items:center;justify-content:center;font:700 20px/1.2 Segoe UI,Arial,sans-serif;text-align:center;color:#991b1b">
+              Heat release + cycle life
+            </div>
+          </foreignObject>
+          <!-- Action A -->
+          <rect x="358" y="0" width="310" height="74" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+          <rect x="358" y="0" width="8"   height="74" rx="4"  fill="#2563eb"/>
+          <foreignObject x="370" y="0" width="298" height="74">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="height:74px;display:flex;align-items:center;justify-content:center;font:500 20px/1.2 Segoe UI,Arial,sans-serif;text-align:center;color:#1e40af">
+              Operating envelope map
+            </div>
+          </foreignObject>
+          <!-- Action B -->
+          <rect x="358" y="76" width="310" height="74" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+          <rect x="358" y="76" width="8"   height="74" rx="4"  fill="#2563eb"/>
+          <foreignObject x="370" y="76" width="298" height="74">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="height:74px;display:flex;align-items:center;justify-content:center;font:500 20px/1.2 Segoe UI,Arial,sans-serif;text-align:center;color:#1e40af">
+              Screen alternative cells
+            </div>
+          </foreignObject>
+          <!-- Outcome -->
+          <rect x="730" y="38" width="300" height="74" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+          <rect x="730" y="38" width="8"   height="74" rx="4"  fill="#16a34a"/>
+          <foreignObject x="742" y="38" width="288" height="74">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="height:74px;display:flex;align-items:center;justify-content:center;font:700 20px/1.2 Segoe UI,Arial,sans-serif;text-align:center;color:#166534">
+              Safe limits / alt. cell
+            </div>
+          </foreignObject>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

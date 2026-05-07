@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOC Algorithm Development - Cost Comparison</title>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f5f6fa;
+    color: #2d3436;
+    padding: 20px 30px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+    color: #1a1a2e;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #636e72;
+    margin-bottom: 18px;
+  }
+
+  /* ── Toggle button ── */
+  .toggle-btn {
+    display: block;
+    margin: 0 auto 14px;
+    padding: 8px 22px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #b2bec3;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .toggle-btn:hover { background: #dfe6e9; }
+
+  /* ── Editor panel ── */
+  .editor {
+    display: none;
+    max-width: 1100px;
+    margin: 0 auto 20px;
+    background: #fff;
+    border: 1px solid #dfe6e9;
+    border-radius: 8px;
+    padding: 18px 22px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  }
+  .editor.open { display: block; }
+  .editor h3 {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    color: #636e72;
+  }
+  .ed-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .ed-card {
+    border: 1px solid #dfe6e9;
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+  .ed-card h4 {
+    font-size: 0.82rem;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid;
+  }
+  .ed-card h4.sc-a  { border-color: #2B7A78; color: #2B7A78; }
+  .ed-card h4.sc-b1 { border-color: #F4A261; color: #c67a30; }
+  .ed-card h4.sc-b2 { border-color: #457B9D; color: #457B9D; }
+  .ed-card h4.sc-c  { border-color: #E76F51; color: #c0513a; }
+  .ed-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 0.78rem;
+  }
+  .ed-row label {
+    flex: 1;
+    color: #636e72;
+  }
+  .ed-row input {
+    width: 62px;
+    padding: 3px 6px;
+    border: 1px solid #dfe6e9;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    text-align: right;
+    margin-left: 4px;
+  }
+  .ed-row .sep { margin: 0 3px; color: #b2bec3; font-size: 0.7rem; }
+  .update-btn {
+    display: block;
+    margin: 14px auto 0;
+    padding: 9px 32px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+    background: #2B7A78;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .update-btn:hover { background: #1f5c5a; }
+
+  /* ── Charts ── */
+  .charts-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    max-width: 1200px;
+    margin: 0 auto 16px;
+  }
+  .chart-box {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    overflow: hidden;
+  }
+  .chart-total {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    overflow: hidden;
+  }
+  .bottom-row {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr;
+    gap: 12px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .chart-lt {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    overflow: hidden;
+  }
+
+  /* ── FTE rate editor ── */
+  .fte-row {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 0.82rem;
+    color: #636e72;
+  }
+  .fte-row input {
+    width: 72px;
+    padding: 3px 6px;
+    border: 1px solid #dfe6e9;
+    border-radius: 4px;
+    text-align: right;
+    font-size: 0.82rem;
+  }
+</style>
+</head>
+<body>
+
+<h1>SOC Algorithm Development: Cost & Lead Time Comparison</h1>
+<p class="subtitle">All costs in kCHF, lead times in weeks. Error bars show low-high range. Click "Edit Values" to adjust inputs.</p>
+
+<button class="toggle-btn" onclick="toggleEditor()">Edit Values</button>
+
+<!-- ════════════ EDITOR PANEL ════════════ -->
+<div class="editor" id="editor">
+  <h3>Adjust cost estimates (kCHF) &mdash; low / high</h3>
+  <div class="fte-row">
+    Fully-loaded FTE rate:
+    <input type="number" id="fte_rate" value="140" step="5" min="50" max="300"> kCHF/yr
+    &nbsp;&nbsp;(used for info only; internal eng. cost entered directly below)
+  </div>
+
+  <div class="ed-grid" id="editorGrid">
+    <!-- JS fills this -->
+  </div>
+  <button class="update-btn" onclick="updateCharts()">Update Charts</button>
+</div>
+
+<!-- ════════════ CHART CONTAINERS ════════════ -->
+<div class="charts-row">
+  <div class="chart-box"><div id="chart_inteng"></div></div>
+  <div class="chart-box"><div id="chart_nre"></div></div>
+  <div class="chart-box"><div id="chart_capex"></div></div>
+  <div class="chart-box"><div id="chart_recurring"></div></div>
+</div>
+<div class="bottom-row">
+  <div class="chart-total"><div id="chart_total"></div></div>
+  <div class="chart-lt"><div id="chart_leadtime"></div></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// DATA  (kCHF, editable via UI)
+// ═══════════════════════════════════════════════════════════
+const SCENARIOS = ['A: TI ChemID', 'B1: Custom (In-House)', 'B2: Custom (Outsourced)', 'C: Fully Outsourced'];
+const SHORT     = ['A', 'B1', 'B2', 'C'];
+const COLORS    = ['#2B7A78', '#F4A261', '#457B9D', '#E76F51'];
+
+const CATEGORIES = ['Internal Eng.', 'External NRE', 'CAPEX', 'Recurring / Chem.', 'Lead Time (wks)'];
+const CAT_IDS    = ['inteng', 'nre', 'capex', 'recurring', 'leadtime'];
+
+// { category: { scenario_idx: [low, high] } }
+let DATA = {
+  inteng:    { 0: [1.5, 3],   1: [84, 112],  2: [84, 112],  3: [10, 16]  },
+  nre:       { 0: [0, 0],     1: [0, 0],     2: [5, 20],    3: [30, 100] },
+  capex:     { 0: [0, 0],     1: [12, 45],   2: [0, 0],     3: [0, 0]    },
+  recurring: { 0: [0, 0],     1: [6, 8],     2: [5, 20],    3: [5, 15]   },
+  leadtime:  { 0: [5, 7],     1: [24, 48],   2: [20, 40],   3: [16, 36]  },
+};
+
+// ═══════════════════════════════════════════════════════════
+// BUILD EDITOR INPUTS
+// ═══════════════════════════════════════════════════════════
+function buildEditor() {
+  const grid = document.getElementById('editorGrid');
+  grid.innerHTML = '';
+  const scClasses = ['sc-a', 'sc-b1', 'sc-b2', 'sc-c'];
+
+  for (let si = 0; si < 4; si++) {
+    const card = document.createElement('div');
+    card.className = 'ed-card';
+    card.innerHTML = `<h4 class="${scClasses[si]}">${SCENARIOS[si]}</h4>`;
+
+    for (let ci = 0; ci < CAT_IDS.length; ci++) {
+      const catId = CAT_IDS[ci];
+      const [lo, hi] = DATA[catId][si];
+      const row = document.createElement('div');
+      row.className = 'ed-row';
+      const unit = catId === 'leadtime' ? ' (wks)' : '';
+      row.innerHTML =
+        `<label>${CATEGORIES[ci]}${unit}</label>` +
+        `<input type="number" id="in_${catId}_${si}_lo" value="${lo}" step="1" min="0">` +
+        `<span class="sep">/</span>` +
+        `<input type="number" id="in_${catId}_${si}_hi" value="${hi}" step="1" min="0">`;
+      card.appendChild(row);
+    }
+    grid.appendChild(card);
+  }
+}
+
+function readEditor() {
+  for (const catId of CAT_IDS) {
+    for (let si = 0; si < 4; si++) {
+      const lo = parseFloat(document.getElementById(`in_${catId}_${si}_lo`).value) || 0;
+      const hi = parseFloat(document.getElementById(`in_${catId}_${si}_hi`).value) || 0;
+      DATA[catId][si] = [lo, hi];
+    }
+  }
+}
+
+function toggleEditor() {
+  document.getElementById('editor').classList.toggle('open');
+}
+
+// ═══════════════════════════════════════════════════════════
+// CHART RENDERING
+// ═══════════════════════════════════════════════════════════
+const LAYOUT_COMMON = {
+  paper_bgcolor: 'rgba(0,0,0,0)',
+  plot_bgcolor: 'rgba(0,0,0,0)',
+  font: { family: 'Segoe UI, system-ui, sans-serif', size: 12 },
+  margin: { t: 46, b: 40, l: 52, r: 16 },
+  yaxis: {
+    gridcolor: '#e0e0e0',
+    gridwidth: 1,
+    zeroline: true,
+    zerolinecolor: '#ccc',
+    title: { text: 'kCHF', standoff: 6 },
+  },
+  bargap: 0.3,
+};
+
+function mid(lo, hi) { return (lo + hi) / 2; }
+
+function makeCategoryChart(divId, catId, title) {
+  const d = DATA[catId];
+  const mids = [], errLo = [], errHi = [], texts = [];
+  for (let si = 0; si < 4; si++) {
+    const [lo, hi] = d[si];
+    const m = mid(lo, hi);
+    mids.push(m);
+    errLo.push(m - lo);
+    errHi.push(hi - m);
+    texts.push(m < 5 && m > 0 ? `${m.toFixed(1)}k` : m > 0 ? `${m.toFixed(0)}k` : '');
+  }
+
+  const trace = {
+    x: SHORT,
+    y: mids,
+    type: 'bar',
+    marker: { color: COLORS },
+    error_y: {
+      type: 'data',
+      symmetric: false,
+      array: errHi,
+      arrayminus: errLo,
+      color: '#333',
+      thickness: 1.5,
+      width: 4,
+    },
+    text: texts,
+    textposition: 'outside',
+    textfont: { size: 11, color: '#333' },
+    hovertemplate: '%{x}<br>Mid: %{y:.1f} kCHF<br>Range: %{customdata[0]:.1f} - %{customdata[1]:.1f} kCHF<extra></extra>',
+    customdata: [0,1,2,3].map(si => d[si]),
+  };
+
+  const yMax = Math.max(...mids.map((m, i) => m + errHi[i]), 1) * 1.35;
+
+  const layout = {
+    ...LAYOUT_COMMON,
+    title: { text: title, font: { size: 13, color: '#1a1a2e' } },
+    yaxis: { ...LAYOUT_COMMON.yaxis, range: [0, yMax] },
+    height: 300,
+  };
+
+  Plotly.react(divId, [trace], layout, { responsive: true, displayModeBar: false });
+}
+
+function makeTotalChart() {
+  const stackData = [];
+  const stackColors = ['#264653', '#2A9D8F', '#E9C46A', '#F4A261'];
+  const stackNames = ['Internal Eng.', 'External NRE', 'CAPEX', 'Recurring'];
+
+  // compute stacked midpoints
+  const catMids = {};
+  for (const catId of CAT_IDS) {
+    catMids[catId] = [];
+    for (let si = 0; si < 4; si++) {
+      const [lo, hi] = DATA[catId][si];
+      catMids[catId].push(mid(lo, hi));
+    }
+  }
+
+  // total low / high / mid (cost categories only, exclude leadtime)
+  const COST_IDS = ['inteng', 'nre', 'capex', 'recurring'];
+  const totalLo = [], totalHi = [], totalMid = [];
+  for (let si = 0; si < 4; si++) {
+    let tl = 0, th = 0, tm = 0;
+    for (const catId of COST_IDS) {
+      tl += DATA[catId][si][0];
+      th += DATA[catId][si][1];
+      tm += catMids[catId][si];
+    }
+    totalLo.push(tl);
+    totalHi.push(th);
+    totalMid.push(tm);
+  }
+
+  // stacked bar traces
+  for (let ci = 0; ci < 4; ci++) {
+    stackData.push({
+      x: SCENARIOS,
+      y: catMids[CAT_IDS[ci]],
+      name: stackNames[ci],
+      type: 'bar',
+      marker: { color: stackColors[ci] },
+      hovertemplate: `${stackNames[ci]}: %{y:.1f} kCHF<extra></extra>`,
+    });
+  }
+
+  // invisible trace for error bars on total
+  stackData.push({
+    x: SCENARIOS,
+    y: totalMid,
+    type: 'scatter',
+    mode: 'markers',
+    marker: { size: 0.1, color: 'rgba(0,0,0,0)' },
+    error_y: {
+      type: 'data',
+      symmetric: false,
+      array: totalMid.map((m, i) => totalHi[i] - m),
+      arrayminus: totalMid.map((m, i) => m - totalLo[i]),
+      color: '#333',
+      thickness: 2,
+      width: 6,
+    },
+    showlegend: false,
+    hoverinfo: 'skip',
+  });
+
+  // annotations for total range labels
+  const annotations = SCENARIOS.map((sc, i) => {
+    const loVal = totalLo[i];
+    const hiVal = totalHi[i];
+    const label = hiVal < 5
+      ? `${loVal.toFixed(1)} - ${hiVal.toFixed(1)}k`
+      : `${loVal.toFixed(0)} - ${hiVal.toFixed(0)}k`;
+    return {
+      x: sc,
+      y: totalHi[i] + Math.max(...totalHi) * 0.04,
+      text: `<b>${label}</b>`,
+      showarrow: false,
+      font: { size: 12, color: '#333' },
+      yanchor: 'bottom',
+    };
+  });
+
+  const yMax = Math.max(...totalHi) * 1.28;
+
+  const layout = {
+    ...LAYOUT_COMMON,
+    title: { text: 'Total First-Year Cost (Internal + External + CAPEX + Recurring)', font: { size: 14, color: '#1a1a2e' } },
+    barmode: 'stack',
+    yaxis: { ...LAYOUT_COMMON.yaxis, range: [0, yMax] },
+    height: 380,
+    margin: { t: 50, b: 60, l: 56, r: 20 },
+    legend: { orientation: 'h', y: 1.12, x: 0.5, xanchor: 'center', font: { size: 11 } },
+    annotations: annotations,
+  };
+
+  Plotly.react('chart_total', stackData, layout, { responsive: true, displayModeBar: true });
+}
+
+function makeLeadTimeChart() {
+  const d = DATA.leadtime;
+  const mids = [], errLo = [], errHi = [], labels = [];
+  for (let si = 0; si < 4; si++) {
+    const [lo, hi] = d[si];
+    const m = mid(lo, hi);
+    mids.push(m);
+    errLo.push(m - lo);
+    errHi.push(hi - m);
+    const moLo = (lo / 4.3).toFixed(0);
+    const moHi = (hi / 4.3).toFixed(0);
+    labels.push(hi <= 8 ? `${lo}-${hi} wks` : `${moLo}-${moHi} mo`);
+  }
+
+  const trace = {
+    y: SHORT,
+    x: mids,
+    type: 'bar',
+    orientation: 'h',
+    marker: { color: COLORS },
+    error_x: {
+      type: 'data',
+      symmetric: false,
+      array: errHi,
+      arrayminus: errLo,
+      color: '#333',
+      thickness: 1.5,
+      width: 4,
+    },
+    text: labels,
+    textposition: 'outside',
+    textfont: { size: 11, color: '#333' },
+    hovertemplate: '%{y}<br>Mid: %{x:.0f} wks<br>Range: %{customdata[0]:.0f} - %{customdata[1]:.0f} wks<extra></extra>',
+    customdata: [0,1,2,3].map(si => d[si]),
+  };
+
+  const xMax = Math.max(...mids.map((m, i) => m + errHi[i]), 1) * 1.35;
+
+  const layout = {
+    ...LAYOUT_COMMON,
+    title: { text: 'Lead Time (1st Delivery)', font: { size: 14, color: '#1a1a2e' } },
+    xaxis: {
+      title: { text: 'Weeks', standoff: 6 },
+      gridcolor: '#e0e0e0',
+      range: [0, xMax],
+    },
+    yaxis: { autorange: 'reversed', title: '' },
+    height: 380,
+    margin: { t: 50, b: 60, l: 40, r: 60 },
+    bargap: 0.3,
+  };
+
+  Plotly.react('chart_leadtime', [trace], layout, { responsive: true, displayModeBar: false });
+}
+
+function updateCharts() {
+  readEditor();
+  makeCategoryChart('chart_inteng',   'inteng',    'Internal Eng. Cost');
+  makeCategoryChart('chart_nre',      'nre',       'External NRE');
+  makeCategoryChart('chart_capex',    'capex',     'CAPEX');
+  makeCategoryChart('chart_recurring','recurring', 'Recurring / Chemistry');
+  makeTotalChart();
+  makeLeadTimeChart();
+}
+
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
+buildEditor();
+updateCharts();
+</script>
+</body>
+</html>

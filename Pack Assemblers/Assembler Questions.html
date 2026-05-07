@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Battery Pack Assembler Questions — E4 Battery Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 920px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #222;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: 24px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 32px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            font-size: 16px;
+            margin-top: 24px;
+        }
+
+        h4 {
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+
+        th, td {
+            border: 1px solid #bbb;
+            padding: 8px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            margin: 12px 0;
+            border-left: 4px solid;
+            border-radius: 4px;
+        }
+
+        .alert-info {
+            border-left-color: #2563eb;
+            background-color: #eff6ff;
+        }
+
+        .alert-warning {
+            border-left-color: #d97706;
+            background-color: #fffbeb;
+        }
+
+        .alert-important {
+            border-left-color: #7c3aed;
+            background-color: #f3f0ff;
+        }
+
+        .alert-label {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        ul, ol {
+            margin: 8px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin: 4px 0;
+        }
+
+        .meta {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .meta strong {
+            color: #333;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 28px 0;
+        }
+
+        .question {
+            margin: 6px 0;
+            padding: 4px 0;
+        }
+
+        .question-num {
+            font-weight: bold;
+            color: #2563eb;
+            margin-right: 4px;
+        }
+
+        .why {
+            font-size: 12px;
+            color: #666;
+            margin-left: 20px;
+            font-style: italic;
+        }
+
+        .notes-box {
+            border: 1px dashed #bbb;
+            background: #fafafa;
+            padding: 12px;
+            min-height: 60px;
+            margin: 8px 0 16px;
+            font-style: italic;
+            color: #999;
+        }
+
+        .partner-header {
+            background: #f0f0f0;
+            padding: 8px 12px;
+            border-left: 4px solid #2563eb;
+            margin-top: 28px;
+        }
+
+        .partner-header h3 {
+            margin: 0;
+        }
+
+        .partner-header .location {
+            color: #555;
+            font-size: 13px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+
+        .tag-critical {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .tag-important {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .tag-nice {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        @media print {
+            .notes-box { min-height: 100px; }
+            h2, .partner-header { page-break-before: always; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Battery Pack Assembler Questions &mdash; E4 Battery Project</h1>
+
+    <p class="meta">
+        <strong>Project:</strong> E4 Battery Project &mdash; Harmony Project<br>
+        <strong>Prepared by:</strong> Federico Pastore (Lead Battery Engineer)<br>
+        <strong>Date:</strong> February 2026<br>
+        <strong>Purpose:</strong> Evaluate external battery pack assemblers for the E4 drone battery (pouch cells, ~6-7k packs/year)<br>
+        <strong>Reference:</strong> Pack Assembler List in techno scouting spreadsheet; Outreach email drafts
+    </p>
+
+    <hr>
+
+    <h2>Context: What We Need</h2>
+
+    <div class="alert alert-info">
+        <div class="alert-label">PACK SUMMARY</div>
+        We are sourcing a contract assembler for the E4 battery pack. The pack uses <strong>silicon-anode pouch cells</strong>
+        (~350 Wh/kg), voltage range <strong>2.7-4.3 V per cell</strong>, assembled into a custom pack with
+        <strong>Flyability-designed BMS</strong>. Annual volume: <strong>~6,000-7,000 packs/year</strong> at steady state.
+        Application: industrial inspection drone operating in confined spaces (temperature extremes, vibration, dust).
+    </div>
+
+    <div class="alert alert-warning">
+        <div class="alert-label">KEY CONSTRAINT</div>
+        US-assembled packs are strongly preferred for the US market (FCC authorization, NDAA compliance).
+        EU-assembled packs are acceptable for non-US markets and as US spare batteries.
+    </div>
+
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Value</th>
+        </tr>
+        <tr><td>Cell format</td><td>Pouch (silicon-anode Li-ion)</td></tr>
+        <tr><td>Cell energy density</td><td>~350 Wh/kg</td></tr>
+        <tr><td>Cell voltage range</td><td>2.7 - 4.3 V</td></tr>
+        <tr><td>BMS</td><td>Customer-supplied (Flyability design)</td></tr>
+        <tr><td>Annual volume</td><td>~6,000-7,000 packs/year</td></tr>
+        <tr><td>Certifications needed</td><td>UN 38.3, IEC 62133</td></tr>
+        <tr><td>Application</td><td>Industrial inspection drone (confined spaces)</td></tr>
+        <tr><td>Environment</td><td>-10 to 50 C, vibration, dust ingress</td></tr>
+    </table>
+
+    <hr>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>1. Technical Capability</h2>
+
+    <h4>Cell Handling &amp; Assembly</h4>
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">1.1</span> Do you have experience assembling packs from <strong>pouch cells</strong>? If so, what welding/bonding methods do you use for pouch cell tabs (ultrasonic, laser, resistance)?</p>
+    <p class="why">Pouch cells require different tab welding than cylindrical. This is a hard filter.</p>
+
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">1.2</span> Can you work with <strong>customer-supplied cells</strong> (we ship cells to you for assembly), or do you only work with cells you source?</p>
+    <p class="why">We are sourcing cells directly from the manufacturer (Amprius, EnPower, etc.).</p>
+
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">1.3</span> Can you integrate a <strong>customer-supplied BMS PCB</strong> into the pack? We provide the BMS design; you handle mechanical/electrical integration into the pack.</p>
+    <p class="why">We own the BMS design. The assembler must not force their own BMS.</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">1.4</span> What <strong>cell formats and sizes</strong> have you worked with? Any experience with large-format pouch cells (>5 Ah)?</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">1.5</span> What is your typical <strong>pack assembly process</strong>? (e.g., cell sorting/matching, tab welding, BMS integration, potting/conformal coating, enclosure assembly, end-of-line testing)</p>
+    <p class="why">We need to understand the full process flow and where our design inputs fit in.</p>
+
+    <p class="question"><span class="question-num">1.6</span> Do you have in-house capability for <strong>thermal management integration</strong> (thermal pads, heat sinks, heating elements for cold operation)?</p>
+
+    <h4>Testing &amp; Validation</h4>
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">1.7</span> What <strong>end-of-line tests</strong> do you perform on every pack? (OCV check, impedance, capacity grading, insulation resistance, functional BMS test, etc.)</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">1.8</span> Can you perform or coordinate <strong>UN 38.3 testing</strong> (transport certification)? In-house or via a partner lab?</p>
+
+    <p class="question"><span class="question-num">1.9</span> Do you have <strong>environmental test chambers</strong> for temperature cycling, vibration, or altitude testing?</p>
+
+    <div class="notes-box">Notes:</div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>2. Quality &amp; Certifications</h2>
+
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">2.1</span> What <strong>quality certifications</strong> do you hold? (ISO 9001, AS9100, ITAR, IEC 62133, etc.)</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">2.2</span> Do you have full <strong>traceability</strong> from cell lot to finished pack? What system do you use? (serial number tracking, MES, etc.)</p>
+    <p class="why">Traceability is required for safety recalls and field failure analysis on drones.</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">2.3</span> What is your <strong>defect rate / yield</strong> on production packs? What is your warranty policy for assembled packs?</p>
+
+    <p class="question"><span class="question-num">2.4</span> Do you perform <strong>incoming cell inspection</strong> (OCV, impedance, visual) before assembly?</p>
+
+    <p class="question"><span class="question-num">2.5</span> Can you share an example of your <strong>test report / certificate of conformity</strong> for a shipped pack?</p>
+
+    <div class="notes-box">Notes:</div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>3. Supply Chain &amp; Regulatory Compliance</h2>
+
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">3.1</span> Where is your <strong>pack assembly physically located</strong>? (Country, state/region)</p>
+    <p class="why">US assembly is required for FCC authorization of the drone. This is a hard filter for US-market packs.</p>
+
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">3.2</span> Is your supply chain <strong>NDAA-compliant</strong>? What percentage of your BOM (excluding customer-supplied cells and BMS) is non-FEOC?</p>
+    <p class="why">US government end-users (DOD, DOE, etc.) require NDAA compliance.</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">3.3</span> Do you have experience with <strong>ITAR-controlled</strong> products or customers? (relevant for defense/government drone applications)</p>
+
+    <p class="question"><span class="question-num">3.4</span> Can you handle <strong>hazmat shipping</strong> (UN 38.3 compliant packaging and labeling) for finished packs?</p>
+
+    <p class="question"><span class="question-num">3.5</span> Do you source any passive components (connectors, wiring harnesses, enclosure parts) that we should be aware of from a country-of-origin perspective?</p>
+
+    <div class="notes-box">Notes:</div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>4. Production &amp; Scalability</h2>
+
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">4.1</span> Can you support a volume of <strong>6,000-7,000 packs/year</strong> (roughly 500-600/month)? What is your current available capacity?</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">4.2</span> What is your typical <strong>lead time</strong> from PO to first article? And from first article approval to steady-state production?</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">4.3</span> Describe your <strong>NPI (New Product Introduction) process</strong>. How many prototype/pilot builds do you typically do before production release?</p>
+
+    <p class="question"><span class="question-num">4.4</span> What is your <strong>minimum order quantity</strong> (MOQ) per production run?</p>
+
+    <p class="question"><span class="question-num">4.5</span> How do you handle <strong>engineering changes</strong> (ECOs) once production has started? What is the typical turnaround?</p>
+
+    <p class="question"><span class="question-num">4.6</span> What level of <strong>automation</strong> is in your assembly line? (Manual, semi-auto, fully automated)</p>
+    <p class="why">Affects consistency, yield, and scalability.</p>
+
+    <div class="notes-box">Notes:</div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>5. Engineering Support &amp; DFM</h2>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">5.1</span> Do you offer <strong>DFM (Design for Manufacturability) review</strong> on customer pack designs? Can your engineers flag issues before we commit to tooling?</p>
+
+    <p class="question"><span class="question-num">5.2</span> Can you support <strong>mechanical design</strong> of the pack enclosure, or do we need to provide a fully finished design? (e.g., do you have CAD/mechanical engineering in-house?)</p>
+
+    <p class="question"><span class="question-num">5.3</span> Do you offer <strong>prototyping services</strong> (small batch, 5-20 units) before committing to production tooling?</p>
+
+    <p class="question"><span class="question-num">5.4</span> What <strong>file formats and documentation</strong> do you need from us to start? (BOM, Gerber/ODB++ for BMS, 3D STEP, assembly drawings, test specs)</p>
+
+    <div class="notes-box">Notes:</div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>6. Commercial</h2>
+
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">6.1</span> What is your typical <strong>NRE (Non-Recurring Engineering) cost</strong> for a new pack program of this complexity? What does it cover?</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">6.2</span> Can you provide a <strong>rough unit cost estimate</strong> (assembly labor + materials, excluding cells and BMS) at 6,000 units/year? Even a ballpark range is useful.</p>
+
+    <p class="question"><span class="question-num">6.3</span> What are your <strong>payment terms</strong>? (Net 30, milestone-based for NRE, etc.)</p>
+
+    <p class="question"><span class="question-num">6.4</span> Do you require <strong>long-term volume commitments</strong>, or can we scale up/down year-over-year?</p>
+
+    <p class="question"><span class="question-num">6.5</span> Is there a <strong>tooling cost</strong> for fixtures, jigs, or test equipment specific to our pack? Who owns the tooling?</p>
+
+    <div class="notes-box">Notes:</div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>7. IP &amp; Confidentiality</h2>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">7.1</span> Are you willing to sign an <strong>NDA</strong> before we share detailed pack design files?</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">7.2</span> Who <strong>owns the IP</strong> for any process improvements, fixtures, or tooling developed during the program?</p>
+
+    <p class="question"><span class="question-num">7.3</span> Do you work with any of our <strong>direct competitors</strong> in the drone/robotics space? Any conflict of interest concerns?</p>
+
+    <div class="notes-box">Notes:</div>
+
+    <hr>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>Assembler-Specific Questions</h2>
+
+    <p>The following questions are tailored to specific partners based on what we already know from initial research.</p>
+
+    <!-- Packet Digital -->
+    <div class="partner-header">
+        <h3>Packet Digital</h3>
+        <span class="location">Fargo, ND, USA &mdash; Drone/UAS specialist (Anduril, Lockheed, US Navy)</span>
+    </div>
+    <p class="question"><span class="question-num">P1.</span> Your new 80K sqft facility is planned for 2026. What is the <strong>expected operational date</strong>, and will our volume fit into the ramp plan?</p>
+    <p class="question"><span class="question-num">P2.</span> You have DOD APFIT funding. Does this create any <strong>restrictions on working with non-US (Swiss) companies</strong>, or is it limited to the funded scope?</p>
+    <p class="question"><span class="question-num">P3.</span> What <strong>pouch cell sizes</strong> have you assembled to date? Any experience with cells above 5 Ah?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- Re:Build Battery Solutions -->
+    <div class="partner-header">
+        <h3>Re:Build Battery Solutions</h3>
+        <span class="location">New Kensington, PA, USA &mdash; 175K sqft, AS9100/ITAR, drone case study</span>
+    </div>
+    <p class="question"><span class="question-num">R1.</span> Your facility currently focuses on cylindrical cells. What is the <strong>timeline and status of pouch cell assembly capability</strong>?</p>
+    <p class="question"><span class="question-num">R2.</span> Can you handle <strong>customer-supplied cells shipped from Asia</strong> (Amprius/EnPower), including incoming inspection and storage?</p>
+    <p class="question"><span class="question-num">R3.</span> Your drone program case study mentions advanced packs. Can you share any <strong>details on that program's specs</strong> (cell format, volume, application)?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- Emerging Power -->
+    <div class="partner-header">
+        <h3>Emerging Power</h3>
+        <span class="location">Hackensack, NJ, USA &mdash; Military + commercial drone packs</span>
+    </div>
+    <p class="question"><span class="question-num">E1.</span> What is your <strong>maximum monthly throughput</strong> today? Can you handle 500-600 packs/month at our steady state?</p>
+    <p class="question"><span class="question-num">E2.</span> You mention concept-to-production services. If we provide the BMS and cell, do you <strong>handle the pack mechanical design</strong>, or do we need to deliver a finished design?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- Titan Power USA -->
+    <div class="partner-header">
+        <h3>Titan Power USA</h3>
+        <span class="location">Pocatello, ID, USA &mdash; Uses Amprius/EnPower cells, AeroVironment</span>
+    </div>
+    <p class="question"><span class="question-num">T1.</span> You already source from Amprius and EnPower. Have you assembled packs with their <strong>silicon-anode pouch cells</strong> specifically?</p>
+    <p class="question"><span class="question-num">T2.</span> Your UN 38.3 on-site testing was in progress. Is it now <strong>operational</strong>?</p>
+    <p class="question"><span class="question-num">T3.</span> You mention 1-day prototyping. What is the <strong>typical timeline from design freeze to production-ready</strong> at 6K/yr volume?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- Leclanch&eacute; -->
+    <div class="partner-header">
+        <h3>Leclanch&eacute;</h3>
+        <span class="location">Yverdon-les-Bains, Switzerland &mdash; 250+ MWh/yr, submarine drones, military</span>
+    </div>
+    <p class="question"><span class="question-num">L1.</span> Your typical systems are large-format (marine, grid). Is a <strong>small drone pack (sub-1 kWh)</strong> within your scope, or below your minimum project size?</p>
+    <p class="question"><span class="question-num">L2.</span> What is your <strong>NRE structure</strong> for a program of this size? Is there a minimum engagement?</p>
+    <p class="question"><span class="question-num">L3.</span> Given your proximity to Flyability (Lausanne area), could we do <strong>joint engineering sessions on-site</strong> during NPI?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- Tulip Tech -->
+    <div class="partner-header">
+        <h3>Tulip Tech</h3>
+        <span class="location">Den Bosch, Netherlands &mdash; Drone-native, Percepto/Acecore/DeltaQuad</span>
+    </div>
+    <p class="question"><span class="question-num">TU1.</span> Your standard offering includes a DroneCAN BMS. Can you work with a <strong>customer-supplied BMS</strong> instead, or is your BMS tightly integrated into the production line?</p>
+    <p class="question"><span class="question-num">TU2.</span> You claim up to 100K/yr per product. What is the <strong>minimum volume</strong> for a new product introduction?</p>
+    <p class="question"><span class="question-num">TU3.</span> You have 50+ cell suppliers. Have any of them supplied <strong>silicon-anode cells</strong>?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- BMZ Group -->
+    <div class="partner-header">
+        <h3>BMZ Group</h3>
+        <span class="location">Germany (HQ) + Poland, USA, China &mdash; Europe's largest Li-ion pack manufacturer</span>
+    </div>
+    <p class="question"><span class="question-num">B1.</span> Can our project be placed at your <strong>US facility</strong>? What is its capacity and current utilization?</p>
+    <p class="question"><span class="question-num">B2.</span> At 6-7K packs/year, are we <strong>above or below your typical minimum project size</strong>?</p>
+    <p class="question"><span class="question-num">B3.</span> What is your typical <strong>project timeline from kick-off to first production shipment</strong>?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- CRG Defense -->
+    <div class="partner-header">
+        <h3>CRG Defense</h3>
+        <span class="location">Miamisburg, OH, USA &mdash; Cell manufacturing + pack assembly, ITAR, >95% non-FEOC</span>
+    </div>
+    <p class="question"><span class="question-num">C1.</span> You manufacture your own cells and assemble packs. If we supply our own cells, do you still offer <strong>pack-only assembly</strong>?</p>
+    <p class="question"><span class="question-num">C2.</span> Your current pouch cell capability is up to 120x120mm. Can you accommodate <strong>larger pouch cells</strong> if our cells exceed that?</p>
+    <div class="notes-box">Notes:</div>
+
+    <hr>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>Scoring Matrix</h2>
+
+    <div class="alert alert-important">
+        <div class="alert-label">HOW TO USE</div>
+        After each meeting, score the assembler 1-5 on each criterion. Weight the scores to get a composite.
+        Use this to rank partners objectively across the universal questions above.
+    </div>
+
+    <table>
+        <tr>
+            <th>Criterion</th>
+            <th>Weight</th>
+            <th>Score (1-5)</th>
+            <th>Weighted</th>
+        </tr>
+        <tr><td>Pouch cell assembly experience</td><td>20%</td><td></td><td></td></tr>
+        <tr><td>Customer-supplied BMS integration</td><td>15%</td><td></td><td></td></tr>
+        <tr><td>US assembly (for US-market partners)</td><td>15%</td><td></td><td></td></tr>
+        <tr><td>Volume capability (6-7K/yr)</td><td>10%</td><td></td><td></td></tr>
+        <tr><td>Quality certs &amp; traceability</td><td>10%</td><td></td><td></td></tr>
+        <tr><td>NPI lead time</td><td>10%</td><td></td><td></td></tr>
+        <tr><td>Unit cost competitiveness</td><td>10%</td><td></td><td></td></tr>
+        <tr><td>Engineering/DFM support</td><td>5%</td><td></td><td></td></tr>
+        <tr><td>Drone/UAS experience</td><td>5%</td><td></td><td></td></tr>
+        <tr><td><strong>TOTAL</strong></td><td><strong>100%</strong></td><td></td><td></td></tr>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E4 Battery Charger — Supplier Selection Report</title>
+<style>
+  :root {
+    --dark: #2d3142;
+    --accent: #4f5d75;
+    --green: #d9ead3;
+    --green-border: #6aa84f;
+    --yellow: #fff2cc;
+    --yellow-border: #f1c232;
+    --red: #f4cccc;
+    --red-border: #cc4125;
+    --blue: #cfe2f3;
+    --blue-border: #3d85c6;
+    --grey: #eeeeee;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #222;
+    background: #f8f9fa;
+    line-height: 1.55;
+    padding: 2rem;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+  h1 {
+    font-size: 1.8rem; color: var(--dark); border-bottom: 3px solid var(--dark);
+    padding-bottom: .5rem; margin-bottom: .5rem;
+  }
+  .subtitle { color: var(--accent); font-size: .95rem; margin-bottom: 2rem; }
+  h2 {
+    font-size: 1.3rem; color: var(--dark); margin-top: 2.5rem; margin-bottom: .8rem;
+    border-left: 4px solid var(--dark); padding-left: .6rem;
+  }
+  h3 { font-size: 1.05rem; color: var(--accent); margin-top: 1.5rem; margin-bottom: .5rem; }
+  p, li { font-size: .92rem; margin-bottom: .45rem; }
+  ul { padding-left: 1.4rem; }
+
+  /* requirement table */
+  table.req { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem 0; font-size: .85rem; }
+  table.req th {
+    background: var(--dark); color: #fff; text-align: left;
+    padding: .45rem .6rem; font-weight: 600;
+  }
+  table.req td { padding: .4rem .6rem; border-bottom: 1px solid #ddd; vertical-align: top; }
+  table.req tr:nth-child(even) td { background: #f4f5f7; }
+  table.req .id { white-space: nowrap; font-family: monospace; font-weight: 600; color: var(--accent); }
+
+  /* supplier cards */
+  .card {
+    border-radius: 6px; padding: 1.1rem 1.3rem; margin-bottom: 1.2rem;
+    border-left: 5px solid; page-break-inside: avoid;
+  }
+  .card.yes   { background: var(--green);  border-color: var(--green-border); }
+  .card.maybe { background: var(--yellow); border-color: var(--yellow-border); }
+  .card.no    { background: var(--red);    border-color: var(--red-border); }
+  .card .name { font-size: 1.1rem; font-weight: 700; color: var(--dark); }
+  .card .name a { color: inherit; text-decoration: none; border-bottom: 1.5px dashed var(--accent); }
+  .card .name a:hover { color: var(--blue-border); border-bottom-style: solid; }
+  .card .meta { font-size: .82rem; color: #555; margin-top: .15rem; margin-bottom: .55rem; }
+  .card .meta a { color: var(--accent); font-size: .78rem; text-decoration: none; }
+  .card .meta a:hover { text-decoration: underline; }
+  table.matrix td:first-child a { color: inherit; text-decoration: none; border-bottom: 1px dashed var(--accent); }
+  table.matrix td:first-child a:hover { color: var(--blue-border); border-bottom-style: solid; }
+  .card .section-label { font-weight: 600; color: var(--accent); font-size: .85rem; margin-top: .5rem; }
+  .card p { font-size: .88rem; }
+  .scale-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .3rem .8rem;
+    font-size: .82rem; margin: .3rem 0 .5rem 0; padding: .45rem .6rem;
+    background: rgba(255,255,255,.45); border-radius: 4px;
+  }
+  .scale-grid dt { font-weight: 600; color: var(--accent); font-size: .75rem; text-transform: uppercase; letter-spacing: .03em; }
+  .scale-grid dd { margin: 0 0 .2rem 0; }
+  .badge {
+    display: inline-block; font-size: .72rem; font-weight: 700; padding: .15rem .5rem;
+    border-radius: 3px; text-transform: uppercase; letter-spacing: .03em; margin-left: .4rem;
+    vertical-align: middle;
+  }
+  .badge.yes   { background: var(--green-border); color: #fff; }
+  .badge.maybe { background: var(--yellow-border); color: #fff; }
+  .badge.no    { background: var(--red-border); color: #fff; }
+
+  /* compliance matrix */
+  table.matrix { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem 0; font-size: .8rem; }
+  table.matrix th {
+    background: var(--dark); color: #fff; text-align: center;
+    padding: .35rem .3rem; font-weight: 600; font-size: .75rem;
+  }
+  table.matrix th:first-child { text-align: left; min-width: 130px; }
+  table.matrix td { padding: .3rem .3rem; border-bottom: 1px solid #ddd; text-align: center; }
+  table.matrix td:first-child { text-align: left; font-weight: 600; font-size: .82rem; }
+  table.matrix tr:nth-child(even) td { background: #f4f5f7; }
+  .chk { color: var(--green-border); font-weight: 700; }
+  .qm  { color: var(--yellow-border); font-weight: 700; }
+  .xx  { color: var(--red-border); font-weight: 700; }
+
+  .toc { background: var(--blue); border: 1px solid var(--blue-border); border-radius: 6px; padding: 1rem 1.3rem; margin: 1.5rem 0; }
+  .toc a { color: var(--dark); text-decoration: none; font-size: .9rem; }
+  .toc a:hover { text-decoration: underline; }
+  .toc ol { padding-left: 1.3rem; }
+  .toc li { margin-bottom: .25rem; }
+
+  .footer { margin-top: 3rem; font-size: .78rem; color: #888; border-top: 1px solid #ddd; padding-top: .8rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>E4 Battery Charger &mdash; Supplier Selection Report</h1>
+<p class="subtitle">
+  Flyability &bull; E4 Battery Project &bull; Prepared Feb 2026<br>
+  Spreadsheet: <em>Battery cell / BMS innovation &mdash; techno scouting</em> &rarr; tab &ldquo;Charger supplier list&rdquo;
+</p>
+
+<div class="toc">
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#sec-context">Why a Smart Charger?</a></li>
+    <li><a href="#sec-reqs">E4 Charger Requirements (CHG-labeled TRs)</a></li>
+    <li><a href="#sec-method">Selection Methodology</a></li>
+    <li><a href="#sec-regulatory">Regulatory Constraints (US/EU)</a></li>
+    <li><a href="#sec-matrix">Compliance Matrix</a></li>
+    <li><a href="#sec-yes">Recommended Suppliers (Promising)</a></li>
+    <li><a href="#sec-maybe">Worth Exploring (Maybe)</a></li>
+    <li><a href="#sec-no">Not Suitable (No)</a></li>
+    <li><a href="#sec-next">Recommended Next Steps</a></li>
+  </ol>
+</div>
+
+<!-- ================================================================ -->
+<h2 id="sec-context">1. Why a Smart Charger?</h2>
+<p>
+  The E4 charger is <strong>not a simple CC/CV power brick</strong>. The technical requirements (TR-99 through TR-118) define a charger that must:
+</p>
+<ul>
+  <li>Digitally communicate with the BMS (SMBus, I2C, UART, or CAN) to read cell voltages, temperatures, SOC, and fault flags in real time.</li>
+  <li>Identify the battery model via Unique ID before charging &mdash; and reject unknown batteries.</li>
+  <li>Wait for an explicit BMS authorization handshake before delivering current.</li>
+  <li>Actively discharge the battery to 30% SOC for IATA transport compliance (mandatory from 2026) and optionally to 60% SOC for storage.</li>
+  <li>Meet IEC 62368-1 reinforced isolation between AC input and DC output.</li>
+  <li>Never exceed 31.3V under any fault condition (1.2&times; the 26.1V CV setpoint).</li>
+</ul>
+<p>
+  These requirements significantly narrow the supplier field. Off-the-shelf hobby/prosumer drone chargers (SkyRC, ISDT, etc.) fail on communication, battery ID, and active discharge. Simple industrial CC/CV OEMs (Elcon, Mean Well) lack the smart firmware layer. The right supplier is one that can deliver a <strong>microprocessor-based platform with BMS communication, custom firmware, and bidirectional energy capability</strong>.
+</p>
+
+<!-- ================================================================ -->
+<h2 id="sec-reqs">2. E4 Charger Requirements (CHG-labeled TRs)</h2>
+<p>
+  The following requirements were extracted from the &ldquo;Technical Requirements&rdquo; tab of the E4 Battery &mdash; System management spreadsheet. Only rows where <code>System = CHG</code> are listed.
+  <strong>Configuration: 6S Li-ion, 26.1V CV.</strong> Charging current is TBD.
+</p>
+
+<table class="req">
+<tr><th>ID</th><th>Category</th><th>Priority</th><th>Title</th><th>Value / Description</th></tr>
+<tr><td class="id">TR-99</td><td>COMPA</td><td>Must have</td><td>Output Voltage (CV mode)</td><td>26.1V &plusmn; TBD%</td></tr>
+<tr><td class="id">TR-100</td><td>COMPA</td><td>Must have</td><td>Output Current (CC mode)</td><td>TBD &mdash; matched to cell pack max charge rate</td></tr>
+<tr><td class="id">TR-101</td><td>COMPA</td><td>Must have</td><td>Charge Termination Current</td><td>TBD (expected 200&ndash;440 mA)</td></tr>
+<tr><td class="id">TR-102</td><td>PERF</td><td>Must have</td><td>Output Voltage Ripple</td><td>&lt; 50 mV peak-to-peak at full load</td></tr>
+<tr><td class="id">TR-103</td><td>SAFE</td><td>Must have</td><td>Over-Voltage Protection (OVP)</td><td>Below BMS permanent OV failure threshold (TBD)</td></tr>
+<tr><td class="id">TR-104</td><td>SAFE</td><td>Must have</td><td>Over-Current Protection (OCP)</td><td>Hardware-limited (TBD)</td></tr>
+<tr><td class="id">TR-105</td><td>SAFE</td><td>Must have</td><td>Short-Circuit Protection</td><td>Survive output short; auto-recover after fault removed</td></tr>
+<tr><td class="id">TR-106</td><td>SAFE</td><td>Must have</td><td>Reverse Polarity Protection</td><td>Mechanical + electrical</td></tr>
+<tr><td class="id">TR-107</td><td>SAFE</td><td>Must have</td><td>Output Isolation</td><td>Reinforced isolation per IEC 62368-1</td></tr>
+<tr><td class="id">TR-108</td><td>SAFE</td><td>Must have</td><td>Thermal Protection</td><td>Auto-derate or shutdown on internal over-temperature</td></tr>
+<tr><td class="id">TR-109</td><td>SAFE</td><td>Must have</td><td>No-Load / Unloaded Behavior</td><td>Output disabled until valid battery detected; OCV &lt; TR-110 limit</td></tr>
+<tr><td class="id">TR-110</td><td>SAFE</td><td>Must have</td><td>Absolute Max Output Voltage</td><td>&lt; 31.3V under any fault (26.1V &times; 1.2 per TR-96)</td></tr>
+<tr><td class="id">TR-111</td><td>COMPA</td><td>Must have</td><td>Communication Protocol</td><td>TBD: SMBus, I2C, UART, or CAN &mdash; must match BMS</td></tr>
+<tr><td class="id">TR-112</td><td>FUNC</td><td>Must have</td><td>Battery Identification</td><td>Read Unique ID; reject unrecognized models; adapt settings</td></tr>
+<tr><td class="id">TR-113</td><td>FUNC</td><td>Must have</td><td>Battery Status Reading</td><td>Cell voltages, pack temp (&ge;2 probes), SOC, fault flags</td></tr>
+<tr><td class="id">TR-114</td><td>FUNC</td><td>Must have</td><td>Charge Authorization Handshake</td><td>Charge only after BMS ACK via protocol</td></tr>
+<tr><td class="id">TR-115</td><td>FUNC</td><td>Must have</td><td>Charger Detection Signal</td><td>Dedicated HW pin independent of comms bus</td></tr>
+<tr><td class="id">TR-116</td><td>RELI</td><td>Must have</td><td>Charging Status Indication</td><td>LEDs: charging / complete / fault</td></tr>
+<tr><td class="id">TR-117</td><td>RELI</td><td>Nice to have</td><td>Storage Mode</td><td>Charge/discharge to 60% SOC</td></tr>
+<tr><td class="id">TR-118</td><td>RELI</td><td>Must have</td><td>Transport Mode</td><td>Charge/discharge to 30% SOC (IATA 2026 mandatory)</td></tr>
+</table>
+
+<!-- ================================================================ -->
+<h2 id="sec-method">3. Selection Methodology</h2>
+<p>Each candidate was evaluated against five discriminating criteria derived from the requirements above:</p>
+<ol>
+  <li><strong>BMS Communication (TR-111/113/114)</strong> &mdash; Does the supplier&rsquo;s charger platform natively support SMBus, I2C, CAN, or UART for real-time BMS data exchange and charge authorization handshake?</li>
+  <li><strong>Battery Identification &amp; Authentication (TR-112)</strong> &mdash; Can the charger read a battery Unique ID and adapt or reject?</li>
+  <li><strong>Active Discharge / Transport Mode (TR-117/118)</strong> &mdash; Can the charger actively discharge a battery to 30% or 60% SOC? This requires bidirectional energy flow or a dedicated discharge path.</li>
+  <li><strong>IEC 62368-1 Isolation (TR-107)</strong> &mdash; Does the supplier routinely certify to IEC 62368-1 or equivalent reinforced isolation standards?</li>
+  <li><strong>Drone / UAS Relevance</strong> &mdash; Does the supplier have experience with drone batteries or similar small-series, high-reliability portable power applications?</li>
+</ol>
+<p>
+  Suppliers were rated <span class="badge yes">Yes</span> if they meet &ge;3 of 5 criteria with evidence,
+  <span class="badge maybe">Maybe</span> if 1&ndash;2 criteria are met or key items are unconfirmed,
+  and <span class="badge no">No</span> if fundamental criteria are missing with no realistic path to compliance.
+  Regulatory fit is shown as a separate gating signal in the matrix.
+</p>
+
+<!-- ================================================================ -->
+<h2 id="sec-regulatory">4. Regulatory Constraints (US/EU)</h2>
+<p>
+  Charger selection is constrained not only by technical fit but also by market-access and procurement compliance.
+  For E4, these constraints are treated as a hard gate.
+</p>
+<ul>
+  <li><strong>FCC Part 15 (US):</strong> Smart chargers with digital control/communication require EMC compliance and an FCC authorization pathway (SDoC or Certification depending on architecture and market path).</li>
+  <li><strong>FCC Covered List (Dec 2025):</strong> UAS and UAS critical components from covered foreign countries face authorization barriers for new models in the US market.</li>
+  <li><strong>ASDA / NDAA (US federal procurement):</strong> Federal restrictions can extend to UAS associated elements and critical components; charger sourcing can become a disqualifier.</li>
+  <li><strong>DOE Energy Conservation (US):</strong> 2025 final rules impose battery-charger efficiency requirements for US market placement.</li>
+  <li><strong>EU compliance:</strong> CE (EMC + LVD), IEC 62368-1 safety alignment, and the new EU Ecodesign charging/efficiency framework must be considered for EU sales.</li>
+</ul>
+<p>
+  <strong>Program implication:</strong> For Flyability, non-compliant charger origin can create the same go/no-go effect as battery sourcing in regulated or government-adjacent channels.
+</p>
+
+<!-- ================================================================ -->
+<h2 id="sec-matrix">5. Compliance Matrix</h2>
+<p>Summary of each supplier against six discriminating criteria. <span class="chk">&check;</span> = confirmed/low risk, <span class="qm">?</span> = plausible or manageable risk, <span class="xx">&times;</span> = missing/high restriction risk.</p>
+
+<table class="matrix">
+<tr>
+  <th>Supplier</th>
+  <th>BMS Comms<br>(TR-111/114)</th>
+  <th>Battery ID<br>(TR-112)</th>
+  <th>Active Discharge<br>(TR-117/118)</th>
+  <th>IEC 62368-1<br>(TR-107)</th>
+  <th>Drone / UAS<br>Experience</th>
+  <th>Regulatory Fit<br>(US/EU)</th>
+  <th>Rating</th>
+</tr>
+<tr><td><a href="https://www.deltaww.com/en-US/products/Industrial-Battery-Charging" target="_blank">Delta Electronics</a></td>     <td class="chk">&check;</td><td class="qm">?</td><td class="qm">?</td><td class="chk">&check;</td>  <td class="qm">?</td><td class="qm">!</td><td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://packetdigital.com/batteries/smart-chargers/" target="_blank">Packet Digital</a></td>     <td class="chk">&check;</td><td class="chk">&check;</td><td class="chk">&check;</td><td class="qm">?</td>  <td class="chk">&check;</td><td class="chk">&check;</td><td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://www.globtek.com/en/battery-chargers/battery-chargers-for-li-ion-battery-packs" target="_blank">GlobTek</a></td>            <td class="chk">&check;</td><td class="chk">&check;</td><td class="qm">?</td>  <td class="chk">&check;</td><td class="xx">&times;</td> <td class="chk">&check;</td><td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://inventuspower.com/products/chargers-and-docking-stations/" target="_blank">Inventus Power</a></td>     <td class="chk">&check;</td><td class="chk">&check;</td><td class="qm">?</td>  <td class="qm">?</td>  <td class="chk">&check;</td><td class="chk">&check;</td><td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://www.rrc-ps.com/en/power-management/power-management-modules" target="_blank">RRC Power Solutions</a></td><td class="chk">&check;</td><td class="qm">?</td>  <td class="qm">?</td>  <td class="chk">&check;</td><td class="xx">&times;</td> <td class="chk">&check;</td><td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://tulip.tech/batteries/" target="_blank">Tulip Tech</a></td>         <td class="chk">&check;</td><td class="chk">&check;</td><td class="qm">?</td>  <td class="qm">?</td>  <td class="chk">&check;</td><td class="qm">!</td><td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://eftmobility.com/en/products/nato-standard-charger" target="_blank">EFT Mobility AG</a></td>    <td class="chk">&check;</td><td class="qm">?</td>  <td class="qm">?</td>  <td class="qm">?</td>  <td class="chk">&check;</td><td class="chk">&check;</td><td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://www.mascot.no/custom-designs" target="_blank">Mascot AS</a></td>          <td class="qm">?</td>  <td class="qm">?</td>  <td class="qm">?</td>  <td class="chk">&check;</td><td class="xx">&times;</td> <td class="chk">&check;</td><td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://custompower.co.uk/uav-power-systems/" target="_blank">Custom Power</a></td>       <td class="chk">&check;</td><td class="qm">?</td>  <td class="qm">?</td>  <td class="qm">?</td>  <td class="chk">&check;</td><td class="chk">&check;</td><td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://www.apexmobilepower.com/products" target="_blank">Apex Mobile Power</a></td>  <td class="chk">&check;</td><td class="qm">?</td>  <td class="qm">?</td>  <td class="qm">?</td>  <td class="chk">&check;</td><td class="qm">!</td><td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://ev-peak.com/portfolio_entries/drone-charger" target="_blank">EV-PEAK</a></td>            <td class="chk">&check;</td><td class="qm">?</td>  <td class="qm">?</td>  <td class="xx">&times;</td> <td class="chk">&check;</td><td class="xx">&times;</td><td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://micropower-group.com/offerings/industrial-battery-chargers-systems" target="_blank">Micropower Group</a></td>   <td class="qm">?</td>  <td class="xx">&times;</td> <td class="qm">?</td>  <td class="chk">&check;</td><td class="xx">&times;</td> <td class="qm">!</td><td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://www.skyrc.com/pc1080neo" target="_blank">SkyRC</a></td>              <td class="xx">&times;</td> <td class="xx">&times;</td> <td class="xx">&times;</td> <td class="xx">&times;</td> <td class="chk">&check;</td><td class="xx">&times;</td><td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://www.skycharge.de/charging-system" target="_blank">Skycharge</a></td>          <td class="chk">&check;</td><td class="qm">?</td>  <td class="chk">&check;</td><td class="qm">?</td>  <td class="chk">&check;</td><td class="qm">!</td><td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://smart-battery-solutions.de/en/product/" target="_blank">SBS</a></td>                <td class="qm">?</td>  <td class="qm">?</td>  <td class="qm">?</td>  <td class="qm">?</td>  <td class="chk">&check;</td><td class="chk">&check;</td><td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://titanbatteries.com/pages/custom" target="_blank">Titan Power USA</a></td>    <td class="chk">&check;</td><td class="qm">?</td>  <td class="qm">?</td>  <td class="qm">?</td>  <td class="chk">&check;</td><td class="chk">&check;</td><td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://elconchargers.com/" target="_blank">Elcon</a></td>              <td class="xx">&times;</td> <td class="xx">&times;</td> <td class="xx">&times;</td> <td class="xx">&times;</td> <td class="xx">&times;</td> <td class="xx">&times;</td><td><span class="badge no">No</span></td></tr>
+<tr><td><a href="https://www.chromaate.com/en/products_list/battery_test_system" target="_blank">Chroma ATE</a></td>         <td class="xx">&times;</td> <td class="xx">&times;</td> <td class="xx">&times;</td> <td class="xx">&times;</td> <td class="xx">&times;</td> <td class="xx">&times;</td><td><span class="badge no">No</span></td></tr>
+</table>
+
+<!-- ================================================================ -->
+<h2 id="sec-yes">6. Recommended Suppliers <span class="badge yes">Promising</span></h2>
+
+<div class="card yes">
+  <div class="name"><a href="https://www.deltaww.com/en-US/products/Industrial-Battery-Charging" target="_blank">Delta Electronics</a> <span class="badge yes">Yes</span></div>
+  <div class="meta">Taiwan (Global) &bull; Tier-1 OEM &bull; <a href="https://www.deltaww.com/en-US/products/Industrial-Battery-Charging" target="_blank">deltaww.com &rarr; Industrial Charging</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~83,000 global</dd>
+    <dt>Facility</dt><dd>~200 facilities worldwide (R&amp;D, sales, manufacturing)</dd>
+    <dt>Production Volume</dt><dd>Tier-1 global OEM ($17.9B revenue). Massive scale.</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    Delta Electronics is a world-class, tier-1 power electronics manufacturer. While their standard product lines focus on industrial and EV applications, they have extensive OEM/ODM capabilities, including custom CAN bus programming and charge profile development. Crucially, they have shown strong willingness and professionalism in early engagements with Flyability, making them a highly attractive partner for a custom smart charger.
+  </p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-111 (Comms):</strong> Confirmed &mdash; extensive CAN/custom firmware experience.</li>
+    <li><strong>TR-112/114 (ID + handshake):</strong> Plausible &mdash; achievable via their custom engineering services.</li>
+    <li><strong>TR-117/118 (Active discharge):</strong> Not confirmed &mdash; needs to be explicitly requested during scoping.</li>
+    <li><strong>TR-107 (IEC 62368-1):</strong> Confirmed &mdash; global regulatory compliance is standard.</li>
+  </ul>
+  <p class="section-label">Risks</p>
+  <p>Need to confirm their technical approach to active discharge (TR-118). For US federal/government-adjacent programs, it is critical to verify that the specific manufacturing site for the E4 charger is outside of China to comply with NDAA and FCC Covered List restrictions.</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://packetdigital.com/batteries/smart-chargers/" target="_blank">Packet Digital</a> <span class="badge yes">Yes</span></div>
+  <div class="meta">Fargo, ND, USA &bull; $50M DOD APFIT &bull; <a href="https://packetdigital.com/batteries/smart-chargers/" target="_blank">packetdigital.com &rarr; Smart Chargers</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~50 (hiring, +40 planned)</dd>
+    <dt>Facility</dt><dd>25,000 sqft current + 80,000 sqft new plant (2026, $55M capex)</dd>
+    <dt>Production Volume</dt><dd>Scaling &mdash; new plant targets drone cell + charger production at volume</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    Packet Digital is the <strong>only supplier found that already manufactures smart drone chargers with BMS handshake</strong> for military-grade UAS programs (Lockheed Martin Indago 4, Anduril Ghost VTOL). Their chargers feature multi-pack field charging (AC+DC input), automatic self-discharge to storage level, temperature monitoring, and fleet management software. This directly addresses TR-111 through TR-118 without custom development.
+  </p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-111 (Comms):</strong> Confirmed &mdash; smart charger communicates with BMS.</li>
+    <li><strong>TR-112/114 (ID + handshake):</strong> Confirmed &mdash; smart battery ecosystem with authentication.</li>
+    <li><strong>TR-117/118 (Storage/Transport discharge):</strong> Confirmed &mdash; auto self-discharge to storage level is a published feature.</li>
+    <li><strong>TR-107 (IEC 62368-1):</strong> Not explicitly confirmed; needs verification.</li>
+  </ul>
+  <p class="section-label">Risks</p>
+  <p>Smaller company currently scaling (new 80K sqft plant in 2026). Pricing unknown. Already contacted for pack assembly &mdash; charger inquiry should be bundled.</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://www.globtek.com/en/battery-chargers/battery-chargers-for-li-ion-battery-packs" target="_blank">GlobTek</a> <span class="badge yes">Yes</span></div>
+  <div class="meta">Northvale, NJ, USA &bull; IEC 62368-1, UL, medical certs &bull; <a href="https://www.globtek.com/en/battery-chargers/battery-chargers-for-li-ion-battery-packs" target="_blank">globtek.com &rarr; Li-Ion Chargers</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>201&ndash;500 (incl. 12 EE, 6 techs at NJ HQ)</dd>
+    <dt>Facility</dt><dd>NJ headquarters + Suzhou (China) factory. Sales offices: DE, FR, UK</dd>
+    <dt>Production Volume</dt><dd>Small lots to large OEM runs. Est. revenue $25&ndash;75M</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    GlobTek builds custom Li-ion chargers on <strong>Texas Instruments charging platforms with native SMBus communication</strong>. Since the E4 BMS uses the TI BQ41z90 gauge IC, this creates a natural chipset alignment. GlobTek also supports battery fuel gauge integration, encryption/authentication, cell balancing, and custom enclosures from small batches.
+  </p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-111 (Comms):</strong> Confirmed &mdash; SMBus is their native protocol.</li>
+    <li><strong>TR-112 (Battery ID):</strong> Confirmed &mdash; encryption/authentication is a standard feature.</li>
+    <li><strong>TR-107 (IEC 62368-1):</strong> Confirmed &mdash; routinely certified.</li>
+    <li><strong>TR-117/118 (Active discharge):</strong> Not confirmed &mdash; would require custom firmware work.</li>
+  </ul>
+  <p class="section-label">Risks</p>
+  <p>Not drone-specific (industrial/medical focus). Active discharge for transport mode (TR-118) is not a standard GlobTek feature and would require custom development. Cost TBC.</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://inventuspower.com/products/chargers-and-docking-stations/" target="_blank">Inventus Power</a> <span class="badge yes">Yes</span></div>
+  <div class="meta">Woodridge, IL, USA (+ Mexico, China, Brazil) &bull; UL, TUV, EN 50604-1 &bull; <a href="https://inventuspower.com/products/chargers-and-docking-stations/" target="_blank">inventuspower.com &rarr; Chargers</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~617 (300+ engineers, +8.7% YoY)</dd>
+    <dt>Facility</dt><dd>4 sites: Woodridge IL, Tijuana MX, Qingxi CN, Manaus BR + R&amp;D centers (QA, DE, ES, CN)</dd>
+    <dt>Production Volume</dt><dd>2M+ products shipped/month. 150+ customers. 3,000+ custom projects</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    Inventus Power has <strong>2,000+ BMS designs and explicit drone battery experience</strong> (dedicated blog post on commercial drone safety). Their charger platform supports SMBus, I2C, CAN, RS232, with microprocessor-based custom algorithms and field-upgradable firmware. They also offer docking stations (relevant for TR-88).
+  </p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-111 (Comms):</strong> Confirmed &mdash; SMBus, I2C, CAN, RS232.</li>
+    <li><strong>TR-112/114 (ID + handshake):</strong> Plausible &mdash; custom algorithms on microprocessor platform.</li>
+    <li><strong>TR-117/118 (Active discharge):</strong> Not confirmed &mdash; custom development likely feasible given FW capability.</li>
+    <li><strong>TR-107 (IEC 62368-1):</strong> Not explicitly confirmed but UL/TUV certified.</li>
+  </ul>
+  <p class="section-label">Risks</p>
+  <p>Large company &mdash; may have minimum engagement size that doesn&rsquo;t fit 6&ndash;7K units/yr. Manufacturing is multi-site including offshore. Need to confirm US charger assembly is possible.</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://www.rrc-ps.com/en/power-management/power-management-modules" target="_blank">RRC Power Solutions</a> <span class="badge yes">Yes</span></div>
+  <div class="meta">Homburg/Saar, Germany &bull; ISO 9001 / 13485 / 14001, no NRE for std &bull; <a href="https://www.rrc-ps.com/en/power-management/power-management-modules" target="_blank">rrc-ps.com &rarr; PMM Modules</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>Not disclosed (multinational, TOP JOB award)</dd>
+    <dt>Facility</dt><dd>HQ Homburg DE + manufacturing in Asia, EU, USA. Logistics hub Hong Kong</dd>
+    <dt>Production Volume</dt><dd>30+ yr history. Standardized + custom products. Volume not disclosed</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    RRC is a German specialist in <strong>SMBus-based power management modules</strong> (PMM series). Their modules feature programmable current/voltage limits, SMBus passthrough to host applications, and custom development capability. Medical-grade quality. No NRE charges for standard configurations.
+  </p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-111 (Comms):</strong> Confirmed &mdash; SMBus is the core interface.</li>
+    <li><strong>TR-112/114 (ID + handshake):</strong> Plausible &mdash; programmable via SMBus interface.</li>
+    <li><strong>TR-107 (IEC 62368-1):</strong> Confirmed &mdash; worldwide certifications including medical.</li>
+    <li><strong>TR-117/118 (Active discharge):</strong> Not confirmed.</li>
+  </ul>
+  <p class="section-label">Risks</p>
+  <p>Not drone-specific. PMM240 module tops out at 240W charging &mdash; may be tight depending on final CC current spec. Active discharge capability is uncertain.</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://tulip.tech/batteries/" target="_blank">Tulip Tech</a> <span class="badge yes">Yes</span></div>
+  <div class="meta">Den Bosch, Netherlands &bull; UN 38.3, aerospace-grade &bull; <a href="https://tulip.tech/batteries/" target="_blank">tulip.tech &rarr; Batteries</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~26 (+89% YoY growth)</dd>
+    <dt>Facility</dt><dd>In-house EU production to aerospace-grade standards</dd>
+    <dt>Production Volume</dt><dd>~10,000 batteries/yr (claims up to 100K/yr capacity)</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    Tulip Tech is a <strong>drone-native battery + charger specialist</strong> with 100+ partners including Acecore, Percepto, Avy, and Deltaquad. They build DroneCAN BMS with in-house firmware and a smart battery charging ecosystem. Production capacity up to 100K/yr. Already in the pack assembler list.
+  </p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-111 (Comms):</strong> Confirmed &mdash; DroneCAN / CAN-based communication.</li>
+    <li><strong>TR-112/114 (ID + handshake):</strong> Confirmed &mdash; smart battery ecosystem includes authentication.</li>
+    <li><strong>TR-117/118 (Active discharge):</strong> Plausible but unconfirmed.</li>
+  </ul>
+  <p class="section-label">Risks</p>
+  <p>Proprietary BMS/charger stack may conflict with the E4&rsquo;s BQ41z90 BMS. Critical question: can their charger work with an external BMS via a standard protocol, or is it locked to their ecosystem?</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://eftmobility.com/en/products/nato-standard-charger" target="_blank">EFT Mobility AG</a> <span class="badge yes">Yes</span></div>
+  <div class="meta">Munich, Germany &bull; UN 38.3, CE, NDAA &bull; <a href="https://eftmobility.com/en/products/nato-standard-charger" target="_blank">eftmobility.com &rarr; NATO-Standard-Charger</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>&lt;50 (founded 2019, Quantum Systems majority stake 2025)</dd>
+    <dt>Facility</dt><dd>Munich R&amp;D + integration/validation lab. Battery &amp; motor test</dd>
+    <dt>Production Volume</dt><dd>Scaling &mdash; confirmed Quantum Systems production volumes pending</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    EFT Mobility has a <strong>purpose-built NATO-Standard-Charger for UAV applications</strong> supporting 6S&ndash;14S configurations. Their BMS supports DroneCAN, CAN 2.0, and UART. The modular platform includes heating foil for cold-weather operations. NDAA compliant.
+  </p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-99 (6S / 26.1V):</strong> Confirmed &mdash; 6S is within their 6S&ndash;14S range.</li>
+    <li><strong>TR-111 (Comms):</strong> Confirmed &mdash; DroneCAN, CAN 2.0, UART.</li>
+    <li><strong>TR-112/114 (ID + handshake):</strong> Plausible but needs confirmation.</li>
+    <li><strong>TR-117/118 (Active discharge):</strong> Not confirmed.</li>
+  </ul>
+  <p class="section-label">Risks</p>
+  <p>Young company (founded 2019). Production scale for 6&ndash;7K/yr is unconfirmed. IEC 62368-1 certification status unknown.</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://www.mascot.no/custom-designs" target="_blank">Mascot AS</a> <span class="badge yes">Yes</span></div>
+  <div class="meta">Fredrikstad, Norway &bull; ISO 9001, UL, EN 60601-1 (medical) &bull; <a href="https://www.mascot.no/custom-designs" target="_blank">mascot.no &rarr; Custom Designs</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~10 at HQ (production outsourced)</dd>
+    <dt>Facility</dt><dd>HQ Norway. Production: Tallinn (Estonia) + Ningbo (China)</dd>
+    <dt>Production Volume</dt><dd>~6,000 units/yr per ref. customer (Gentex). Min batch 25 units</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    Mascot is a Norwegian custom charger OEM with <strong>medical-grade quality standards and small-batch capability (minimum 25 units)</strong>. They offer microprocessor-controlled Li-ion chargers up to 14S with configurable profiles, custom connectors, housing, and IP ratings. Good for prototyping and small initial runs.
+  </p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-107 (IEC 62368-1):</strong> Confirmed &mdash; UL and medical certifications.</li>
+    <li><strong>TR-111 (Comms):</strong> Not confirmed &mdash; need to ask about SMBus/CAN.</li>
+    <li><strong>TR-112/114 (ID + handshake):</strong> Not confirmed.</li>
+    <li><strong>TR-117/118 (Active discharge):</strong> Not confirmed.</li>
+  </ul>
+  <p class="section-label">Risks</p>
+  <p>No drone experience. Smart communication capability (SMBus/CAN) is not publicly documented. Rated &ldquo;Yes&rdquo; primarily on their custom design flexibility and medical-grade platform quality, but the smart features need explicit verification.</p>
+</div>
+
+<!-- ================================================================ -->
+<h2 id="sec-maybe">7. Worth Exploring <span class="badge maybe">Maybe</span></h2>
+
+<div class="card maybe">
+  <div class="name"><a href="https://custompower.co.uk/uav-power-systems/" target="_blank">Custom Power</a> <span class="badge maybe">Maybe</span></div>
+  <div class="meta">UK + USA &bull; AS9100, UN 38.3, ISO 9001 &bull; <a href="https://custompower.co.uk/uav-power-systems/" target="_blank">custompower.co.uk &rarr; UAV Power</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>70+ (UK production)</dd>
+    <dt>Facility</dt><dd>~60,000 sqft total (24,000 sqft UK prod. + US office/warehouse)</dd>
+    <dt>Production Volume</dt><dd>Custom batches; defense, marine, aerospace. Volume TBC</dd>
+  </dl>
+  <p>US drone/UAV specialist since 1965 with in-house BMS (STM32), CAN, and SMBus experience. However, their charger product details are sparse in public sources. They may only offer chargers bundled with packs. Already in the pack assembler list &mdash; worth asking about standalone charger capability during pack discussions.</p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://www.apexmobilepower.com/products" target="_blank">Apex Mobile Power</a> <span class="badge maybe">Maybe</span></div>
+  <div class="meta">Suwanee, GA (eng.) + Vietnam/Asia (mfg.) &bull; ISO &bull; <a href="https://www.apexmobilepower.com/products" target="_blank">apexmobilepower.com &rarr; Products</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>60+ R&amp;D engineers</dd>
+    <dt>Facility</dt><dd>US engineering office + offshore factories (Vietnam, Asia)</dd>
+    <dt>Production Volume</dt><dd>4M+ battery modules/month. 3,000+ custom projects</dd>
+  </dl>
+  <p>3,000+ custom battery projects with OEM charger capability. Supports CAN, SMBus, UART, MODBUS. However, manufacturing is offshore (China/Vietnam), and the depth of charger customization (battery ID, handshake, active discharge) is unconfirmed. Already contacted for packs.</p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://ev-peak.com/portfolio_entries/drone-charger" target="_blank">EV-PEAK</a> <span class="badge maybe">Maybe</span></div>
+  <div class="meta">Shenzhen, China &bull; CE, FCC, UL, RoHS &bull; <a href="https://ev-peak.com/portfolio_entries/drone-charger" target="_blank">ev-peak.com &rarr; Drone Chargers</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>350 (67 technical staff)</dd>
+    <dt>Facility</dt><dd>2,000 sqm workshop, Longhua, Shenzhen</dd>
+    <dt>Production Volume</dt><dd>17+ yrs production. Dozens of ODM projects. 25+ patents</dd>
+  </dl>
+  <p>Drone-native charger manufacturer with CAN 2.0 BMS and OEM/ODM customization. 6S is within range. However: China-based (NDAA/FCC concerns for Flyability), BMS handshake and battery ID are unconfirmed for their charger products, and IEC 62368-1 is not documented. For US federal/government-adjacent programs, sourcing and authorization constraints (FCC Covered List / ASDA / NDAA context) can be disqualifying.</p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://micropower-group.com/offerings/industrial-battery-chargers-systems" target="_blank">Micropower Group</a> <span class="badge maybe">Maybe</span></div>
+  <div class="meta">V&auml;xj&ouml;, Sweden &bull; ISO, CE &bull; <a href="https://micropower-group.com/offerings/industrial-battery-chargers-systems" target="_blank">micropower-group.com &rarr; Chargers</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>Not disclosed (multinational, multiple subsidiaries)</dd>
+    <dt>Facility</dt><dd>New 25,000 sqm factory (V&auml;xj&ouml;, opened 2025) + solar roof. Automated lines</dd>
+    <dt>Production Volume</dt><dd>High-volume industrial. Chargers 100W&ndash;3.2kW (modular to 10kW+)</dd>
+  </dl>
+  <p>Nordic OEM with modular charger platforms (100W&ndash;3.2kW). Strong industrial quality. However, no drone or smart-battery experience. BMS communication and active discharge capability are unconfirmed. Would need significant custom FW development to meet TR-111/112/114.</p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://www.skyrc.com/pc1080neo" target="_blank">SkyRC</a> <span class="badge maybe">Maybe</span></div>
+  <div class="meta">Shenzhen, China &bull; CE &bull; <a href="https://www.skyrc.com/pc1080neo" target="_blank">skyrc.com &rarr; PC1080neo</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~244 (174 production + 70 non-production)</dd>
+    <dt>Facility</dt><dd>~9,000 sqm across 3 floors, Meitai Industry Park, Shenzhen</dd>
+    <dt>Production Volume</dt><dd>Mass consumer/prosumer production (RC + enterprise chargers)</dd>
+  </dl>
+  <p>PC1080neo enterprise drone charger supports 6S, balance charging, and has a storage mode. However: it is a <strong>consumer product with no BMS communication, no battery ID, no handshake, and no active discharge to 30%</strong>. Fails TR-111, TR-112, TR-114, and TR-118. Rated &ldquo;Maybe&rdquo; only as a potential interim/field-backup charger, not for production use. For US federal/government-adjacent programs, sourcing and authorization constraints (FCC Covered List / ASDA / NDAA context) can be disqualifying.</p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://www.skycharge.de/charging-system" target="_blank">Skycharge</a> <span class="badge maybe">Maybe</span></div>
+  <div class="meta">Berlin, Germany &bull; US/EU patents &bull; <a href="https://www.skycharge.de/charging-system" target="_blank">skycharge.de &rarr; Charging System</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>Small (startup, team size undisclosed)</dd>
+    <dt>Facility</dt><dd>Berlin HQ. Engineering &amp; assembly in Germany</dd>
+    <dt>Production Volume</dt><dd>Station/infrastructure product, not volume chargers</dd>
+  </dl>
+  <p>Autonomous drone charging stations with cross-platform compatibility (Avy, Enel, Fortem, HHLA Sky). Relevant for TR-88 (docking station compatibility) and future fleet operations. However: this is a <strong>station/hangar product, not a standalone field charger</strong>. Different product category from what E4 needs today.</p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://smart-battery-solutions.de/en/product/" target="_blank">Smart Battery Solutions (SBS)</a> <span class="badge maybe">Maybe</span></div>
+  <div class="meta">Kleinostheim, Germany &bull; <a href="https://smart-battery-solutions.de/en/product/" target="_blank">smart-battery-solutions.de &rarr; Products</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~85 (capacity ~100 in new HQ, opened 2024)</dd>
+    <dt>Facility</dt><dd>SBS Campus: production hall + 2-story HQ (2024) + warehouses. 20+ production lines</dd>
+    <dt>Production Volume</dt><dd>20+ production lines. 15+ yrs. Prototype to mass production</dd>
+  </dl>
+  <p>Pack assembler with charger capability (UniPower chargers). Industrial drone experience. EU-based. However, the depth of their smart charger features (BMS protocol, battery ID, active discharge) is unconfirmed. Already contacted for packs &mdash; ask about charger specifics.</p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://titanbatteries.com/pages/custom" target="_blank">Titan Power USA</a> <span class="badge maybe">Maybe</span></div>
+  <div class="meta">Pocatello, ID, USA &bull; ISO 9001, NDAA &bull; <a href="https://titanbatteries.com/pages/custom" target="_blank">titanbatteries.com &rarr; Custom</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~20&ndash;25 (5 new hires in 2025)</dd>
+    <dt>Facility</dt><dd>12,500 sqft vertically integrated production, Pocatello ID</dd>
+    <dt>Production Volume</dt><dd>Thousands/week capability (stated). Robotic 99.9% tolerance. Prototypes in hours</dd>
+  </dl>
+  <p>US-based pack assembler with a Charger Management System (CMS) for multi-battery fleet charging. Relevant for fleet use cases. However, standalone smart charger capability for a single E4 battery is unconfirmed. Already in pack list.</p>
+</div>
+
+<!-- ================================================================ -->
+<h2 id="sec-no">8. Not Suitable <span class="badge no">No</span></h2>
+
+<div class="card no">
+  <div class="name"><a href="https://elconchargers.com/" target="_blank">Elcon (Electric Conversions)</a> <span class="badge no">No</span></div>
+  <div class="meta">Indiana, USA &bull; IP67 &bull; <a href="https://elconchargers.com/" target="_blank">elconchargers.com</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>Small (not disclosed)</dd>
+    <dt>Facility</dt><dd>Not disclosed</dd>
+    <dt>Production Volume</dt><dd>EV/industrial charger volumes (not disclosed)</dd>
+  </dl>
+  <p>Proven EV charger OEM with robust PFC chargers (1.5&ndash;10kW). Custom voltage programming is trivial. However: <strong>fundamentally a basic CC/CV charger with no smart firmware, no BMS handshake, no battery ID, and no active discharge</strong>. Does not meet TR-111, TR-112, TR-114, TR-117, or TR-118. Slow support reported by users.</p>
+</div>
+
+<div class="card no">
+  <div class="name"><a href="https://www.chromaate.com/en/products_list/battery_test_system" target="_blank">Chroma ATE</a> <span class="badge no">No</span></div>
+  <div class="meta">Taiwan &bull; <a href="https://www.chromaate.com/en/products_list/battery_test_system" target="_blank">chromaate.com &rarr; Battery Test</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>Large (global company)</dd>
+    <dt>Facility</dt><dd>Multiple global facilities</dd>
+    <dt>Production Volume</dt><dd>High-volume test equipment (not applicable for charger supply)</dd>
+  </dl>
+  <p>Battery test equipment manufacturer (cyclers, test systems). <strong>Not a charger manufacturer.</strong> Wrong product category entirely. Included only for completeness as it appeared in initial search results.</p>
+</div>
+
+<!-- ================================================================ -->
+<h2 id="sec-next">9. Recommended Next Steps</h2>
+
+<table class="req">
+<tr><th>#</th><th>Action</th><th>Supplier(s)</th><th>Timeline</th></tr>
+<tr><td>1</td><td>Bundle charger inquiry with existing pack outreach</td><td>Packet Digital, Tulip Tech, SBS, Custom Power, Apex Mobile Power, Titan Power</td><td>Immediate</td></tr>
+<tr><td>2</td><td>Send dedicated charger RFQ with E4 CHG requirements summary</td><td>Delta Electronics, GlobTek, Inventus Power, RRC Power Solutions</td><td>Week 1</td></tr>
+<tr><td>3</td><td>Send inquiry about custom charger with BMS comms</td><td>EFT Mobility AG, Mascot AS</td><td>Week 1&ndash;2</td></tr>
+<tr><td>4</td><td>Finalize CC charging current (TR-100) based on cell selection</td><td>Internal (Prop team)</td><td>Week 2&ndash;4</td></tr>
+<tr><td>5</td><td>Evaluate Chinese suppliers (EV-PEAK) only if Western options insufficient</td><td>EV-PEAK</td><td>Week 4+</td></tr>
+<tr><td>6</td><td>Decision gate: shortlist 2&ndash;3 suppliers for NRE quotes</td><td>&mdash;</td><td>Week 6&ndash;8</td></tr>
+</table>
+
+<p style="margin-top:1rem;">
+  <strong>Key open question:</strong> The CC charging current (TR-100) is still TBD. This directly impacts charger power rating (26.1V &times; I<sub>CC</sub>) and will affect which suppliers can deliver within their standard platform range vs. requiring custom development. Finalizing the cell selection will unlock this parameter.
+</p>
+
+<!-- ================================================================ -->
+<h2 id="sec-pack-assemblers">10. Addendum: Additional Pack Assemblers (Europe & WTO)</h2>
+<p>
+  Following further scoping for pack assembly partners located specifically in Europe and WTO-aligned countries (excluding China), the following candidates were identified. These partners strengthen the supply chain strategy for mitigating regulatory risks (NDAA, FCC, MOFCOM).
+</p>
+
+<table class="req">
+<tr><th>Supplier</th><th>Location</th><th>Overview / Capabilities</th></tr>
+<tr>
+  <td><strong>Swaytronic</strong></td>
+  <td>Switzerland</td>
+  <td>Local Swiss manufacturer with over 10 years of battery tech experience. Specializes in custom-made battery packs for UAV drones and industrial applications. Highly relevant due to proximity to Flyability.</td>
+</tr>
+<tr>
+  <td><strong>Alexander Battery Technologies</strong></td>
+  <td>UK</td>
+  <td>High-end OEM pack supplier with 40 years of experience. End-to-end custom development including design, manufacturing, and full BMS integration for UAVs and robotics.</td>
+</tr>
+<tr>
+  <td><strong>Enix Power Solutions</strong></td>
+  <td>France, UK, Spain</td>
+  <td>European manufacturer (part of UPERGY Group). Specializes in custom drone batteries from PoC to series production. Strong certifications (ISO 9001/14001/13485).</td>
+</tr>
+<tr>
+  <td><strong>AKKU SYS</strong></td>
+  <td>Germany</td>
+  <td>Custom battery pack assembly working with various cell chemistries. Flexible designs including quality testing and input measurements.</td>
+</tr>
+<tr>
+  <td><strong>ABH-Nord GmbH</strong></td>
+  <td>Germany</td>
+  <td>Contract manufacturing for custom battery packs. Offers BMS integration, 3D design, prototyping, and series production.</td>
+</tr>
+<tr>
+  <td><strong>Neo Battery Materials Ltd.</strong></td>
+  <td>Canada / South Korea</td>
+  <td>Canada-based developer with mass production in Gimje, South Korea. Explicitly focuses on silicon-anode drone batteries with high energy density. Actively engaging with NATO/US drone manufacturers.</td>
+</tr>
+<tr>
+  <td><strong>Perkons Energy</strong></td>
+  <td>USA</td>
+  <td>US-based custom Li-ion battery pack manufacturer offering high-power systems for drones and UGVs. Full-cycle development from concept to manufacturing.</td>
+</tr>
+<tr>
+  <td><strong>Mitsunami Co., Ltd.</strong></td>
+  <td>Japan</td>
+  <td>Lithium battery solutions provider that coordinates custom battery pack development. Supports various cell types and helps with certifications (UL2054, PSE).</td>
+</tr>
+</table>
+
+<div class="footer">
+  Generated by Cursor AI &bull; Feb 2026 &bull; E4 Battery Project &mdash; 01_Project Management / 01_03_Planning
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Battery Pack Assembler Scouting</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 20px;
+            color: #1a1a1a;
+            background: #fafafa;
+        }
+        h1 { font-size: 20px; color: #1a1a2e; }
+        h2 { font-size: 16px; color: #1e40af; margin-top: 30px; }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 12px;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 6px 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #1e3a5f;
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) { background: #f9fafb; }
+        tr:hover { background: #eef2ff; }
+        .high { color: #15803d; font-weight: 600; }
+        .medium { color: #b45309; font-weight: 600; }
+        .low { color: #dc2626; font-weight: 600; }
+        .tag {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .us { background: #dbeafe; color: #1e40af; }
+        .eu { background: #e5e7eb; color: #374151; }
+        .note { font-size: 11px; color: #6b7280; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>E4 Battery Pack Assembler Scouting</h1>
+<p style="font-size:13px;"><strong>Updated:</strong> February 2026 | <strong>Project:</strong> E4 Battery | <strong>Owner:</strong> Federico Pastore</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Company</th>
+        <th>Contacted?</th>
+        <th>Suitability for Flyability?</th>
+        <th>Status update</th>
+        <th>Next actions</th>
+        <th>NDA signed</th>
+        <th>Region</th>
+        <th>Location</th>
+        <th>Scale</th>
+        <th>Drone / UAS experience</th>
+        <th>Cell formats</th>
+        <th>Business model</th>
+        <th>Certifications</th>
+        <th>Employees</th>
+        <th>Key strengths</th>
+        <th>Key risks / limitations</th>
+        <th>Willingness</th>
+        <th>Comment</th>
+        <th>Promising</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- ======================================== -->
+    <!-- US ASSEMBLERS                            -->
+    <!-- ======================================== -->
+    <tr>
+        <td><strong>Packet Digital</strong></td>
+        <td>TRUE</td>
+        <td></td>
+        <td>Initial outreach sent (Feb 2026)</td>
+        <td>Await response</td>
+        <td>FALSE</td>
+        <td><span class="tag us">US</span></td>
+        <td>Fargo, ND</td>
+        <td>Medium-Large (new 80K sqft plant 2026)</td>
+        <td>Yes - Anduril (Ghost VTOL), Lockheed Martin (Indago 4), US Navy, Air Force</td>
+        <td>Pouch + cylindrical</td>
+        <td>Contract assembly + custom BMS</td>
+        <td>$50M DOD APFIT award. Custom BMS (CAN, MAVLink, USB)</td>
+        <td>&lt;100</td>
+        <td>Drone/UAS specialist. DOD-backed. Scaling US manufacturing. Smart battery expertise. Pouch cell capable.</td>
+        <td>Smaller company, scaling in progress. Pricing unknown.</td>
+        <td></td>
+        <td>Top US candidate. Drone-native. Expanding capacity.</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td><strong>Re:Build Battery Solutions</strong></td>
+        <td>FALSE</td>
+        <td></td>
+        <td></td>
+        <td>Send initial outreach (web form)</td>
+        <td>FALSE</td>
+        <td><span class="tag us">US</span></td>
+        <td>New Kensington, PA</td>
+        <td>Large (175K sqft, expandable to 750K, 15 MWh/yr)</td>
+        <td>Yes - advanced drone program case study</td>
+        <td>Cylindrical now, pouch in development</td>
+        <td>Contract assembly + engineering services</td>
+        <td>AS9100, ITAR</td>
+        <td>~200+</td>
+        <td>Large capacity. Aerospace-certified. Laser welding, wire bonding. Real-time quality monitoring.</td>
+        <td>Primarily cylindrical cells today. Pouch capability TBC.</td>
+        <td></td>
+        <td>Strong facility but need to confirm pouch cell readiness.</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td><strong>Emerging Power</strong></td>
+        <td>TRUE</td>
+        <td></td>
+        <td>Initial outreach sent (Feb 2026)</td>
+        <td>Await response</td>
+        <td>FALSE</td>
+        <td><span class="tag us">US</span></td>
+        <td>Hackensack, NJ</td>
+        <td>Small-Medium</td>
+        <td>Yes - military + commercial drone packs</td>
+        <td>Multiple formats</td>
+        <td>Contract assembly, concept-to-production</td>
+        <td>ITAR, ISO</td>
+        <td>~50</td>
+        <td>75+ years collective experience. Military drone battery specialist. Full lifecycle support.</td>
+        <td>Smaller scale. Volume capacity TBC.</td>
+        <td></td>
+        <td>Good military drone experience. Verify volume capacity for 6-7K/yr.</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td><strong>Titan Power USA</strong></td>
+        <td>FALSE</td>
+        <td></td>
+        <td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag us">US</span></td>
+        <td>Pocatello, ID</td>
+        <td>Medium (thousands of units/month)</td>
+        <td>Yes - US Navy, Air Force, AeroVironment, Flock Safety</td>
+        <td>Multiple (uses Amprius, EnPower cells)</td>
+        <td>Vertically integrated (cell selection, BMS, charger, enclosure)</td>
+        <td>ISO 9001, NDAA compliant, CMMC underway, UN 38.3 (onsite 2026)</td>
+        <td>&lt;50</td>
+        <td>Vertically integrated. Already uses Amprius/EnPower cells. Fast prototyping (1 day). Defense customers.</td>
+        <td>Smaller company. UN 38.3 onsite testing still in progress.</td>
+        <td></td>
+        <td>Interesting because they already source from our target cell suppliers (Amprius, EnPower).</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td><strong>CRG Defense</strong></td>
+        <td>FALSE</td>
+        <td></td>
+        <td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag us">US</span></td>
+        <td>Miamisburg, OH</td>
+        <td>Medium (40K cells/shift/yr on cell line)</td>
+        <td>Yes - defense, aerospace, ground robotics</td>
+        <td>Pouch (up to 120x120mm, custom sizes available)</td>
+        <td>Cell manufacturing + pack assembly</td>
+        <td>ITAR, CUI-ready, >95% non-FEOC supply chain</td>
+        <td>&lt;100</td>
+        <td>Makes their own cells AND packs. Pouch cell native. >95% NDAA-compliant supply chain. Defense-grade.</td>
+        <td>Smaller company. Pricing likely premium. Cell sizes may not match E4 needs.</td>
+        <td></td>
+        <td>Unique in that they manufacture cells + assemble packs. Worth exploring for full vertical integration.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td><strong>Wake Energy</strong></td>
+        <td>FALSE</td>
+        <td></td>
+        <td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag us">US</span></td>
+        <td>Los Angeles, CA</td>
+        <td>Medium (hundreds of packs/week)</td>
+        <td>Yes - FPV, UAS, robotics</td>
+        <td>Cylindrical (Molicel 21700)</td>
+        <td>Contract assembly</td>
+        <td>NDAA compliant, UN 38.3 in progress</td>
+        <td>&lt;50</td>
+        <td>High volume drone pack experience. Fast turnaround. US-assembled with non-Chinese cells (Taiwanese).</td>
+        <td>Cylindrical only (no pouch). Smaller company. UN 38.3 not yet complete.</td>
+        <td></td>
+        <td>Volume-oriented but cylindrical focus. May not suit E4 pouch cell requirement.</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td><strong>Aved / Lithion Battery</strong></td>
+        <td>FALSE</td>
+        <td></td>
+        <td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag us">US</span></td>
+        <td>USA</td>
+        <td>Large</td>
+        <td>Limited - medical, military, industrial (not drone-specific)</td>
+        <td>Multiple</td>
+        <td>Contract assembly</td>
+        <td>Chroma 17020 test systems, 100% product certification</td>
+        <td>~200+</td>
+        <td>One of largest US custom pack manufacturers. Strong testing (Chroma 17020). Medical/military markets.</td>
+        <td>Less drone-specific. Generic industrial focus.</td>
+        <td></td>
+        <td>Large scale but not drone-native. Lower priority.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td><strong>Custom Power</strong></td>
+        <td>FALSE</td>
+        <td></td>
+        <td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag us">US</span></td>
+        <td>USA</td>
+        <td>Medium</td>
+        <td>Yes - drone/UAV specialist since 1965</td>
+        <td>Multiple</td>
+        <td>Contract assembly + in-house BMS/firmware</td>
+        <td>Aerospace standards</td>
+        <td>~100+</td>
+        <td>Drone/UAV specialist. In-house BMS + firmware. Aerospace standards. Cold-environment thermal management.</td>
+        <td>Specific volume capacity unknown.</td>
+        <td></td>
+        <td>Good drone focus and BMS capability. Worth a conversation.</td>
+        <td>Maybe</td>
+    </tr>
+    <!-- ======================================== -->
+    <!-- EU ASSEMBLERS                            -->
+    <!-- ======================================== -->
+    <tr>
+        <td><strong>Leclanch&eacute;</strong></td>
+        <td>TRUE</td>
+        <td></td>
+        <td>Initial outreach sent (Feb 2026)</td>
+        <td>Await response</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/CH</span></td>
+        <td>Yverdon-les-Bains, CH</td>
+        <td>Large (250+ MWh/yr automated)</td>
+        <td>Yes - submarine drones, robotics, 20 yrs military battery exp.</td>
+        <td>Multi-chemistry</td>
+        <td>Custom specialty battery systems, turnkey (incl. chargers, monitoring)</td>
+        <td>ISO, military standards</td>
+        <td>~300+</td>
+        <td>Near Flyability (Paudex). Drone/defense experience. 250+ MWh/yr. Turnkey solutions. Swiss quality.</td>
+        <td>Does not help with FCC (Swiss = foreign). Higher cost than Asian assembly.</td>
+        <td></td>
+        <td>Top EU candidate. Proximity for development iterations. Ideal for non-US markets + US spare batteries.</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td><strong>EFT Mobility AG</strong></td>
+        <td>FALSE</td>
+        <td></td>
+        <td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/CH</span></td>
+        <td>Switzerland</td>
+        <td>Small-Medium</td>
+        <td>Yes - UAV/drone specialist (electric + hybrid-electric powertrains)</td>
+        <td>Modular platform (6S-14S), up to 300 Wh/kg</td>
+        <td>Engineering services + custom battery platform</td>
+        <td>UN 38.3, CE, NDAA compliant</td>
+        <td>&lt;50 (founded 2019)</td>
+        <td>Swiss UAV battery specialist. Modular turn-key platform. Pre-certified designs. Fast sample delivery. Heating foil for cold ops.</td>
+        <td>Young company (2019). Scale for 6-7K/yr TBC. Max 300 Wh/kg (below our 350 target?).</td>
+        <td></td>
+        <td>Interesting Swiss UAV-native option. Verify if they can handle 350 Wh/kg cells and our volumes.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td><strong>GRITEC</strong></td>
+        <td>TRUE</td>
+        <td></td>
+        <td>Initial outreach sent (Feb 2026)</td>
+        <td>Await response</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/CH</span></td>
+        <td>Gr&uuml;sch, CH</td>
+        <td>Medium (2,600 sqm)</td>
+        <td>No - general contract manufacturing</td>
+        <td>N/A (contract manufacturer, not battery-native)</td>
+        <td>Contract manufacturing + assembly</td>
+        <td>ISO Class 7 cleanroom</td>
+        <td>~200+</td>
+        <td>Swiss contract manufacturer. Cleanroom. E&amp;M testing. FAT capability. Global supplier network management.</td>
+        <td>No battery-specific experience (TBC). Would need to set up battery assembly line.</td>
+        <td></td>
+        <td>General contract manufacturer. Battery assembly would be new. Worth asking but lower confidence.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td><strong>Exista</strong></td>
+        <td>FALSE</td>
+        <td></td>
+        <td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/CH</span></td>
+        <td>Switzerland</td>
+        <td>Small-Medium</td>
+        <td>No - general industrial</td>
+        <td>Multiple (Samsung, Panasonic, LG cells)</td>
+        <td>Custom pack design + serial production</td>
+        <td>IEC 62133, UL 1642, UL 2054</td>
+        <td>&lt;50</td>
+        <td>Swiss. End-to-end from concept to serial production. Multi-vendor cell experience. Full certifications.</td>
+        <td>Smaller company. No specific drone experience. Scale for 6-7K/yr TBC.</td>
+        <td></td>
+        <td>Good Swiss option with strong certifications. Verify volume capability.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td><strong>BMZ Group</strong></td>
+        <td>TRUE</td>
+        <td></td>
+        <td>Initial outreach sent (Feb 2026)</td>
+        <td>Await response</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/CH</span> + <span class="tag us">US</span></td>
+        <td>Germany (HQ) + Poland, USA, China</td>
+        <td>Very Large (~250 new projects/yr, 2,300 employees)</td>
+        <td>Limited - industrial, not drone-specific</td>
+        <td>Multiple</td>
+        <td>Contract assembly at scale</td>
+        <td>ISO, automotive standards</td>
+        <td>~2,300</td>
+        <td>Europe's largest Li-ion pack mfg. Multi-site (DE, PL, US, CN). ~250 new projects/yr. Highly automated.</td>
+        <td>Not drone-specific. Large company = may not prioritize smaller projects. US facility capability TBC.</td>
+        <td></td>
+        <td>Scale is impressive. Key question: can US facility handle our project? Could be single partner for EU + US.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td><strong>VARTA AG</strong></td>
+        <td>FALSE</td>
+        <td></td>
+        <td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/CH</span></td>
+        <td>Germany</td>
+        <td>Large</td>
+        <td>No - industrial, robotics focus</td>
+        <td>Multiple</td>
+        <td>CellPac PLUS custom packs</td>
+        <td>ISO, industrial standards</td>
+        <td>~4,000+</td>
+        <td>130 years experience. Strong reputation. Prototyping through production. Industrial + robotics focus.</td>
+        <td>Not drone-specific. Large corporation = longer decision cycles. Recently had financial difficulties.</td>
+        <td></td>
+        <td>Big name but not ideal fit. Lower priority unless others don't work out.</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td><strong>Tulip Tech</strong></td>
+        <td>FALSE</td>
+        <td></td>
+        <td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/NL</span></td>
+        <td>Den Bosch, Netherlands</td>
+        <td>Large (up to 100K batteries/yr per product)</td>
+        <td>Yes - drone specialist. Tective, Acecore, Percepto, Avy, Deltaquad</td>
+        <td>Multiple (50+ cell suppliers, database of thousands of cells)</td>
+        <td>Custom pack design + assembly, smart batteries with proprietary DroneCAN BMS</td>
+        <td>Full supply chain traceability, every unit tested</td>
+        <td>&lt;100</td>
+        <td>Drone-native. 30-100% flight time extension claims. In-house design + assembly in Europe. Western-sourced components. Huge cell supplier database. Up to 100K/yr capacity.</td>
+        <td>Netherlands-based (does not help FCC). Proprietary BMS may conflict with Flyability's own BMS design.</td>
+        <td></td>
+        <td>Very relevant: European drone battery specialist with serious volume capability. Verify if they can work with our BMS or only their own.</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td><strong>Smart Battery Solutions (SBS)</strong></td>
+        <td>FALSE</td>
+        <td></td>
+        <td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/DE</span></td>
+        <td>Kleinostheim, Germany (near Frankfurt)</td>
+        <td>Medium-Large (20+ production lines, small to large series)</td>
+        <td>Yes - industrial drones listed as application area</td>
+        <td>Multiple</td>
+        <td>Custom pack design + development + production, charging solutions</td>
+        <td>Common certifications (details TBC)</td>
+        <td>~100</td>
+        <td>15+ years experience. Full lifecycle (design, BMS, testing, production, after-sales). 20+ production lines. Semi-automated. New facility (2024). Smart connector/communication interfaces.</td>
+        <td>Germany-based (does not help FCC). Drone is one application among many, not core focus.</td>
+        <td></td>
+        <td>Solid German battery pack manufacturer with drone experience. Good scale. Worth exploring.</td>
+        <td>Maybe</td>
+    </tr>
+    <tr>
+        <td><strong>Enix Power Solutions</strong></td>
+        <td>FALSE</td>
+        <td></td>
+        <td></td>
+        <td>Evaluate further</td>
+        <td>FALSE</td>
+        <td><span class="tag eu">EU/CH</span></td>
+        <td>UK</td>
+        <td>Small-Medium</td>
+        <td>Yes - drone, e-mobility, oil &amp; gas</td>
+        <td>Multiple</td>
+        <td>Custom design + manufacture</td>
+        <td>UN 38.3, IEC 62133, IEC 62619</td>
+        <td>~50+</td>
+        <td>30+ years experience. Drone sector experience. Strong certifications. Oil &amp; gas market overlap.</td>
+        <td>UK = post-Brexit trade considerations. Smaller scale.</td>
+        <td></td>
+        <td>Decent fit on experience but UK location adds trade complexity. Lower priority.</td>
+        <td>Maybe</td>
+    </tr>
+    </tbody>
+</table>
+
+<p class="note">
+    <strong>Total:</strong> 17 companies (8 US, 9 EU). Table designed to be copy-pasted into Google Sheets.<br>
+    <strong>Priority outreach:</strong> Packet Digital, Re:Build, Emerging Power (US) + Leclanch&eacute;, Tulip Tech (EU).<br>
+    <strong>FCC note:</strong> US assemblers support drone FCC authorization. EU assemblers serve non-US markets + US spare batteries.
+</p>
+
+</body>
+</html>

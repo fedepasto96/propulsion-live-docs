@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Charger Supplier Questions — E4 Battery Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 920px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #222;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: 24px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 32px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            font-size: 16px;
+            margin-top: 24px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+
+        th, td {
+            border: 1px solid #bbb;
+            padding: 8px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            margin: 12px 0;
+            border-left: 4px solid;
+            border-radius: 4px;
+        }
+
+        .alert-info {
+            border-left-color: #2563eb;
+            background-color: #eff6ff;
+        }
+
+        .alert-warning {
+            border-left-color: #d97706;
+            background-color: #fffbeb;
+        }
+
+        .alert-important {
+            border-left-color: #7c3aed;
+            background-color: #f3f0ff;
+        }
+
+        .alert-label {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        ul, ol {
+            margin: 8px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin: 4px 0;
+        }
+
+        .meta {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .meta strong {
+            color: #333;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 28px 0;
+        }
+
+        .question {
+            margin: 6px 0;
+            padding: 4px 0;
+        }
+
+        .question-num {
+            font-weight: bold;
+            color: #2563eb;
+            margin-right: 4px;
+        }
+
+        .why {
+            font-size: 12px;
+            color: #666;
+            margin-left: 20px;
+            font-style: italic;
+        }
+
+        .notes-box {
+            border: 1px dashed #bbb;
+            background: #fafafa;
+            padding: 12px;
+            min-height: 60px;
+            margin: 8px 0 16px;
+            font-style: italic;
+            color: #999;
+        }
+
+        .partner-header {
+            background: #f0f0f0;
+            padding: 8px 12px;
+            border-left: 4px solid #7c3aed;
+            margin-top: 28px;
+        }
+
+        .partner-header h3 {
+            margin: 0;
+        }
+
+        .partner-header .location {
+            color: #555;
+            font-size: 13px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+
+        .tag-critical {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .tag-important {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .tag-nice {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        @media print {
+            .notes-box { min-height: 100px; }
+            h2, .partner-header { page-break-before: always; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Charger Supplier Questions &mdash; E4 Battery Project</h1>
+
+    <p class="meta">
+        <strong>Project:</strong> E4 Battery Project &mdash; Harmony Project<br>
+        <strong>Prepared by:</strong> Federico Pastore (Lead Battery Engineer)<br>
+        <strong>Date:</strong> February 2026<br>
+        <strong>Purpose:</strong> Evaluate smart charger suppliers for the E4 drone battery<br>
+        <strong>Reference:</strong> Charger supplier list in techno scouting spreadsheet; Outreach email drafts
+    </p>
+
+    <hr>
+
+    <h2>Context: What We Need</h2>
+
+    <div class="alert alert-info">
+        <div class="alert-label">CHARGER SUMMARY</div>
+        The E4 charger is a <strong>smart charger</strong>, not a simple CC/CV power supply. It must communicate with
+        the BMS, authenticate the battery, and <strong>actively discharge</strong> to 30% SOC for IATA air transport.
+        The BMS is Flyability-designed (TI BQ41z90 gauge IC). Communication protocol is <strong>TBD</strong>
+        (SMBus, I2C, UART, or CAN).
+    </div>
+
+    <div class="alert alert-warning">
+        <div class="alert-label">KEY DIFFERENTIATORS vs. STANDARD CHARGER</div>
+        <ul style="margin:4px 0;">
+            <li><strong>Active discharge</strong> (bidirectional power stage) &mdash; mandatory for IATA 2026</li>
+            <li><strong>BMS handshake</strong> &mdash; charger charges only after BMS authorization</li>
+            <li><strong>Battery authentication</strong> &mdash; reject unknown/counterfeit batteries</li>
+        </ul>
+        Most off-the-shelf Li-ion chargers cannot do these. This is the primary filter.
+    </div>
+
+    <table>
+        <tr><th>Parameter</th><th>Value</th></tr>
+        <tr><td>Configuration</td><td>6S Li-ion (silicon-anode pouch cells)</td></tr>
+        <tr><td>Charge voltage (CV)</td><td>26.1 V</td></tr>
+        <tr><td>Charge current (CC)</td><td>~13 A (1C for 13 Ah pack)</td></tr>
+        <tr><td>Power</td><td>~340 W</td></tr>
+        <tr><td>Max output voltage (fault)</td><td>&lt; 31.3 V (OVP)</td></tr>
+        <tr><td>BMS communication</td><td>TBD (SMBus, I2C, UART, or CAN)</td></tr>
+        <tr><td>Battery ID / authentication</td><td>Required &mdash; reject unknown batteries</td></tr>
+        <tr><td>Active discharge</td><td>30% SOC (IATA transport) and 60% SOC (storage)</td></tr>
+        <tr><td>Safety isolation</td><td>IEC 62368-1 reinforced</td></tr>
+        <tr><td>Volume</td><td>~6,000&ndash;7,000 units/year</td></tr>
+    </table>
+
+    <hr>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>1. Core Charger Capability</h2>
+
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">1.1</span> Can your platform support <strong>active discharge</strong> (drawing energy from the battery back through the charger)? We need to discharge packs to 30% SOC for air transport and 60% for long-term storage.</p>
+    <p class="why">This is a hard filter. Most chargers are unidirectional. We need a bidirectional power stage or a dedicated discharge path.</p>
+
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">1.2</span> Can the charger implement a <strong>charge authorization handshake</strong> via digital communication with the BMS? (Charger requests permission &rarr; BMS checks conditions &rarr; BMS sends ACK &rarr; charger starts.)</p>
+    <p class="why">The charger must not start charging until the BMS explicitly authorizes it. This protects against cell damage if the BMS detects a fault.</p>
+
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">1.3</span> Which <strong>communication protocols</strong> does your platform support natively? (SMBus, I2C, CAN, UART, other?) Can you add a protocol that isn't currently supported?</p>
+    <p class="why">Our BMS protocol is TBD. We need a supplier that can adapt to whichever protocol we choose.</p>
+
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">1.4</span> Can the charger read a <strong>battery unique ID</strong> from the BMS and refuse to charge if the ID is unknown or fails authentication?</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">1.5</span> What <strong>real-time telemetry</strong> can the charger read from the BMS during charging? (Individual cell voltages, pack temperature, SOC, fault flags?) How does it react to a fault flag mid-charge?</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">1.6</span> Can the charger <strong>firmware be updated in the field</strong>? (USB, BLE, wired interface?) We expect to iterate on charging profiles post-launch.</p>
+
+    <div class="notes-box">Notes:</div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>2. Electrical &amp; Safety</h2>
+
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">2.1</span> Is the charger designed to meet <strong>IEC 62368-1</strong> (reinforced isolation between mains and output)? Do you handle the certification, or does the customer?</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">2.2</span> What is the <strong>maximum output voltage under any fault condition</strong>? Our pack requires OVP &lt; 31.3 V (hard limit set by cell chemistry and 6S config).</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">2.3</span> What <strong>protections</strong> are built into the charger hardware? (OVP, OCP, OTP, short-circuit, reverse polarity, ground fault?)</p>
+
+    <p class="question"><span class="question-num">2.4</span> What is the <strong>input voltage range</strong>? We need worldwide AC compatibility (100&ndash;240 V, 50/60 Hz).</p>
+
+    <div class="notes-box">Notes:</div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>3. Production &amp; Scalability</h2>
+
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">3.1</span> Can you deliver <strong>6,000&ndash;7,000 chargers/year</strong> at steady state? What is your current available capacity?</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">3.2</span> What is the typical <strong>timeline from project kick-off to first prototypes</strong>, and from first article to production?</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">3.3</span> Where is the charger <strong>physically assembled</strong>? (Country, site.) Is there a US assembly option?</p>
+    <p class="why">US assembly preferred for FCC/NDAA, but not a hard requirement for chargers as it is for packs.</p>
+
+    <p class="question"><span class="question-num">3.4</span> What is your <strong>MOQ</strong> for a first prototype run? And for production batches?</p>
+
+    <div class="notes-box">Notes:</div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>4. Commercial</h2>
+
+    <p class="question"><span class="tag tag-critical">CRITICAL</span>
+        <span class="question-num">4.1</span> What is the estimated <strong>NRE</strong> for a custom charger with these features? What does it cover? (HW design, FW development, certification, tooling?)</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">4.2</span> Can you provide a <strong>rough unit cost estimate</strong> at 6,000&ndash;7,000 units/year?</p>
+
+    <p class="question"><span class="tag tag-important">IMPORTANT</span>
+        <span class="question-num">4.3</span> Who <strong>owns the charger design IP</strong> at the end of the program? (Flyability, supplier, or shared?)</p>
+
+    <p class="question"><span class="question-num">4.4</span> Are you open to signing an <strong>NDA</strong> before we share detailed BMS specs and charging profiles?</p>
+
+    <div class="notes-box">Notes:</div>
+
+    <hr>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>Supplier-Specific Questions</h2>
+
+    <p>Tailored questions based on initial research. Ask these on top of the universal questions above.</p>
+
+    <!-- Packet Digital -->
+    <div class="partner-header">
+        <h3>Packet Digital</h3>
+        <span class="location">Fargo, ND &mdash; Already builds smart drone chargers for Lockheed Indago, Anduril Ghost</span>
+    </div>
+    <p class="question"><span class="question-num">PD1.</span> You already make chargers with BMS handshake and auto-discharge for mil-grade drones. Can you share what <strong>discharge power and method</strong> you use? (Resistive bleed vs. bidirectional converter?)</p>
+    <p class="question"><span class="question-num">PD2.</span> If we bundle pack + charger, is there a <strong>meaningful cost advantage</strong> vs. sourcing separately?</p>
+    <p class="question"><span class="question-num">PD3.</span> Your fleet management software includes charger telemetry. Is that <strong>available as a standalone module</strong>, or only with Packet Digital packs?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- GlobTek -->
+    <div class="partner-header">
+        <h3>GlobTek</h3>
+        <span class="location">Northvale, NJ &mdash; TI-based charging platforms, SMBus native, IEC 62368-1</span>
+    </div>
+    <p class="question"><span class="question-num">GT1.</span> Your TI-based platform has SMBus. If we choose a <strong>non-SMBus protocol</strong> (e.g., CAN or UART), what is the effort to add it?</p>
+    <p class="question"><span class="question-num">GT2.</span> Active discharge is not a standard feature. Is it <strong>feasible within your existing HW architecture</strong>, or would it require a new power stage design?</p>
+    <p class="question"><span class="question-num">GT3.</span> Your manufacturing is split between NJ and Suzhou. Where would our <strong>6&ndash;7K/yr volume be assembled</strong>?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- Inventus Power -->
+    <div class="partner-header">
+        <h3>Inventus Power</h3>
+        <span class="location">Woodridge, IL &mdash; 2,000+ BMS designs, drone experience, multi-protocol</span>
+    </div>
+    <p class="question"><span class="question-num">IP1.</span> You support SMBus, I2C, CAN, RS232. Have you implemented a <strong>charge authorization handshake</strong> on any of these protocols for a customer?</p>
+    <p class="question"><span class="question-num">IP2.</span> At our volume (6&ndash;7K/yr), is there a <strong>minimum engagement threshold</strong> or NRE commitment?</p>
+    <p class="question"><span class="question-num">IP3.</span> Your manufacturing spans 4 countries. Is <strong>US-only assembly</strong> available for our charger?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- RRC Power Solutions -->
+    <div class="partner-header">
+        <h3>RRC Power Solutions</h3>
+        <span class="location">Homburg, Germany &mdash; PMM series, SMBus passthrough, medical-grade</span>
+    </div>
+    <p class="question"><span class="question-num">RR1.</span> The PMM series specs up to 240 W. Our requirement is ~340 W. Do you have a <strong>higher-power module</strong>, or can the PMM be upscaled?</p>
+    <p class="question"><span class="question-num">RR2.</span> You advertise zero NRE for standard configurations. Does <strong>adding active discharge change that</strong> significantly?</p>
+    <p class="question"><span class="question-num">RR3.</span> Your platform uses SMBus passthrough. Can it also implement a <strong>battery authentication check</strong> before forwarding charge commands?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- Tulip Tech -->
+    <div class="partner-header">
+        <h3>Tulip Tech</h3>
+        <span class="location">Den Bosch, NL &mdash; Drone-native, DroneCAN ecosystem, 100+ drone partners</span>
+    </div>
+    <p class="question"><span class="question-num">TU1.</span> Your charger is part of the Tulip smart battery ecosystem. Can it be <strong>decoupled from your BMS</strong> and work with a third-party BMS (our TI BQ41z90)?</p>
+    <p class="question"><span class="question-num">TU2.</span> If we use our own BMS, does your charger still support <strong>battery ID and charge authorization</strong> via a standard protocol?</p>
+    <p class="question"><span class="question-num">TU3.</span> Do your chargers include an <strong>active discharge path</strong>, or is discharge handled by the BMS/pack side only?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- EFT Mobility -->
+    <div class="partner-header">
+        <h3>EFT Mobility AG</h3>
+        <span class="location">Munich, Germany &mdash; NATO-Standard-Charger, 6S-14S UAV, CAN/UART</span>
+    </div>
+    <p class="question"><span class="question-num">EF1.</span> The NATO-Standard-Charger supports CAN 2.0 and UART. Can it also support <strong>SMBus or I2C</strong> if we choose those protocols?</p>
+    <p class="question"><span class="question-num">EF2.</span> Does your charger have <strong>IEC 62368-1 certification</strong>, or only CE/UN 38.3?</p>
+    <p class="question"><span class="question-num">EF3.</span> At 6&ndash;7K units/year, what is a realistic <strong>production lead time per batch</strong>? Is Quantum Systems your primary customer today, and does our volume conflict?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- Mascot AS -->
+    <div class="partner-header">
+        <h3>Mascot AS</h3>
+        <span class="location">Fredrikstad, Norway &mdash; Custom Li-ion OEM chargers, EU production, medical-grade</span>
+    </div>
+    <p class="question"><span class="question-num">MA1.</span> Your chargers are microprocessor-controlled. Do they currently support any <strong>digital BMS communication</strong> (SMBus, CAN, UART), or are they analog/PWM only?</p>
+    <p class="question"><span class="question-num">MA2.</span> Your production is split between Estonia and China. Can we get <strong>EU-only production</strong> (no Chinese content)?</p>
+    <p class="question"><span class="question-num">MA3.</span> You mention configurable profiles. Can you implement a full <strong>charge authorization + battery ID check</strong> in firmware, or would that require custom HW?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- Custom Power -->
+    <div class="partner-header">
+        <h3>Custom Power</h3>
+        <span class="location">UK (HQ) + Fountain Valley, CA &mdash; UAV specialist since 1965, in-house BMS/FW</span>
+    </div>
+    <p class="question"><span class="question-num">CP1.</span> You design BMS and charger systems in-house. Is the <strong>charger available as a standalone product</strong>, or only bundled with a Custom Power pack?</p>
+    <p class="question"><span class="question-num">CP2.</span> If we provide the BMS design, can your charger <strong>interface with it via a standard protocol</strong> rather than Custom Power's own firmware?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- Skycharge -->
+    <div class="partner-header">
+        <h3>Skycharge</h3>
+        <span class="location">Berlin, Germany &mdash; Autonomous drone charging stations, fleet infrastructure</span>
+    </div>
+    <p class="question"><span class="question-num">SC1.</span> Your product is a docking/charging station. Do you also offer a <strong>standalone field charger</strong> (desktop/portable) for manual use, or only autonomous stations?</p>
+    <p class="question"><span class="question-num">SC2.</span> Your station charges cross-platform. What <strong>protocol does it use to communicate</strong> with different drone batteries?</p>
+    <div class="notes-box">Notes:</div>
+
+    <!-- Titan Power USA -->
+    <div class="partner-header">
+        <h3>Titan Power USA</h3>
+        <span class="location">Pocatello, ID &mdash; Vertically integrated, CMS for multi-battery fleet</span>
+    </div>
+    <p class="question"><span class="question-num">TP1.</span> Your CMS is designed for multi-battery fleet management. Can it be adapted for a <strong>single-pack field charger</strong>?</p>
+    <p class="question"><span class="question-num">TP2.</span> Does the CMS include <strong>active discharge to a target SOC</strong>, or only charge functionality?</p>
+    <div class="notes-box">Notes:</div>
+
+    <hr>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <h2>Scoring Matrix</h2>
+
+    <div class="alert alert-important">
+        <div class="alert-label">HOW TO USE</div>
+        After each meeting, score the supplier 1&ndash;5 on each criterion. Weight the scores to get a composite.
+    </div>
+
+    <table>
+        <tr>
+            <th>Criterion</th>
+            <th>Weight</th>
+            <th>Score (1&ndash;5)</th>
+            <th>Weighted</th>
+        </tr>
+        <tr><td>Active discharge capability</td><td>25%</td><td></td><td></td></tr>
+        <tr><td>BMS communication &amp; handshake</td><td>20%</td><td></td><td></td></tr>
+        <tr><td>Battery authentication support</td><td>10%</td><td></td><td></td></tr>
+        <tr><td>IEC 62368-1 certification</td><td>10%</td><td></td><td></td></tr>
+        <tr><td>NRE + unit cost</td><td>15%</td><td></td><td></td></tr>
+        <tr><td>Production lead time</td><td>10%</td><td></td><td></td></tr>
+        <tr><td>Volume capability (6&ndash;7K/yr)</td><td>5%</td><td></td><td></td></tr>
+        <tr><td>FW update / field upgradeability</td><td>5%</td><td></td><td></td></tr>
+        <tr><td><strong>TOTAL</strong></td><td><strong>100%</strong></td><td></td><td></td></tr>
+    </table>
+
+</body>
+</html>

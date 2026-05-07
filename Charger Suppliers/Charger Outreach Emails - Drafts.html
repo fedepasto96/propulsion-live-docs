@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>E4 Battery Charger — Outreach Email Drafts</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px 40px;
+            color: #1a1a1a;
+            line-height: 1.6;
+            background: #fafafa;
+        }
+
+        h1 {
+            color: #1a1a2e;
+            border-bottom: 3px solid #7c3aed;
+            padding-bottom: 10px;
+            font-size: 22px;
+        }
+
+        h2 {
+            color: #5b21b6;
+            margin-top: 40px;
+            font-size: 18px;
+            border-left: 4px solid #7c3aed;
+            padding-left: 12px;
+        }
+
+        .email-block {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 24px 28px;
+            margin: 16px 0 32px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        }
+
+        .email-header {
+            background: #f3f4f6;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .email-header strong {
+            display: inline-block;
+            width: 70px;
+            color: #4b5563;
+        }
+
+        .email-body {
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .email-body p {
+            margin: 10px 0;
+        }
+
+        .note {
+            background: #f5f3ff;
+            border-left: 4px solid #7c3aed;
+            padding: 12px 16px;
+            margin: 16px 0;
+            font-size: 13px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .priority-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .tag-recommended {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .tag-explore {
+            background: #fef9c3;
+            color: #854d0e;
+        }
+
+        .tag-bundled {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 40px 0;
+        }
+
+        ul {
+            margin: 8px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin: 4px 0;
+        }
+
+        .context-box {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin: 16px 0 28px 0;
+        }
+
+        .context-box h3 {
+            font-size: 14px;
+            color: #5b21b6;
+            margin-bottom: 8px;
+        }
+
+        .context-box table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .context-box th {
+            background: #f3f4f6;
+            padding: 6px 10px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid #d1d5db;
+        }
+
+        .context-box td {
+            padding: 6px 10px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>E4 Battery Charger &mdash; Outreach Email Drafts</h1>
+
+    <p><strong>Prepared:</strong> February 11, 2026<br>
+        <strong>Purpose:</strong> Initial outreach to charger suppliers identified in the Charger Supplier Selection Report<br>
+        <strong>Contact:</strong> Federico Pastore, Lead Battery Engineer, Flyability SA, Paudex
+    </p>
+
+    <div class="note">
+        <strong>Charger context:</strong> The E4 charger is a smart charger, not a simple CC/CV power supply.
+        It must communicate with the BMS, authenticate the battery, and actively discharge to 30% SOC for IATA
+        transport compliance. Suppliers already contacted for pack assembly (Packet Digital, Tulip Tech, Apex)
+        should receive a bundled inquiry that adds the charger scope to the existing conversation.
+    </div>
+
+    <div class="context-box">
+        <h3>E4 Charger Quick Spec (for reference)</h3>
+        <table>
+            <tr><th>Parameter</th><th>Value</th></tr>
+            <tr><td>Configuration</td><td>6S Li-ion (silicon-anode pouch cells)</td></tr>
+            <tr><td>Charge voltage (CV)</td><td>26.1 V &plusmn; TBD%</td></tr>
+            <tr><td>Charge current (CC)</td><td>~13 A (1C for 13 Ah pack) &mdash; TBD</td></tr>
+            <tr><td>Power</td><td>~340 W</td></tr>
+            <tr><td>Max output voltage (fault)</td><td>&lt; 31.3 V</td></tr>
+            <tr><td>BMS communication</td><td>SMBus, I2C, UART, or CAN (TBD, must match BMS)</td></tr>
+            <tr><td>Battery ID / authentication</td><td>Required &mdash; reject unknown batteries</td></tr>
+            <tr><td>Active discharge</td><td>To 30% SOC (IATA transport) and 60% SOC (storage)</td></tr>
+            <tr><td>Safety</td><td>IEC 62368-1 reinforced isolation</td></tr>
+            <tr><td>Volume</td><td>~6,000&ndash;7,000 units/year at steady state</td></tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <!-- ============================================================ -->
+    <!-- 1. PACKET DIGITAL (BUNDLED)                                  -->
+    <!-- ============================================================ -->
+
+    <h2>1. Packet Digital &mdash; Fargo, ND <span class="priority-tag tag-bundled">BUNDLED WITH PACK INQUIRY</span></h2>
+
+    <div class="note">Already in contact for pack assembly. Add charger scope to the existing conversation.</div>
+
+    <div class="email-block">
+        <div class="email-header">
+            <strong>To:</strong> info@packetdigital.com (or existing contact thread)<br>
+            <strong>Subject:</strong> Follow-up: charger development alongside pack assembly - Flyability E4
+        </div>
+        <div class="email-body">
+            <p>Hi,</p>
+
+            <p>Following up on our pack assembly discussion. We also need a smart charger for the E4 and noticed
+                that Packet Digital builds chargers with BMS handshake for UAS programs.</p>
+
+            <p>In short: 6S Li-ion, 26.1 V / ~13 A (~340 W), with BMS communication for charge authorization,
+                battery authentication, active discharge to 30% SOC (IATA transport), and IEC 62368-1 isolation.
+                Volume same as the packs (~6&ndash;7K/year).</p>
+
+            <p>Would it make sense to discuss charger and pack together?</p>
+
+            <p>Best regards,<br>
+                Federico Pastore<br>
+                Lead Battery Engineer, Flyability SA, Paudex</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- ============================================================ -->
+    <!-- 2. GLOBTEK                                                   -->
+    <!-- ============================================================ -->
+
+    <h2>2. GlobTek &mdash; Northvale, NJ <span class="priority-tag tag-recommended">RECOMMENDED</span></h2>
+
+    <div class="email-block">
+        <div class="email-header">
+            <strong>To:</strong> sales@globtek.com<br>
+            <strong>Subject:</strong> Custom smart charger inquiry - 6S Li-ion drone battery - Flyability
+        </div>
+        <div class="email-body">
+            <p>Hello,</p>
+
+            <p>I'm Federico Pastore, Lead Battery Engineer at Flyability. We build inspection drones for confined
+                spaces and we're developing a new battery platform (E4).</p>
+
+            <p>GlobTek caught our attention because of your TI-based charging platforms, which could align well
+                with our BMS (TI BQ41z90). We need:</p>
+
+            <ul>
+                <li>6S Li-ion, 26.1 V / ~13 A (~340 W)</li>
+                <li>Digital communication with BMS (protocol TBD) for charge authorization and monitoring</li>
+                <li>Battery authentication (unique ID) and active discharge to 30% SOC (IATA transport)</li>
+                <li>IEC 62368-1 isolation</li>
+                <li>~6,000&ndash;7,000 units/year</li>
+            </ul>
+
+            <p>Key question: can your platform support active discharge (bidirectional)? Happy to share detailed
+                specs under NDA if there's a fit.</p>
+
+            <p>Best regards,<br>
+                Federico Pastore<br>
+                Lead Battery Engineer, Flyability SA, Paudex</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- ============================================================ -->
+    <!-- 3. INVENTUS POWER                                            -->
+    <!-- ============================================================ -->
+
+    <h2>3. Inventus Power &mdash; Woodridge, IL <span class="priority-tag tag-recommended">RECOMMENDED</span></h2>
+
+    <div class="email-block">
+        <div class="email-header">
+            <strong>To:</strong> sales@inventuspower.com (or via inventuspower.com/contact/)<br>
+            <strong>Subject:</strong> Custom drone battery charger inquiry - Flyability (Swiss OEM)
+        </div>
+        <div class="email-body">
+            <p>Hello,</p>
+
+            <p>I'm Federico Pastore, Lead Battery Engineer at Flyability. We build inspection drones and we're
+                looking for a charger partner for our next-gen battery platform (E4).</p>
+
+            <p>Inventus stood out for your drone battery experience and custom firmware capability. We need:</p>
+
+            <ul>
+                <li>6S Li-ion smart charger (26.1 V / ~13 A, ~340 W)</li>
+                <li>BMS communication (protocol TBD) for charge authorization and monitoring</li>
+                <li>Battery authentication and active discharge to 30% SOC (IATA transport)</li>
+                <li>IEC 62368-1 isolation, ~6,000&ndash;7,000 units/year</li>
+            </ul>
+
+            <p>Quick question: is US-based charger assembly possible, and do you have a minimum engagement size
+                for this volume? Happy to discuss further.</p>
+
+            <p>Best regards,<br>
+                Federico Pastore<br>
+                Lead Battery Engineer, Flyability SA, Paudex</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- ============================================================ -->
+    <!-- 4. RRC POWER SOLUTIONS                                       -->
+    <!-- ============================================================ -->
+
+    <h2>4. RRC Power Solutions &mdash; Homburg, Germany <span class="priority-tag tag-recommended">RECOMMENDED</span></h2>
+
+    <div class="email-block">
+        <div class="email-header">
+            <strong>To:</strong> info@rrc-ps.com<br>
+            <strong>Subject:</strong> Custom charger module inquiry - 6S Li-ion drone battery - Flyability
+        </div>
+        <div class="email-body">
+            <p>Hello,</p>
+
+            <p>I'm Federico Pastore, Lead Battery Engineer at Flyability. We build inspection drones and we're
+                looking for a charger module for our next-gen battery (E4).</p>
+
+            <p>RRC's PMM series caught our attention for the digital BMS interface. We need:</p>
+
+            <ul>
+                <li>6S Li-ion, 26.1 V / ~13 A (~340 W)</li>
+                <li>BMS communication (protocol TBD) for charge authorization and monitoring</li>
+                <li>Battery authentication and active discharge to 30% SOC (IATA transport)</li>
+                <li>IEC 62368-1 isolation, ~6,000&ndash;7,000 units/year</li>
+            </ul>
+
+            <p>Two questions: does the PMM series go up to ~340 W, and is active discharge feasible as a custom
+                feature? Happy to share specs under NDA.</p>
+
+            <p>Best regards,<br>
+                Federico Pastore<br>
+                Lead Battery Engineer, Flyability SA, Paudex</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- ============================================================ -->
+    <!-- 5. TULIP TECH (BUNDLED)                                      -->
+    <!-- ============================================================ -->
+
+    <h2>5. Tulip Tech &mdash; Den Bosch, NL <span class="priority-tag tag-bundled">BUNDLED WITH PACK INQUIRY</span></h2>
+
+    <div class="note">Already in contact for pack assembly. Add charger scope to the existing conversation.</div>
+
+    <div class="email-block">
+        <div class="email-header">
+            <strong>To:</strong> (existing contact thread)<br>
+            <strong>Subject:</strong> Follow-up: smart charger alongside battery pack - Flyability E4
+        </div>
+        <div class="email-body">
+            <p>Hi,</p>
+
+            <p>Following up on our pack assembly discussion. We also need a smart charger for the E4 and saw
+                that Tulip offers chargers as part of your battery ecosystem.</p>
+
+            <p>Quick specs: 6S Li-ion, 26.1 V / ~13 A (~340 W), BMS communication, battery authentication,
+                active discharge to 30% SOC (IATA transport), IEC 62368-1 isolation. Same volume as the packs.</p>
+
+            <p>One question: can your charger work with an external BMS (we use our own design), or is it
+                tied to the Tulip ecosystem? If there's flexibility, we could discuss charger and pack together.</p>
+
+            <p>Best regards,<br>
+                Federico Pastore<br>
+                Lead Battery Engineer, Flyability SA, Paudex</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- ============================================================ -->
+    <!-- 6. EFT MOBILITY                                              -->
+    <!-- ============================================================ -->
+
+    <h2>6. EFT Mobility AG &mdash; Munich, Germany <span class="priority-tag tag-recommended">RECOMMENDED</span></h2>
+
+    <div class="email-block">
+        <div class="email-header">
+            <strong>To:</strong> info@eftmobility.com<br>
+            <strong>Subject:</strong> NATO-Standard-Charger inquiry for drone battery - Flyability (Swiss OEM)
+        </div>
+        <div class="email-body">
+            <p>Hello,</p>
+
+            <p>I'm Federico Pastore, Lead Battery Engineer at Flyability. We build inspection drones and we're
+                developing a new battery platform (E4).</p>
+
+            <p>Your NATO-Standard-Charger caught our attention because it supports 6S and CAN/UART, which fits
+                our requirements well. We need:</p>
+
+            <ul>
+                <li>6S Li-ion, 26.1 V / ~13 A (~340 W)</li>
+                <li>BMS communication for charge authorization and monitoring</li>
+                <li>Battery authentication and active discharge to 30% SOC (IATA transport)</li>
+                <li>IEC 62368-1 isolation, ~6,000&ndash;7,000 units/year</li>
+            </ul>
+
+            <p>We're also exploring your platform for the pack itself, so there could be synergies. Would you
+                have time for a call?</p>
+
+            <p>Best regards,<br>
+                Federico Pastore<br>
+                Lead Battery Engineer, Flyability SA, Paudex</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- ============================================================ -->
+    <!-- 7. MASCOT AS                                                 -->
+    <!-- ============================================================ -->
+
+    <h2>7. Mascot AS &mdash; Fredrikstad, Norway <span class="priority-tag tag-recommended">RECOMMENDED</span></h2>
+
+    <div class="email-block">
+        <div class="email-header">
+            <strong>To:</strong> customdesign@mascot.no<br>
+            <strong>Subject:</strong> Custom Li-ion charger inquiry - drone application - Flyability
+        </div>
+        <div class="email-body">
+            <p>Hello,</p>
+
+            <p>I'm Federico Pastore, Lead Battery Engineer at Flyability. We build inspection drones and we're
+                looking for a charger partner for our next-gen battery (E4).</p>
+
+            <p>Mascot's custom design capability and IEC 62368-1 certification experience are relevant. We need:</p>
+
+            <ul>
+                <li>6S Li-ion smart charger (26.1 V / ~13 A, ~340 W)</li>
+                <li>Digital communication with BMS (protocol TBD) for charge authorization</li>
+                <li>Battery authentication and active discharge to 30% SOC (IATA transport)</li>
+                <li>IEC 62368-1 isolation, ~6,000&ndash;7,000 units/year</li>
+            </ul>
+
+            <p>What is the typical NRE and timeline for a custom charger at this power level? Happy to discuss.</p>
+
+            <p>Best regards,<br>
+                Federico Pastore<br>
+                Lead Battery Engineer, Flyability SA, Paudex</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- ============================================================ -->
+    <!-- 8. APEX MOBILE POWER (BUNDLED)                               -->
+    <!-- ============================================================ -->
+
+    <h2>8. Apex Mobile Power &mdash; Atlanta, GA <span class="priority-tag tag-bundled">BUNDLED WITH PACK INQUIRY</span></h2>
+
+    <div class="note">Already in contact for pack assembly. Add charger scope to the existing conversation.</div>
+
+    <div class="email-block">
+        <div class="email-header">
+            <strong>To:</strong> (existing contact thread)<br>
+            <strong>Subject:</strong> Follow-up: charger development alongside pack - Flyability E4
+        </div>
+        <div class="email-body">
+            <p>Hi,</p>
+
+            <p>Following up on our pack discussion. We also need a smart charger for the E4: 6S Li-ion,
+                26.1 V / ~13 A (~340 W), with BMS communication, battery authentication, and active discharge
+                to 30% SOC (IATA transport). IEC 62368-1 isolation. Same volume as the packs.</p>
+
+            <p>Is charger development something you handle in-house? If so, could make sense to bundle it
+                with the pack project.</p>
+
+            <p>Best regards,<br>
+                Federico Pastore<br>
+                Lead Battery Engineer, Flyability SA, Paudex</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- ============================================================ -->
+    <!-- 9. CUSTOM POWER                                              -->
+    <!-- ============================================================ -->
+
+    <h2>9. Custom Power &mdash; UK <span class="priority-tag tag-explore">WORTH EXPLORING</span></h2>
+
+    <div class="email-block">
+        <div class="email-header">
+            <strong>To:</strong> sales@custompower.co.uk<br>
+            <strong>Subject:</strong> Smart charger inquiry for drone battery - Flyability (Swiss OEM)
+        </div>
+        <div class="email-body">
+            <p>Hello,</p>
+
+            <p>I'm Federico Pastore, Lead Battery Engineer at Flyability. We build inspection drones and need
+                a smart charger for our next-gen battery (E4). Your drone/UAV focus and in-house firmware
+                capability are relevant.</p>
+
+            <p>Quick specs: 6S Li-ion, 26.1 V / ~13 A (~340 W), BMS communication (protocol TBD), battery
+                authentication, active discharge to 30% SOC (IATA transport), IEC 62368-1 isolation.
+                ~6,000&ndash;7,000 units/year.</p>
+
+            <p>Would you be open to a short call to discuss?</p>
+
+            <p>Best regards,<br>
+                Federico Pastore<br>
+                Lead Battery Engineer, Flyability SA, Paudex</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- ============================================================ -->
+    <!-- 10. SKYCHARGE                                                -->
+    <!-- ============================================================ -->
+
+    <h2>10. Skycharge &mdash; Germany <span class="priority-tag tag-explore">WORTH EXPLORING</span></h2>
+
+    <div class="email-block">
+        <div class="email-header">
+            <strong>To:</strong> info@skycharge.de<br>
+            <strong>Subject:</strong> Smart charger for drone battery - Flyability inquiry
+        </div>
+        <div class="email-body">
+            <p>Hello,</p>
+
+            <p>I'm Federico Pastore, Lead Battery Engineer at Flyability. We build inspection drones and need
+                a smart charger for our next-gen battery (E4): 6S Li-ion, 26.1 V / ~13 A (~340 W), with BMS
+                communication, battery authentication, and active discharge to 30% SOC (IATA transport).</p>
+
+            <p>Your charging system with BMS communication and discharge capability looks like a potential fit.
+                Key question: is the platform adaptable to work with a third-party BMS? We use our own design.</p>
+
+            <p>Happy to discuss further.</p>
+
+            <p>Best regards,<br>
+                Federico Pastore<br>
+                Lead Battery Engineer, Flyability SA, Paudex</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- ============================================================ -->
+    <!-- 11. TITAN POWER USA                                          -->
+    <!-- ============================================================ -->
+
+    <h2>11. Titan Power USA &mdash; Pocatello, ID <span class="priority-tag tag-explore">WORTH EXPLORING</span></h2>
+
+    <div class="note">Already contacted for pack assembly. Charger capability not yet discussed.</div>
+
+    <div class="email-block">
+        <div class="email-header">
+            <strong>To:</strong> (existing contact thread, or info@titanbatteries.com)<br>
+            <strong>Subject:</strong> Follow-up: charger capability alongside battery pack - Flyability E4
+        </div>
+        <div class="email-body">
+            <p>Hi,</p>
+
+            <p>Quick follow-up to our pack discussion. We also need a smart charger for the E4 battery: 6S Li-ion,
+                26.1 V / ~13 A (~340 W), with BMS communication, battery authentication, and active discharge to
+                30% SOC for IATA transport.</p>
+
+            <p>Is charger development something Titan Power handles, and if so, would it make sense to bundle it
+                with the pack project?</p>
+
+            <p>Best regards,<br>
+                Federico Pastore<br>
+                Lead Battery Engineer, Flyability SA, Paudex</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- ============================================================ -->
+    <!-- SUMMARY TABLE                                                -->
+    <!-- ============================================================ -->
+
+    <h2 style="border-left-color: #1a1a2e; color: #1a1a2e;">Summary &mdash; Outreach Priority</h2>
+
+    <div class="context-box">
+        <table>
+            <tr>
+                <th>Supplier</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Key question to answer</th>
+            </tr>
+            <tr>
+                <td><strong>Packet Digital</strong></td>
+                <td>Fargo, ND</td>
+                <td>Already in contact (pack)</td>
+                <td style="color:#166534;">Bundle charger</td>
+                <td>Can we get combined pack + charger pricing?</td>
+            </tr>
+            <tr>
+                <td><strong>GlobTek</strong></td>
+                <td>Northvale, NJ</td>
+                <td>New outreach</td>
+                <td style="color:#166534;">Recommended</td>
+                <td>Can they do active discharge? NRE for custom dev?</td>
+            </tr>
+            <tr>
+                <td><strong>Inventus Power</strong></td>
+                <td>Woodridge, IL</td>
+                <td>New outreach</td>
+                <td style="color:#166534;">Recommended</td>
+                <td>US assembly possible? Min engagement size?</td>
+            </tr>
+            <tr>
+                <td><strong>RRC Power Solutions</strong></td>
+                <td>Homburg, DE</td>
+                <td>New outreach</td>
+                <td style="color:#166534;">Recommended</td>
+                <td>Power limit (240 W vs 340 W)? Active discharge?</td>
+            </tr>
+            <tr>
+                <td><strong>Tulip Tech</strong></td>
+                <td>Den Bosch, NL</td>
+                <td>Already in contact (pack)</td>
+                <td style="color:#166534;">Bundle charger</td>
+                <td>Can their charger work with an external BMS?</td>
+            </tr>
+            <tr>
+                <td><strong>EFT Mobility</strong></td>
+                <td>Munich, DE</td>
+                <td>New outreach</td>
+                <td style="color:#166534;">Recommended</td>
+                <td>Production scale for 6&ndash;7K/yr? IEC 62368-1?</td>
+            </tr>
+            <tr>
+                <td><strong>Mascot AS</strong></td>
+                <td>Fredrikstad, NO</td>
+                <td>New outreach</td>
+                <td style="color:#166534;">Recommended</td>
+                <td>NRE + timeline? BMS comms experience?</td>
+            </tr>
+            <tr>
+                <td><strong>Apex Mobile Power</strong></td>
+                <td>Atlanta, GA</td>
+                <td>Already in contact (pack)</td>
+                <td style="color:#1e40af;">Bundle charger</td>
+                <td>In-house charger dev or outsourced?</td>
+            </tr>
+            <tr>
+                <td><strong>Custom Power</strong></td>
+                <td>UK</td>
+                <td>New outreach</td>
+                <td style="color:#854d0e;">Explore</td>
+                <td>Can they deliver active discharge at volume?</td>
+            </tr>
+            <tr>
+                <td><strong>Skycharge</strong></td>
+                <td>Germany</td>
+                <td>New outreach</td>
+                <td style="color:#854d0e;">Explore</td>
+                <td>Platform adaptability to third-party BMS?</td>
+            </tr>
+            <tr>
+                <td><strong>Titan Power USA</strong></td>
+                <td>Pocatello, ID</td>
+                <td>Already in contact (pack)</td>
+                <td style="color:#854d0e;">Bundle/explore</td>
+                <td>Do they do charger development at all?</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="note">
+        <strong>Timeline:</strong> Per the project Gantt, charger supplier selection runs Feb 16 &ndash; Mar 27, 2026.
+        Interviews and discussions should happen Mar 9&ndash;20, with final selection by Mar 27. Charger development
+        at the selected supplier is planned for May 1 &ndash; Sep 15, 2026, with prototype production Sep 15 &ndash; Nov 1.
+    </div>
+
+</body>
+
+</html>

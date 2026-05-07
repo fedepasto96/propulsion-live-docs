@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Charger Supplier Scouting &mdash; Unified Ranking</title>
+<style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; color: #1a1a1a; background: #fafafa; }
+    h1 { font-size: 20px; color: #1a1a2e; }
+    h2 { font-size: 16px; color: #1e40af; margin-top: 30px; }
+    h3 { font-size: 14px; color: #1e40af; margin-top: 18px; }
+    table { border-collapse: collapse; width: 100%; font-size: 12px; background: white; }
+    th, td { border: 1px solid #d1d5db; padding: 6px 8px; text-align: left; vertical-align: top; }
+    th { background: #1e3a5f; color: white; font-weight: 600; position: sticky; top: 0; }
+    tr:nth-child(even) { background: #f9fafb; }
+    tr:hover { background: #eef2ff; }
+    .score-cell { text-align:center; font-weight:700; font-size:11.5px; border-radius:3px; padding:2px 5px; }
+    .s-high { background:#d1fae5; color:#065f46; }
+    .s-mid  { background:#fef3c7; color:#92400e; }
+    .s-low  { background:#fee2e2; color:#7f1d1d; }
+    .score-big { font-size:13px; font-weight:700; }
+    .rank-num { display:inline-flex; align-items:center; justify-content:center; background:#1e3a5f; color:white; border-radius:50%; width:22px; height:22px; font-size:11px; font-weight:700; flex-shrink:0; }
+    .ranking-table { border-collapse:collapse; width:100%; font-size:11.5px; background:white; margin-bottom:24px; }
+    .ranking-table th { background:#374151; color:white; padding:5px 7px; text-align:left; font-size:11px; }
+    .ranking-table th[title] { cursor:help; border-bottom:2px dashed #9ca3af; }
+    .ranking-table td { border:1px solid #e5e7eb; padding:4px 7px; vertical-align:middle; }
+    .ranking-table tr:nth-child(even) { background:#f9fafb; }
+    .ranking-table tr:hover { background:#eef2ff; }
+    .method-box { background:#f0f9ff; border:1px solid #bae6fd; border-radius:6px; padding:14px 18px; font-size:12.5px; margin:16px 0; line-height:1.6; }
+    .method-box strong { color:#0c4a6e; }
+    .method-weight { display:inline-block; background:#0ea5e9; color:white; border-radius:3px; padding:1px 5px; font-size:11px; font-weight:700; margin-left:3px; }
+    .intro { background: #fff; border-left: 4px solid #2563eb; padding: 14px 18px; font-size: 13px; line-height: 1.6; margin: 16px 0 24px 0; border-radius: 0 6px 6px 0; }
+    .intro strong { color: #1e3a5f; }
+    .note { font-size: 12px; color: #374151; margin-top: 14px; line-height: 1.55; }
+    ul.tier-list { font-size: 12.5px; line-height: 1.6; }
+    a.company-link { color: #1d4ed8; text-decoration: underline; font-weight: 600; }
+    a.company-link:hover { color: #1e3a8a; }
+    .tag { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 11px; font-weight: 600; }
+    .tw { background: #dbeafe; color: #1e40af; }
+    .cn { background: #fde68a; color: #92400e; }
+    .us { background: #d1fae5; color: #065f46; }
+    .eu { background: #e5e7eb; color: #374151; }
+    .gl { background: #f3e8ff; color: #6b21a8; }
+    .src-tag { display:inline-block; padding:1px 5px; border-radius:3px; font-size:10px; font-weight:600; margin-left:4px; }
+    .src1 { background:#bfdbfe; color:#1e40af; }
+    .src2 { background:#fde68a; color:#92400e; }
+</style>
+</head>
+<body>
+
+<h1>Charger Supplier Scouting &mdash; Unified Ranking</h1>
+<p style="font-size:13px;"><strong>Updated:</strong> April 2026 | <strong>Project:</strong> E4 Battery | <strong>Owner:</strong> Federico Pastore</p>
+
+<div class="intro">
+    <p><strong>Purpose.</strong> This document merges the two existing charger scouting reports into a single, scored ranking:</p>
+    <ul style="margin:6px 0 6px 18px;">
+        <li><strong>Phase 1</strong> &mdash; <em>Charger Supplier Selection Report</em> (Feb 2026): US/EU-focused, NDAA as hard gate.</li>
+        <li><strong>Phase 2</strong> &mdash; <em>Cost-Effective Asia &amp; Global Scouting</em> (Apr 2026): cost-first lens, NDAA softened.</li>
+    </ul>
+    <p>Suppliers from both phases are evaluated on a <strong>unified set of 6 metrics</strong> derived from the E4 Battery charger Technical Requirements (TR-82 to TR-102) and the Cost Estimation Guideline. Two suppliers (Chroma ATE = test equipment; Skycharge = docking station) are excluded as they are not charger OEMs.</p>
+    <p><strong>Source tags:</strong> <span class="src-tag src1">Ph.1</span> = Phase 1 report &nbsp; <span class="src-tag src2">Ph.2</span> = Phase 2 cost-effective addendum &nbsp; <span class="src-tag src1">Ph.1</span><span class="src-tag src2">Ph.2</span> = appears in both.</p>
+</div>
+
+<h2 style="margin-top:28px;">Supplier Ranking &mdash; Composite Score</h2>
+<div class="method-box">
+    <strong>Scoring methodology.</strong> Each supplier is scored 1&ndash;10 on six criteria, weighted to reflect the E4 charger program priorities (6S / 26.1 V, BMS handshake, IATA transport mode, 1&ndash;10 k units/yr, USD&nbsp;200&ndash;500 target):
+    <ul style="margin:6px 0 4px 18px; padding:0;">
+        <li><strong>Smart Charger Intelligence (SCI)</strong> <span class="method-weight">30%</span> &mdash; BMS communication (TR-94), battery ID (TR-95), charge-authorization handshake (TR-97), real-time status reading (TR-96). The core &ldquo;smart charger&rdquo; differentiator.</li>
+        <li><strong>Active Discharge &amp; Modes (ADM)</strong> <span class="method-weight">20%</span> &mdash; Bidirectional capability or discharge path to 30% SOC (TR-101, transport &mdash; IATA 2026 mandatory) and 60% SOC (TR-100, storage). A hard requirement.</li>
+        <li><strong>Safety &amp; Certification (SAF)</strong> <span class="method-weight">15%</span> &mdash; IEC 62368-1 reinforced isolation (TR-90), OVP &lt; 31.3 V (TR-93), CE/UL, thermal protection (TR-91). Table-stakes but discriminating on depth.</li>
+        <li><strong>Cost Competitiveness (COST)</strong> <span class="method-weight">15%</span> &mdash; Realistic ability to land a 4-port smart charger in the USD&nbsp;200&ndash;500/unit bracket at 1&ndash;10 k/yr (Delta benchmark &plusmn;). Cost Estimation Guideline: quote at 1,000&ndash;7,000 units/yr.</li>
+        <li><strong>Drone / UAS Pedigree (UAV)</strong> <span class="method-weight">10%</span> &mdash; Track record with UAV chargers, multi-bay field units, or closely adjacent sectors (robotics, defense autonomous systems).</li>
+        <li><strong>Industrial Scale &amp; Stability (IND)</strong> <span class="method-weight">10%</span> &mdash; Headcount, revenue, manufacturing footprint, and ability to sustain a multi-year program.</li>
+    </ul>
+    <strong>Formula: Score = SCI&times;0.30 + ADM&times;0.20 + SAF&times;0.15 + COST&times;0.15 + UAV&times;0.10 + IND&times;0.10</strong> (max 10.0).
+    <span class="score-cell s-high" style="font-size:11px;">Green &ge; 6.5</span> &nbsp;
+    <span class="score-cell s-mid" style="font-size:11px;">Amber 4.5&ndash;6.4</span> &nbsp;
+    <span class="score-cell s-low" style="font-size:11px;">Red &lt; 4.5</span>
+</div>
+
+<table class="ranking-table">
+<thead><tr>
+    <th style="width:30px;">#</th>
+    <th>Supplier</th>
+    <th>Source</th>
+    <th>Region</th>
+    <th title="Smart Charger Intelligence /10 (30%) &mdash; BMS comms, battery ID, handshake, status reading">SCI /10</th>
+    <th title="Active Discharge &amp; Modes /10 (20%) &mdash; bidirectional / discharge to 30% transport / 60% storage">ADM /10</th>
+    <th title="Safety &amp; Certification /10 (15%) &mdash; IEC 62368-1, CE/UL, OVP, thermal">SAF /10</th>
+    <th title="Cost Competitiveness /10 (15%) &mdash; realistic USD 200-500/unit for 4-port at 1-10k/yr">COST /10</th>
+    <th title="Drone / UAS Pedigree /10 (10%)">UAV /10</th>
+    <th title="Industrial Scale &amp; Stability /10 (10%)">IND /10</th>
+    <th title="Composite Score = SCI&times;0.30 + ADM&times;0.20 + SAF&times;0.15 + COST&times;0.15 + UAV&times;0.10 + IND&times;0.10">Score</th>
+</tr></thead>
+<tbody>
+<!-- 1 --><tr><td><span class="rank-num">1</span></td><td><a class="company-link" href="https://www.grepow.com/" target="_blank"><strong>Grepow / Tattu</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag cn">CN</span></td>
+    <td class="score-cell s-high">9</td><td class="score-cell s-mid">6</td><td class="score-cell s-mid">5</td><td class="score-cell s-high">9</td><td class="score-cell s-high">10</td><td class="score-cell s-mid">6</td>
+    <td class="score-cell s-high score-big">7.6</td></tr>
+<!-- 2 --><tr><td><span class="rank-num">2</span></td><td><a class="company-link" href="https://packetdigital.com/batteries/smart-chargers/" target="_blank"><strong>Packet Digital</strong></a></td><td><span class="src-tag src1">Ph.1</span></td><td><span class="tag us">US</span></td>
+    <td class="score-cell s-high">10</td><td class="score-cell s-high">9</td><td class="score-cell s-mid">6</td><td class="score-cell s-low">3</td><td class="score-cell s-high">10</td><td class="score-cell s-low">3</td>
+    <td class="score-cell s-high score-big">7.5</td></tr>
+<!-- 3 --><tr><td><span class="rank-num">3</span></td><td><a class="company-link" href="https://www.deltaww.com/" target="_blank"><strong>Delta Electronics</strong></a></td><td><span class="src-tag src1">Ph.1</span></td><td><span class="tag tw">TW/Global</span></td>
+    <td class="score-cell s-high">7</td><td class="score-cell s-mid">5</td><td class="score-cell s-high">9</td><td class="score-cell s-high">9</td><td class="score-cell s-low">3</td><td class="score-cell s-high">10</td>
+    <td class="score-cell s-high score-big">7.1</td></tr>
+<!-- 4 --><tr><td><span class="rank-num">4</span></td><td><a class="company-link" href="https://www.foxtechuav.com/" target="_blank"><strong>Foxtech</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag cn">CN</span></td>
+    <td class="score-cell s-high">8</td><td class="score-cell s-mid">5</td><td class="score-cell s-mid">5</td><td class="score-cell s-high">8</td><td class="score-cell s-high">9</td><td class="score-cell s-low">4</td>
+    <td class="score-cell s-high score-big">6.7</td></tr>
+<!-- 5 --><tr><td><span class="rank-num">5</span></td><td><a class="company-link" href="https://www.meanwell.com/" target="_blank"><strong>Mean Well</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag tw">TW</span></td>
+    <td class="score-cell s-mid">5</td><td class="score-cell s-high">8</td><td class="score-cell s-high">9</td><td class="score-cell s-high">8</td><td class="score-cell s-low">1</td><td class="score-cell s-high">9</td>
+    <td class="score-cell s-high score-big">6.7</td></tr>
+<!-- 6 --><tr><td><span class="rank-num">6</span></td><td><a class="company-link" href="https://www.phihong.com/" target="_blank"><strong>Phihong</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag tw">TW</span></td>
+    <td class="score-cell s-high">7</td><td class="score-cell s-low">4</td><td class="score-cell s-high">8</td><td class="score-cell s-high">8</td><td class="score-cell s-mid">6</td><td class="score-cell s-high">7</td>
+    <td class="score-cell s-high score-big">6.6</td></tr>
+<!-- 7 --><tr><td><span class="rank-num">7</span></td><td><a class="company-link" href="https://tulip.tech/" target="_blank"><strong>Tulip Tech</strong></a></td><td><span class="src-tag src1">Ph.1</span></td><td><span class="tag eu">EU/NL</span></td>
+    <td class="score-cell s-high">9</td><td class="score-cell s-mid">5</td><td class="score-cell s-mid">5</td><td class="score-cell s-mid">5</td><td class="score-cell s-high">10</td><td class="score-cell s-low">3</td>
+    <td class="score-cell s-high score-big">6.5</td></tr>
+<!-- 8 --><tr><td><span class="rank-num">8</span></td><td><a class="company-link" href="https://ev-peak.com/" target="_blank"><strong>EV-PEAK (U6Q)</strong></a></td><td><span class="src-tag src1">Ph.1</span><span class="src-tag src2">Ph.2</span></td><td><span class="tag cn">CN</span></td>
+    <td class="score-cell s-high">7</td><td class="score-cell s-mid">5</td><td class="score-cell s-mid">5</td><td class="score-cell s-high">8</td><td class="score-cell s-high">8</td><td class="score-cell s-mid">5</td>
+    <td class="score-cell s-mid score-big">6.4</td></tr>
+<!-- 9 --><tr><td><span class="rank-num">9</span></td><td><a class="company-link" href="https://inventuspower.com/" target="_blank"><strong>Inventus Power</strong></a></td><td><span class="src-tag src1">Ph.1</span></td><td><span class="tag us">US/Global</span></td>
+    <td class="score-cell s-high">8</td><td class="score-cell s-mid">5</td><td class="score-cell s-high">7</td><td class="score-cell s-low">3</td><td class="score-cell s-high">7</td><td class="score-cell s-high">7</td>
+    <td class="score-cell s-mid score-big">6.3</td></tr>
+<!-- 10 --><tr><td><span class="rank-num">10</span></td><td><a class="company-link" href="https://www.mgm-compro.com/" target="_blank"><strong>MGM COMPRO</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag eu">EU/CZ</span></td>
+    <td class="score-cell s-high">7</td><td class="score-cell s-mid">5</td><td class="score-cell s-high">7</td><td class="score-cell s-mid">5</td><td class="score-cell s-high">9</td><td class="score-cell s-low">3</td>
+    <td class="score-cell s-mid score-big">6.1</td></tr>
+<!-- 11 --><tr><td><span class="rank-num">11</span></td><td><a class="company-link" href="https://www.globtek.com/" target="_blank"><strong>GlobTek</strong></a></td><td><span class="src-tag src1">Ph.1</span></td><td><span class="tag us">US</span></td>
+    <td class="score-cell s-high">8</td><td class="score-cell s-low">4</td><td class="score-cell s-high">9</td><td class="score-cell s-low">4</td><td class="score-cell s-low">2</td><td class="score-cell s-mid">6</td>
+    <td class="score-cell s-mid score-big">6.0</td></tr>
+<!-- 12 --><tr><td><span class="rank-num">12</span></td><td><a class="company-link" href="https://www.friwo.com/" target="_blank"><strong>FRIWO</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag eu">DE/VN</span></td>
+    <td class="score-cell s-high">7</td><td class="score-cell s-low">4</td><td class="score-cell s-high">8</td><td class="score-cell s-mid">6</td><td class="score-cell s-low">3</td><td class="score-cell s-mid">6</td>
+    <td class="score-cell s-mid score-big">5.9</td></tr>
+<!-- 13 --><tr><td><span class="rank-num">13</span></td><td><a class="company-link" href="https://www.apexmobilepower.com/" target="_blank"><strong>Apex Mobile Power</strong></a></td><td><span class="src-tag src1">Ph.1</span></td><td><span class="tag us">US/VN</span></td>
+    <td class="score-cell s-high">7</td><td class="score-cell s-low">4</td><td class="score-cell s-mid">5</td><td class="score-cell s-mid">6</td><td class="score-cell s-high">7</td><td class="score-cell s-mid">5</td>
+    <td class="score-cell s-mid score-big">5.8</td></tr>
+<!-- 14 --><tr><td><span class="rank-num">14</span></td><td><a class="company-link" href="https://aerotate.com/" target="_blank"><strong>Aerotate</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag eu">EU/DE</span></td>
+    <td class="score-cell s-high">9</td><td class="score-cell s-low">4</td><td class="score-cell s-low">4</td><td class="score-cell s-low">4</td><td class="score-cell s-high">9</td><td class="score-cell s-low">1</td>
+    <td class="score-cell s-mid score-big">5.7</td></tr>
+<!-- 15 --><tr><td><span class="rank-num">15</span></td><td><a class="company-link" href="https://www.rrc-ps.com/" target="_blank"><strong>RRC Power Solutions</strong></a></td><td><span class="src-tag src1">Ph.1</span></td><td><span class="tag eu">EU/DE</span></td>
+    <td class="score-cell s-high">7</td><td class="score-cell s-low">4</td><td class="score-cell s-high">9</td><td class="score-cell s-mid">5</td><td class="score-cell s-low">2</td><td class="score-cell s-mid">5</td>
+    <td class="score-cell s-mid score-big">5.7</td></tr>
+<!-- 16 --><tr><td><span class="rank-num">16</span></td><td><a class="company-link" href="https://eftmobility.com/" target="_blank"><strong>EFT Mobility AG</strong></a></td><td><span class="src-tag src1">Ph.1</span></td><td><span class="tag eu">EU/DE</span></td>
+    <td class="score-cell s-high">8</td><td class="score-cell s-low">4</td><td class="score-cell s-mid">5</td><td class="score-cell s-low">4</td><td class="score-cell s-high">9</td><td class="score-cell s-low">2</td>
+    <td class="score-cell s-mid score-big">5.7</td></tr>
+<!-- 17 --><tr><td><span class="rank-num">17</span></td><td><a class="company-link" href="https://www.bmz-group.com/" target="_blank"><strong>BMZ Group</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag eu">DE/Global</span></td>
+    <td class="score-cell s-high">7</td><td class="score-cell s-low">4</td><td class="score-cell s-high">7</td><td class="score-cell s-mid">5</td><td class="score-cell s-low">3</td><td class="score-cell s-mid">6</td>
+    <td class="score-cell s-mid score-big">5.6</td></tr>
+<!-- 18 --><tr><td><span class="rank-num">18</span></td><td><a class="company-link" href="https://custompower.co.uk/" target="_blank"><strong>Custom Power</strong></a></td><td><span class="src-tag src1">Ph.1</span></td><td><span class="tag us">UK/US</span></td>
+    <td class="score-cell s-high">7</td><td class="score-cell s-low">4</td><td class="score-cell s-mid">6</td><td class="score-cell s-low">3</td><td class="score-cell s-high">8</td><td class="score-cell s-low">4</td>
+    <td class="score-cell s-mid score-big">5.5</td></tr>
+<!-- 19 --><tr><td><span class="rank-num">19</span></td><td><a class="company-link" href="https://www.skyrc.com/pc2500" target="_blank"><strong>SkyRC (PC2500)</strong></a></td><td><span class="src-tag src1">Ph.1</span><span class="src-tag src2">Ph.2</span></td><td><span class="tag cn">CN</span></td>
+    <td class="score-cell s-mid">6</td><td class="score-cell s-low">4</td><td class="score-cell s-low">3</td><td class="score-cell s-high">8</td><td class="score-cell s-high">7</td><td class="score-cell s-low">4</td>
+    <td class="score-cell s-mid score-big">5.4</td></tr>
+<!-- 20 --><tr><td><span class="rank-num">20</span></td><td><a class="company-link" href="https://www.cincon.com/" target="_blank"><strong>Cincon Electronics</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag tw">TW</span></td>
+    <td class="score-cell s-mid">5</td><td class="score-cell s-low">4</td><td class="score-cell s-high">8</td><td class="score-cell s-high">7</td><td class="score-cell s-low">2</td><td class="score-cell s-mid">5</td>
+    <td class="score-cell s-mid score-big">5.3</td></tr>
+<!-- 21 --><tr><td><span class="rank-num">21</span></td><td><a class="company-link" href="https://www.topband.com/" target="_blank"><strong>Topband</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag cn">CN</span></td>
+    <td class="score-cell s-mid">5</td><td class="score-cell s-low">3</td><td class="score-cell s-high">7</td><td class="score-cell s-high">8</td><td class="score-cell s-low">1</td><td class="score-cell s-high">8</td>
+    <td class="score-cell s-mid score-big">5.3</td></tr>
+<!-- 22 --><tr><td><span class="rank-num">22</span></td><td><a class="company-link" href="https://titanbatteries.com/" target="_blank"><strong>Titan Power USA</strong></a></td><td><span class="src-tag src1">Ph.1</span></td><td><span class="tag us">US</span></td>
+    <td class="score-cell s-mid">6</td><td class="score-cell s-low">4</td><td class="score-cell s-mid">5</td><td class="score-cell s-low">3</td><td class="score-cell s-high">8</td><td class="score-cell s-low">2</td>
+    <td class="score-cell s-mid score-big">4.8</td></tr>
+<!-- 23 --><tr><td><span class="rank-num">23</span></td><td><a class="company-link" href="https://www.acbel.com/" target="_blank"><strong>AcBel Polytech</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag tw">TW</span></td>
+    <td class="score-cell s-low">3</td><td class="score-cell s-low">3</td><td class="score-cell s-high">8</td><td class="score-cell s-high">8</td><td class="score-cell s-low">1</td><td class="score-cell s-high">8</td>
+    <td class="score-cell s-mid score-big">4.8</td></tr>
+<!-- 24 --><tr><td><span class="rank-num">24</span></td><td><a class="company-link" href="https://www.liteon.com/" target="_blank"><strong>Lite-On Technology</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag tw">TW</span></td>
+    <td class="score-cell s-low">3</td><td class="score-cell s-low">2</td><td class="score-cell s-high">8</td><td class="score-cell s-high">8</td><td class="score-cell s-low">1</td><td class="score-cell s-high">10</td>
+    <td class="score-cell s-mid score-big">4.8</td></tr>
+<!-- 25 --><tr><td><span class="rank-num">25</span></td><td><a class="company-link" href="https://smart-battery-solutions.de/" target="_blank"><strong>SBS</strong></a></td><td><span class="src-tag src1">Ph.1</span></td><td><span class="tag eu">EU/DE</span></td>
+    <td class="score-cell s-mid">5</td><td class="score-cell s-low">3</td><td class="score-cell s-mid">5</td><td class="score-cell s-mid">5</td><td class="score-cell s-high">7</td><td class="score-cell s-low">4</td>
+    <td class="score-cell s-mid score-big">4.7</td></tr>
+<!-- 26 --><tr><td><span class="rank-num">26</span></td><td><a class="company-link" href="https://heishatech.com/" target="_blank"><strong>HEISHA Tech</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag cn">CN</span></td>
+    <td class="score-cell s-low">4</td><td class="score-cell s-low">3</td><td class="score-cell s-low">3</td><td class="score-cell s-high">8</td><td class="score-cell s-high">7</td><td class="score-cell s-low">3</td>
+    <td class="score-cell s-low score-big">4.5</td></tr>
+<!-- 27 --><tr><td><span class="rank-num">27</span></td><td><a class="company-link" href="https://www.mascot.no/" target="_blank"><strong>Mascot AS</strong></a></td><td><span class="src-tag src1">Ph.1</span></td><td><span class="tag eu">EU/NO</span></td>
+    <td class="score-cell s-low">4</td><td class="score-cell s-low">3</td><td class="score-cell s-high">8</td><td class="score-cell s-mid">5</td><td class="score-cell s-low">1</td><td class="score-cell s-low">3</td>
+    <td class="score-cell s-low score-big">4.2</td></tr>
+<!-- 28 --><tr><td><span class="rank-num">28</span></td><td><a class="company-link" href="https://salcomp.com/" target="_blank"><strong>Salcomp</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag gl">FI/CN/IN</span></td>
+    <td class="score-cell s-low">2</td><td class="score-cell s-low">1</td><td class="score-cell s-high">7</td><td class="score-cell s-high">9</td><td class="score-cell s-low">0</td><td class="score-cell s-high">9</td>
+    <td class="score-cell s-low score-big">4.1</td></tr>
+<!-- 29 --><tr><td><span class="rank-num">29</span></td><td><a class="company-link" href="https://www.icharger-direct.com/" target="_blank"><strong>iCharger / Junsi</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag cn">CN</span></td>
+    <td class="score-cell s-low">3</td><td class="score-cell s-low">4</td><td class="score-cell s-low">2</td><td class="score-cell s-high">9</td><td class="score-cell s-mid">5</td><td class="score-cell s-low">2</td>
+    <td class="score-cell s-low score-big">4.1</td></tr>
+<!-- 30 --><tr><td><span class="rank-num">30</span></td><td><a class="company-link" href="https://www.schaeferpower.de/" target="_blank"><strong>Schaefer Electronic</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag eu">EU/DE</span></td>
+    <td class="score-cell s-low">4</td><td class="score-cell s-low">3</td><td class="score-cell s-high">7</td><td class="score-cell s-low">4</td><td class="score-cell s-low">1</td><td class="score-cell s-low">4</td>
+    <td class="score-cell s-low score-big">4.0</td></tr>
+<!-- 31 --><tr><td><span class="rank-num">31</span></td><td><a class="company-link" href="https://micropower-group.com/" target="_blank"><strong>Micropower Group</strong></a></td><td><span class="src-tag src1">Ph.1</span></td><td><span class="tag eu">EU/SE</span></td>
+    <td class="score-cell s-low">3</td><td class="score-cell s-low">3</td><td class="score-cell s-high">7</td><td class="score-cell s-mid">5</td><td class="score-cell s-low">1</td><td class="score-cell s-mid">5</td>
+    <td class="score-cell s-low score-big">3.9</td></tr>
+<!-- 32 --><tr><td><span class="rank-num">32</span></td><td><a class="company-link" href="https://hacker-industrial-solutions.com/" target="_blank"><strong>Hacker Industrial</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag eu">EU/DE</span></td>
+    <td class="score-cell s-low">3</td><td class="score-cell s-low">3</td><td class="score-cell s-low">4</td><td class="score-cell s-mid">5</td><td class="score-cell s-mid">6</td><td class="score-cell s-low">2</td>
+    <td class="score-cell s-low score-big">3.7</td></tr>
+<!-- 33 --><tr><td><span class="rank-num">33</span></td><td><a class="company-link" href="https://azansys.com/" target="_blank"><strong>Azansys Technologies</strong></a></td><td><span class="src-tag src2">Ph.2</span></td><td><span class="tag gl">IN</span></td>
+    <td class="score-cell s-low">3</td><td class="score-cell s-low">2</td><td class="score-cell s-low">3</td><td class="score-cell s-high">8</td><td class="score-cell s-mid">5</td><td class="score-cell s-low">1</td>
+    <td class="score-cell s-low score-big">3.6</td></tr>
+<!-- 34 --><tr><td><span class="rank-num">34</span></td><td><a class="company-link" href="https://elconchargers.com/" target="_blank"><strong>Elcon</strong></a></td><td><span class="src-tag src1">Ph.1</span></td><td><span class="tag us">US</span></td>
+    <td class="score-cell s-low">1</td><td class="score-cell s-low">1</td><td class="score-cell s-low">3</td><td class="score-cell s-mid">6</td><td class="score-cell s-low">1</td><td class="score-cell s-low">2</td>
+    <td class="score-cell s-low score-big">2.2</td></tr>
+</tbody>
+</table>
+
+<h2>Tiering &amp; next steps</h2>
+
+<h3>Tier 1 &mdash; primary RFQ track (score &ge; 6.5)</h3>
+<ul class="tier-list">
+    <li><strong>Grepow / Tattu (CN)</strong> &mdash; 7.6 &mdash; drone-native; DroneCAN handshake; TA3200/TA300 references; aggressive OEM cost. China origin = NDAA soft risk.</li>
+    <li><strong>Packet Digital (US)</strong> &mdash; 7.5 &mdash; only supplier with confirmed BMS handshake + auto-discharge on mil-grade UAS. Premium US pricing (~$1,500). NDAA-clean.</li>
+    <li><strong>Delta Electronics (TW)</strong> &mdash; 7.1 &mdash; benchmark cost ($250/unit); Tier-1 certs; already engaged. Active discharge not yet confirmed.</li>
+    <li><strong>Foxtech (CN)</strong> &mdash; 6.7 &mdash; smart charger + Diamond BMS ecosystem; strong OEM pricing. China origin.</li>
+    <li><strong>Mean Well (TW)</strong> &mdash; 6.7 &mdash; BIC-2200 bidirectional CAN; strongest discharge hardware. Power stage only &mdash; handshake layer external.</li>
+    <li><strong>Phihong (TW)</strong> &mdash; 6.6 &mdash; Tier-1 TW OEM; CAN robot charger line; drones named; Vietnam mfg option.</li>
+    <li><strong>Tulip Tech (NL)</strong> &mdash; 6.5 &mdash; DroneCAN ecosystem; 100+ drone partners. Proprietary lock-in risk if BMS doesn&rsquo;t match E4 BQ41Z90.</li>
+</ul>
+
+<h3>Tier 2 &mdash; parallel track / EU hybrid / contingency (score 5.0&ndash;6.4)</h3>
+<ul class="tier-list">
+    <li><strong>EV-PEAK U6Q (CN)</strong> &mdash; 6.4 &mdash; off-the-shelf 4-channel at $503 retail; OEM pricing could hit Delta zone.</li>
+    <li><strong>Inventus Power (US)</strong> &mdash; 6.3 &mdash; 2,000+ BMS designs; US premium pricing.</li>
+    <li><strong>MGM COMPRO (CZ)</strong> &mdash; 6.1 &mdash; CZ UAV/eVTOL specialist; CAN BMS; EU pricing.</li>
+    <li><strong>GlobTek (US)</strong> &mdash; 6.0 &mdash; TI-native SMBus; IEC 62368-1. No discharge.</li>
+    <li><strong>FRIWO (DE/VN)</strong> &mdash; 5.9 &mdash; EU hybrid track; CAN charger + BMS pairing.</li>
+    <li><strong>Apex Mobile Power (US/VN)</strong> &mdash; 5.8 &mdash; CAN/SMBus; offshore mfg.</li>
+    <li><strong>Aerotate (DE)</strong> &mdash; 5.7 &mdash; aeroPAX6 = near-perfect 6S reference; startup scale risk.</li>
+    <li><strong>RRC Power Solutions (DE)</strong> &mdash; 5.7 &mdash; SMBus specialist; medical-grade; 240W limit.</li>
+    <li><strong>EFT Mobility AG (DE)</strong> &mdash; 5.7 &mdash; NATO charger; DroneCAN/CAN; NDAA; young company.</li>
+    <li><strong>BMZ Group (DE)</strong> &mdash; 5.6 &mdash; pack+charger bundle angle.</li>
+    <li><strong>Custom Power (UK/US)</strong> &mdash; 5.5 &mdash; drone specialist; charger details sparse.</li>
+    <li><strong>SkyRC PC2500 (CN)</strong> &mdash; 5.4 &mdash; enterprise CAN 4-ch; not IEC-certified.</li>
+    <li><strong>Cincon (TW)</strong> &mdash; 5.3 &mdash; defense EMC; custom chargers since 1992.</li>
+    <li><strong>Topband (CN)</strong> &mdash; 5.3 &mdash; Tier-1 ODM; IATF automotive; not drone-native.</li>
+</ul>
+
+<h3>Tier 3 &mdash; track / monitor / niche (&lt; 5.0)</h3>
+<ul class="tier-list">
+    <li><strong>Titan Power (US)</strong> &mdash; 4.8 &mdash; CMS for fleet; standalone charger TBC.</li>
+    <li><strong>AcBel (TW)</strong> &mdash; 4.8 &mdash; Tier-1 ODM; not drone; NRE-only path.</li>
+    <li><strong>Lite-On (TW)</strong> &mdash; 4.8 &mdash; world-scale PSU; volume mismatch.</li>
+    <li><strong>SBS (DE)</strong> &mdash; 4.7 &mdash; pack+charger cross-ref; smart features TBC.</li>
+    <li><strong>HEISHA (CN)</strong> &mdash; 4.5 &mdash; multi-bay dock/box OEM; 6S customization TBC.</li>
+    <li><strong>Mascot (NO)</strong> &mdash; 4.2 &mdash; medical-grade; no drone experience; comms TBC.</li>
+    <li><strong>Salcomp (FI/CN/IN)</strong> &mdash; 4.1 &mdash; volume scale-up reserve only (50k+/yr).</li>
+    <li><strong>iCharger / Junsi (CN)</strong> &mdash; 4.1 &mdash; prosumer; field/backup tier only.</li>
+    <li><strong>Schaefer (DE)</strong> &mdash; 4.0 &mdash; defensive EU option if Asia constrained.</li>
+    <li><strong>Micropower Group (SE)</strong> &mdash; 3.9 &mdash; industrial; no smart charger DNA.</li>
+    <li><strong>Hacker Industrial (DE)</strong> &mdash; 3.7 &mdash; distributor/integrator, not charger OEM.</li>
+    <li><strong>Azansys (IN)</strong> &mdash; 3.6 &mdash; channel partner for EV-PEAK-style platforms.</li>
+    <li><strong>Elcon (US)</strong> &mdash; 2.2 &mdash; basic CC/CV; no smart features; not suitable.</li>
+</ul>
+
+<p class="note">
+    <strong>Total:</strong> 34 suppliers (7 Tier-1, 14 Tier-2, 13 Tier-3).<br>
+    <strong>Regional split:</strong> 7 Taiwan, 7 China, 7 US/UK, 10 EU, 2 Global/India, 1 Finland/hybrid.<br>
+    <strong>Key insight:</strong> the top 7 span three very different supplier archetypes: <em>drone-native Chinese OEMs</em> (Grepow, Foxtech) offer the best price + UAV DNA combination; <em>Tier-1 Taiwanese industrials</em> (Delta, Phihong, Mean Well) offer the best cert + cost balance; <em>US/EU specialists</em> (Packet Digital, Tulip, EFT) offer the best handshake maturity but at premium cost. A dual-source strategy combining one Asian Tier-1 (cost) with one US/EU specialist (NDAA / reference design) covers the full requirements envelope.
+</p>
+
+</body>
+</html>

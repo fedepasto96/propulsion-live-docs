@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E4 Battery Charger — Cost-Effective Asia &amp; Global Supplier Scouting</title>
+<style>
+  :root {
+    --dark: #2d3142;
+    --accent: #4f5d75;
+    --green: #d9ead3;
+    --green-border: #6aa84f;
+    --yellow: #fff2cc;
+    --yellow-border: #f1c232;
+    --red: #f4cccc;
+    --red-border: #cc4125;
+    --blue: #cfe2f3;
+    --blue-border: #3d85c6;
+    --orange: #fce5cd;
+    --orange-border: #e69138;
+    --grey: #eeeeee;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #222;
+    background: #f8f9fa;
+    line-height: 1.55;
+    padding: 2rem;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+  h1 {
+    font-size: 1.8rem; color: var(--dark); border-bottom: 3px solid var(--dark);
+    padding-bottom: .5rem; margin-bottom: .5rem;
+  }
+  .subtitle { color: var(--accent); font-size: .95rem; margin-bottom: 2rem; }
+  h2 {
+    font-size: 1.3rem; color: var(--dark); margin-top: 2.5rem; margin-bottom: .8rem;
+    border-left: 4px solid var(--dark); padding-left: .6rem;
+  }
+  h3 { font-size: 1.05rem; color: var(--accent); margin-top: 1.5rem; margin-bottom: .5rem; }
+  p, li { font-size: .92rem; margin-bottom: .45rem; }
+  ul { padding-left: 1.4rem; }
+
+  .callout {
+    background: var(--orange); border-left: 5px solid var(--orange-border);
+    border-radius: 4px; padding: 1rem 1.2rem; margin: 1rem 0 1.5rem 0;
+  }
+  .callout strong { color: var(--dark); }
+
+  /* requirement table */
+  table.req { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem 0; font-size: .85rem; }
+  table.req th {
+    background: var(--dark); color: #fff; text-align: left;
+    padding: .45rem .6rem; font-weight: 600;
+  }
+  table.req td { padding: .4rem .6rem; border-bottom: 1px solid #ddd; vertical-align: top; }
+  table.req tr:nth-child(even) td { background: #f4f5f7; }
+  table.req .id { white-space: nowrap; font-family: monospace; font-weight: 600; color: var(--accent); }
+
+  /* supplier cards */
+  .card {
+    border-radius: 6px; padding: 1.1rem 1.3rem; margin-bottom: 1.2rem;
+    border-left: 5px solid; page-break-inside: avoid;
+  }
+  .card.yes   { background: var(--green);  border-color: var(--green-border); }
+  .card.maybe { background: var(--yellow); border-color: var(--yellow-border); }
+  .card.no    { background: var(--red);    border-color: var(--red-border); }
+  .card .name { font-size: 1.1rem; font-weight: 700; color: var(--dark); }
+  .card .name a { color: inherit; text-decoration: none; border-bottom: 1.5px dashed var(--accent); }
+  .card .name a:hover { color: var(--blue-border); border-bottom-style: solid; }
+  .card .meta { font-size: .82rem; color: #555; margin-top: .15rem; margin-bottom: .55rem; }
+  .card .meta a { color: var(--accent); font-size: .78rem; text-decoration: none; }
+  .card .meta a:hover { text-decoration: underline; }
+  table.matrix td:first-child a { color: inherit; text-decoration: none; border-bottom: 1px dashed var(--accent); }
+  table.matrix td:first-child a:hover { color: var(--blue-border); border-bottom-style: solid; }
+  .card .section-label { font-weight: 600; color: var(--accent); font-size: .85rem; margin-top: .5rem; }
+  .card p { font-size: .88rem; }
+  .scale-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .3rem .8rem;
+    font-size: .82rem; margin: .3rem 0 .5rem 0; padding: .45rem .6rem;
+    background: rgba(255,255,255,.45); border-radius: 4px;
+  }
+  .scale-grid dt { font-weight: 600; color: var(--accent); font-size: .75rem; text-transform: uppercase; letter-spacing: .03em; }
+  .scale-grid dd { margin: 0 0 .2rem 0; }
+  .badge {
+    display: inline-block; font-size: .72rem; font-weight: 700; padding: .15rem .5rem;
+    border-radius: 3px; text-transform: uppercase; letter-spacing: .03em; margin-left: .4rem;
+    vertical-align: middle;
+  }
+  .badge.yes   { background: var(--green-border); color: #fff; }
+  .badge.maybe { background: var(--yellow-border); color: #fff; }
+  .badge.no    { background: var(--red-border); color: #fff; }
+  .badge.cost  { background: var(--blue-border); color: #fff; }
+  .badge.region { background: var(--accent); color: #fff; }
+
+  /* compliance matrix */
+  table.matrix { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem 0; font-size: .8rem; }
+  table.matrix th {
+    background: var(--dark); color: #fff; text-align: center;
+    padding: .35rem .3rem; font-weight: 600; font-size: .75rem;
+  }
+  table.matrix th:first-child { text-align: left; min-width: 130px; }
+  table.matrix td { padding: .3rem .3rem; border-bottom: 1px solid #ddd; text-align: center; }
+  table.matrix td:first-child { text-align: left; font-weight: 600; font-size: .82rem; }
+  table.matrix tr:nth-child(even) td { background: #f4f5f7; }
+  .chk { color: var(--green-border); font-weight: 700; }
+  .qm  { color: var(--yellow-border); font-weight: 700; }
+  .xx  { color: var(--red-border); font-weight: 700; }
+  .price { font-family: 'Courier New', monospace; font-weight: 600; color: var(--blue-border); }
+
+  .toc { background: var(--blue); border: 1px solid var(--blue-border); border-radius: 6px; padding: 1rem 1.3rem; margin: 1.5rem 0; }
+  .toc a { color: var(--dark); text-decoration: none; font-size: .9rem; }
+  .toc a:hover { text-decoration: underline; }
+  .toc ol { padding-left: 1.3rem; }
+  .toc li { margin-bottom: .25rem; }
+
+  .footer { margin-top: 3rem; font-size: .78rem; color: #888; border-top: 1px solid #ddd; padding-top: .8rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>E4 Battery Charger &mdash; Cost-Effective Asia &amp; Global Supplier Scouting</h1>
+<p class="subtitle">
+  Flyability &bull; E4 Battery Project &bull; Prepared Apr 2026<br>
+  Companion to: <em>Charger Supplier Selection Report</em> &mdash; this addendum focuses on cost-effective alternatives
+</p>
+
+<div class="callout">
+  <strong>Strategic context.</strong>
+  Initial outreach to US-domiciled, NDAA-compliant smart-charger suppliers (Packet Digital, GlobTek, Inventus Power, Titan Power, Custom Power) returned per-unit costs in the order of <strong>~USD&nbsp;1,500</strong> for a 4-port unit, with multi-thousand-dollar NRE on top.
+  In contrast, <strong>Delta Electronics (Taiwan)</strong> &mdash; the only Tier-1 Asian OEM already in the active list &mdash; quoted around <strong>USD&nbsp;250 per unit</strong> for a comparable 4-port platform.
+  Given that the E4 program is not bid-locked into US federal channels, this report broadens the scouting envelope to <strong>cost-effective charger OEMs across Asia (Taiwan, China, Japan, Vietnam, India) and adjacent global geographies (Germany, Czech Republic, Finland)</strong> that can credibly hit a Delta-level price target while still delivering BMS communication, multi-port operation, and IEC&nbsp;62368-1 grade safety.
+</div>
+
+<div class="toc">
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#sec-strategy">Strategy Shift &mdash; From NDAA Gate to Cost Gate</a></li>
+    <li><a href="#sec-method">Re-weighted Selection Criteria</a></li>
+    <li><a href="#sec-summary">Summary Compliance &amp; Cost Matrix</a></li>
+    <li><a href="#sec-recommended">Recommended New Candidates (Cost-Effective &amp; Capable)</a></li>
+    <li><a href="#sec-worth">Worth Exploring (Maybe)</a></li>
+    <li><a href="#sec-revisit">Re-evaluation of Existing &ldquo;Maybe&rdquo; Suppliers</a></li>
+    <li><a href="#sec-cost">Indicative Multi-Port Charger Cost Reference</a></li>
+    <li><a href="#sec-next">Recommended Next Steps</a></li>
+  </ol>
+</div>
+
+<!-- ================================================================ -->
+<h2 id="sec-strategy">1. Strategy Shift &mdash; From NDAA Gate to Cost Gate</h2>
+<p>
+  The original <em>Charger Supplier Selection Report</em> (Feb 2026) treated <strong>regulatory fit (US/EU)</strong> as a hard gate, with NDAA / FCC Covered List compliance functioning as a near-veto for any China-anchored supplier. The practical consequence was a shortlist dominated by US/EU custom-OEM houses whose smart-charger price points are 5&ndash;10&times; higher than what Asian Tier-1s can offer for a functionally equivalent unit.
+</p>
+<p>
+  Flyability&rsquo;s primary commercial channels are not US federal procurement. The E4 charger ships to industrial inspection customers worldwide, alongside the drone. Treating NDAA as a soft preference rather than a hard gate unlocks a new tier of suppliers and substantially improves the cost curve. The Delta engagement &mdash; positive, professional, and around <strong>USD&nbsp;250/unit</strong> at 4-port multi-bay scale &mdash; sets the cost benchmark this addendum is built around.
+</p>
+<p>
+  Scoping decisions for this addendum:
+</p>
+<ul>
+  <li><strong>Hard requirements</strong> remain the technical CHG-labeled TRs (BMS comms, battery ID/handshake, active discharge, IEC 62368-1, OVP, status indication).</li>
+  <li><strong>Soft preferences</strong>: CE (EU placement is mandatory), IATA-compliant transport mode, multi-port capability, and field upgradability.</li>
+  <li><strong>Cost target</strong>: <strong>USD&nbsp;200&ndash;500 per unit</strong> for a 4-port multi-bay smart charger (Delta benchmark &plusmn;).</li>
+  <li><strong>Region focus</strong>: Taiwan, China, Vietnam, Japan, Korea, India for cost; Germany / Czech Republic / Northern Europe for hybrid &ldquo;cost &amp; quality&rdquo; (mfg in Asia, design in EU).</li>
+</ul>
+
+<!-- ================================================================ -->
+<h2 id="sec-method">2. Re-weighted Selection Criteria</h2>
+<p>Each new candidate is evaluated against six criteria, with cost competitiveness explicitly added as a discriminator.</p>
+<ol>
+  <li><strong>BMS Communication (TR-111/113/114)</strong> &mdash; Native SMBus / I2C / CAN / DroneCAN / UART support.</li>
+  <li><strong>Battery Identification &amp; Handshake (TR-112/114)</strong> &mdash; Smart battery recognition, charge authorization.</li>
+  <li><strong>Active Discharge / Storage / Transport Mode (TR-117/118)</strong> &mdash; Bidirectional flow or discharge path to 30% / 60% SOC.</li>
+  <li><strong>IEC 62368-1 + CE (TR-107)</strong> &mdash; Reinforced isolation, EU placement readiness.</li>
+  <li><strong>Multi-Port / Drone-Native</strong> &mdash; Existing 4-port (or scalable) smart-charger product line and UAS-specific firmware experience.</li>
+  <li><strong>Cost Posture</strong> &mdash; Realistic ability to hit the USD&nbsp;200&ndash;500/unit envelope at typical batch sizes (1k&ndash;10k/yr).</li>
+</ol>
+<p>Ratings: <span class="badge yes">Yes</span> = strong fit on &ge;4 criteria with confirming evidence; <span class="badge maybe">Maybe</span> = partial fit / needs verification; <span class="badge no">No</span> = fundamental gaps.</p>
+
+<!-- ================================================================ -->
+<h2 id="sec-summary">3. Summary Compliance &amp; Cost Matrix</h2>
+<p>
+  <span class="chk">&check;</span> = confirmed/strong, <span class="qm">?</span> = plausible/needs confirmation, <span class="xx">&times;</span> = missing/weak.
+</p>
+
+<table class="matrix">
+<tr>
+  <th>Supplier</th>
+  <th>Region</th>
+  <th>BMS Comms</th>
+  <th>Battery ID /<br>Handshake</th>
+  <th>Active<br>Discharge</th>
+  <th>IEC 62368-1<br>/ CE</th>
+  <th>Multi-Port /<br>Drone-Native</th>
+  <th>Cost Posture</th>
+  <th>Rating</th>
+</tr>
+<tr><td><a href="https://www.meanwell.com/" target="_blank">Mean Well</a></td>
+  <td>TW</td><td class="chk">&check;</td><td class="qm">?</td><td class="chk">&check;</td><td class="chk">&check;</td><td class="qm">?</td><td class="chk">&check;</td>
+  <td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://www.phihong.com/products/battery-chargers" target="_blank">Phihong</a></td>
+  <td>TW</td><td class="chk">&check;</td><td class="qm">?</td><td class="qm">?</td><td class="chk">&check;</td><td class="chk">&check;</td><td class="chk">&check;</td>
+  <td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://www.cincon.com/" target="_blank">Cincon Electronics</a></td>
+  <td>TW</td><td class="chk">&check;</td><td class="qm">?</td><td class="qm">?</td><td class="chk">&check;</td><td class="qm">?</td><td class="chk">&check;</td>
+  <td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://www.tattuworld.com/charger/" target="_blank">Grepow / Tattu (UAV Smart Chargers)</a></td>
+  <td>CN</td><td class="chk">&check;</td><td class="chk">&check;</td><td class="qm">?</td><td class="qm">?</td><td class="chk">&check;</td><td class="chk">&check;</td>
+  <td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://www.foxtechuav.com/" target="_blank">Foxtech</a></td>
+  <td>CN</td><td class="chk">&check;</td><td class="chk">&check;</td><td class="qm">?</td><td class="qm">?</td><td class="chk">&check;</td><td class="chk">&check;</td>
+  <td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://www.friwo.com/en/products-services/drive-system-solutions/chargers/" target="_blank">FRIWO</a></td>
+  <td>DE/VN</td><td class="chk">&check;</td><td class="chk">&check;</td><td class="qm">?</td><td class="chk">&check;</td><td class="qm">?</td><td class="chk">&check;</td>
+  <td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://aerotate.com/products/smart-charger-6s-22a" target="_blank">Aerotate</a></td>
+  <td>EU</td><td class="chk">&check;</td><td class="chk">&check;</td><td class="qm">?</td><td class="qm">?</td><td class="chk">&check;</td><td class="qm">?</td>
+  <td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://www.mgm-compro.com/industrial-chargers/" target="_blank">MGM COMPRO</a></td>
+  <td>CZ</td><td class="chk">&check;</td><td class="qm">?</td><td class="qm">?</td><td class="chk">&check;</td><td class="chk">&check;</td><td class="qm">?</td>
+  <td><span class="badge yes">Yes</span></td></tr>
+<tr><td><a href="https://heishatech.com/" target="_blank">HEISHA</a></td>
+  <td>CN</td><td class="qm">?</td><td class="qm">?</td><td class="qm">?</td><td class="qm">?</td><td class="chk">&check;</td><td class="chk">&check;</td>
+  <td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="http://www.topband.com/" target="_blank">Topband</a></td>
+  <td>CN</td><td class="chk">&check;</td><td class="qm">?</td><td class="qm">?</td><td class="chk">&check;</td><td class="qm">?</td><td class="chk">&check;</td>
+  <td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://www.acbel.com/" target="_blank">AcBel Polytech</a></td>
+  <td>TW</td><td class="qm">?</td><td class="qm">?</td><td class="qm">?</td><td class="chk">&check;</td><td class="xx">&times;</td><td class="chk">&check;</td>
+  <td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://www.liteon.com/" target="_blank">Lite-On Technology</a></td>
+  <td>TW</td><td class="qm">?</td><td class="qm">?</td><td class="qm">?</td><td class="chk">&check;</td><td class="xx">&times;</td><td class="chk">&check;</td>
+  <td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://www.bmz-group.com/" target="_blank">BMZ Group</a></td>
+  <td>DE</td><td class="chk">&check;</td><td class="chk">&check;</td><td class="qm">?</td><td class="chk">&check;</td><td class="qm">?</td><td class="qm">?</td>
+  <td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://salcomp.com/" target="_blank">Salcomp</a></td>
+  <td>FI/CN/IN</td><td class="qm">?</td><td class="xx">&times;</td><td class="xx">&times;</td><td class="chk">&check;</td><td class="xx">&times;</td><td class="chk">&check;</td>
+  <td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://www.schaeferpower.de/en" target="_blank">Schaefer Electronic</a></td>
+  <td>DE</td><td class="qm">?</td><td class="qm">?</td><td class="qm">?</td><td class="chk">&check;</td><td class="xx">&times;</td><td class="qm">?</td>
+  <td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://www.icharger-direct.com/" target="_blank">iCharger / Junsi</a></td>
+  <td>CN</td><td class="qm">?</td><td class="xx">&times;</td><td class="qm">?</td><td class="xx">&times;</td><td class="chk">&check;</td><td class="chk">&check;</td>
+  <td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://hacker-industrial-solutions.com/" target="_blank">Hacker Industrial</a></td>
+  <td>DE</td><td class="qm">?</td><td class="qm">?</td><td class="qm">?</td><td class="qm">?</td><td class="chk">&check;</td><td class="qm">?</td>
+  <td><span class="badge maybe">Maybe</span></td></tr>
+<tr><td><a href="https://azansys.com/DroneCharger" target="_blank">Azansys Technologies</a></td>
+  <td>IN</td><td class="qm">?</td><td class="qm">?</td><td class="xx">&times;</td><td class="qm">?</td><td class="chk">&check;</td><td class="chk">&check;</td>
+  <td><span class="badge maybe">Maybe</span></td></tr>
+</table>
+
+<!-- ================================================================ -->
+<h2 id="sec-recommended">4. Recommended New Candidates <span class="badge yes">Promising</span></h2>
+
+<div class="card yes">
+  <div class="name"><a href="https://www.meanwell.com/" target="_blank">Mean Well</a> <span class="badge yes">Yes</span> <span class="badge cost">Tier-1 cost</span> <span class="badge region">TW</span></div>
+  <div class="meta">Taipei, Taiwan &bull; UL 62368-1, TUV, CB, IEC 62477-1 &bull; <a href="https://www.meanwell.com/" target="_blank">meanwell.com</a> &bull; BIC-2200 series: <a href="https://www.meanwell.com/Upload/PDF/BIC-2200-E.pdf" target="_blank">datasheet</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~10,000 global</dd>
+    <dt>Facility</dt><dd>HQ Taipei + factories in Guangzhou and Suzhou (CN), Europe distribution hubs</dd>
+    <dt>Production Volume</dt><dd>Tier-1 standard-product OEM. Massive volume; price/W among lowest in industry</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    Mean Well is the world&rsquo;s largest standard-product power supply brand and increasingly competitive on smart-charger / bidirectional platforms. The <strong>BIC-2200 series</strong> is a 2.2 kW bidirectional AC/DC unit available in 12V / 24V / 48V / 96V variants, each with a 24V model that can be programmed to ~26.1V via CAN bus. The <strong>BIC-2200-24CAN</strong> integrates a CAN-Bus interface with explicit force-charge / force-discharge commands, anti-islanding, and 5-unit parallel current sharing. Operating range -30&deg;C to +70&deg;C. Certified to UL 62368-1 and IEC 62477-1.
+  </p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-111 (Comms):</strong> Confirmed &mdash; CAN-Bus on -CAN suffix variants; PMBus on enclosed series.</li>
+    <li><strong>TR-107 (IEC 62368-1):</strong> Confirmed &mdash; standard certification on all BIC and BIC-2200 lines.</li>
+    <li><strong>TR-117/118 (Active discharge):</strong> Confirmed in principle &mdash; BIC-2200 is bidirectional and supports force-discharge via CAN; perfect physical match for &ldquo;charge to 30% / 60% SOC&rdquo; modes.</li>
+    <li><strong>TR-112/114 (Battery ID + handshake):</strong> Not native &mdash; Mean Well is a power-stage supplier, not a smart-charger firmware vendor. The handshake layer would have to live in an external micro (Flyability-side or via an integrator).</li>
+  </ul>
+  <p class="section-label">Risks</p>
+  <p>Not a turnkey drone smart charger &mdash; their platform is a programmable power stage. Need a system integrator (or Flyability firmware) to layer Battery-ID / handshake on top. Multi-port (4-bay) version needs to be a Flyability or 3rd-party mechanical/control-board build around 2&ndash;4 BIC modules.</p>
+  <p class="section-label">Cost posture</p>
+  <p>Single BIC-2200-24CAN: ~USD&nbsp;500&ndash;700 list, well under USD&nbsp;300 OEM. A 4-bay smart charger built around a single BIC-2200 + 4-channel switching board can plausibly land in the <strong>USD&nbsp;300&ndash;500/unit</strong> bracket at volume.</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://www.phihong.com/products/battery-chargers" target="_blank">Phihong</a> <span class="badge yes">Yes</span> <span class="badge cost">Tier-1 cost</span> <span class="badge region">TW</span></div>
+  <div class="meta">Taipei, Taiwan (HQ) + Fremont CA (US) &bull; UL, CE, IEC 62368-1 &bull; <a href="https://www.phihong.com/" target="_blank">phihong.com</a> &bull; <a href="https://www.phihong.com/oem-battery-charger-manufacturer-where-to-source-custom-power-charging-solutions-for-your-product-line" target="_blank">OEM charger services</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>3,000+ global (50+ year company history)</dd>
+    <dt>Facility</dt><dd>HQ Taiwan + manufacturing in China and Vietnam; US sales/engineering office (Fremont, CA)</dd>
+    <dt>Production Volume</dt><dd>Tier-1 standard-product + OEM. Power adapters, EV chargers, custom Li-ion chargers</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    Phihong explicitly markets <strong>OEM custom Li-ion chargers from 1W to 1kW</strong>, with drones and robotics named as a target application. They have a dedicated &ldquo;Smart Robot Charging with CANBus for Predictive Maintenance&rdquo; product line, and an internal smart-charger track record across e-bike, e-scooter, and AGV. As a Taiwan-headquartered Tier-1, their cost posture is comparable to Delta&rsquo;s.
+  </p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-111 (Comms):</strong> Confirmed &mdash; CANBus is a published smart-charger feature.</li>
+    <li><strong>TR-112/114 (ID + handshake):</strong> Plausible &mdash; predictive-maintenance line implies they already do handshake-style protocol work.</li>
+    <li><strong>TR-107 (IEC 62368-1) + CE/FCC:</strong> Confirmed across product portfolio.</li>
+    <li><strong>Drone/UAS:</strong> Drones explicitly listed as a target application.</li>
+    <li><strong>TR-117/118 (Active discharge):</strong> Not advertised; needs explicit RFQ scoping.</li>
+  </ul>
+  <p class="section-label">Cost posture</p>
+  <p>Tier-1 Taiwanese OEM with Vietnam mfg option. A 4-port smart charger of E4&rsquo;s class should target <strong>USD&nbsp;250&ndash;400/unit</strong> at 1&ndash;10k volume.</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://www.cincon.com/" target="_blank">Cincon Electronics</a> <span class="badge yes">Yes</span> <span class="badge region">TW</span></div>
+  <div class="meta">Taipei, Taiwan &bull; ISO 9001/14001, UL, TUV, CE, MIL-STD-461 EMC chamber (2023) &bull; <a href="https://www.cincon.com/" target="_blank">cincon.com</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~600 (publicly traded, TWSE: 1989)</dd>
+    <dt>Facility</dt><dd>Taiwan HQ + manufacturing; in-house EMC chamber MIL-STD-461 compliant</dd>
+    <dt>Production Volume</dt><dd>Custom OEM/ODM since 1991. Defense, railway, medical, industrial</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    Cincon has been designing and manufacturing battery chargers since 1992 and has an explicit <strong>defense solution line with MIL-STD-461 EMC compliance</strong> &mdash; a strong differentiator versus generic Asian OEMs. Their custom-modification service is geared exactly to programs like E4 (small-to-medium volume, custom voltage/current, custom comms).
+  </p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-107 (IEC 62368-1) + CE/UL/TUV/CB:</strong> Standard.</li>
+    <li><strong>TR-111 (Comms):</strong> Plausible &mdash; custom OEM expertise; needs explicit confirmation of CAN/SMBus stack.</li>
+    <li><strong>TR-112/114/117/118:</strong> All achievable via their customization service, but require explicit RFQ scoping.</li>
+  </ul>
+  <p class="section-label">Cost posture</p>
+  <p>Mid-tier Taiwanese custom OEM, generally priced between Delta and Mean Well. A 4-port custom charger should target <strong>USD&nbsp;300&ndash;500/unit</strong> at moderate volume, with NRE in the USD&nbsp;15&ndash;40k range.</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://www.tattuworld.com/charger/" target="_blank">Grepow / Tattu / Gens Ace (UAV Smart Charger Line)</a> <span class="badge yes">Yes</span> <span class="badge cost">Drone-native</span> <span class="badge region">CN</span></div>
+  <div class="meta">Shenzhen + Hong Kong &bull; CE, FCC, UN 38.3, RoHS &bull; <a href="https://www.grepow.com/battery-charger.html" target="_blank">grepow.com chargers</a> &bull; <a href="https://www.tattuworld.com/customized/" target="_blank">Tattu OEM</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~2,000+ Grepow group</dd>
+    <dt>Facility</dt><dd>Shenzhen, Guangdong + secondary plants. Vertically integrated cells &rarr; packs &rarr; chargers</dd>
+    <dt>Production Volume</dt><dd>Mass production. Drone batteries are the flagship line</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    Grepow group (operating Tattu and Gens Ace consumer/professional brands) makes a <strong>full smart-charger family explicitly for industrial drones</strong>:
+  </p>
+  <ul>
+    <li><strong>TA3200 (3.2 kW dual-channel, 6S&ndash;14S, DroneCAN)</strong> &mdash; battery auto-recognition, BMS protection, cell mismatch / over-V / over-T / wire-break / reverse-polarity detection.</li>
+    <li><strong>TA9000PLUS (9 kW dual-channel, 12S&ndash;24S)</strong> &mdash; auto-detection and real-time status adjustment for high-cell-count packs.</li>
+    <li><strong>TA300 (8-channel, 30W per channel)</strong> &mdash; small-pack multi-bay with G-Tech smart recognition.</li>
+  </ul>
+  <p>They also explicitly advertise OEM customisation: custom cells, BMS, soft-pack batteries, and integrated smart chargers. The TA3200 is the closest published reference for a 6S smart charger with DroneCAN handshake.</p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-111 (Comms):</strong> Confirmed &mdash; DroneCAN is the published standard.</li>
+    <li><strong>TR-112/114 (ID + handshake):</strong> Confirmed &mdash; auto battery recognition is a flagship feature.</li>
+    <li><strong>TR-117/118 (Active discharge):</strong> Storage mode is published on multiple models; transport (30%) needs explicit confirmation.</li>
+    <li><strong>Multi-port:</strong> Confirmed &mdash; up to 8 channels in the TA300.</li>
+    <li><strong>TR-107 (IEC 62368-1):</strong> CE confirmed; specific 62368-1 letter needs requesting.</li>
+  </ul>
+  <p class="section-label">Cost posture</p>
+  <p>Drone-native Chinese OEM with vertically integrated production. <strong>TA300 at ~USD&nbsp;150 retail</strong>, TA3200 at USD&nbsp;500&ndash;800 retail. A custom 4-port unit for E4 is a natural fit and should target <strong>USD&nbsp;200&ndash;350/unit</strong> at OEM volume.</p>
+  <p class="section-label">Risks</p>
+  <p>China-based &mdash; FCC Covered List / NDAA exposure exists for any US channel sales. Strong fit for EU/Worldwide commercial channels. Already in active list as a pack-assembler candidate (cross-link).</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://www.foxtechuav.com/" target="_blank">Foxtech</a> <span class="badge yes">Yes</span> <span class="badge cost">Drone-native</span> <span class="badge region">CN</span></div>
+  <div class="meta">Tianjin, China &bull; CE, FCC, RoHS &bull; <a href="https://www.foxtechuav.com/" target="_blank">foxtechuav.com</a> &bull; <a href="https://store.foxtech.com/foxtech/" target="_blank">store</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~200&ndash;500 (private)</dd>
+    <dt>Facility</dt><dd>Tianjin HQ + production. Distribution USA, EU, Asia</dd>
+    <dt>Production Volume</dt><dd>Industrial-drone integrator. Frames, motors, ESCs, packs, BMS, chargers</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    Foxtech offers a published smart-charger family aimed at industrial drones:
+  </p>
+  <ul>
+    <li><strong>D14 Smart Balance Charger</strong> &mdash; 6&ndash;14S, dual output, 0&ndash;30A adjustable, 4.3" IPS touchscreen, AS150U connector, cell-level monitoring, full protection suite. <span class="price">USD&nbsp;559</span> retail.</li>
+    <li><strong>UP4000-14S</strong> &mdash; dual-channel intelligent charger (LiPo/LiHV) up to 4 kW.</li>
+    <li><strong>UP3000-24S</strong> &mdash; 3 kW / 35A high-power smart charger for 16&ndash;24S smart batteries.</li>
+    <li><strong>UP13 Ultra Power</strong> &mdash; 200W AC dual-channel fast charger.</li>
+  </ul>
+  <p>Foxtech also makes its own <strong>Diamond Smart BMS</strong> with real-time monitoring (cell V &plusmn;10mV, current &plusmn;1%, temp &plusmn;2&deg;C) and 60,000-record data logging &mdash; meaning their chargers and BMS are designed to talk to each other natively.</p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-111 (Comms):</strong> Confirmed via Diamond Smart BMS pairing.</li>
+    <li><strong>TR-112/114 (ID + handshake):</strong> Confirmed &mdash; smart-battery recognition is a published feature on UP3000-24S.</li>
+    <li><strong>Multi-port:</strong> Dual-output today; 4-port custom build is plausible.</li>
+    <li><strong>TR-117/118:</strong> Storage mode standard; transport mode needs confirmation.</li>
+  </ul>
+  <p class="section-label">Cost posture</p>
+  <p>Catalogue retail USD&nbsp;200&ndash;700 for off-the-shelf smart chargers. Custom 4-port at OEM volume should target <strong>USD&nbsp;250&ndash;400/unit</strong>.</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://www.friwo.com/en/" target="_blank">FRIWO</a> <span class="badge yes">Yes</span> <span class="badge region">DE/VN</span></div>
+  <div class="meta">Ostbevern, Germany (HQ) + Vietnam mfg &bull; CE, IEC 62368, IP65 &bull; <a href="https://www.friwo-shop.de/en/charging-technology-industrial-e-mobility/li-ion/39/li-ion-charger" target="_blank">FRIWO Li-Ion Charger</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~1,500 global</dd>
+    <dt>Facility</dt><dd>Germany HQ + Vietnam manufacturing (Dong Nai); China and Bulgaria operations</dd>
+    <dt>Production Volume</dt><dd>~22M power supplies/yr. Standard + custom Li-ion chargers</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    FRIWO is the strongest hybrid &ldquo;EU design + Asia cost&rdquo; play in this list. Their flagship <strong>LEV500 Li-Ion charger</strong> is a 500W IP65, fanless, Red-Dot-Award unit with <strong>CAN communication via Weipu connector to the FRIWO BMS</strong>. Standard product is parameterized for 14S but explicitly customisable to other cell counts &mdash; 6S/26.1V is well within scope. Pairs with FRIWO&rsquo;s own 10S&ndash;14S BMS (CAN + USB, 65A peak, active balancing, SOC, OTA-via-Enable-Tool).
+  </p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-111 (Comms):</strong> Confirmed &mdash; CAN native to charger and BMS.</li>
+    <li><strong>TR-112/114 (ID + handshake):</strong> Plausible &mdash; the BMS-charger pair already implements protocol-level negotiation.</li>
+    <li><strong>TR-107 (IEC 62368-1) + CE:</strong> Confirmed.</li>
+    <li><strong>TR-117/118 (Active discharge):</strong> Not advertised on LEV500; would need scoping.</li>
+    <li><strong>Multi-port:</strong> Single-port standard; multi-bay would be a custom mechanical/control build around N&times;LEV500.</li>
+  </ul>
+  <p class="section-label">Cost posture</p>
+  <p>Vietnam manufacturing puts FRIWO in a more competitive bracket than pure-EU OEMs. Standard LEV500: ~EUR&nbsp;400 list. Custom 4-port build should target <strong>USD&nbsp;400&ndash;700/unit</strong> &mdash; higher than pure Asian Tier-1, but with stronger brand and EU traceability.</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://aerotate.com/" target="_blank">Aerotate</a> <span class="badge yes">Yes</span> <span class="badge cost">Drone-native EU</span> <span class="badge region">EU</span></div>
+  <div class="meta">Germany (EU) &bull; Drone-native, ArduPilot/PX4 ecosystem &bull; <a href="https://aerotate.com/products/smart-charger-6s-22a" target="_blank">aeroPAX6 Smart Charger</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>Small (start-up scale)</dd>
+    <dt>Facility</dt><dd>Germany HQ. EU-assembled smart batteries + chargers + DroneCAN/I2C distribution boards</dd>
+    <dt>Production Volume</dt><dd>Small-to-medium series. Direct e-commerce + OEM</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    The aeroPAX6 is essentially a <strong>purpose-built clone of what E4 needs</strong>:
+  </p>
+  <ul>
+    <li>6S Li-ion smart charger.</li>
+    <li>Four power options: 13.5A/450W, 22A/750W, 36A/1200W, 50A/1700W.</li>
+    <li>CAN-Bus interface for handshake with their aeroPAX smart batteries.</li>
+    <li>Air-cooled, continuous battery temperature monitoring with auto current adjustment.</li>
+    <li>Integrated BMS that balances cells.</li>
+    <li>Recommended &lt;2C charge rate (matches Flyability&rsquo;s prudent rate).</li>
+  </ul>
+  <p>
+    They explicitly publish DroneCAN compatibility &mdash; meaning their charger can be ported to any DroneCAN BMS, not just their own. Strong reference design even if Flyability doesn&rsquo;t buy the unit directly.
+  </p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-99 (6S / 26.1V):</strong> Native &mdash; this is their target market.</li>
+    <li><strong>TR-111 (Comms):</strong> Confirmed &mdash; CAN-Bus / DroneCAN.</li>
+    <li><strong>TR-112/114 (ID + handshake):</strong> Confirmed.</li>
+    <li><strong>TR-117/118:</strong> Not explicitly advertised; needs confirmation.</li>
+  </ul>
+  <p class="section-label">Cost posture</p>
+  <p>Smaller EU vendor, mid-volume pricing. Expect <strong>USD&nbsp;500&ndash;900</strong> for a 6S/22A unit at typical RFQ. A 4-port multi-bay custom build is non-trivial &mdash; they&rsquo;d need to scale, but their reference design is reusable.</p>
+  <p class="section-label">Risks</p>
+  <p>Small company, scale risk for 6&ndash;7k units/yr. Best treated as a <strong>technical reference partner</strong> first, with potential for Flyability to license or co-develop their architecture rather than buying the unit off the shelf.</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://www.mgm-compro.com/" target="_blank">MGM COMPRO</a> <span class="badge yes">Yes</span> <span class="badge region">CZ</span></div>
+  <div class="meta">Zl&iacute;n, Czech Republic &bull; ISO 9001, CE &bull; <a href="https://www.mgm-compro.com/industrial-chargers/" target="_blank">Industrial Chargers</a> &bull; <a href="http://mgm-compro.com/bms-battery-management-systems/" target="_blank">BMS line</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~80&ndash;150</dd>
+    <dt>Facility</dt><dd>Czech Republic HQ + EU operations</dd>
+    <dt>Production Volume</dt><dd>EPS / ESS specialist for UAVs, eVTOLs, aircraft. Custom &amp; serial</dd>
+  </dl>
+  <p class="section-label">Why selected</p>
+  <p>
+    MGM COMPRO is a <strong>dedicated EU electric-propulsion-system house for UAV / eVTOL</strong>. Their integrated stack covers motors, ESCs, BMSs, and industrial chargers from sub-kW field units up to &gt;100 kW stationary chargers. Their BMS family (BMS-4i, -8i, -16i, -16Ai) all run CAN bus, doubled critical components, and active or passive balancing. Their charger line supports balancing across the full charge current range, with diagnostic and protection features and PC communications. CHAdeMO / CCS2 expertise indicates strong protocol know-how.
+  </p>
+  <p class="section-label">Requirement coverage</p>
+  <ul>
+    <li><strong>TR-111 (Comms):</strong> Confirmed &mdash; CAN bus across BMS line; charger PC comms confirmed.</li>
+    <li><strong>TR-112/114 (ID + handshake):</strong> Plausible given their automotive-style protocol depth (CHAdeMO/CCS2).</li>
+    <li><strong>TR-117/118:</strong> Plausible &mdash; advanced balancing platform; needs explicit confirmation.</li>
+    <li><strong>TR-107 (IEC 62368-1) + CE:</strong> Standard.</li>
+    <li><strong>Drone/UAS:</strong> Native &mdash; UAV/eVTOL is a stated target market.</li>
+  </ul>
+  <p class="section-label">Cost posture</p>
+  <p>EU pricing, but for a UAV-specialist with serious R&amp;D. A 4-port custom unit likely lands in <strong>USD&nbsp;500&ndash;800/unit</strong> &mdash; not the cheapest, but defensible against US-NDAA suppliers and with much stronger drone DNA than e.g. Schaefer.</p>
+</div>
+
+<!-- ================================================================ -->
+<h2 id="sec-worth">5. Worth Exploring <span class="badge maybe">Maybe</span></h2>
+
+<div class="card maybe">
+  <div class="name"><a href="https://heishatech.com/" target="_blank">HEISHA Tech</a> <span class="badge maybe">Maybe</span> <span class="badge region">CN</span></div>
+  <div class="meta">Shenzhen, China &bull; <a href="https://www.heishatech.com/dport-multi-drone-docking-airport/" target="_blank">DPort dock</a> &bull; <a href="https://heishatech.com/solutions/dbox-drone-battery-charging-box/" target="_blank">DBox 4-bay charging box</a> &bull; <a href="https://www.heishatech.com/for-developers/a100-smart-drone-charging-module/" target="_blank">A100 smart module</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>Mid-size (private)</dd>
+    <dt>Facility</dt><dd>Shenzhen HQ + production</dd>
+    <dt>Production Volume</dt><dd>Robot &amp; drone charging station specialist</dd>
+  </dl>
+  <p>
+    HEISHA is a Chinese <strong>charging-station and multi-bay charging-box specialist</strong>:
+  </p>
+  <ul>
+    <li><strong>DBox</strong> &mdash; vehicle-mountable 4-battery charging box, 300W, DC 17.6V output, IP54, real-time status, customisable (currently DJI-targeted).</li>
+    <li><strong>T400</strong> &mdash; 4-pad drone docking hub with land/unload/recharge/relaunch &lt; 90s.</li>
+    <li><strong>A100</strong> &mdash; standalone OEM smart-charging-control module (2&ndash;4S) with overcharge, over-discharge, temperature control, and integrated fire-extinguisher logic.</li>
+  </ul>
+  <p>
+    Reportedly <strong>significantly cheaper than DJI&rsquo;s BS60 charging hub</strong> (which sells at ~USD&nbsp;1,200) &mdash; HEISHA&rsquo;s comparable kit is roughly half the price for similar throughput.
+  </p>
+  <p>
+    Currently advertised products are 2&ndash;4S, so a 6S build would be a customisation. Their A100 module is the cleanest integration point if E4 wants to source a control board rather than a finished unit. BMS handshake / battery ID over CAN are not explicit on the public datasheets but are plausible given their developer programme.
+  </p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="http://www.topband.com/" target="_blank">Topband</a> <span class="badge maybe">Maybe</span> <span class="badge region">CN</span></div>
+  <div class="meta">Shenzhen, China &bull; ISO 9001, ISO 14001, IATF 16949, IEC 62619, UL 62368 &bull; <a href="https://www.topband.com/en/" target="_blank">topband.com</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~10,000+ (2,000+ engineers)</dd>
+    <dt>Facility</dt><dd>13 R&amp;D / production bases globally; 93 SMT lines</dd>
+    <dt>Production Volume</dt><dd>China&rsquo;s largest controller-solution supplier (own claim). Mass production</dd>
+  </dl>
+  <p>
+    Topband is a Tier-1 Chinese smart-control / BMS / EV-charger ODM with deep IATF 16949 (automotive-grade) credentials and IEC 62368-1 / IEC 62619 alignment. Their charging-station portfolio ranges from EV chargers to modular BMS architectures (16&ndash;112 string master/slave). They emphasise <strong>active+passive balancing (87% efficiency), real-time monitoring, fault diagnosis, and OTA via their cloud platform</strong>.
+  </p>
+  <p>
+    Not drone-specific today, but the platform breadth and IATF 16949 quality system make them a credible custom-OEM partner. Battery ID handshake and active discharge would need explicit scoping.
+  </p>
+  <p class="section-label">Cost posture</p>
+  <p>Tier-1 Chinese cost structure. Custom 4-port should target <strong>USD&nbsp;200&ndash;350/unit</strong>.</p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://www.acbel.com/" target="_blank">AcBel Polytech</a> <span class="badge maybe">Maybe</span> <span class="badge region">TW</span></div>
+  <div class="meta">New Taipei, Taiwan &bull; ISO 9001, IECQ, UL, CE &bull; <a href="https://www.acbel.com/" target="_blank">acbel.com</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~10,000 group</dd>
+    <dt>Facility</dt><dd>Taiwan HQ + China, Vietnam, Philippines manufacturing</dd>
+    <dt>Production Volume</dt><dd>Tier-1 PSU OEM/ODM. Server, telecom, medical, EV onboard chargers</dd>
+  </dl>
+  <p>
+    AcBel is a major Taiwanese ODM/OEM with EV onboard-charger experience and a credible cost structure. Drone applications are <strong>not their target market</strong>, so any engagement would be a custom-OEM contract (not off the shelf). Their EV onboard charger know-how (CAN bus, multi-stage charging) is technically transferable to a 6S smart drone charger, but only with NRE.
+  </p>
+  <p>Worth approaching if Delta declines or the price isn&rsquo;t aggressive enough &mdash; AcBel can credibly hit a similar Tier-1 cost point.</p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://www.liteon.com/" target="_blank">Lite-On Technology</a> <span class="badge maybe">Maybe</span> <span class="badge region">TW</span></div>
+  <div class="meta">Taipei, Taiwan &bull; ISO 9001/14001, UL, TUV, CE &bull; <a href="https://www.liteon.com/" target="_blank">liteon.com</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~37,000 group</dd>
+    <dt>Facility</dt><dd>Taiwan HQ + China, Thailand, US production</dd>
+    <dt>Production Volume</dt><dd>Tier-1 PSU OEM/ODM. Notebook chargers, EV charging, server power</dd>
+  </dl>
+  <p>
+    Lite-On is one of the world&rsquo;s largest power-supply OEMs (notebook adapters, server PSUs, EV charging modules). Same comments as AcBel &mdash; drone is not native, but if they engage on a custom OEM smart charger, the cost structure will be highly competitive. Better fit for high-volume programs (&gt;50k/yr) than for E4&rsquo;s ~6&ndash;7k/yr today.
+  </p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://www.bmz-group.com/index.php/en/battery-systems-en/charger" target="_blank">BMZ Group</a> <span class="badge maybe">Maybe</span> <span class="badge region">DE</span></div>
+  <div class="meta">Karlstein am Main, Germany &bull; ISO 9001, CE &bull; <a href="https://www.bmz-group.com/" target="_blank">bmz-group.com</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~3,500 group</dd>
+    <dt>Facility</dt><dd>Germany HQ + Poland, China, US plants. Europe&rsquo;s largest pack maker</dd>
+    <dt>Production Volume</dt><dd>One-stop OEM: cells, packs, BMS, chargers, motors, displays</dd>
+  </dl>
+  <p>
+    BMZ is the largest European Li-ion pack maker. They explicitly market <strong>custom chargers per customer specifications</strong>, with cost-optimised design during development and CAN-bus BMS integration. Their charger line spans e-bike, garden tools, industrial, on-board EV, and forklift use cases. Drone is not a flagship application, but their custom-OEM motion is well established.
+  </p>
+  <p>Likely positioned in the same bracket as FRIWO &mdash; mid-cost EU OEM with German engineering and Polish/Asian mfg. <strong>Cross-link with pack-assembler list:</strong> BMZ is a strong candidate for a bundled pack+charger relationship.</p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://salcomp.com/" target="_blank">Salcomp</a> <span class="badge maybe">Maybe</span> <span class="badge region">FI/CN/IN</span></div>
+  <div class="meta">Salo, Finland (HQ) &bull; ISO 9001/14001, UL, TUV, CE &bull; <a href="https://salcomp.com/" target="_blank">salcomp.com</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~14,000 global</dd>
+    <dt>Facility</dt><dd>8 plants: Shenzhen + Guilin (CN), Chennai + Noida (IN), Salo (FI), Dallas + Arlington (US), Manaus (BR), Istanbul (TR)</dd>
+    <dt>Production Volume</dt><dd>~600M units/yr capacity. 4B+ cumulative units. 5W&ndash;6.6kW range</dd>
+  </dl>
+  <p>
+    Salcomp is a tier-1 mass-volume charger/adapter OEM with the strongest cost structure of any candidate on this list. Manufacturing exists in <strong>India</strong> (NDAA-friendly) as well as China and Finland, giving regional optionality. Their core business is consumer adapters, but they explicitly list industrial power supplies, IoT, wireless charging pads, and battery packs as growth segments.
+  </p>
+  <p>
+    Caveats: Salcomp is geared for ultra-high-volume programs (millions of units), not 6&ndash;7k/yr. Smart-charger handshake / drone-CAN engineering is not their established expertise. Best treated as a <strong>volume scale-up partner</strong> if E4 ever crosses 50k/yr.
+  </p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://www.schaeferpower.de/en" target="_blank">Schaefer Electronic</a> <span class="badge maybe">Maybe</span> <span class="badge region">DE</span></div>
+  <div class="meta">Achern, Germany + Ireland, USA, UAE &bull; ISO 9001, CE, railway-grade &bull; <a href="https://www.schaeferpower.de/en/portfolio/4-5kw-on-board-battery-charger" target="_blank">on-board chargers</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~250</dd>
+    <dt>Facility</dt><dd>Germany HQ + Ireland, USA, UAE subsidiaries</dd>
+    <dt>Production Volume</dt><dd>Custom power conversion, 50W&ndash;40kW. Industrial / railway / defense</dd>
+  </dl>
+  <p>
+    50+ year German custom-power house. Emphasis on multi-stage charging, rugged industrial environments, conformal coating. Not drone-native but capable of MIL-grade execution. Realistically priced higher than Asian Tier-1 but useful as a <strong>defensive EU option</strong> if Asian sourcing becomes politically constrained mid-program.
+  </p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://www.icharger-direct.com/" target="_blank">iCharger / Junsi</a> <span class="badge maybe">Maybe</span> <span class="badge region">CN</span></div>
+  <div class="meta">Beijing, China &bull; CE &bull; <a href="https://www.icharger.eu/" target="_blank">icharger.eu</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>Small/medium (private)</dd>
+    <dt>Facility</dt><dd>Beijing HQ</dd>
+    <dt>Production Volume</dt><dd>Multi-channel programmable chargers (RC + light commercial)</dd>
+  </dl>
+  <p>
+    Well-known programmable charger brand. The <strong>4010 Duo</strong> (2 kW, 2&times;40A, 2&times;10S) and <strong>X12</strong> (1.1 kW, 30A, 12S) are dual / single-channel high-end balance chargers with stored battery profiles, internal-resistance measurement, and discharge modes. Lacks CAN handshake out of the box and does not provide industrial-grade IEC 62368-1 paperwork. <strong>Suitable as a field/backup interim charger only</strong>, not for the production E4 charger.
+  </p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://hacker-industrial-solutions.com/" target="_blank">Hacker Industrial Solutions</a> <span class="badge maybe">Maybe</span> <span class="badge region">DE</span></div>
+  <div class="meta">Ergolding, Germany &bull; <a href="https://hacker-industrial-solutions.com/" target="_blank">hacker-industrial-solutions.com</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>~50&ndash;100</dd>
+    <dt>Facility</dt><dd>Germany HQ. EU drive-system specialist (motors, batteries, controllers)</dd>
+    <dt>Production Volume</dt><dd>Industrial / aviation drive-system integrator</dd>
+  </dl>
+  <p>
+    Hacker is a German integrator for electric drive systems in aviation and industrial UAV, with ESC/motor/battery specialism. They distribute the ISDT 608AC smart-charger and several other partner units. As a charger primary supplier they are weaker than MGM COMPRO, but they are a strong <strong>EU integration partner</strong> if Flyability wants a turnkey drive-system provider rather than just a charger OEM.
+  </p>
+</div>
+
+<div class="card maybe">
+  <div class="name"><a href="https://azansys.com/DroneCharger" target="_blank">Azansys Technologies</a> <span class="badge maybe">Maybe</span> <span class="badge region">IN</span></div>
+  <div class="meta">India &bull; <a href="https://azansys.com/" target="_blank">azansys.com</a></div>
+  <dl class="scale-grid">
+    <dt>Employees</dt><dd>Small (start-up scale)</dd>
+    <dt>Facility</dt><dd>India HQ. Distributor + small-series drone-charger and pack assembler</dd>
+    <dt>Production Volume</dt><dd>Small-series drone-charger and Li-ion pack supply</dd>
+  </dl>
+  <p>
+    Indian-domiciled drone-charger reseller and small-series assembler. Currently distributes the <strong>EV-PEAK U6Q</strong> 4-channel fast charger alongside their own 6S/12S/14S LiPo packs. Useful as an <strong>India-routed channel for an EV-PEAK-style platform</strong> if China sourcing needs to be diluted with an India layer (NDAA / Make-in-India optionality).
+  </p>
+</div>
+
+<!-- ================================================================ -->
+<h2 id="sec-revisit">6. Re-evaluation of Existing &ldquo;Maybe&rdquo; Suppliers Under Cost-Effective Lens</h2>
+<p>
+  Two suppliers in the active list deserve a second look now that NDAA is treated as a soft preference rather than a hard gate:
+</p>
+
+<div class="card yes">
+  <div class="name"><a href="https://ev-peak.com/portfolio_entries/drone-charger" target="_blank">EV-PEAK &mdash; U6Q (4-channel)</a> <span class="badge yes">Upgrade to Yes</span> <span class="badge cost">USD 503 retail</span></div>
+  <div class="meta">Shenzhen, China &bull; CE, FCC, UL, RoHS, PSE, KC &bull; <a href="https://ev-peak.com/drone-charger" target="_blank">ev-peak.com chargers</a></div>
+  <p>
+    The original report rated EV-PEAK <span class="badge maybe">Maybe</span> primarily on regulatory grounds. Under the cost-effective lens, the <strong>U6Q 4-channel charger</strong> is one of the most directly comparable products to what the user described:
+  </p>
+  <ul>
+    <li>4 independent channels charging 4 batteries simultaneously.</li>
+    <li>3,000 W max total / 60 A max charge current.</li>
+    <li>6S&ndash;14S range (covers TR-99 / 26.1V CV).</li>
+    <li>Compatible with LiPo, LiHV, and intelligent batteries with auto identification and current adjustment.</li>
+    <li>Multi-protection (over-current / over-voltage / over-charge / over-temperature).</li>
+    <li><strong>Retail USD&nbsp;503 for the off-the-shelf 4-channel</strong> &mdash; OEM volume with E4-specific firmware should land near the USD&nbsp;250 Delta benchmark.</li>
+  </ul>
+  <p>Recommendation: send a real OEM RFQ now, with explicit scoping of (a) BMS handshake, (b) battery ID, (c) active discharge to 30% / 60% SOC, and (d) IEC 62368-1 letter.</p>
+</div>
+
+<div class="card yes">
+  <div class="name"><a href="https://www.skyrc.com/pc2500" target="_blank">SkyRC &mdash; PC2500 (4-channel)</a> <span class="badge yes">Upgrade to Yes</span> <span class="badge cost">Industrial-grade</span></div>
+  <div class="meta">Shenzhen, China &bull; CE &bull; <a href="https://www.skyrc.com/Enterprise" target="_blank">skyrc.com Enterprise UAV</a></div>
+  <p>
+    The original SkyRC entry focused on the prosumer <strong>PC1080neo</strong> and concluded SkyRC has no BMS comms, ID, or handshake. The enterprise <strong>PC2500</strong> changes that picture materially:
+  </p>
+  <ul>
+    <li><strong>Quad-channel</strong>, 2,500 W total, 45 A per channel, 12S&ndash;14S native (6S adaptable on RFQ).</li>
+    <li><strong>Built-in CAN-Bus communication</strong> &mdash; the charger natively recognizes batteries with custom CAN protocol and can also charge ordinary lithium batteries with balance ports.</li>
+    <li>BMS-aware fast / standard / storage modes with real-time per-cell voltage display.</li>
+    <li>Pre-charge function that adjusts current intelligently based on initial battery voltage.</li>
+    <li>Industrial-grade design with conformal coating for outdoor use.</li>
+  </ul>
+  <p>
+    This is a near-direct fit for the user&rsquo;s &ldquo;Delta-class but Asian-priced 4-port&rdquo; brief. Recommendation: open a parallel OEM-RFQ track with SkyRC&rsquo;s enterprise division specifically scoping PC2500 derivatives for E4 (6S/26.1V CV, custom CAN protocol, transport-mode discharge, IEC 62368-1).
+  </p>
+</div>
+
+<!-- ================================================================ -->
+<h2 id="sec-cost">7. Indicative Multi-Port Charger Cost Reference</h2>
+<p>
+  Public list / retail prices for off-the-shelf multi-port smart drone chargers, normalised per channel where possible. These set the upper bound &mdash; OEM/custom 6S units at volume should land at 50&ndash;70% of these numbers.
+</p>
+<table class="req">
+<tr><th>Product</th><th>Channels</th><th>Total Power</th><th>List / Retail</th><th>$/Channel</th><th>Smart / CAN</th></tr>
+<tr><td><a href="https://www.skyrc.com/pc2500" target="_blank">SkyRC PC2500</a></td><td>4</td><td>2,500 W</td><td class="price">USD ~600</td><td class="price">~150</td><td>Yes &mdash; CAN</td></tr>
+<tr><td><a href="https://www.uavmodel.com/products/ev-peak-u6q-3000w-12-14s-intelligent-balancing-charger" target="_blank">EV-PEAK U6Q</a></td><td>4</td><td>3,000 W</td><td class="price">USD 503</td><td class="price">~126</td><td>Yes &mdash; smart auto-ID</td></tr>
+<tr><td><a href="https://www.foxtechuav.com/up3000-24s-3000w-35a-high-power-smart-charger-for-lipo-lihv-16-24s-smart-batteries.html" target="_blank">Foxtech UP3000-24S</a></td><td>1 (high-power)</td><td>3,000 W</td><td class="price">USD ~500</td><td class="price">~500</td><td>Yes &mdash; smart battery</td></tr>
+<tr><td><a href="https://store.foxtech.com/d14-smart-balance-charger-for-6-14s-lithium-batteries-dual-output-0-30a-adjustable-4-3-ips-hd-touchscreen-real-time-cell-monitoring-multi-protection/" target="_blank">Foxtech D14</a></td><td>2</td><td>~1.6 kW</td><td class="price">USD 559</td><td class="price">~280</td><td>Smart balance</td></tr>
+<tr><td><a href="https://www.grepow.com/battery-charger/ta3200-3200w-6s-12s-14s-smart-drone-battery-charger.html" target="_blank">Grepow / Tattu TA3200</a></td><td>2</td><td>3,200 W</td><td class="price">USD ~700</td><td class="price">~350</td><td>Yes &mdash; DroneCAN</td></tr>
+<tr><td><a href="http://www.grepow.com/battery-charger/ta300-g-tech-8-channel-smart-charger.html" target="_blank">Grepow / Tattu TA300</a></td><td>8 (small pack)</td><td>240 W</td><td class="price">USD 150</td><td class="price">~19</td><td>G-Tech smart auto-ID</td></tr>
+<tr><td><a href="https://www.dominiondrones.com/products/ak-m4t4-300w-4-way-battery-charging-hub" target="_blank">AK M4T4 (DJI Matrice 4)</a></td><td>4</td><td>300 W</td><td class="price">USD ~250</td><td class="price">~63</td><td>Hub-style, no CAN</td></tr>
+<tr><td>DJI BS60 (M30 hub)</td><td>4</td><td>~720 W</td><td class="price">USD ~1,200</td><td class="price">~300</td><td>DJI proprietary</td></tr>
+<tr><td>HEISHA charging kit</td><td>2</td><td>~360 W</td><td class="price">USD ~600</td><td class="price">~300</td><td>Smart hub (proprietary)</td></tr>
+<tr><td>Reference: Delta E4 quote</td><td>4</td><td>TBD</td><td class="price">USD ~250</td><td class="price">~63</td><td>Custom CAN OEM</td></tr>
+<tr><td>Reference: US NDAA 4-port</td><td>4</td><td>TBD</td><td class="price">USD ~1,500</td><td class="price">~375</td><td>Smart CAN+SMBus</td></tr>
+</table>
+<p style="margin-top:.6rem; color:#555; font-size:.83rem;">
+  Prices are public list/retail and rough conversions; OEM/custom prices typically run 50&ndash;70% of these. The Delta and US-NDAA numbers reflect indicative quotes obtained during E4 outreach.
+</p>
+
+<!-- ================================================================ -->
+<h2 id="sec-next">8. Recommended Next Steps</h2>
+
+<table class="req">
+<tr><th>#</th><th>Action</th><th>Supplier(s)</th><th>Priority / Timing</th></tr>
+<tr>
+  <td>1</td>
+  <td><strong>Issue parallel OEM RFQ</strong> for a custom 4-port 6S/26.1V smart charger with BMS handshake, transport (30%) + storage (60%) discharge, IEC 62368-1, CE/FCC. Use the existing E4 CHG TR pack (TR-99 to TR-118) as the requirements bundle.</td>
+  <td>Delta (already engaged), <strong>Phihong</strong>, <strong>Cincon</strong>, <strong>Mean Well</strong>, <strong>Grepow / Tattu</strong>, <strong>Foxtech</strong>, <strong>EV-PEAK U6Q</strong>, <strong>SkyRC PC2500</strong></td>
+  <td>Week 1&ndash;2</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><strong>EU hybrid track</strong> (DE/EU design + Asia mfg) for redundancy and EU traceability. Scope at the same TR set with explicit Vietnam/EU mfg-location requirement.</td>
+  <td><strong>FRIWO</strong>, <strong>BMZ</strong>, <strong>MGM COMPRO</strong>, <strong>Aerotate</strong> (technical reference)</td>
+  <td>Week 1&ndash;2</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><strong>Reference-design review</strong> with Aerotate&rsquo;s aeroPAX6 architecture and Foxtech&rsquo;s Diamond-BMS-paired charger as live examples of &ldquo;6S Li-ion smart charger with CAN handshake&rdquo;. Use to refine the E4 charger spec sheet before final RFQ.</td>
+  <td><strong>Aerotate</strong>, <strong>Foxtech</strong>, <strong>Grepow/Tattu (TA3200 datasheet)</strong></td>
+  <td>Week 1</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><strong>Volume scale-up reserve</strong> &mdash; identify partners that can absorb 50k+/yr volume if E4 takes off. Approach for early conversation only, no commitment.</td>
+  <td><strong>Salcomp</strong>, <strong>Lite-On</strong>, <strong>AcBel</strong>, <strong>Topband</strong></td>
+  <td>Week 4&ndash;6</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><strong>Cross-link with pack-assembler outreach</strong> &mdash; bundle charger + pack + BMS where the supplier offers all three under one roof. Better cost negotiation leverage and tighter integration.</td>
+  <td>Grepow/Tattu, Foxtech, BMZ, FRIWO, Phihong</td>
+  <td>Continuous</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><strong>Decision gate</strong> &mdash; downselect to 2&ndash;3 finalists based on landed cost, technical fit, and willingness to engage. NRE quotes locked.</td>
+  <td>&mdash;</td>
+  <td>Week 8&ndash;10</td>
+</tr>
+</table>
+
+<p style="margin-top:1rem;">
+  <strong>Open question for the program lead:</strong> Confirm the cost target. If the Delta benchmark of ~USD&nbsp;250 per 4-port unit is treated as the budget ceiling, the recommended-track table above is appropriately scoped. If a USD&nbsp;200 ceiling is preferred, Phihong / Grepow / EV-PEAK / Foxtech move ahead of Delta and the EU hybrids; if cost is more elastic (USD&nbsp;400&ndash;600 acceptable for stronger EU origin), FRIWO and MGM COMPRO move into the primary track.
+</p>
+
+<div class="footer">
+  Generated by Cursor AI &bull; Apr 2026 &bull; E4 Battery Project &mdash; 01_Project Management / 01_03_Planning &mdash; Companion to Charger Supplier Selection Report
+</div>
+
+</div>
+</body>
+</html>
