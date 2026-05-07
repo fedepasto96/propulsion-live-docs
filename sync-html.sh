@@ -116,4 +116,4 @@ git push origin main
 
 echo ""
 echo "Done. Changes pushed to GitHub. GitHub Pages will update shortly."
-echo "View at: https://fedepasto-96.github.io/e4-battery-planning-docs/"
+echo "View at: https://fedepasto96.github.io/propulsion-live-docs/"

@@ -111,4 +111,4 @@ git commit -m "Sync HTML documents - $timestamp`n`nAuto-sync of $Changed modifie
 git push origin main
 
 Write-Host "`nDone. Changes pushed to GitHub. GitHub Pages will update shortly." -ForegroundColor Green
-Write-Host "View at: https://fedepasto-96.github.io/e4-battery-planning-docs/" -ForegroundColor Cyan
+Write-Host "View at: https://fedepasto96.github.io/propulsion-live-docs/" -ForegroundColor Cyan

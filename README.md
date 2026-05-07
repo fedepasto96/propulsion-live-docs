@@ -2,7 +2,7 @@
 
 Internal HTML documentation for the E4 Battery Project, auto-published via GitHub Pages.
 
-**Live site:** [https://fedepasto-96.github.io/e4-battery-planning-docs/](https://fedepasto-96.github.io/e4-battery-planning-docs/)
+**Live site:** [https://fedepasto96.github.io/propulsion-live-docs/](https://fedepasto96.github.io/propulsion-live-docs/)
 
 ## Structure
 
@@ -22,14 +22,14 @@ HTML files originate from the Google Shared Drive project folder. To sync change
 
 ### Option A — PowerShell (recommended on Windows)
 ```powershell
-cd ~\e4-battery-planning-docs
+cd ~\propulsion-live-docs
 .\sync-html.ps1           # Sync and push
 .\sync-html.ps1 -DryRun   # Preview changes without pushing
 ```
 
 ### Option B — Bash (Git Bash / WSL)
 ```bash
-cd ~/e4-battery-planning-docs
+cd ~/propulsion-live-docs
 ./sync-html.sh             # Sync and push
 ./sync-html.sh --dry-run   # Preview changes without pushing
 ```
