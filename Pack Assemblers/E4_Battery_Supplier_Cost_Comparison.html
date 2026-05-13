@@ -25,6 +25,7 @@
     --pd-color: #2c5282;
     --ep-color: #276749;
     --sbs-color: #b7791f;
+    --abt-color: #6b21a8;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,7 +38,7 @@
     padding: 2rem;
   }
 
-  .container { max-width: 1340px; margin: 0 auto; }
+  .container { max-width: 1500px; margin: 0 auto; }
 
   header {
     background: linear-gradient(135deg, var(--blue-900), var(--blue-700));
@@ -51,7 +52,7 @@
   header .subtitle { font-size: 1rem; opacity: 0.85; }
   header .date { font-size: 0.85rem; opacity: 0.65; margin-top: 0.75rem; }
 
-  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 2rem; }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-bottom: 2rem; }
 
   .card {
     background: white;
@@ -63,6 +64,7 @@
   .card.pd { border-top-color: var(--pd-color); }
   .card.ep { border-top-color: var(--ep-color); }
   .card.sbs { border-top-color: var(--sbs-color); }
+  .card.abt { border-top-color: var(--abt-color); }
 
   .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
   .card .location { font-size: 0.85rem; color: var(--gray-500); margin-bottom: 0.75rem; }
@@ -79,6 +81,7 @@
   }
   .tag.us { background: #dbeafe; color: #1e40af; }
   .tag.eu { background: #fef3c7; color: #92400e; }
+  .tag.uk { background: #ede9fe; color: #5b21b6; }
   .tag.nda { background: #d1fae5; color: #065f46; }
   .tag.pending { background: #fee2e2; color: #991b1b; }
 
@@ -129,6 +132,7 @@
   .col-pd { color: var(--pd-color); }
   .col-ep { color: var(--ep-color); }
   .col-sbs { color: var(--sbs-color); }
+  .col-abt { color: var(--abt-color); }
 
   .highlight { background: #fffbeb !important; }
 
@@ -165,6 +169,7 @@
   .bar.pd-bar { background: linear-gradient(90deg, #2c5282, #4299e1); }
   .bar.ep-bar { background: linear-gradient(90deg, #276749, #48bb78); }
   .bar.sbs-bar { background: linear-gradient(90deg, #b7791f, #ecc94b); color: #744210; }
+  .bar.abt-bar { background: linear-gradient(90deg, #6b21a8, #a78bfa); }
   .bar.na-bar { background: #e5e7eb; color: #6b7280; font-style: italic; }
 
   .stacked-bar { display: flex; height: 30px; border-radius: 4px; overflow: hidden; margin-bottom: 0.15rem; }
@@ -219,7 +224,7 @@
 <header>
   <h1>E4 Battery Pack &mdash; Supplier Cost Comparison</h1>
   <div class="subtitle">Pack Assembler Scouting &bull; Cost Estimate Analysis</div>
-  <div class="date">Generated: May 5, 2026 &bull; Source: Battery Pack Innovation &mdash; Techno Scouting (Pack Assembler List)</div>
+  <div class="date">Updated: May 13, 2026 &bull; Source: Battery Pack Innovation &mdash; Techno Scouting (Pack Assembler List)</div>
 </header>
 
 <!-- ─── Supplier Overview Cards ─── -->
@@ -260,11 +265,23 @@
       <strong>Scope:</strong> Full unit incl. cells (excl. BMS &amp; display board)
     </div>
   </div>
+  <div class="card abt">
+    <h3 class="col-abt">Alexander Battery Technologies (ABT)</h3>
+    <div class="location">Peterlee, UK</div>
+    <span class="tag uk">UK</span>
+    <span class="tag nda">NDA Signed</span>
+    <div class="meta">
+      <strong>Quote:</strong> ABT-FLY-2026-05-006 &bull; May 11, 2026<br>
+      <strong>Scale:</strong> Medium-Large (40 yrs exp.)<br>
+      <strong>Drone exp.:</strong> Aviation-class, UAVs &amp; robotics<br>
+      <strong>Scope:</strong> Full unit incl. cells (excl. BMS/PCBA, free-issued)
+    </div>
+  </div>
 </div>
 
 <div class="note warning">
   <strong>Important &mdash; Scope differences:</strong>
-  Packet Digital quotes <strong>materials + labor only</strong> (excluding both BMS/PCBA and cells). Emerging Power includes cells (~$410/unit at 1K qty) but excludes BMS. SBS includes cells but excludes BMS and display board. Direct unit-cost comparison requires adjusting for these differences. See the normalized comparison in Section 5 below.
+  Packet Digital quotes <strong>materials + labor only</strong> (excluding both BMS/PCBA and cells). Emerging Power includes cells (~$410/unit at 1K qty) but excludes BMS. SBS includes cells but excludes BMS and display board. ABT includes cells (Amprius SA08) but excludes BMS/PCBA (free-issued by Flyability). ABT quotes in <strong>GBP (&pound;)</strong>. Direct unit-cost comparison requires adjusting for these differences. See the normalized comparison in Section 5 below.
 </div>
 
 <!-- ─── 1. NRE / Development Costs ─── -->
@@ -273,10 +290,11 @@
   <table>
     <thead>
       <tr>
-        <th style="width:35%">Item</th>
-        <th style="width:22%" class="col-pd">Packet Digital (USD)</th>
-        <th style="width:22%" class="col-ep">Emerging Power (USD)</th>
-        <th style="width:22%" class="col-sbs">SBS (EUR)</th>
+        <th style="width:24%">Item</th>
+        <th style="width:19%" class="col-pd">Packet Digital (USD)</th>
+        <th style="width:19%" class="col-ep">Emerging Power (USD)</th>
+        <th style="width:19%" class="col-sbs">SBS (EUR)</th>
+        <th style="width:19%" class="col-abt">ABT (GBP)</th>
       </tr>
     </thead>
     <tbody>
@@ -285,11 +303,13 @@
         <td class="currency">&mdash;</td>
         <td class="currency">$2,500</td>
         <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>Automated Test Program (ATE)</td>
         <td class="currency">&mdash;</td>
         <td class="currency">$2,500</td>
+        <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
       </tr>
       <tr>
@@ -297,66 +317,98 @@
         <td class="currency">&mdash;</td>
         <td class="currency">TBD</td>
         <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>Mfg Equipment Programming (laser welder, SMT, battery tester)</td>
         <td class="currency">$13,500 &ndash; $18,000</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
+      </tr>
+      <tr>
+        <td>NRE Engineering &amp; DFM</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&pound;8,500</td>
       </tr>
       <tr>
         <td>System Design &amp; Analysis (mechanical, FMEA, integration)</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;5,700</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>BMS Hardware Testing</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;580</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>CCS-board Hardware (layout + testing)</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;3,120</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>CAD Works &amp; Simulations (casing, CCS-board, bus bars, labels)</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;22,850</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>Sample Testing (design, implementation, documentation)</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;10,600</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>End-of-Line Testing Setup</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;6,000</td>
+        <td class="currency">&mdash;</td>
+      </tr>
+      <tr>
+        <td>Test Equipment &mdash; Fully Automated EOL</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&pound;28,000</td>
+      </tr>
+      <tr>
+        <td>Pre-production / Qualification Samples (300 packs)</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&pound;240,597</td>
       </tr>
       <tr class="subtotal-row">
         <td>NRE / Design Subtotal</td>
         <td class="currency">$13,500 &ndash; $18,000</td>
         <td class="currency">$5,000+</td>
         <td class="currency">&euro;48,850</td>
+        <td class="currency">&pound;277,097</td>
       </tr>
-      <tr><td colspan="4" style="background: var(--gray-100); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gray-700); padding: 0.6rem 0.85rem;">Tooling</td></tr>
+      <tr><td colspan="5" style="background: var(--gray-100); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gray-700); padding: 0.6rem 0.85rem;">Tooling</td></tr>
       <tr style="background: #fff8f0;">
         <td>Plastic Injection Mold Tooling <span style="color: #c05621; font-weight: 600; font-size: 0.78rem;">&#9888;</span></td>
         <td class="currency">&mdash;</td>
         <td class="currency" style="color: #c05621;">$100,000 &#9888;</td>
         <td class="currency">&mdash;</td>
+        <td class="currency" style="color: #c05621;">&pound;10,630 &#9888;</td>
       </tr>
       <tr>
         <td>Ultrasonic Tooling</td>
         <td class="currency">&mdash;</td>
         <td class="currency">$10,000</td>
+        <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
       </tr>
       <tr style="background: #fff8f0;">
@@ -364,81 +416,101 @@
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency" style="color: #c05621;">&euro;12,370 &#9888;</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>CCS-board Tooling</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;4,025</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>BMS Support Tooling</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;3,860</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>Labels (3 customized) + Cutting Tool + Clich&eacute;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;2,050</td>
+        <td class="currency">&mdash;</td>
+      </tr>
+      <tr>
+        <td>Label Artwork &amp; Die Set</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&pound;1,500</td>
       </tr>
       <tr>
         <td>Bus Bars (2)</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;1,230</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr class="subtotal-row">
         <td>Tooling Subtotal</td>
         <td class="currency">Included above</td>
         <td class="currency">$110,000</td>
         <td class="currency">&euro;23,535</td>
+        <td class="currency">&pound;12,130</td>
       </tr>
-      <tr><td colspan="4" style="background: var(--gray-100); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gray-700); padding: 0.6rem 0.85rem;">Other Development (SBS only)</td></tr>
+      <tr><td colspan="5" style="background: var(--gray-100); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gray-700); padding: 0.6rem 0.85rem;">Other Development (SBS only)</td></tr>
       <tr>
         <td>Components &amp; Prototypes for Internal Tests</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;8,840</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>Production Line Setup &amp; Equipment</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;5,970</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>EOL Test Equipment Adapter</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;2,300</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>Initial CCS-board Production</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;1,830</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr class="subtotal-row">
         <td>Other Development Subtotal</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;18,940</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr class="total-row">
         <td>NRE + Tooling + Other Dev. Total</td>
         <td class="currency">$13,500 &ndash; $18,000</td>
         <td class="currency">$115,000+</td>
         <td class="currency">&euro;91,325</td>
+        <td class="currency">&pound;289,227</td>
       </tr>
     </tbody>
   </table>
   <div class="note warning">
-    <strong>&#9888; Fair comparison note &mdash; housing mold tooling:</strong> Both Emerging Power (<strong>$100K</strong> injection mold) and SBS (<strong>&euro;12,370</strong> housing parts tooling) include plastic housing tooling in their quotes. Packet Digital does not &mdash; this cost would be borne separately by Flyability. The large price gap ($100K vs ~$13K) likely reflects different manufacturing approaches (full injection mold vs. simpler tooling). For an apples-to-apples comparison excluding housing tooling, EP&rsquo;s adjusted NRE is <strong>$15,000</strong> and SBS&rsquo;s adjusted NRE is <strong>&euro;78,955</strong>.
+    <strong>&#9888; Fair comparison note &mdash; housing mold tooling:</strong> EP (<strong>$100K</strong> injection mold), SBS (<strong>&euro;12,370</strong> housing parts) and ABT (<strong>&pound;10,630</strong> injection mould) all include plastic housing tooling. Packet Digital does not &mdash; this cost would be borne separately by Flyability. The large price gap between EP ($100K) and others (~$13K) likely reflects different manufacturing approaches.<br>
+    <strong>&#9888; ABT pre-production samples:</strong> ABT includes <strong>&pound;240,597</strong> for 300 qualification packs (used for DFMEA/PFMEA/SPC/Gauge R&amp;R establishment + regulatory test programme). This is the largest single NRE line item across all suppliers and is a significant differentiator in total NRE cost.
   </div>
   <div class="note">
-    <strong>Note:</strong> Packet Digital does not break out tooling separately; manufacturing equipment programming is included in their NRE line.
+    <strong>Note:</strong> Packet Digital does not break out tooling separately; manufacturing equipment programming is included in their NRE line. ABT prices are in GBP; conversion at 1 GBP &asymp; 1.27 USD (May 2026).
   </div>
 </section>
 
@@ -448,10 +520,11 @@
   <table>
     <thead>
       <tr>
-        <th style="width:35%">Certification</th>
-        <th style="width:22%" class="col-pd">Packet Digital (USD)</th>
-        <th style="width:22%" class="col-ep">Emerging Power (USD)</th>
-        <th style="width:22%" class="col-sbs">SBS (EUR)</th>
+        <th style="width:24%">Certification</th>
+        <th style="width:19%" class="col-pd">Packet Digital (USD)</th>
+        <th style="width:19%" class="col-ep">Emerging Power (USD)</th>
+        <th style="width:19%" class="col-sbs">SBS (EUR)</th>
+        <th style="width:19%" class="col-abt">ABT (GBP)</th>
       </tr>
     </thead>
     <tbody>
@@ -460,65 +533,104 @@
         <td class="currency"><em>Not quoted yet</em></td>
         <td class="currency">$8,100</td>
         <td class="currency">&euro;13,650</td>
+        <td class="currency">&pound;7,000</td>
       </tr>
       <tr>
         <td>CB &mdash; IEC 62133 (+Japan, +Canada)</td>
         <td class="currency"><em>Not quoted yet</em></td>
         <td class="currency">$10,800</td>
         <td class="currency">&euro;25,700</td>
+        <td class="currency">&pound;12,000 &dagger;</td>
       </tr>
       <tr>
         <td>In-Carton Drop Test</td>
         <td class="currency"><em>Not quoted yet</em></td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;1,500</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
-        <td>CE (EMC) + FCC Part 15B + IC (Canada)</td>
+        <td>CE-EMC (EN61000-6-3 / EN61000-6-1)</td>
         <td class="currency"><em>Not quoted yet</em></td>
-        <td class="currency">$8,000</td>
+        <td class="currency" rowspan="1">$8,000</td>
         <td class="currency">&euro;24,525</td>
+        <td class="currency">&pound;6,000</td>
       </tr>
       <tr>
-        <td>CE (RoHS &amp; REACH / Battery Directive 2023/1542)</td>
+        <td>FCC Part 15B (USA)</td>
         <td class="currency"><em>Not quoted yet</em></td>
-        <td class="currency">$5,400</td>
+        <td class="currency"><em>Incl. above</em></td>
+        <td class="currency"><em>Incl. above</em></td>
+        <td class="currency">&pound;4,500</td>
+      </tr>
+      <tr>
+        <td>IC ICES-003 (Canada)</td>
+        <td class="currency"><em>Not quoted yet</em></td>
+        <td class="currency"><em>Incl. above</em></td>
+        <td class="currency"><em>Incl. above</em></td>
+        <td class="currency">&pound;1,500</td>
+      </tr>
+      <tr>
+        <td>CE-RoHS</td>
+        <td class="currency"><em>Not quoted yet</em></td>
+        <td class="currency" rowspan="1">$5,400</td>
         <td class="currency">Included</td>
+        <td class="currency">&pound;1,500</td>
+      </tr>
+      <tr>
+        <td>REACH Compliance</td>
+        <td class="currency"><em>Not quoted yet</em></td>
+        <td class="currency"><em>Incl. above</em></td>
+        <td class="currency">Included</td>
+        <td class="currency">&pound;1,000</td>
+      </tr>
+      <tr>
+        <td>MSDS (Material Safety Data Sheet)</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">N/C</td>
+        <td class="currency">Included</td>
+        <td class="currency">&pound;750</td>
       </tr>
       <tr>
         <td>PSE &mdash; Japan</td>
         <td class="currency"><em>Not quoted yet</em></td>
         <td class="currency">$7,600</td>
         <td class="currency">&euro;7,440</td>
+        <td class="currency">&pound;4,000</td>
       </tr>
       <tr>
         <td>CCC / CQC &mdash; China</td>
         <td class="currency"><em>Not quoted yet</em></td>
         <td class="currency">$16,600 *</td>
         <td class="currency">&euro;43,040</td>
+        <td class="currency">&pound;5,000</td>
       </tr>
       <tr>
-        <td>C-Tick &mdash; Australia / NZ</td>
+        <td>C-Tick / RCM &mdash; Australia / NZ</td>
         <td class="currency"><em>Not quoted yet</em></td>
         <td class="currency">$7,600</td>
         <td class="currency">&mdash;</td>
+        <td class="currency">&pound;3,000</td>
       </tr>
       <tr>
         <td>Australia C-Tick + CE + FCC/IC (combined)</td>
         <td class="currency"><em>Not quoted yet</em></td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;24,525</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>BSMI &mdash; Taiwan</td>
         <td class="currency"><em>Not quoted yet</em></td>
         <td class="currency">$18,400</td>
         <td class="currency">&euro;24,290</td>
+        <td class="currency">&pound;4,000</td>
       </tr>
       <tr>
         <td>UN 38.3.5 Drop Test</td>
         <td class="currency"><em>Not quoted yet</em></td>
         <td class="currency">$2,500</td>
+        <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
       </tr>
       <tr>
@@ -526,25 +638,43 @@
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&euro;2,580</td>
-      </tr>
-      <tr>
-        <td>SDS (Safety Data Sheet)</td>
         <td class="currency">&mdash;</td>
-        <td class="currency">N/C</td>
-        <td class="currency">Included</td>
+      </tr>
+      <tr class="subtotal-row">
+        <td>Mandatory Base (UN38.3 + CE-EMC + CE-RoHS + REACH + MSDS)</td>
+        <td class="currency"><em>Pending</em></td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&pound;16,250</td>
+      </tr>
+      <tr class="subtotal-row">
+        <td>Strongly Recommended (IEC 62133-2)</td>
+        <td class="currency"><em>Pending</em></td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&pound;12,000</td>
+      </tr>
+      <tr class="subtotal-row">
+        <td>All Regional Certifications (if elected)</td>
+        <td class="currency"><em>Pending</em></td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&mdash;</td>
+        <td class="currency">&pound;22,000</td>
       </tr>
       <tr class="total-row">
-        <td>Certification Total</td>
+        <td>Certification Total (all elected)</td>
         <td class="currency"><em>Pending</em></td>
         <td class="currency">$85,000</td>
         <td class="currency">&euro;142,725</td>
+        <td class="currency">&pound;50,250</td>
       </tr>
     </tbody>
   </table>
   <div class="note">
     <strong>* EP Note on CCC China:</strong> Cell is manufactured in China and may require a factory audit; annual fees may apply. Critical components (enclosure, PCB/BMS) may need their own CCC certification at additional cost.<br>
     <strong>EP sample requirement:</strong> Minimum 165 battery packs &amp; 150 individual cells; lead time ~17&ndash;19 weeks ARO.<br>
-    <strong>SBS note:</strong> SBS groups CE + FCC/IC + Australia C-Tick into a single combined line at &euro;24,525.
+    <strong>SBS note:</strong> SBS groups CE + FCC/IC + Australia C-Tick into a single combined line at &euro;24,525.<br>
+    <strong>&dagger; ABT note on IEC 62133:</strong> Classified as &ldquo;strongly recommended&rdquo; (not mandatory). ABT structures certifications into mandatory base (&pound;16,250), strongly recommended (&pound;12,000) and per-region (&pound;22,000). ABT mandatory base only: <strong>&pound;16,250</strong>; total if all certifications elected: <strong>&pound;50,250</strong>.
   </div>
 </section>
 
@@ -556,11 +686,12 @@
   <table>
     <thead>
       <tr>
-        <th style="width:28%">Category</th>
-        <th style="width:18%" class="col-pd">Packet Digital (USD)</th>
-        <th style="width:18%" class="col-ep">Emerging Power (USD)</th>
-        <th style="width:18%" class="col-sbs">SBS (EUR)</th>
-        <th style="width:18%" class="col-sbs">SBS (USD est.)*</th>
+        <th style="width:20%">Category</th>
+        <th style="width:16%" class="col-pd">Packet Digital (USD)</th>
+        <th style="width:16%" class="col-ep">Emerging Power (USD)</th>
+        <th style="width:16%" class="col-sbs">SBS (EUR)</th>
+        <th style="width:16%" class="col-abt">ABT (GBP)</th>
+        <th style="width:16%">ABT (USD est.)&Dagger;</th>
       </tr>
     </thead>
     <tbody>
@@ -569,79 +700,94 @@
         <td class="currency">$13,500 &ndash; $18,000</td>
         <td class="currency">$115,000</td>
         <td class="currency">&euro;91,325</td>
-        <td class="currency">~$98,630</td>
+        <td class="currency">&pound;289,227</td>
+        <td class="currency">~$367,120</td>
       </tr>
       <tr style="background: #fff8f0;">
         <td>&nbsp;&nbsp;&nbsp;<em>of which: housing mold tooling</em> &#9888;</td>
         <td class="currency" style="color: var(--gray-500);">&mdash;</td>
         <td class="currency" style="color: #c05621;"><em>($100,000)</em></td>
         <td class="currency" style="color: #c05621;"><em>(&euro;12,370)</em></td>
-        <td class="currency" style="color: #c05621;"><em>(~$13,360)</em></td>
+        <td class="currency" style="color: #c05621;"><em>(&pound;10,630)</em></td>
+        <td class="currency" style="color: #c05621;"><em>(~$13,500)</em></td>
       </tr>
-      <tr style="background: #f0fdf4;">
-        <td>&nbsp;&nbsp;&nbsp;<strong>Adjusted NRE (excl. housing mold)</strong></td>
-        <td class="currency">$13,500 &ndash; $18,000</td>
-        <td class="currency" style="color: var(--green-700);"><strong>$15,000</strong></td>
-        <td class="currency" style="color: var(--green-700);"><strong>&euro;78,955</strong></td>
-        <td class="currency" style="color: var(--green-700);"><strong>~$85,270</strong></td>
+      <tr style="background: #fdf4ff;">
+        <td>&nbsp;&nbsp;&nbsp;<em>of which: pre-production samples (300)</em></td>
+        <td class="currency" style="color: var(--gray-500);">&mdash;</td>
+        <td class="currency" style="color: var(--gray-500);">&mdash;</td>
+        <td class="currency" style="color: var(--gray-500);">&mdash;</td>
+        <td class="currency" style="color: var(--abt-color);"><em>(&pound;240,597)</em></td>
+        <td class="currency" style="color: var(--abt-color);"><em>(~$305,560)</em></td>
       </tr>
       <tr>
-        <td>Certification</td>
+        <td>Certification (all elected)</td>
         <td class="currency"><em>Pending</em></td>
         <td class="currency">$85,000</td>
         <td class="currency">&euro;142,725</td>
-        <td class="currency">~$154,140</td>
+        <td class="currency">&pound;50,250</td>
+        <td class="currency">~$63,820</td>
       </tr>
       <tr class="total-row">
         <td>GRAND TOTAL (Non-Recurring)</td>
         <td class="currency">$13,500 &ndash; $18,000<br><small>+ cert. TBD</small></td>
         <td class="currency">$200,000</td>
         <td class="currency">&euro;234,050</td>
-        <td class="currency">~$252,775</td>
+        <td class="currency">&pound;339,477</td>
+        <td class="currency">~$431,140</td>
       </tr>
       <tr class="total-row" style="background: #f0fdf4 !important;">
-        <td>ADJUSTED TOTAL (excl. housing mold) &#9888;</td>
+        <td>ADJUSTED (excl. housing mold) &#9888;</td>
         <td class="currency">$13,500 &ndash; $18,000<br><small>+ cert. TBD</small></td>
         <td class="currency" style="color: var(--green-700);"><strong>$100,000</strong></td>
         <td class="currency" style="color: var(--green-700);"><strong>&euro;221,680</strong></td>
-        <td class="currency" style="color: var(--green-700);"><strong>~$239,415</strong></td>
+        <td class="currency" style="color: var(--green-700);"><strong>&pound;328,847</strong></td>
+        <td class="currency" style="color: var(--green-700);"><strong>~$417,640</strong></td>
       </tr>
     </tbody>
   </table>
 
   <div class="note">
-    <strong>* EUR &rarr; USD conversion:</strong> Using approximate rate of 1 EUR &asymp; 1.08 USD (May 2026). Actual rates at payment time will apply.<br>
-    <strong>Packet Digital:</strong> Certification costs are still being collected from third-party labs and are <strong>not included</strong> in their total. Expect the actual grand total to be significantly higher once certification is quoted.
+    <strong>* EUR &rarr; USD:</strong> 1 EUR &asymp; 1.08 USD. <strong>&Dagger; GBP &rarr; USD:</strong> 1 GBP &asymp; 1.27 USD (May 2026). Actual rates at payment time will apply.<br>
+    <strong>Packet Digital:</strong> Certification costs are still being collected from third-party labs and are <strong>not included</strong> in their total. Expect the actual grand total to be significantly higher once certification is quoted.<br>
+    <strong>ABT:</strong> The very high NRE is dominated by <strong>&pound;240,597 for 300 pre-production qualification packs</strong> (~&pound;802/pack), which fund the full DFMEA/PFMEA/SPC/Gauge R&amp;R programme. This is <em>not</em> present in any other quote.
   </div>
   <div class="note warning">
-    <strong>&#9888; Housing mold adjustment:</strong> Both EP ($100K injection mold) and SBS (&euro;12,370 housing parts) include plastic housing tooling. Packet Digital does not. The &ldquo;Adjusted Total&rdquo; row removes housing mold costs from both for a fairer like-for-like comparison &mdash; EP drops from $200K to <strong>$100K</strong>, SBS from &euro;234K to <strong>&euro;222K</strong>. The 8&times; price gap between EP and SBS on this item likely reflects different manufacturing approaches.
+    <strong>&#9888; Housing mold adjustment:</strong> EP ($100K injection mold), SBS (&euro;12,370 housing parts) and ABT (&pound;10,630 injection mould) all include plastic housing tooling. Packet Digital does not. The &ldquo;Adjusted Total&rdquo; row removes housing mold costs for a fairer like-for-like comparison. The 8&times; price gap between EP and others on this item likely reflects different manufacturing approaches (full injection mold vs. simpler tooling).
   </div>
 
   <!-- Visual comparison bars -->
   <div class="comparison-bar-container" style="margin-top: 2rem;">
     <h3 style="font-size: 1rem; margin-bottom: 1rem; color: var(--gray-700);">Total Non-Recurring Costs (USD Estimate)</h3>
-    <p style="font-size: 0.82rem; color: var(--gray-500); margin-bottom: 1rem;">Adjusted: excludes housing mold tooling (EP $100K, SBS &euro;12.4K) for like-for-like comparison.</p>
+    <p style="font-size: 0.82rem; color: var(--gray-500); margin-bottom: 1rem;">All values converted to USD. Adjusted: excludes housing mold tooling for like-for-like comparison.</p>
     <div class="bar-row" style="margin-bottom: 0.5rem;">
       <div class="bar-supplier col-pd">Packet Digital</div>
       <div class="bar pd-bar" style="min-width: 180px;">$15.8K + cert. TBD</div>
     </div>
     <div class="bar-row" style="margin-bottom: 0.5rem;">
       <div class="bar-supplier col-ep">EP (adjusted)</div>
-      <div class="bar ep-bar" style="width: 42%;">$100K (excl. mold)</div>
+      <div class="bar ep-bar" style="width: 24%;">$100K (excl. mold)</div>
     </div>
     <div class="bar-row" style="margin-bottom: 0.5rem;">
       <div class="bar-supplier col-sbs">SBS (adjusted)</div>
-      <div class="bar sbs-bar" style="width: 100%;">~$239K (excl. mold)</div>
+      <div class="bar sbs-bar" style="width: 56%;">~$239K (excl. mold)</div>
+    </div>
+    <div class="bar-row" style="margin-bottom: 0.5rem;">
+      <div class="bar-supplier col-abt">ABT (adjusted)</div>
+      <div class="bar abt-bar" style="width: 97%;">~$418K (excl. mold)</div>
+    </div>
+    <div class="bar-row" style="margin-bottom: 0.5rem;">
+      <div class="bar-supplier col-abt" style="font-size: 0.72rem;">ABT (as quoted)</div>
+      <div class="bar abt-bar" style="width: 100%; opacity: 0.5;">~$431K</div>
     </div>
     <div style="margin-top: 0.75rem; padding-top: 0.5rem; border-top: 1px dashed var(--gray-300);">
       <p style="font-size: 0.78rem; color: var(--gray-500); margin-bottom: 0.5rem;">As quoted (for reference):</p>
       <div class="bar-row" style="margin-bottom: 0.4rem;">
         <div class="bar-supplier" style="color: var(--ep-color); font-size: 0.72rem;">EP (as quoted)</div>
-        <div class="bar ep-bar" style="width: 84%; opacity: 0.4;">$200K</div>
+        <div class="bar ep-bar" style="width: 46%; opacity: 0.4;">$200K</div>
       </div>
       <div class="bar-row" style="margin-bottom: 0.4rem;">
         <div class="bar-supplier" style="color: var(--sbs-color); font-size: 0.72rem;">SBS (as quoted)</div>
-        <div class="bar sbs-bar" style="width: 100%; opacity: 0.4;">~$253K</div>
+        <div class="bar sbs-bar" style="width: 59%; opacity: 0.4;">~$253K</div>
       </div>
     </div>
   </div>
@@ -802,13 +948,61 @@
   <div class="note">
     <strong>BOM split (SA504 at 6K/yr):</strong> 77.8% cells &bull; 13% mechanical parts (CCS-board + bus bars) &bull; 5.2% assembly &bull; 0.9% carton
   </div>
+
+  <h3 style="font-size: 1rem; color: var(--abt-color); margin: 1.5rem 0 0.75rem;">4d. Alexander Battery Technologies (ABT) &mdash; Unit Cost (GBP)</h3>
+  <p style="font-size: 0.85rem; color: var(--gray-500); margin-bottom: 0.75rem;">
+    <strong>Includes:</strong> Amprius SA08 cells, assembly, testing, packaging. <strong>Excludes:</strong> BMS/PCBA (free-issued by Flyability). Prices EXW Peterlee, UK, exc. VAT. Build-to-print engagement; prices are indicative and will be re-validated at Cost Freeze gate.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Volume Commitment</th>
+        <th>Total Committed Volume</th>
+        <th>Annual Call-off</th>
+        <th>Unit Cost (GBP)</th>
+        <th>Unit Cost (USD est.)</th>
+        <th>Saving vs 1Y</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1 Year</td>
+        <td>7,000 units</td>
+        <td>7,000 / yr</td>
+        <td class="currency"><strong>&pound;449.29</strong></td>
+        <td class="currency"><strong>~$570</strong></td>
+        <td class="currency">&mdash;</td>
+      </tr>
+      <tr>
+        <td>3 Year</td>
+        <td>21,000 units</td>
+        <td>7,000 / yr</td>
+        <td class="currency"><strong>&pound;424.33</strong></td>
+        <td class="currency"><strong>~$539</strong></td>
+        <td class="currency">&pound;24.96 / unit</td>
+      </tr>
+      <tr class="highlight">
+        <td>5 Year</td>
+        <td>35,000 units</td>
+        <td>7,000 / yr</td>
+        <td class="currency"><strong>&pound;405.05</strong></td>
+        <td class="currency"><strong>~$514</strong></td>
+        <td class="currency">&pound;44.24 / unit</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <strong>Pricing model:</strong> ABT uses volume-commitment tiers (1/3/5 year at 7K/yr) rather than per-shipment quantity pricing. Longer commitments are rewarded with progressively better terms.<br>
+    <strong>Cell:</strong> Amprius SA08 silicon-anode, 10.8 Ah (vs SA504 used by EP and SBS in their quotes).<br>
+    <strong>GBP &rarr; USD:</strong> Using 1 GBP &asymp; 1.27 USD (May 2026).
+  </div>
 </section>
 
 <!-- ─── 7. Normalized Comparison ─── -->
 <section>
   <h2>5. Normalized Unit Cost Comparison (USD Estimate)</h2>
   <div class="note warning" style="margin-bottom: 1.25rem;">
-    To enable like-for-like comparison, the table below estimates the <strong>full unit cost including cells</strong> (excluding BMS in all cases). For Packet Digital, Amprius SA-504 cell cost is estimated at <strong>6 &times; $31 = $186/pack</strong> (Flyability consigns) or <strong>$214/pack</strong> (with PD&rsquo;s 15% markup). Exchange rate: 1 EUR &asymp; 1.08 USD.
+    To enable like-for-like comparison, the table below estimates the <strong>full unit cost including cells</strong> (excluding BMS in all cases). For Packet Digital, Amprius SA-504 cell cost is estimated at <strong>6 &times; $31 = $186/pack</strong> (Flyability consigns) or <strong>$214/pack</strong> (with PD&rsquo;s 15% markup). Exchange rates: 1 EUR &asymp; 1.08 USD, 1 GBP &asymp; 1.27 USD.
   </div>
   <table>
     <thead>
@@ -817,6 +1011,7 @@
         <th class="col-pd">Packet Digital (USD est.) <sup>&dagger;</sup></th>
         <th class="col-ep">Emerging Power (USD)</th>
         <th class="col-sbs">SBS &mdash; SA504 (USD est.)</th>
+        <th class="col-abt">ABT &mdash; SA08 (USD est.)</th>
       </tr>
     </thead>
     <tbody>
@@ -825,10 +1020,12 @@
         <td class="currency">$676 &ndash; $838</td>
         <td class="currency">$1,000</td>
         <td class="currency">~$1,460 (A sample)</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>~100 units</td>
         <td class="currency">$457 &ndash; $548</td>
+        <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
       </tr>
@@ -837,11 +1034,13 @@
         <td class="currency">&mdash;</td>
         <td class="currency">$745</td>
         <td class="currency">~$738 (C sample)</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr>
         <td>~500 units</td>
         <td class="currency">$409 &ndash; $484</td>
         <td class="currency">$695</td>
+        <td class="currency">&mdash;</td>
         <td class="currency">&mdash;</td>
       </tr>
       <tr class="highlight">
@@ -849,38 +1048,49 @@
         <td class="currency"><strong>$390 &ndash; $462</strong></td>
         <td class="currency"><strong>$645</strong></td>
         <td class="currency"><strong>~$590</strong> (1K/yr)</td>
+        <td class="currency">&mdash;</td>
       </tr>
       <tr class="highlight">
-        <td><strong>~5,000&ndash;6,000 units/yr</strong></td>
+        <td><strong>~5,000&ndash;7,000 units/yr</strong></td>
         <td class="currency"><strong>$374 &ndash; $442</strong></td>
         <td class="currency">$590 (at 750)<br>$645 (at 1K)</td>
         <td class="currency"><strong>~$547</strong> (6K/yr)</td>
+        <td class="currency"><strong>~$570</strong> (1Y) <br> <strong>~$514</strong> (5Y)</td>
       </tr>
     </tbody>
   </table>
   <div class="footnotes">
     <p><sup>&dagger;</sup> Packet Digital unit cost + Amprius SA-504 cells at ~$31/cell &times; 6 cells = <strong>$186/pack</strong> (Flyability consigns). If PD sources cells: $186 &times; 1.15 = $214/pack (+$28). Figures above use the consigned scenario.</p>
     <p><strong>All quotes exclude BMS/PCBA cost</strong>, which is designed and sourced by Flyability.</p>
+    <p><strong>ABT note:</strong> ABT uses Amprius SA08 (not SA504). Their unit price already includes cells. ABT prices are commitment-based (1/3/5 year at 7K/yr), not per-shipment quantity. The 5-year commitment offers the best unit price at &pound;405 (~$514).</p>
   </div>
 
   <!-- Bar chart comparison at target volume -->
-  <h3 style="font-size: 1rem; margin: 1.5rem 0 1rem; color: var(--gray-700);">Unit Cost at Target Volume (~6,000 units/yr) &mdash; USD Estimate</h3>
+  <h3 style="font-size: 1rem; margin: 1.5rem 0 1rem; color: var(--gray-700);">Unit Cost at Target Volume (~6,000&ndash;7,000 units/yr) &mdash; USD Estimate</h3>
   <div class="comparison-bar-container">
     <div class="bar-row" style="margin-bottom: 0.5rem;">
       <div class="bar-supplier col-pd">Packet Digital</div>
-      <div class="bar pd-bar" style="width: 58%;">$374 &ndash; $442 (excl. BMS)</div>
+      <div class="bar pd-bar" style="width: 52%;">$374 &ndash; $442 (excl. BMS)</div>
     </div>
     <div class="bar-row" style="margin-bottom: 0.5rem;">
-      <div class="bar-supplier col-ep">Emerging Power</div>
-      <div class="bar ep-bar" style="width: 85%;">$590 &ndash; $645 (excl. BMS)</div>
+      <div class="bar-supplier col-abt">ABT (5Y)</div>
+      <div class="bar abt-bar" style="width: 60%;">~$514 (excl. BMS)</div>
     </div>
     <div class="bar-row" style="margin-bottom: 0.5rem;">
       <div class="bar-supplier col-sbs">SBS (SA504)</div>
-      <div class="bar sbs-bar" style="width: 72%;">~$547 (excl. BMS)</div>
+      <div class="bar sbs-bar" style="width: 64%;">~$547 (excl. BMS)</div>
+    </div>
+    <div class="bar-row" style="margin-bottom: 0.5rem;">
+      <div class="bar-supplier col-abt" style="font-size: 0.72rem;">ABT (1Y)</div>
+      <div class="bar abt-bar" style="width: 67%; opacity: 0.6;">~$570 (excl. BMS)</div>
+    </div>
+    <div class="bar-row" style="margin-bottom: 0.5rem;">
+      <div class="bar-supplier col-ep">Emerging Power</div>
+      <div class="bar ep-bar" style="width: 76%;">$590 &ndash; $645 (excl. BMS)</div>
     </div>
     <div class="bar-row" style="margin-bottom: 0.5rem;">
       <div class="bar-supplier" style="color: var(--sbs-color); font-size: 0.72rem;">SBS (SES H10P)</div>
-      <div class="bar sbs-bar" style="width: 44%;">~$334 (excl. BMS)</div>
+      <div class="bar sbs-bar" style="width: 39%;">~$334 (excl. BMS)</div>
     </div>
   </div>
 </section>
@@ -891,17 +1101,26 @@
   <table>
     <thead>
       <tr>
-        <th style="width:30%">Phase</th>
-        <th style="width:23%" class="col-pd">Packet Digital</th>
-        <th style="width:23%" class="col-ep">Emerging Power</th>
-        <th style="width:23%" class="col-sbs">SBS</th>
+        <th style="width:22%">Phase</th>
+        <th style="width:19.5%" class="col-pd">Packet Digital</th>
+        <th style="width:19.5%" class="col-ep">Emerging Power</th>
+        <th style="width:19.5%" class="col-sbs">SBS</th>
+        <th style="width:19.5%" class="col-abt">ABT</th>
       </tr>
     </thead>
     <tbody>
       <tr>
+        <td>Design Review / DFM</td>
+        <td>&mdash;</td>
+        <td>&mdash;</td>
+        <td>&mdash;</td>
+        <td>Phase 1 (kick-off)</td>
+      </tr>
+      <tr>
         <td>Prototypes</td>
         <td>&mdash;</td>
         <td>5&ndash;7 weeks ARO</td>
+        <td>&mdash;</td>
         <td>&mdash;</td>
       </tr>
       <tr>
@@ -909,30 +1128,42 @@
         <td>&mdash;</td>
         <td>2&ndash;3 weeks</td>
         <td>&mdash;</td>
+        <td>&mdash;</td>
       </tr>
       <tr>
         <td>Tooling</td>
         <td>&mdash;</td>
         <td>17&ndash;19 weeks ARO</td>
         <td>&mdash;</td>
+        <td>~40 days from design approval</td>
+      </tr>
+      <tr>
+        <td>Pre-production Samples</td>
+        <td>&mdash;</td>
+        <td>&mdash;</td>
+        <td>&mdash;</td>
+        <td>300 packs (Phase 4)</td>
       </tr>
       <tr>
         <td>Certification</td>
         <td>&mdash;</td>
         <td>17&ndash;19 weeks ARO</td>
         <td>&mdash;</td>
+        <td>Phase 5 (regulatory validation)</td>
       </tr>
       <tr>
         <td>Production</td>
         <td>&mdash;</td>
         <td>TBD</td>
         <td>&mdash;</td>
+        <td>12-week rolling forecast</td>
       </tr>
     </tbody>
   </table>
   <div class="note">
     <strong>Note:</strong> Packet Digital and SBS have not provided detailed lead time estimates in their initial quotes.
-    EP lead times are &ldquo;After Receipt of Order&rdquo; (ARO). Deliveries are contingent on supply of customer-provided PCBAs.
+    EP lead times are &ldquo;After Receipt of Order&rdquo; (ARO). Deliveries are contingent on supply of customer-provided PCBAs.<br>
+    <strong>ABT:</strong> Six gated phases (Design Review &rarr; Scope Freeze &rarr; Cost Freeze &rarr; Tooling &amp; Pre-Production &rarr; Regulatory Validation &rarr; Mass Production). Kick-off suggested week of 8 June 2026. Mould lead time ~40 days from design approval to T0. Production on 12-week rolling forecast.
   </div>
 </section>
 
@@ -967,7 +1198,6 @@
       <h4 class="col-sbs">Smart Battery Solutions (SBS)</h4>
       <ul>
         <li><strong>Most comprehensive development proposal</strong> with detailed design/tooling/cert lines</li>
-        <li>Highest total non-recurring: <strong>&euro;234,050 (~$253K)</strong></li>
         <li>Highest certification cost at &euro;142,725 (~$154K) &mdash; notably CQC China at &euro;43K</li>
         <li>Competitive unit cost at 6K/yr: <strong>&euro;506 (~$547)</strong> with SA504 cells</li>
         <li>Offers three cell options (SA504, SA08, SES H10P) with different price points</li>
@@ -975,14 +1205,28 @@
         <li>EU-based (Germany) &mdash; does <strong>not</strong> help with FCC compliance for US market</li>
       </ul>
     </div>
+    <div class="summary-box" style="border-color: var(--abt-color);">
+      <h4 class="col-abt">Alexander Battery Technologies (ABT)</h4>
+      <ul>
+        <li><strong>Highest total non-recurring: &pound;339K (~$431K)</strong> &mdash; dominated by &pound;241K for 300 qualification packs</li>
+        <li><strong>Lowest certification cost</strong> across all suppliers: &pound;50,250 (~$64K) if all elected</li>
+        <li>Competitive unit cost at 7K/yr: <strong>&pound;405&ndash;&pound;449 (~$514&ndash;$570)</strong> with SA08 cells, depending on commitment length</li>
+        <li><strong>Prior Amprius SA-series production experience</strong> on aviation-class programme</li>
+        <li>Audit-grade quality: DFMEA/PFMEA/SPC/Gauge R&amp;R/PPAP methodology; 100% EOL on every pack</li>
+        <li>UK-based (Peterlee) &mdash; mitigates EU/US supply chain risk, no Far East dependency</li>
+        <li>Build-to-print model; all prices indicative until Cost Freeze gate</li>
+        <li>ISO 9001 / ISO 45001 certified facility</li>
+      </ul>
+    </div>
     <div class="summary-box">
       <h4 style="color: var(--gray-700);">Overall Assessment</h4>
       <ul>
-        <li>At target volume (6K&ndash;7K/yr), <strong>Packet Digital offers the lowest estimated unit cost</strong> ($374&ndash;$442 with consigned cells at $31/cell) followed by SBS (~$547 with SA504)</li>
-        <li><strong>Emerging Power has the most balanced total cost</strong> &mdash; adjusted to $100K non-recurring (excl. injection mold common to all paths) + competitive unit pricing</li>
+        <li>At target volume (6K&ndash;7K/yr), <strong>Packet Digital offers the lowest estimated unit cost</strong> ($374&ndash;$442 with consigned cells at $31/cell) followed by ABT 5Y (~$514), SBS (~$547) and EP ($590&ndash;$645)</li>
+        <li><strong>Emerging Power has the most balanced total cost</strong> &mdash; adjusted to $100K non-recurring (excl. injection mold) + competitive unit pricing</li>
+        <li><strong>ABT has the highest NRE</strong> ($431K) due to the 300-pack qualification programme, but the <strong>lowest certification cost</strong> ($64K) and competitive unit pricing with long-term commitment</li>
         <li><strong>Packet Digital&rsquo;s quote is incomplete</strong> without certification &mdash; final comparison pending; unit cost advantage is significant</li>
         <li>For <strong>US market / FCC</strong>, both Packet Digital and Emerging Power are suitable</li>
-        <li>For <strong>EU supply chain</strong>, SBS is the natural choice with the most detailed proposal</li>
+        <li>For <strong>EU/UK supply chain</strong>, SBS (Germany) and ABT (UK) are both strong options; ABT brings prior Amprius SA-series experience and audit-grade quality methodology</li>
         <li>Cell cost is the dominant factor (~64&ndash;78% of unit cost across all suppliers)</li>
       </ul>
     </div>
@@ -995,10 +1239,11 @@
   <table>
     <thead>
       <tr>
-        <th style="width:25%">Term</th>
-        <th style="width:25%" class="col-pd">Packet Digital</th>
-        <th style="width:25%" class="col-ep">Emerging Power</th>
-        <th style="width:25%" class="col-sbs">SBS</th>
+        <th style="width:16%">Term</th>
+        <th style="width:21%" class="col-pd">Packet Digital</th>
+        <th style="width:21%" class="col-ep">Emerging Power</th>
+        <th style="width:21%" class="col-sbs">SBS</th>
+        <th style="width:21%" class="col-abt">ABT</th>
       </tr>
     </thead>
     <tbody>
@@ -1007,36 +1252,49 @@
         <td>30 days (expired Apr 16)</td>
         <td>30 days</td>
         <td>1 month</td>
+        <td>30 days from issue (May 11)</td>
       </tr>
       <tr>
         <td>Prototype / NRE</td>
         <td>&mdash;</td>
         <td>Due at order placement</td>
         <td>30% at PO; 30% tool launch; 40% at homologation reports</td>
+        <td>Payable on PO</td>
       </tr>
       <tr>
         <td>Tooling</td>
         <td>&mdash;</td>
         <td>50% at order; balance on completion</td>
         <td>Included in milestone above</td>
+        <td>Payable on PO (Flyability-owned)</td>
       </tr>
       <tr>
         <td>Certification</td>
         <td>&mdash;</td>
         <td>Due when product is certified</td>
         <td>Pro rata with homologation reports</td>
+        <td>Payable on PO</td>
       </tr>
       <tr>
         <td>Production</td>
         <td>&mdash;</td>
         <td>Cash in advance (until credit line); then NET 30</td>
         <td>15 days from invoice date</td>
+        <td>NET 30 from invoice</td>
       </tr>
       <tr>
         <td>Shipping</td>
         <td>FOB Origin (customer account)</td>
         <td>FOB New Jersey</td>
         <td>Ex-works Kleinostheim (~&euro;1/pack to CH)</td>
+        <td>EXW Peterlee, UK (Incoterms 2020)</td>
+      </tr>
+      <tr>
+        <td>Currency</td>
+        <td>USD</td>
+        <td>USD</td>
+        <td>EUR</td>
+        <td>GBP</td>
       </tr>
     </tbody>
   </table>
@@ -1046,73 +1304,79 @@
 <section style="background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%); border: 2px solid var(--gray-300); border-radius: 10px; padding: 1.5rem 2rem;">
   <h2 style="margin-top: 0;">9. Budget Summary (CHF)</h2>
   <p style="font-size: 0.85rem; color: var(--gray-500); margin-bottom: 1.25rem;">
-    All values converted at <strong>1 USD &asymp; 0.88 CHF</strong> and <strong>1 EUR &asymp; 0.95 CHF</strong> (May 2026 rates). Unit costs at target volume (~6,000 units/yr) including cells, excluding BMS.
+    All values converted at <strong>1 USD &asymp; 0.88 CHF</strong>, <strong>1 EUR &asymp; 0.95 CHF</strong> and <strong>1 GBP &asymp; 1.12 CHF</strong> (May 2026 rates). Unit costs at target volume (~6,000&ndash;7,000 units/yr) including cells, excluding BMS.
   </p>
 
   <table>
     <thead>
       <tr>
-        <th style="width:28%">&nbsp;</th>
-        <th style="width:18%" class="col-pd">Packet Digital</th>
-        <th style="width:18%" class="col-ep">Emerging Power</th>
-        <th style="width:18%" class="col-sbs">SBS (SA504)</th>
-        <th style="width:18%; background: var(--gray-100); color: var(--gray-700);">Average</th>
+        <th style="width:20%">&nbsp;</th>
+        <th style="width:16%" class="col-pd">Packet Digital</th>
+        <th style="width:16%" class="col-ep">Emerging Power</th>
+        <th style="width:16%" class="col-sbs">SBS (SA504)</th>
+        <th style="width:16%" class="col-abt">ABT (SA08)</th>
+        <th style="width:16%; background: var(--gray-100); color: var(--gray-700);">Average</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td colspan="5" style="background: var(--gray-100); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gray-700); padding: 0.6rem 0.85rem;">Non-Recurring Costs (NRE + Tooling + Certification)</td>
+        <td colspan="6" style="background: var(--gray-100); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gray-700); padding: 0.6rem 0.85rem;">Non-Recurring Costs (NRE + Tooling + Certification)</td>
       </tr>
       <tr>
-        <td>As quoted (USD)</td>
+        <td>As quoted (USD est.)</td>
         <td class="currency">$15,750 <sup>*</sup></td>
         <td class="currency">$200,000</td>
         <td class="currency">$252,775</td>
-        <td class="currency" style="background: #f9fafb;"><strong>$156,175</strong> <sup>*</sup></td>
+        <td class="currency">$431,140</td>
+        <td class="currency" style="background: #f9fafb;"><strong>$224,915</strong> <sup>*</sup></td>
       </tr>
       <tr style="font-size: 1.05em;">
         <td><strong>As quoted (CHF)</strong></td>
         <td class="currency"><strong>CHF 13,860</strong> <sup>*</sup></td>
         <td class="currency"><strong>CHF 176,000</strong></td>
         <td class="currency"><strong>CHF 222,350</strong></td>
-        <td class="currency" style="background: #f0fdf4;"><strong style="font-size: 1.1em;">CHF 137,400</strong> <sup>*</sup></td>
+        <td class="currency"><strong>CHF 380,215</strong></td>
+        <td class="currency" style="background: #f0fdf4;"><strong style="font-size: 1.1em;">CHF 198,105</strong> <sup>*</sup></td>
       </tr>
       <tr style="color: var(--gray-500); font-size: 0.85em;">
-        <td><em>Complete quotes only (EP+SBS avg)</em></td>
+        <td><em>Complete quotes only (EP+SBS+ABT avg)</em></td>
         <td class="currency">&mdash;</td>
         <td class="currency">CHF 176,000</td>
         <td class="currency">CHF 222,350</td>
-        <td class="currency" style="background: #f9fafb;"><strong>CHF 199,175</strong></td>
+        <td class="currency">CHF 380,215</td>
+        <td class="currency" style="background: #f9fafb;"><strong>CHF 259,520</strong></td>
       </tr>
       <tr>
-        <td colspan="5" style="background: var(--gray-100); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gray-700); padding: 0.6rem 0.85rem;">Unit Cost at Target Volume (~6,000 units/yr)</td>
+        <td colspan="6" style="background: var(--gray-100); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--gray-700); padding: 0.6rem 0.85rem;">Unit Cost at Target Volume (~6,000&ndash;7,000 units/yr)</td>
       </tr>
       <tr>
         <td>Estimated (USD)</td>
         <td class="currency">$374 &ndash; $442</td>
         <td class="currency">$590 &ndash; $645</td>
         <td class="currency">~$547</td>
-        <td class="currency" style="background: #f9fafb;"><strong>~$524</strong></td>
+        <td class="currency">~$514 &ndash; $570</td>
+        <td class="currency" style="background: #f9fafb;"><strong>~$527</strong></td>
       </tr>
       <tr style="font-size: 1.05em;">
         <td><strong>Estimated (CHF)</strong></td>
         <td class="currency"><strong>CHF 329 &ndash; 389</strong></td>
         <td class="currency"><strong>CHF 519 &ndash; 568</strong></td>
         <td class="currency"><strong>~CHF 481</strong></td>
-        <td class="currency" style="background: #f0fdf4;"><strong style="font-size: 1.1em;">~CHF 461</strong></td>
+        <td class="currency"><strong>~CHF 454 &ndash; 503</strong></td>
+        <td class="currency" style="background: #f0fdf4;"><strong style="font-size: 1.1em;">~CHF 464</strong></td>
       </tr>
     </tbody>
   </table>
 
   <div class="note" style="margin-top: 1rem;">
-    <strong><sup>*</sup> Packet Digital&rsquo;s NRE excludes certification</strong> (still pending). The 3-supplier average will increase once PD&rsquo;s certification is quoted. The EP+SBS average of <strong>CHF 199,175</strong> is a more reliable NRE benchmark today.<br>
-    <strong>Unit cost averages</strong> use midpoints: PD CHF 359, EP CHF 544, SBS CHF 481. All exclude BMS/PCBA. PD figure assumes Flyability-consigned cells at $31/cell.
+    <strong><sup>*</sup> Packet Digital&rsquo;s NRE excludes certification</strong> (still pending). The 4-supplier average will increase once PD&rsquo;s certification is quoted. The EP+SBS+ABT average of <strong>CHF 259,520</strong> is a more reliable NRE benchmark today, though ABT&rsquo;s NRE is heavily skewed by the &pound;241K pre-production qualification programme.<br>
+    <strong>Unit cost averages</strong> use midpoints: PD CHF 359, EP CHF 544, SBS CHF 481, ABT CHF 479. All exclude BMS/PCBA. PD assumes consigned cells at $31/cell. ABT figure uses midpoint of 1Y/5Y commitment pricing.
   </div>
 </section>
 
 <footer style="text-align: center; padding: 1.5rem; color: var(--gray-500); font-size: 0.8rem;">
-  Flyability &mdash; E4 Battery Project &bull; Confidential &bull; Generated May 5, 2026<br>
-  Source data: Packet Digital ROM Quote #00003669 (Mar 17, 2026) &bull; Emerging Power Budgetary Quotation (Apr 17, 2026) &bull; SBS Battery Proposal V1.0 (Apr 23, 2026)
+  Flyability &mdash; E4 Battery Project &bull; Confidential &bull; Updated May 13, 2026<br>
+  Source data: Packet Digital ROM Quote #00003669 (Mar 17, 2026) &bull; Emerging Power Budgetary Quotation (Apr 17, 2026) &bull; SBS Battery Proposal V1.0 (Apr 23, 2026) &bull; ABT Commercial Quotation ABT-FLY-2026-05-006 (May 11, 2026)
 </footer>
 
 </div>
